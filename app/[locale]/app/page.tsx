@@ -143,7 +143,7 @@ export default function TimelinePage() {
 
       {/* Scan FAB */}
       {filteredDocs.length > 0 && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 safe-area-inset-bottom">
+        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-40">
           <Link
             href="/app/scan"
             className="flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3.5 rounded-2xl shadow-lg shadow-primary/30 active:scale-95 transition-transform"
