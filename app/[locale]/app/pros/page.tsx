@@ -104,7 +104,7 @@ export default function ProsPage() {
         <p className="text-sm text-[#6B7280] mb-3">{t('subtitle')}</p>
 
         {/* Category filter pills */}
-        <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+        <div className="flex flex-wrap gap-2 pb-2">
           {filterCategories.map((cat) => (
             <button
               key={cat}
@@ -173,15 +173,7 @@ export default function ProsPage() {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  {/* Name + badge */}
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-semibold text-[#1A1A2E] truncate">{pro.name}</h3>
-                    {pro.recommended && (
-                      <span className="flex-shrink-0 text-[10px] bg-[#1A1A2E]/10 text-[#1A1A2E] font-semibold px-2 py-0.5 rounded-full">
-                        {t('recommended')}
-                      </span>
-                    )}
-                  </div>
+                  <h3 className="font-semibold text-[#1A1A2E] truncate">{pro.name}</h3>
 
                   {/* Description */}
                   <p className="text-sm text-[#6B7280] mt-1 leading-relaxed">

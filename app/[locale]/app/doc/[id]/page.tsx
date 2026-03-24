@@ -112,6 +112,8 @@ export default function DocumentPage() {
       d.status = 'read';
     }
     setDoc(d);
+    // Auto-scroll to last chat message
+    setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
   }, [id, router]);
 
   function handleMarkDone() {

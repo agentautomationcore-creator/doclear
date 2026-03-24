@@ -26,7 +26,7 @@ export default function CategoryFilter({ selected, onChange }: Props) {
   const categories = useTranslations('categories');
 
   return (
-    <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+    <div className="flex flex-wrap gap-2 pb-2">
       {allCategories.map((cat) => {
         const isActive = cat === selected;
         const label = cat === 'all' ? t('filter_all') : categories(cat as any);
