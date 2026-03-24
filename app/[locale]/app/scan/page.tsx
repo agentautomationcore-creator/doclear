@@ -15,6 +15,8 @@ export default function ScanPage() {
   const router = useRouter();
 
   const [preview, setPreview] = useState<string | null>(null);
+  const [fileData, setFileData] = useState<string | null>(null);
+  const [isPdf, setIsPdf] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
   const [step, setStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -35,15 +37,30 @@ export default function ScanPage() {
     }
 
     try {
-      const compressed = await compressImage(file);
-      setPreview(compressed);
+      if (file.type === 'application/pdf') {
+        // PDF: read as base64 directly
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const dataUrl = e.target?.result as string;
+          setFileData(dataUrl);
+          setPreview(null);
+          setIsPdf(true);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        // Image: compress and preview
+        const compressed = await compressImage(file);
+        setPreview(compressed);
+        setFileData(compressed);
+        setIsPdf(false);
+      }
     } catch {
       setError(errT('analysis_failed'));
     }
   }
 
   async function handleAnalyze() {
-    if (!preview) return;
+    if (!fileData) return;
     setAnalyzing(true);
     setError(null);
     setStep(0);
@@ -57,8 +74,9 @@ export default function ScanPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          image: preview,
+          image: fileData,
           language: locale,
+          isPdf,
         }),
       });
 
@@ -81,7 +99,7 @@ export default function ScanPage() {
         deadlineDescription: analysis.deadline_description,
         urgency: analysis.urgency,
         amounts: analysis.amounts,
-        imageData: preview,
+        imageData: isPdf ? '' : fileData,
         chatHistory: [],
         language: locale,
       };
@@ -116,15 +134,22 @@ export default function ScanPage() {
 
       <div className="px-4 py-6">
         {/* Preview */}
-        {preview ? (
+        {(preview || isPdf) ? (
           <div className="mb-6">
-            <div className="relative rounded-2xl overflow-hidden bg-gray-100 aspect-[3/4] max-h-[50vh]">
-              <img
-                src={preview}
-                alt="Document preview"
-                className="w-full h-full object-contain"
-              />
-            </div>
+            {isPdf ? (
+              <div className="rounded-2xl bg-gray-50 border border-gray-200 p-8 flex flex-col items-center justify-center aspect-[3/4] max-h-[50vh]">
+                <span className="text-6xl mb-3">PDF</span>
+                <p className="text-muted text-sm">PDF</p>
+              </div>
+            ) : (
+              <div className="relative rounded-2xl overflow-hidden bg-gray-100 aspect-[3/4] max-h-[50vh]">
+                <img
+                  src={preview!}
+                  alt="Document preview"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            )}
           </div>
         ) : (
           <div className="bg-gray-50 rounded-2xl aspect-[3/4] max-h-[50vh] flex items-center justify-center mb-6 border-2 border-dashed border-gray-300">
@@ -171,7 +196,7 @@ export default function ScanPage() {
         {/* Buttons */}
         {!analyzing && (
           <div className="space-y-3">
-            {preview ? (
+            {(preview || isPdf) ? (
               <button
                 onClick={handleAnalyze}
                 className="w-full bg-primary text-white font-semibold py-3.5 rounded-xl text-lg active:scale-95 transition-transform min-h-[52px]"
@@ -183,7 +208,7 @@ export default function ScanPage() {
             <button
               onClick={() => cameraRef.current?.click()}
               className={`w-full font-semibold py-3.5 rounded-xl text-lg active:scale-95 transition-transform min-h-[52px] ${
-                preview
+                (preview || isPdf)
                   ? 'bg-gray-100 text-gray-700'
                   : 'bg-primary text-white'
               }`}

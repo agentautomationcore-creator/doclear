@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { image, language } = await request.json();
+    const { image, language, isPdf } = await request.json();
 
     if (!image || !language) {
       return NextResponse.json(
@@ -42,22 +42,43 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check image size (~10MB in base64)
+    // Check file size (~10MB in base64)
     if (image.length > 14_000_000) {
       return NextResponse.json(
-        { error: 'Image too large (max 10MB)' },
+        { error: 'File too large (max 10MB)' },
         { status: 400 }
       );
     }
 
-    // Strip data URL prefix if present
-    const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
+    // Build content block based on file type
+    let contentBlock: Anthropic.ImageBlockParam | Anthropic.DocumentBlockParam;
 
-    // Determine media type
-    let mediaType: 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp' = 'image/jpeg';
-    if (image.startsWith('data:image/png')) mediaType = 'image/png';
-    else if (image.startsWith('data:image/webp')) mediaType = 'image/webp';
-    else if (image.startsWith('data:image/gif')) mediaType = 'image/gif';
+    if (isPdf) {
+      const base64Data = image.replace(/^data:application\/pdf;base64,/, '');
+      contentBlock = {
+        type: 'document',
+        source: {
+          type: 'base64',
+          media_type: 'application/pdf',
+          data: base64Data,
+        },
+      };
+    } else {
+      const base64Data = image.replace(/^data:[^;]+;base64,/, '');
+      let mediaType: 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp' = 'image/jpeg';
+      if (image.startsWith('data:image/png')) mediaType = 'image/png';
+      else if (image.startsWith('data:image/webp')) mediaType = 'image/webp';
+      else if (image.startsWith('data:image/gif')) mediaType = 'image/gif';
+
+      contentBlock = {
+        type: 'image',
+        source: {
+          type: 'base64',
+          media_type: mediaType,
+          data: base64Data,
+        },
+      };
+    }
 
     const response = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
@@ -67,14 +88,7 @@ export async function POST(request: NextRequest) {
         {
           role: 'user',
           content: [
-            {
-              type: 'image',
-              source: {
-                type: 'base64',
-                media_type: mediaType,
-                data: base64Data,
-              },
-            },
+            contentBlock,
             {
               type: 'text',
               text: 'Analyze this document.',
