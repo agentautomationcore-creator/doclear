@@ -2,99 +2,95 @@
 
 import { useState, useMemo } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
-import { Professional, Locale } from '@/lib/types';
-import professionalsData from '@/data/professionals.json';
+import { Locale } from '@/lib/types';
+import prosData from '@/data/professionals.json';
 
-const professionals = professionalsData as Professional[];
+interface Specialist {
+  name: string;
+  firm: string;
+  specialization: string;
+  city: string;
+  address: string | null;
+  phone: string | null;
+  email?: string | null;
+  website: string | null;
+  languages: string[];
+  hours: string | null;
+}
 
-type FilterCategory = 'all' | 'lawyers' | 'accountants' | 'translators' | 'notaries' | 'insurance' | 'doctors' | 'realtors';
+interface CategoryGroup {
+  category: string;
+  specialists: Specialist[];
+}
 
-const FILTER_TO_TYPES: Record<FilterCategory, string[]> = {
-  all: [],
-  lawyers: ['immigration_lawyer', 'tax_lawyer', 'labor_lawyer', 'family_lawyer', 'real_estate_lawyer'],
-  accountants: ['accountant'],
-  translators: ['sworn_translator'],
-  notaries: ['notary'],
-  insurance: ['insurance_broker'],
-  doctors: ['doctor'],
-  realtors: ['realtor'],
+const data = prosData as CategoryGroup[];
+
+type FilterKey = 'all' | 'lawyers' | 'accountants' | 'translators' | 'notaries' | 'insurance' | 'doctors' | 'realtors';
+
+const FILTER_TO_CATEGORY: Record<FilterKey, string> = {
+  all: '',
+  lawyers: 'Avocats',
+  accountants: 'Comptables',
+  translators: 'Traducteurs',
+  notaries: 'Notaires',
+  insurance: 'Assurances',
+  doctors: 'Médecins',
+  realtors: 'Agents immobiliers',
 };
 
-const filterCategories: FilterCategory[] = ['all', 'lawyers', 'accountants', 'translators', 'notaries', 'insurance', 'doctors', 'realtors'];
+const CATEGORY_COLORS: Record<string, string> = {
+  'Avocats': '#3B82F6',
+  'Notaires': '#F97316',
+  'Comptables': '#6366F1',
+  'Traducteurs': '#14B8A6',
+  'Assurances': '#0EA5E9',
+  'Médecins': '#EF4444',
+  'Agents immobiliers': '#84CC16',
+};
+
+const filterKeys: FilterKey[] = ['all', 'lawyers', 'accountants', 'translators', 'notaries', 'insurance', 'doctors', 'realtors'];
 const languages: Locale[] = ['fr', 'en', 'ru', 'ar', 'it', 'zh', 'pt', 'tr'];
 
-const LANGUAGE_LABELS: Record<Locale, string> = {
-  fr: 'FR',
-  en: 'EN',
-  ru: 'RU',
-  ar: 'AR',
-  it: 'IT',
-  zh: 'ZH',
-  pt: 'PT',
-  tr: 'TR',
+const LANG_LABELS: Record<string, string> = {
+  fr: 'FR', en: 'EN', ru: 'RU', ar: 'AR', it: 'IT', zh: 'ZH', pt: 'PT', tr: 'TR',
+  de: 'DE', es: 'ES', uk: 'UK', pl: 'PL',
 };
-
-const TYPE_COLORS: Record<string, string> = {
-  immigration_lawyer: '#3B82F6',
-  tax_lawyer: '#8B5CF6',
-  labor_lawyer: '#EC4899',
-  family_lawyer: '#F59E0B',
-  real_estate_lawyer: '#10B981',
-  accountant: '#6366F1',
-  sworn_translator: '#14B8A6',
-  notary: '#F97316',
-  insurance_broker: '#0EA5E9',
-  doctor: '#EF4444',
-  realtor: '#84CC16',
-};
-
-function StarIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  );
-}
 
 export default function ProsPage() {
   const t = useTranslations('pros');
   const locale = useLocale() as Locale;
-  const searchParams = useSearchParams();
-  const typeParam = searchParams.get('type');
+  const [filter, setFilter] = useState<FilterKey>('all');
+  const [langFilter, setLangFilter] = useState<string>('all');
 
-  const [filter, setFilter] = useState<FilterCategory>(() => {
-    if (typeParam) {
-      for (const [cat, types] of Object.entries(FILTER_TO_TYPES)) {
-        if (types.includes(typeParam)) return cat as FilterCategory;
+  const allSpecialists = useMemo(() => {
+    const result: (Specialist & { categoryName: string })[] = [];
+    for (const group of data) {
+      for (const spec of group.specialists) {
+        result.push({ ...spec, categoryName: group.category });
       }
     }
-    return 'all';
-  });
-  const [langFilter, setLangFilter] = useState<Locale | 'all'>('all');
+    return result;
+  }, []);
 
   const filtered = useMemo(() => {
-    let result = professionals;
+    let result = allSpecialists;
 
     if (filter !== 'all') {
-      const types = FILTER_TO_TYPES[filter];
-      result = result.filter((p) => types.includes(p.type));
-    }
-
-    if (typeParam && filter === 'all') {
-      result = result.filter((p) => p.type === typeParam);
+      const catName = FILTER_TO_CATEGORY[filter];
+      result = result.filter((s) => s.categoryName === catName);
     }
 
     if (langFilter !== 'all') {
-      result = result.filter((p) => p.languages.includes(langFilter));
+      result = result.filter((s) => s.languages.includes(langFilter));
     }
 
+    // Sort: specialists speaking user's language first
     return result.sort((a, b) => {
-      if (a.recommended && !b.recommended) return -1;
-      if (!a.recommended && b.recommended) return 1;
-      return b.rating - a.rating;
+      const aMatch = a.languages.includes(locale) ? 1 : 0;
+      const bMatch = b.languages.includes(locale) ? 1 : 0;
+      return bMatch - aMatch;
     });
-  }, [filter, langFilter, typeParam]);
+  }, [filter, langFilter, allSpecialists, locale]);
 
   return (
     <div className="min-h-screen bg-white safe-area-inset-top max-w-2xl mx-auto">
@@ -105,29 +101,27 @@ export default function ProsPage() {
 
         {/* Category filter pills */}
         <div className="flex flex-wrap gap-2 pb-2">
-          {filterCategories.map((cat) => (
+          {filterKeys.map((key) => (
             <button
-              key={cat}
-              onClick={() => setFilter(cat)}
+              key={key}
+              onClick={() => setFilter(key)}
               className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-[13px] font-medium transition-all min-h-[36px] ${
-                cat === filter
+                key === filter
                   ? 'bg-[#1A1A2E] text-white'
                   : 'bg-[#F5F5F7] text-[#6B7280] hover:text-[#1A1A2E]'
               }`}
             >
-              {t(`filter_${cat}` as any)}
+              {t(`filter_${key}` as any)}
             </button>
           ))}
         </div>
 
-        {/* Language filter pills */}
-        <div className="flex gap-1.5 overflow-x-auto pt-1 -mx-4 px-4 scrollbar-hide">
+        {/* Language filter */}
+        <div className="flex flex-wrap gap-1.5 pt-1">
           <button
             onClick={() => setLangFilter('all')}
-            className={`flex-shrink-0 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide transition-all ${
-              langFilter === 'all'
-                ? 'bg-[#1A1A2E] text-white'
-                : 'bg-[#F5F5F7] text-[#6B7280]'
+            className={`px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide transition-all ${
+              langFilter === 'all' ? 'bg-[#1A1A2E] text-white' : 'bg-[#F5F5F7] text-[#6B7280]'
             }`}
           >
             ALL
@@ -136,19 +130,17 @@ export default function ProsPage() {
             <button
               key={l}
               onClick={() => setLangFilter(l)}
-              className={`flex-shrink-0 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide transition-all ${
-                langFilter === l
-                  ? 'bg-[#1A1A2E] text-white'
-                  : 'bg-[#F5F5F7] text-[#6B7280]'
+              className={`px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide transition-all ${
+                langFilter === l ? 'bg-[#1A1A2E] text-white' : 'bg-[#F5F5F7] text-[#6B7280]'
               }`}
             >
-              {LANGUAGE_LABELS[l]}
+              {LANG_LABELS[l]}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Professional cards */}
+      {/* Specialist cards */}
       <div className="px-4 py-4 space-y-3">
         {filtered.length === 0 ? (
           <div className="text-center py-16 text-[#6B7280]">
@@ -158,65 +150,61 @@ export default function ProsPage() {
             <p className="text-[15px]">{t('filter_all')}</p>
           </div>
         ) : (
-          filtered.map((pro) => (
+          filtered.map((spec, i) => (
             <div
-              key={pro.id}
+              key={`${spec.name}-${i}`}
               className="bg-white rounded-[16px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-black/[0.06] p-5"
             >
               <div className="flex items-start gap-3.5">
-                {/* Type indicator dot */}
                 <div className="flex-shrink-0 mt-2">
                   <div
                     className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: TYPE_COLORS[pro.type] || '#6B7280' }}
+                    style={{ backgroundColor: CATEGORY_COLORS[spec.categoryName] || '#6B7280' }}
                   />
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-[#1A1A2E] truncate">{pro.name}</h3>
+                  <h3 className="font-semibold text-[#1A1A2E]">{spec.name}</h3>
+                  {spec.firm !== spec.name && (
+                    <p className="text-xs text-[#6B7280] mt-0.5">{spec.firm}</p>
+                  )}
 
-                  {/* Description */}
-                  <p className="text-sm text-[#6B7280] mt-1 leading-relaxed">
-                    {pro.description[locale] || pro.description.en || pro.description.fr}
+                  <p className="text-sm text-[#6B7280] mt-1.5 leading-relaxed">
+                    {spec.specialization}
                   </p>
 
-                  {/* Meta row */}
-                  <div className="flex items-center gap-2 mt-2.5 text-sm">
-                    <span className="text-[#6B7280]">{pro.city}</span>
-                    <span className="text-[#D1D5DB]">/</span>
-                    <span className="flex items-center gap-0.5 text-yellow-500">
-                      <StarIcon />
-                      <span className="text-[13px] font-medium">{pro.rating}</span>
-                    </span>
-                    {pro.availableOnline && (
+                  {/* City + hours */}
+                  <div className="flex items-center gap-2 mt-2 text-sm text-[#6B7280]">
+                    <span>{spec.city}</span>
+                    {spec.hours && (
                       <>
                         <span className="text-[#D1D5DB]">/</span>
-                        <span className="text-[#34C759] text-xs font-medium">{t('online')}</span>
+                        <span className="text-xs">{spec.hours}</span>
                       </>
                     )}
                   </div>
 
-                  {/* Languages as text pills */}
+                  {/* Languages */}
                   <div className="flex gap-1.5 mt-2.5">
-                    {pro.languages.map((l) => (
+                    {spec.languages.map((l) => (
                       <span
                         key={l}
-                        className="bg-[#F5F5F7] text-[#6B7280] rounded-full px-2 py-0.5 text-xs font-medium"
+                        className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                          l === locale
+                            ? 'bg-[#1A1A2E]/10 text-[#1A1A2E]'
+                            : 'bg-[#F5F5F7] text-[#6B7280]'
+                        }`}
                       >
-                        {LANGUAGE_LABELS[l as Locale] || l.toUpperCase()}
+                        {LANG_LABELS[l] || l.toUpperCase()}
                       </span>
                     ))}
                   </div>
 
-                  {pro.priceRange && (
-                    <p className="text-xs text-[#6B7280] mt-2">{pro.priceRange}</p>
-                  )}
-
-                  {/* Action buttons */}
+                  {/* Actions */}
                   <div className="flex gap-2 mt-3.5">
-                    {pro.phone && (
+                    {spec.phone && (
                       <a
-                        href={`tel:${pro.phone}`}
+                        href={`tel:${spec.phone.replace(/\s/g, '')}`}
                         className="flex items-center gap-1.5 bg-[#34C759] text-white text-sm font-medium px-4 py-2 rounded-[12px] active:scale-95 transition-transform"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -225,20 +213,20 @@ export default function ProsPage() {
                         {t('call')}
                       </a>
                     )}
-                    {pro.email && (
+                    {spec.email && (
                       <a
-                        href={`mailto:${pro.email}`}
-                        className="flex items-center gap-1.5 bg-[#F5F5F7] text-[#1A1A2E] text-sm font-medium px-4 py-2 rounded-[12px] border border-black/[0.06]"
+                        href={`mailto:${spec.email}`}
+                        className="bg-[#F5F5F7] text-[#1A1A2E] text-sm font-medium px-4 py-2 rounded-[12px] border border-black/[0.06]"
                       >
                         {t('email')}
                       </a>
                     )}
-                    {pro.website && (
+                    {spec.website && (
                       <a
-                        href={pro.website}
+                        href={spec.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 bg-[#F5F5F7] text-[#1A1A2E] text-sm font-medium px-4 py-2 rounded-[12px] border border-black/[0.06]"
+                        className="bg-[#F5F5F7] text-[#1A1A2E] text-sm font-medium px-4 py-2 rounded-[12px] border border-black/[0.06]"
                       >
                         {t('website')}
                       </a>

@@ -1,307 +1,270 @@
 [
   {
-    "id": "p1",
-    "name": "Cabinet Maitre Dupont",
-    "type": "immigration_lawyer",
-    "specialties": ["titre de sejour", "naturalisation", "regroupement familial"],
-    "languages": ["fr", "en", "ar"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Nice",
-    "phone": "+33 4 93 00 00 01",
-    "website": "https://www.barreau-nice.com",
-    "rating": 4.5,
-    "recommended": true,
-    "description": {
-      "fr": "Avocat spécialisé en droit des étrangers et immigration",
-      "en": "Lawyer specializing in immigration and foreigners' rights",
-      "ru": "Юрист по иммиграционному праву и правам иностранцев"
-    },
-    "availableOnline": true,
-    "priceRange": "150-300€/consultation"
+    "category": "Avocats",
+    "specialists": [
+      {
+        "name": "Maître Dali MATIYEVA",
+        "firm": "Cabinet MATIYEVA",
+        "specialization": "Droit des étrangers, immigration, civil, business",
+        "city": "Nice",
+        "address": "6 Avenue Durante, 06000 Nice",
+        "phone": "07 82 85 35 44",
+        "email": "cabinet@avocat-matiyeva.fr",
+        "website": "https://avocat-matiyeva.fr",
+        "languages": ["fr", "ru"],
+        "hours": "Lun-Ven 10h-19h"
+      },
+      {
+        "name": "Maître Jean-Louis SOURNY",
+        "firm": "Cabinet Sourny",
+        "specialization": "Droit des affaires, immobilier, civil",
+        "city": "Nice",
+        "address": "14 Rue Guiglia, 06000 Nice",
+        "phone": "04 93 87 29 41",
+        "website": "http://www.cabinet-sourny-avocats-nice.com",
+        "languages": ["fr", "ru", "it"],
+        "hours": null
+      },
+      {
+        "name": "Maître Emery CROISÉ",
+        "firm": "Croisé Emery Avocat",
+        "specialization": "Droit international privé, immobilier, civil",
+        "city": "Antibes",
+        "address": "Antibes, 06600",
+        "phone": null,
+        "website": "https://croise-avocat-06.fr",
+        "languages": ["fr", "en"],
+        "hours": null
+      },
+      {
+        "name": "Maître Catherine CRAVINO",
+        "firm": "Cabinet Cravino",
+        "specialization": "Droit civil, famille",
+        "city": "Cannes",
+        "address": "1 Boulevard d'Alsace, 06400 Cannes",
+        "phone": "04 93 39 62 33",
+        "website": null,
+        "languages": ["fr", "en"],
+        "hours": null
+      }
+    ]
   },
   {
-    "id": "p2",
-    "name": "Expert-Comptable Martin & Associés",
-    "type": "accountant",
-    "specialties": ["declaration revenus", "auto-entrepreneur", "TVA", "creation entreprise"],
-    "languages": ["fr", "en"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Antibes",
-    "phone": "+33 4 93 00 00 02",
-    "website": "https://www.experts-comptables.fr",
-    "rating": 4.8,
-    "recommended": true,
-    "description": {
-      "fr": "Cabinet d'expertise comptable — déclarations, création d'entreprise",
-      "en": "Accounting firm — tax returns, business creation",
-      "ru": "Бухгалтерская фирма — декларации, создание бизнеса"
-    },
-    "availableOnline": true,
-    "priceRange": "80-200€/consultation"
+    "category": "Notaires",
+    "specialists": [
+      {
+        "name": "SELAS de POULPIQUET Notaires",
+        "firm": "De Poulpiquet & Associés",
+        "specialization": "Immobilier, succession, famille, entreprise",
+        "city": "Nice",
+        "address": "31 Avenue Jean Médecin, 06000 Nice",
+        "phone": "04 93 16 50 00",
+        "website": "https://depoulpiquet-associes-nice.notaires.fr",
+        "languages": ["fr", "en", "it", "es", "ru", "de", "pl"],
+        "hours": null
+      },
+      {
+        "name": "Maître Stéphane SERRATRICE",
+        "firm": "Notaire Antibes",
+        "specialization": "Immobilier, succession, droit international",
+        "city": "Antibes",
+        "address": "5 Place du Général de Gaulle, BP 659, 06632 Antibes",
+        "phone": "04 92 90 62 62",
+        "website": null,
+        "languages": ["fr", "en"],
+        "hours": null
+      },
+      {
+        "name": "Maître Germain VIALATTE",
+        "firm": "Notaires Cannes",
+        "specialization": "Famille, immobilier, droit international",
+        "city": "Cannes",
+        "address": "Cannes, 06400",
+        "phone": "04 97 06 17 06",
+        "email": "germain.vialatte@notaires.fr",
+        "website": "https://www.notairescannes.fr",
+        "languages": ["fr", "en"],
+        "hours": null
+      }
+    ]
   },
   {
-    "id": "p3",
-    "name": "Traductions Assermentées Côte d'Azur",
-    "type": "sworn_translator",
-    "specialties": ["traduction assermentée", "apostille", "documents officiels"],
-    "languages": ["fr", "en", "ru", "ar", "it"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Nice",
-    "phone": "+33 4 93 00 00 03",
-    "email": "contact@traductions-nice.fr",
-    "rating": 4.6,
-    "recommended": true,
-    "description": {
-      "fr": "Traductions assermentées de documents officiels dans 15 langues",
-      "en": "Sworn translations of official documents in 15 languages",
-      "ru": "Присяжные переводы официальных документов на 15 языках"
-    },
-    "availableOnline": false,
-    "priceRange": "30-50€/page"
+    "category": "Comptables",
+    "specialists": [
+      {
+        "name": "Exco Nice",
+        "firm": "Exco Nice",
+        "specialization": "Comptabilité, audit, conseil, fiscal, social",
+        "city": "Nice",
+        "address": "Nice, 06000",
+        "phone": null,
+        "website": "https://exco.fr/cabinets/exco-nice/",
+        "languages": ["fr", "en"],
+        "hours": null
+      },
+      {
+        "name": "SOFICA",
+        "firm": "SOFICA Expert-Comptable",
+        "specialization": "Expertise comptable, audit, gestion de patrimoine",
+        "city": "Nice",
+        "address": "Nice / Cagnes-sur-Mer, Alpes-Maritimes",
+        "phone": null,
+        "website": "https://sofica.com",
+        "languages": ["fr", "en"],
+        "hours": null
+      },
+      {
+        "name": "Cabinet Bittini",
+        "firm": "Cabinet Bittini",
+        "specialization": "Création entreprise, comptabilité, retraite",
+        "city": "Antibes",
+        "address": "Antibes, 06600",
+        "phone": null,
+        "website": "https://www.bittini.fr",
+        "languages": ["fr", "it"],
+        "hours": null
+      }
+    ]
   },
   {
-    "id": "p4",
-    "name": "Notaire Riviera - Me Leroy",
-    "type": "notary",
-    "specialties": ["immobilier", "succession", "mariage", "donations"],
-    "languages": ["fr", "en"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Cannes",
-    "phone": "+33 4 93 00 00 04",
-    "website": "https://www.notaires.fr",
-    "rating": 4.3,
-    "recommended": false,
-    "description": {
-      "fr": "Notaire — immobilier, successions, contrats de mariage",
-      "en": "Notary — real estate, inheritance, marriage contracts",
-      "ru": "Нотариус — недвижимость, наследство, брачные контракты"
-    },
-    "availableOnline": false,
-    "priceRange": "Tarifs réglementés"
+    "category": "Traducteurs",
+    "specialists": [
+      {
+        "name": "BTI Traducteur Assermenté",
+        "firm": "BTI Traduction",
+        "specialization": "Traduction assermentée officielle — 70 langues",
+        "city": "Cannes",
+        "address": "Cannes, Provence-Alpes-Côte d'Azur",
+        "phone": null,
+        "website": "https://www.bti-traducteur-assermente.fr",
+        "languages": ["fr", "en", "ru", "de", "es", "it", "pt", "ar"],
+        "hours": null
+      },
+      {
+        "name": "Traducteur Assermenté Cannes",
+        "firm": "Traducteur-assermente-cannes.fr",
+        "specialization": "Traductions officielles mairie, préfecture, tribunal — dès 25€",
+        "city": "Cannes",
+        "address": "Cannes, 06400",
+        "phone": null,
+        "website": "https://www.traducteur-assermente-cannes.fr",
+        "languages": ["fr", "en", "ru", "de", "es", "ar", "pt", "it"],
+        "hours": "Résultat en 24h"
+      },
+      {
+        "name": "Assertra Nice",
+        "firm": "Assertra",
+        "specialization": "Annuaire de 80 traducteurs assermentés à Nice",
+        "city": "Nice",
+        "address": "Nice, 06000",
+        "phone": null,
+        "website": "https://assertra.fr/annuaire/nice",
+        "languages": ["fr", "en", "ru", "de", "es", "ar", "pt", "it"],
+        "hours": null
+      }
+    ]
   },
   {
-    "id": "p5",
-    "name": "Cabinet Fiscal Méditerranée",
-    "type": "tax_lawyer",
-    "specialties": ["contentieux fiscal", "controle fiscal", "optimisation", "SCI"],
-    "languages": ["fr", "en", "it"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Nice",
-    "phone": "+33 4 93 00 00 05",
-    "rating": 4.7,
-    "recommended": true,
-    "description": {
-      "fr": "Avocat fiscaliste — contentieux, optimisation, SCI",
-      "en": "Tax lawyer — disputes, optimization, property companies",
-      "ru": "Налоговый юрист — споры, оптимизация, SCI"
-    },
-    "availableOnline": true,
-    "priceRange": "200-400€/consultation"
+    "category": "Assurances",
+    "specialists": [
+      {
+        "name": "Franco-Anglaise d'Assurances",
+        "firm": "FAA Courtage",
+        "specialization": "Courtage assurances — fondé 1924, spécialiste expatriés",
+        "city": "Nice",
+        "address": "3 Rue de la Liberté, 06000 Nice",
+        "phone": null,
+        "website": "https://faa.fr",
+        "languages": ["fr", "en"],
+        "hours": "Lun-Jeu 9h-12h45 et 14h-18h"
+      },
+      {
+        "name": "V&P Assurances",
+        "firm": "V&P Assurances",
+        "specialization": "Auto, habitation, décennale, RC pro, santé",
+        "city": "Nice",
+        "address": "Nice, 06000",
+        "phone": null,
+        "website": "https://www.vpassurances.fr",
+        "languages": ["fr", "en"],
+        "hours": null
+      }
+    ]
   },
   {
-    "id": "p6",
-    "name": "Assurances Azur Conseil",
-    "type": "insurance_broker",
-    "specialties": ["habitation", "auto", "sante", "responsabilite civile"],
-    "languages": ["fr", "en", "ru"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Antibes",
-    "phone": "+33 4 93 00 00 06",
-    "rating": 4.4,
-    "recommended": true,
-    "description": {
-      "fr": "Courtier en assurances — habitation, auto, santé, RC pro",
-      "en": "Insurance broker — home, car, health, liability",
-      "ru": "Страховой брокер — жильё, авто, здоровье, ответственность"
-    },
-    "availableOnline": true,
-    "priceRange": "Gratuit (commission assureur)"
+    "category": "Médecins",
+    "specialists": [
+      {
+        "name": "Dr Richard ROZENFELD",
+        "firm": "Cabinet médical",
+        "specialization": "Médecin généraliste",
+        "city": "Nice",
+        "address": "51 Boulevard Stalingrad, 06300 Nice",
+        "phone": null,
+        "website": "https://www.doctolib.fr/medecin-generaliste/stains/richard-rozenfeld",
+        "languages": ["fr", "ru"],
+        "hours": "Sur Doctolib"
+      },
+      {
+        "name": "Centre médical MGEN Nice",
+        "firm": "Centre MGEN",
+        "specialization": "Médecine générale et dentaire, multilingue",
+        "city": "Nice",
+        "address": "Nice, 06000",
+        "phone": "04 93 82 63 00",
+        "website": null,
+        "languages": ["fr", "en", "it"],
+        "hours": null
+      },
+      {
+        "name": "Dr Diane Kleh-Reinle",
+        "firm": "Cabinet médical",
+        "specialization": "Médecin généraliste",
+        "city": "Nice",
+        "address": "24 Rue Maréchal Joffre, 06000 Nice",
+        "phone": "06 84 17 73 25",
+        "website": null,
+        "languages": ["fr", "en"],
+        "hours": null
+      }
+    ]
   },
   {
-    "id": "p7",
-    "name": "Avocat Droit du Travail - Me Blanc",
-    "type": "labor_lawyer",
-    "specialties": ["licenciement", "prudhommes", "contrat travail", "harcelement"],
-    "languages": ["fr", "en"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Nice",
-    "phone": "+33 4 93 00 00 07",
-    "rating": 4.5,
-    "recommended": false,
-    "description": {
-      "fr": "Avocat en droit du travail — licenciement, prud'hommes",
-      "en": "Employment lawyer — dismissal, labor court",
-      "ru": "Юрист по трудовому праву — увольнение, трудовой суд"
-    },
-    "availableOnline": true,
-    "priceRange": "150-250€/consultation"
-  },
-  {
-    "id": "p8",
-    "name": "Immobilier Côte d'Azur - Agence Soleil",
-    "type": "realtor",
-    "specialties": ["location", "achat", "vente", "gestion locative"],
-    "languages": ["fr", "en", "ru", "it"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Juan-les-Pins",
-    "phone": "+33 4 93 00 00 08",
-    "rating": 4.2,
-    "recommended": true,
-    "description": {
-      "fr": "Agence immobilière — location, vente, gestion",
-      "en": "Real estate agency — rental, sales, management",
-      "ru": "Агентство недвижимости — аренда, продажа, управление"
-    },
-    "availableOnline": false,
-    "priceRange": "Commission 3-5%"
-  },
-  {
-    "id": "p9",
-    "name": "Médecin Généraliste Dr. Moreau",
-    "type": "doctor",
-    "specialties": ["medecine generale", "certificats", "vaccinations"],
-    "languages": ["fr", "en"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Antibes",
-    "phone": "+33 4 93 00 00 09",
-    "rating": 4.6,
-    "recommended": false,
-    "description": {
-      "fr": "Médecin généraliste conventionné secteur 1",
-      "en": "General practitioner — sector 1 (regulated fees)",
-      "ru": "Врач общей практики — сектор 1 (регулируемые тарифы)"
-    },
-    "availableOnline": false,
-    "priceRange": "26.50€ (tarif conventionné)"
-  },
-  {
-    "id": "p10",
-    "name": "Consultant Immigration Riviera",
-    "type": "immigration_consultant",
-    "specialties": ["titre sejour", "carte resident", "changement statut", "visa"],
-    "languages": ["fr", "en", "ru", "ar"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Nice",
-    "phone": "+33 4 93 00 00 10",
-    "email": "info@immigration-riviera.fr",
-    "rating": 4.4,
-    "recommended": true,
-    "description": {
-      "fr": "Consultant en immigration — accompagnement démarches administratives",
-      "en": "Immigration consultant — administrative procedures guidance",
-      "ru": "Консультант по иммиграции — сопровождение административных процедур"
-    },
-    "availableOnline": true,
-    "priceRange": "100-200€/consultation"
-  },
-  {
-    "id": "p11",
-    "name": "Assistante Sociale CCAS Antibes",
-    "type": "social_worker",
-    "specialties": ["aide sociale", "logement", "insertion", "droits"],
-    "languages": ["fr"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Antibes",
-    "phone": "+33 4 93 00 00 11",
-    "rating": 4.0,
-    "recommended": false,
-    "description": {
-      "fr": "Service social municipal — aide aux démarches, droits sociaux",
-      "en": "Municipal social services — administrative help, social rights",
-      "ru": "Муниципальная социальная служба — помощь с документами, соц. права"
-    },
-    "availableOnline": false,
-    "priceRange": "Gratuit"
-  },
-  {
-    "id": "p12",
-    "name": "Avocat Famille & Divorce - Me Petit",
-    "type": "family_lawyer",
-    "specialties": ["divorce", "garde enfants", "pension alimentaire", "adoption"],
-    "languages": ["fr", "en", "it"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Cannes",
-    "phone": "+33 4 93 00 00 12",
-    "rating": 4.3,
-    "recommended": false,
-    "description": {
-      "fr": "Avocat en droit de la famille — divorce, garde, pension",
-      "en": "Family lawyer — divorce, custody, alimony",
-      "ru": "Семейный юрист — развод, опека, алименты"
-    },
-    "availableOnline": true,
-    "priceRange": "150-300€/consultation"
-  },
-  {
-    "id": "p13",
-    "name": "Banque Conseil Riviera",
-    "type": "bank_advisor",
-    "specialties": ["ouverture compte", "credit immobilier", "epargne", "non-residents"],
-    "languages": ["fr", "en", "ru"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Nice",
-    "phone": "+33 4 93 00 00 13",
-    "rating": 4.1,
-    "recommended": false,
-    "description": {
-      "fr": "Conseiller bancaire indépendant — ouverture de compte, crédit",
-      "en": "Independent bank advisor — account opening, loans",
-      "ru": "Независимый банковский консультант — открытие счёта, кредиты"
-    },
-    "availableOnline": true,
-    "priceRange": "100-150€/consultation"
-  },
-  {
-    "id": "p14",
-    "name": "Avocat Immobilier Côte d'Azur",
-    "type": "real_estate_lawyer",
-    "specialties": ["bail commercial", "copropriete", "litige locatif", "construction"],
-    "languages": ["fr", "en"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Nice",
-    "phone": "+33 4 93 00 00 14",
-    "rating": 4.4,
-    "recommended": false,
-    "description": {
-      "fr": "Avocat en droit immobilier — baux, copropriété, litiges",
-      "en": "Real estate lawyer — leases, co-ownership, disputes",
-      "ru": "Юрист по недвижимости — аренда, совладение, споры"
-    },
-    "availableOnline": true,
-    "priceRange": "200-350€/consultation"
-  },
-  {
-    "id": "p15",
-    "name": "Consultant RH Azur",
-    "type": "hr_consultant",
-    "specialties": ["contrat travail", "fiche paie", "convention collective", "embauche"],
-    "languages": ["fr", "en"],
-    "country": "FR",
-    "region": "Côte d'Azur",
-    "city": "Sophia Antipolis",
-    "phone": "+33 4 93 00 00 15",
-    "rating": 4.2,
-    "recommended": false,
-    "description": {
-      "fr": "Consultant RH — contrats, paie, droit social",
-      "en": "HR consultant — contracts, payroll, social law",
-      "ru": "HR консультант — контракты, зарплата, трудовое право"
-    },
-    "availableOnline": true,
-    "priceRange": "100-200€/consultation"
+    "category": "Agents immobiliers",
+    "specialists": [
+      {
+        "name": "Crystal Riviera",
+        "firm": "Crystal Riviera",
+        "specialization": "Vente et location immobilier de prestige — Nice, Monaco, Cannes, St-Tropez",
+        "city": "Nice / Monaco / Cannes",
+        "address": null,
+        "phone": null,
+        "website": "https://www.crystal-riviera.com",
+        "languages": ["fr", "en", "ru", "it"],
+        "hours": null
+      },
+      {
+        "name": "Magrey & Sons Monaco",
+        "firm": "Magrey And Sons",
+        "specialization": "Immobilier de luxe — Monaco et Côte d'Azur",
+        "city": "Monaco",
+        "address": "Monaco",
+        "phone": null,
+        "website": "https://www.magreymonaco.com",
+        "languages": ["fr", "en", "ru", "it"],
+        "hours": null
+      },
+      {
+        "name": "Nataliya DONSKYY",
+        "firm": "Palais Immobilier",
+        "specialization": "Immobilier France et Émirats Arabes Unis",
+        "city": "Nice",
+        "address": "Nice, 06000",
+        "phone": null,
+        "website": "https://palaisimmobilier.com/fr/equipe/81827",
+        "languages": ["fr", "en", "ru", "uk"],
+        "hours": null
+      }
+    ]
   }
 ]
