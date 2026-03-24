@@ -8,6 +8,73 @@ import { processFile, processZip, getFormatIcon, ProcessedFile } from '@/lib/fil
 import { addDocument, incrementScanCount, canScan, getUserProfile } from '@/lib/storage';
 import { AnalysisResponse, Document } from '@/lib/types';
 
+/* ---- SVG Icon Components ---- */
+function IconCamera({ className = 'w-6 h-6' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
+    </svg>
+  );
+}
+
+function IconFolder({ className = 'w-6 h-6' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+    </svg>
+  );
+}
+
+function IconArchive({ className = 'w-10 h-10' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+    </svg>
+  );
+}
+
+function IconDocument({ className = 'w-10 h-10' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+    </svg>
+  );
+}
+
+function IconDocumentSmall({ className = 'w-4 h-4' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+    </svg>
+  );
+}
+
+function IconCheckCircle({ className = 'w-5 h-5' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  );
+}
+
+function IconSpinner({ className = 'w-5 h-5' }: { className?: string }) {
+  return (
+    <svg className={`${className} animate-spin`} fill="none" viewBox="0 0 24 24">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+    </svg>
+  );
+}
+
+function IconCircle({ className = 'w-5 h-5' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+    </svg>
+  );
+}
+
 export default function ScanPage() {
   const t = useTranslations('scan');
   const errT = useTranslations('errors');
@@ -180,40 +247,45 @@ export default function ScanPage() {
   const hasContent = files.length > 0;
 
   return (
-    <div className="min-h-screen bg-white safe-area-inset-top max-w-2xl mx-auto">
+    <div className="min-h-screen bg-white safe-area-inset-top max-w-2xl mx-auto font-[Inter,system-ui,sans-serif]">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white border-b border-[#D2D2D7] px-4 py-3">
-        <div className="flex items-center gap-3">
-          <button onClick={() => router.back()} className="p-2 hover:bg-[#F5F5F7] rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center">
-            <svg className="w-5 h-5 text-[#86868B] rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <h1 className="text-lg font-semibold text-[#1D1D1F]">{t('title')}</h1>
-        </div>
+      <div className="sticky top-0 z-40 bg-white border-b border-black/[0.06] h-14 flex items-center px-4">
+        <button
+          onClick={() => router.back()}
+          className="p-2 hover:bg-[#F5F5F7] rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center absolute left-2"
+        >
+          <svg className="w-5 h-5 text-[#1A1A2E] rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <h1 className="text-[17px] font-semibold text-[#1A1A2E] mx-auto">{t('title')}</h1>
       </div>
 
       <div className="px-4 py-6">
         {/* Preview area */}
         {preview ? (
-          <div className="mb-6 rounded-2xl overflow-hidden bg-[#F5F5F7] aspect-[3/4] max-h-[40vh]">
-            <img src={preview} alt="Document preview" className="w-full h-full object-contain" />
+          <div className="mb-6 rounded-[20px] overflow-hidden bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-black/[0.06]">
+            <div className="aspect-[3/4] max-h-[40vh]">
+              <img src={preview} alt="Document preview" className="w-full h-full object-contain" />
+            </div>
           </div>
         ) : hasContent ? (
-          <div className="mb-6 rounded-2xl bg-[#F5F5F7] border border-[#D2D2D7] p-6">
+          <div className="mb-6 rounded-[20px] bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-black/[0.06] p-5">
             {isZip ? (
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-4xl">{'\ud83d\udce6'}</span>
+                  <div className="w-12 h-12 rounded-2xl bg-[#F5F5F7] flex items-center justify-center">
+                    <IconArchive className="w-7 h-7 text-[#6B7280]" />
+                  </div>
                   <div>
-                    <p className="font-semibold text-[#1D1D1F]">{fileName}</p>
-                    <p className="text-sm text-muted">{files.length} files</p>
+                    <p className="font-semibold text-[#1A1A2E]">{fileName}</p>
+                    <p className="text-sm text-[#6B7280]">{files.length} files</p>
                   </div>
                 </div>
-                <div className="space-y-1.5 max-h-[200px] overflow-y-auto">
+                <div className="space-y-1 max-h-[200px] overflow-y-auto">
                   {files.map((f, i) => (
-                    <div key={i} className="flex items-center gap-2 text-sm text-[#86868B]">
-                      <span>{getFormatIcon(f.originalFormat)}</span>
+                    <div key={i} className="flex items-center gap-2.5 text-sm text-[#6B7280] py-1.5 px-3 rounded-lg hover:bg-[#F5F5F7] transition-colors">
+                      <IconDocumentSmall className="w-4 h-4 flex-shrink-0 text-[#6B7280]" />
                       <span className="truncate">{f.fileName}</span>
                     </div>
                   ))}
@@ -221,49 +293,61 @@ export default function ScanPage() {
               </div>
             ) : (
               <div className="flex items-center gap-3">
-                <span className="text-4xl">{getFormatIcon(files[0]?.originalFormat || '')}</span>
+                <div className="w-12 h-12 rounded-2xl bg-[#F5F5F7] flex items-center justify-center">
+                  <IconDocument className="w-7 h-7 text-[#6B7280]" />
+                </div>
                 <div>
-                  <p className="font-semibold text-[#1D1D1F]">{fileName}</p>
-                  <p className="text-sm text-muted">{files[0]?.originalFormat.toUpperCase()}</p>
+                  <p className="font-semibold text-[#1A1A2E]">{fileName}</p>
+                  <p className="text-sm text-[#6B7280]">{files[0]?.originalFormat.toUpperCase()}</p>
                 </div>
               </div>
             )}
           </div>
         ) : (
-          <div className="bg-[#F5F5F7] rounded-2xl aspect-[3/4] max-h-[40vh] flex items-center justify-center mb-6 border-2 border-dashed border-[#D2D2D7]">
-            <div className="text-center text-muted">
-              <div className="text-5xl mb-3">{'\ud83d\udcf7'}</div>
-              <p>{t('take_photo')}</p>
+          <div className="rounded-[20px] aspect-[3/4] max-h-[40vh] flex items-center justify-center mb-6 bg-white border-2 border-dashed border-[#D1D5DB]">
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-[#F5F5F7] flex items-center justify-center">
+                <IconCamera className="w-8 h-8 text-[#6B7280]" />
+              </div>
+              <p className="text-[#6B7280] text-sm font-medium">{t('take_photo')}</p>
             </div>
           </div>
         )}
 
         {/* Error */}
         {error && (
-          <div className="bg-danger/10 text-danger text-sm font-medium rounded-xl px-4 py-3 mb-4">{error}</div>
+          <div className="bg-[#FEE2E2] text-[#DC2626] text-sm font-medium rounded-[14px] px-4 py-3 mb-4">{error}</div>
         )}
 
         {/* Analysis progress */}
         {analyzing && (
-          <div className="bg-primary/10 rounded-2xl p-6 mb-6">
-            <p className="font-semibold text-[#1D1D1F] mb-4">{t('analyzing')}</p>
+          <div className="bg-[#F5F5F7] rounded-[20px] p-5 mb-6">
+            <p className="font-semibold text-[#1A1A2E] mb-4">{t('analyzing')}</p>
             {isZip && batchProgress.total > 0 ? (
               <div>
-                <div className="flex items-center justify-between text-sm text-muted mb-2">
+                <div className="flex items-center justify-between text-sm text-[#6B7280] mb-2">
                   <span>{batchProgress.current} / {batchProgress.total}</span>
                   <span>{Math.round((batchProgress.current / batchProgress.total) * 100)}%</span>
                 </div>
-                <div className="w-full h-2 bg-[#D2D2D7] rounded-full overflow-hidden">
-                  <div className="h-full bg-primary rounded-full transition-all" style={{ width: `${(batchProgress.current / batchProgress.total) * 100}%` }} />
+                <div className="w-full h-2 bg-white rounded-full overflow-hidden">
+                  <div className="h-full bg-[#1A1A2E] rounded-full transition-all" style={{ width: `${(batchProgress.current / batchProgress.total) * 100}%` }} />
                 </div>
               </div>
             ) : (
-              [t('step1'), t('step2'), t('step3')].map((label, i) => (
-                <div key={i} className={`flex items-center gap-3 py-2 transition-opacity duration-300 ${i <= step ? 'opacity-100' : 'opacity-30'}`}>
-                  {i < step ? <span className="text-success">{'\u2705'}</span> : i === step ? <span className="animate-spin text-primary">{'\u23f3'}</span> : <span className="text-muted">{'\u25cb'}</span>}
-                  <span className={i <= step ? 'text-[#1D1D1F]' : 'text-muted'}>{label}</span>
-                </div>
-              ))
+              <div className="space-y-1">
+                {[t('step1'), t('step2'), t('step3')].map((label, i) => (
+                  <div key={i} className={`flex items-center gap-3 py-2 transition-opacity duration-300 ${i <= step ? 'opacity-100' : 'opacity-30'}`}>
+                    {i < step ? (
+                      <IconCheckCircle className="w-5 h-5 text-[#22C55E]" />
+                    ) : i === step ? (
+                      <IconSpinner className="w-5 h-5 text-[#1A1A2E]" />
+                    ) : (
+                      <IconCircle className="w-5 h-5 text-[#6B7280]" />
+                    )}
+                    <span className={`text-sm ${i <= step ? 'text-[#1A1A2E] font-medium' : 'text-[#6B7280]'}`}>{label}</span>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         )}
@@ -272,18 +356,27 @@ export default function ScanPage() {
         {!analyzing && (
           <div className="space-y-3">
             {hasContent && (
-              <button onClick={handleAnalyze} className="w-full bg-primary text-white font-semibold py-3.5 rounded-xl text-lg active:scale-95 transition-transform min-h-[52px]">
+              <button onClick={handleAnalyze} className="w-full bg-[#1A1A2E] text-white font-medium py-3.5 rounded-[14px] text-lg active:scale-[0.98] transition-transform h-[52px]">
                 {t('analyze')}{isZip ? ` (${files.length})` : ''}
               </button>
             )}
             <button
               onClick={() => cameraRef.current?.click()}
-              className={`w-full font-semibold py-3.5 rounded-xl text-lg active:scale-95 transition-transform min-h-[52px] ${hasContent ? 'bg-[#F5F5F7] text-[#86868B]' : 'bg-primary text-white'}`}
+              className={`w-full font-medium py-3.5 rounded-[14px] text-lg active:scale-[0.98] transition-transform h-[52px] flex items-center justify-center gap-2.5 ${
+                hasContent
+                  ? 'bg-[#F5F5F7] text-[#6B7280] border border-black/[0.06]'
+                  : 'bg-[#1A1A2E] text-white'
+              }`}
             >
-              {'\ud83d\udcf7'} {t('take_photo')}
+              <IconCamera className="w-5 h-5" />
+              <span>{t('take_photo')}</span>
             </button>
-            <button onClick={() => fileRef.current?.click()} className="w-full bg-[#F5F5F7] text-[#86868B] font-semibold py-3.5 rounded-xl text-lg active:scale-95 transition-transform min-h-[52px]">
-              {'\ud83d\udcc1'} {t('upload_file')}
+            <button
+              onClick={() => fileRef.current?.click()}
+              className="w-full bg-[#F5F5F7] text-[#6B7280] font-medium py-3.5 rounded-[14px] text-lg active:scale-[0.98] transition-transform h-[52px] flex items-center justify-center gap-2.5 border border-black/[0.06]"
+            >
+              <IconFolder className="w-5 h-5" />
+              <span>{t('upload_file')}</span>
             </button>
           </div>
         )}

@@ -4,11 +4,40 @@ import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { getSettings, saveSettings } from '@/lib/storage';
-import { LOCALE_FLAGS, LOCALE_NAMES, Locale, MAX_FREE_SCANS, Settings, CountryCode, ImmigrationStatus, COUNTRY_FLAGS, COUNTRY_NAMES } from '@/lib/types';
+import { LOCALE_NAMES, Locale, MAX_FREE_SCANS, Settings, CountryCode, ImmigrationStatus, COUNTRY_NAMES } from '@/lib/types';
 import ScanCounter from '@/components/ScanCounter';
 
 const locales: Locale[] = ['fr', 'en', 'ru', 'ar', 'it', 'zh', 'pt', 'tr'];
 const countries: CountryCode[] = ['FR', 'DE', 'IT', 'ES', 'GB', 'NL', 'BE', 'CH', 'AT', 'PT', 'OTHER'];
+
+function ChevronDown({ open }: { open?: boolean }) {
+  return (
+    <svg
+      className={`w-4 h-4 text-[#6B7280] transition-transform ${open ? 'rotate-180' : ''}`}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+  );
+}
+
+function ChevronRight() {
+  return (
+    <svg className="w-4 h-4 text-[#6B7280]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg className="w-4 h-4 text-[#34C759]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+    </svg>
+  );
+}
 
 export default function SettingsPage() {
   const t = useTranslations('settings');
@@ -51,7 +80,6 @@ export default function SettingsPage() {
 
   function handleEmailSubmit() {
     if (!email.trim()) return;
-    // In production, send to Google Sheets API
     console.log('Waitlist email:', email);
     setEmailSent(true);
   }
@@ -61,37 +89,30 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom max-w-2xl mx-auto">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white border-b border-[#D2D2D7] px-4 py-3">
+      <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-black/[0.06] px-4 py-3">
         <div className="flex items-center gap-3">
           <button
             onClick={() => router.back()}
-            className="p-2 hover:bg-[#F5F5F7] rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="p-2 hover:bg-[#F5F5F7] rounded-[10px] min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors"
           >
-            <svg className="w-5 h-5 text-[#86868B] rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-[#1A1A2E] rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <h1 className="text-lg font-semibold text-[#1D1D1F]">{t('title')}</h1>
+          <h1 className="text-lg font-semibold text-[#1A1A2E]">{t('title')}</h1>
         </div>
       </div>
 
-      <div className="px-4 py-4 space-y-6">
-        {/* Language */}
+      <div className="px-4 py-5 space-y-6">
+        {/* Language Section */}
         <div>
+          <p className="text-[11px] uppercase tracking-wider text-[#6B7280] font-semibold mb-2">{t('language')}</p>
           <button
             onClick={() => setShowLangPicker(!showLangPicker)}
-            className="w-full flex items-center justify-between py-3 min-h-[52px]"
+            className="w-full flex items-center justify-between bg-white py-3.5 px-4 rounded-[14px] border border-black/[0.06] min-h-[52px]"
           >
-            <div className="flex items-center gap-3">
-              <span className="text-xl">\ud83c\udf10</span>
-              <span className="font-medium text-[#1D1D1F]">{t('language')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-muted">{LOCALE_NAMES[locale as Locale]}</span>
-              <svg className={`w-4 h-4 text-muted transition-transform ${showLangPicker ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
+            <span className="font-medium text-[#1A1A2E]">{LOCALE_NAMES[locale as Locale]}</span>
+            <ChevronDown open={showLangPicker} />
           </button>
 
           {showLangPicker && (
@@ -100,37 +121,34 @@ export default function SettingsPage() {
                 <button
                   key={l}
                   onClick={() => switchLanguage(l)}
-                  className={`flex items-center gap-2 px-3 py-2.5 rounded-xl transition-colors min-h-[44px] ${
+                  className={`flex items-center gap-2 px-4 py-3 rounded-[12px] transition-all min-h-[44px] ${
                     l === locale
-                      ? 'bg-primary/10 border border-primary/30'
-                      : 'bg-[#F5F5F7] border border-[#D2D2D7]'
+                      ? 'bg-[#1A1A2E]/5 border-2 border-[#1A1A2E]'
+                      : 'bg-[#F5F5F7] border border-black/[0.06] hover:border-[#1A1A2E]/20'
                   }`}
                 >
-                  <span className="text-sm font-medium">{LOCALE_NAMES[l]}</span>
+                  <span className="text-sm font-medium text-[#1A1A2E]">{LOCALE_NAMES[l]}</span>
                 </button>
               ))}
             </div>
           )}
         </div>
 
-        <hr className="border-[#D2D2D7]" />
-
-        {/* Country — dropdown */}
+        {/* Country Section */}
         <div>
+          <p className="text-[11px] uppercase tracking-wider text-[#6B7280] font-semibold mb-2">{t('country')}</p>
           <button
             onClick={() => setShowCountryPicker(!showCountryPicker)}
-            className="w-full flex items-center justify-between py-3 min-h-[52px]"
+            className="w-full flex items-center justify-between bg-white py-3.5 px-4 rounded-[14px] border border-black/[0.06] min-h-[52px]"
           >
-            <span className="font-medium text-[#1D1D1F]">{t('country')}</span>
-            <div className="flex items-center gap-2">
-              <span className="text-muted">{settings?.country === 'OTHER' ? onbT('other_country') : COUNTRY_NAMES[settings?.country || 'FR']}</span>
-              <svg className={`w-4 h-4 text-muted transition-transform ${showCountryPicker ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
+            <span className="font-medium text-[#1A1A2E]">
+              {settings?.country === 'OTHER' ? onbT('other_country') : COUNTRY_NAMES[settings?.country || 'FR']}
+            </span>
+            <ChevronDown open={showCountryPicker} />
           </button>
+
           {showCountryPicker && (
-            <div className="grid grid-cols-2 gap-2 mt-2 mb-2">
+            <div className="grid grid-cols-2 gap-2 mt-2">
               {countries.map((c) => (
                 <button
                   key={c}
@@ -141,8 +159,10 @@ export default function SettingsPage() {
                     setSettings(updated);
                     setShowCountryPicker(false);
                   }}
-                  className={`px-3 py-2.5 rounded-xl text-sm font-medium transition-colors min-h-[44px] text-left rtl:text-right ${
-                    settings?.country === c ? 'bg-primary/10 border border-primary/30' : 'bg-[#F5F5F7] border border-[#D2D2D7]'
+                  className={`px-4 py-3 rounded-[12px] text-sm font-medium transition-all min-h-[44px] text-left rtl:text-right ${
+                    settings?.country === c
+                      ? 'bg-[#1A1A2E]/5 border-2 border-[#1A1A2E] text-[#1A1A2E]'
+                      : 'bg-[#F5F5F7] border border-black/[0.06] text-[#1A1A2E] hover:border-[#1A1A2E]/20'
                   }`}
                 >
                   {c === 'OTHER' ? onbT('other_country') : COUNTRY_NAMES[c]}
@@ -152,24 +172,19 @@ export default function SettingsPage() {
           )}
         </div>
 
-        <hr className="border-[#D2D2D7]" />
-
-        {/* Status — dropdown */}
+        {/* Status Section */}
         <div>
+          <p className="text-[11px] uppercase tracking-wider text-[#6B7280] font-semibold mb-2">{t('status')}</p>
           <button
             onClick={() => setShowStatusPicker(!showStatusPicker)}
-            className="w-full flex items-center justify-between py-3 min-h-[52px]"
+            className="w-full flex items-center justify-between bg-white py-3.5 px-4 rounded-[14px] border border-black/[0.06] min-h-[52px]"
           >
-            <span className="font-medium text-[#1D1D1F]">{t('status')}</span>
-            <div className="flex items-center gap-2">
-              <span className="text-muted">{onbT(`status_${settings?.status || 'residence_permit'}` as any)}</span>
-              <svg className={`w-4 h-4 text-muted transition-transform ${showStatusPicker ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
+            <span className="font-medium text-[#1A1A2E]">{onbT(`status_${settings?.status || 'residence_permit'}` as any)}</span>
+            <ChevronDown open={showStatusPicker} />
           </button>
+
           {showStatusPicker && (
-            <div className="grid grid-cols-2 gap-2 mt-2 mb-2">
+            <div className="grid grid-cols-2 gap-2 mt-2">
               {(['student', 'work_permit', 'residence_permit', 'family_reunion', 'tourist', 'eu_citizen', 'pending', 'citizen'] as const).map((s) => (
                 <button
                   key={s}
@@ -180,8 +195,10 @@ export default function SettingsPage() {
                     setSettings(updated);
                     setShowStatusPicker(false);
                   }}
-                  className={`px-3 py-2.5 rounded-xl text-sm font-medium transition-colors min-h-[44px] text-left rtl:text-right ${
-                    settings?.status === s ? 'bg-primary/10 border border-primary/30' : 'bg-[#F5F5F7] border border-[#D2D2D7]'
+                  className={`px-4 py-3 rounded-[12px] text-sm font-medium transition-all min-h-[44px] text-left rtl:text-right ${
+                    settings?.status === s
+                      ? 'bg-[#1A1A2E]/5 border-2 border-[#1A1A2E] text-[#1A1A2E]'
+                      : 'bg-[#F5F5F7] border border-black/[0.06] text-[#1A1A2E] hover:border-[#1A1A2E]/20'
                   }`}
                 >
                   {onbT(`status_${s}` as any)}
@@ -191,40 +208,34 @@ export default function SettingsPage() {
           )}
         </div>
 
-        <hr className="border-[#D2D2D7]" />
-
-        {/* Usage */}
+        {/* Usage Section */}
         <div>
-          <h3 className="flex items-center gap-2 font-medium text-[#1D1D1F] mb-3">
-            <span>\ud83d\udcca</span> {t('usage')}
-          </h3>
-          <ScanCounter used={settings.scanCount} />
+          <p className="text-[11px] uppercase tracking-wider text-[#6B7280] font-semibold mb-2">{t('usage')}</p>
+          <div className="bg-white rounded-[14px] border border-black/[0.06] p-4">
+            <ScanCounter used={settings.scanCount} />
+          </div>
         </div>
 
-        <hr className="border-[#D2D2D7]" />
-
-        {/* Reminders */}
+        {/* Reminders Section */}
         <div>
-          <h3 className="flex items-center gap-2 font-medium text-[#1D1D1F] mb-3">
-            <span>\ud83d\udd14</span> {t('reminders')}
-          </h3>
-          <div className="space-y-2">
+          <p className="text-[11px] uppercase tracking-wider text-[#6B7280] font-semibold mb-2">{t('reminders')}</p>
+          <div className="bg-white rounded-[14px] border border-black/[0.06] divide-y divide-black/[0.06]">
             {([
               { key: 'sevenDays' as const, label: t('reminder_7days') },
               { key: 'oneDay' as const, label: t('reminder_1day') },
               { key: 'today' as const, label: t('reminder_today') },
             ]).map(({ key, label }) => (
-              <div key={key} className="flex items-center justify-between py-2">
-                <span className="text-[#86868B]">{label}</span>
+              <div key={key} className="flex items-center justify-between py-3.5 px-4">
+                <span className="text-[15px] text-[#1A1A2E]">{label}</span>
                 <button
                   onClick={() => toggleNotification(key)}
-                  className={`w-12 h-7 rounded-full transition-colors relative ${
-                    settings.notifications[key] ? 'bg-primary' : 'bg-[#D2D2D7]'
+                  className={`w-[50px] h-[30px] rounded-full transition-colors relative ${
+                    settings.notifications[key] ? 'bg-[#1A1A2E]' : 'bg-[#D1D5DB]'
                   }`}
                 >
                   <div
-                    className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform ${
-                      settings.notifications[key] ? 'ltr:translate-x-6 rtl:-translate-x-6' : 'ltr:translate-x-1 rtl:-translate-x-1'
+                    className={`w-[26px] h-[26px] bg-white rounded-full absolute top-[2px] transition-transform shadow-sm ${
+                      settings.notifications[key] ? 'ltr:translate-x-[22px] rtl:-translate-x-[22px]' : 'ltr:translate-x-[2px] rtl:-translate-x-[2px]'
                     }`}
                   />
                 </button>
@@ -233,60 +244,67 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <hr className="border-[#D2D2D7]" />
+        {/* Subscription Card */}
+        <div>
+          <p className="text-[11px] uppercase tracking-wider text-[#6B7280] font-semibold mb-2">{t('unlock_pro')}</p>
+          <div className="bg-[#F5F5F7] rounded-[20px] p-6 border border-black/[0.06]">
+            <h3 className="font-bold text-[#1A1A2E] text-lg mb-1">
+              {t('unlock_pro')}
+            </h3>
+            <p className="text-[#6B7280] text-sm mb-5">{t('pro_price')}</p>
+            <ul className="space-y-2.5 mb-5">
+              {[t('pro_feature1'), t('pro_feature2'), t('pro_feature3')].map(
+                (feature, i) => (
+                  <li key={i} className="flex items-center gap-2.5 text-sm text-[#1A1A2E]">
+                    <CheckIcon />
+                    <span>{feature}</span>
+                  </li>
+                )
+              )}
+            </ul>
 
-        {/* Pro */}
-        <div className="bg-primary/10 rounded-2xl p-5 border border-primary/20">
-          <h3 className="font-bold text-[#1D1D1F] text-lg mb-1">
-            {t('unlock_pro')}
-          </h3>
-          <p className="text-muted text-sm mb-4">{t('pro_price')}</p>
-          <ul className="space-y-2 mb-4">
-            {[t('pro_feature1'), t('pro_feature2'), t('pro_feature3')].map(
-              (feature, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-[#86868B]">
-                  <span className="text-success">{'\u2713'}</span>
-                  <span>{feature}</span>
-                </li>
-              )
+            {/* Waitlist email */}
+            {emailSent ? (
+              <p className="text-[#34C759] font-medium text-sm">{paywallT('thanks')}</p>
+            ) : (
+              <div className="flex gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={paywallT('email_placeholder')}
+                  className="flex-1 bg-white rounded-[12px] px-4 py-3 text-sm border border-black/[0.06] focus:outline-none focus:ring-2 focus:ring-[#1A1A2E]/20 text-[#1A1A2E] placeholder:text-[#6B7280]"
+                />
+                <button
+                  onClick={handleEmailSubmit}
+                  className="bg-[#1A1A2E] text-white px-5 py-3 rounded-[14px] text-sm font-medium active:scale-95 transition-transform"
+                >
+                  {paywallT('submit')}
+                </button>
+              </div>
             )}
-          </ul>
-
-          {/* Waitlist email */}
-          {emailSent ? (
-            <p className="text-success font-medium text-sm">{paywallT('thanks')}</p>
-          ) : (
-            <div className="flex gap-2">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={paywallT('email_placeholder')}
-                className="flex-1 bg-white rounded-xl px-4 py-2.5 text-sm border border-[#D2D2D7] focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
-              <button
-                onClick={handleEmailSubmit}
-                className="bg-primary text-white px-4 py-2.5 rounded-xl text-sm font-medium active:scale-95 transition-transform"
-              >
-                {paywallT('submit')}
-              </button>
-            </div>
-          )}
+          </div>
         </div>
 
-        <hr className="border-[#D2D2D7]" />
-
-        {/* Links */}
-        <div className="space-y-1">
-          <a href="mailto:hello@growthor.ai" className="block py-3 text-[#86868B] min-h-[44px]">
-            \ud83d\udce7 {t('support')}
-          </a>
-          <button className="block py-3 text-[#86868B] min-h-[44px] w-full text-left rtl:text-right">
-            \ud83d\udcc4 {t('terms')}
-          </button>
-          <button className="block py-3 text-[#86868B] min-h-[44px] w-full text-left rtl:text-right">
-            \ud83d\udd12 {t('privacy')}
-          </button>
+        {/* Footer Links */}
+        <div className="pt-2 pb-8">
+          <div className="space-y-0 rounded-[14px] border border-black/[0.06] divide-y divide-black/[0.06]">
+            <a
+              href="mailto:hello@growthor.ai"
+              className="flex items-center justify-between py-3.5 px-4 text-[#6B7280] hover:text-[#1A1A2E] transition-colors min-h-[44px]"
+            >
+              <span className="text-[15px]">{t('support')}</span>
+              <ChevronRight />
+            </a>
+            <button className="flex items-center justify-between py-3.5 px-4 text-[#6B7280] hover:text-[#1A1A2E] transition-colors min-h-[44px] w-full text-left rtl:text-right">
+              <span className="text-[15px]">{t('terms')}</span>
+              <ChevronRight />
+            </button>
+            <button className="flex items-center justify-between py-3.5 px-4 text-[#6B7280] hover:text-[#1A1A2E] transition-colors min-h-[44px] w-full text-left rtl:text-right">
+              <span className="text-[15px]">{t('privacy')}</span>
+              <ChevronRight />
+            </button>
+          </div>
         </div>
       </div>
     </div>

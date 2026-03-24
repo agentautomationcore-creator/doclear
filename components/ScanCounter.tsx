@@ -12,16 +12,17 @@ export default function ScanCounter({ used }: Props) {
   const pct = Math.min(100, Math.round((used / MAX_FREE_SCANS) * 100));
 
   return (
-    <div className="text-sm text-muted">
+    <div className="text-sm text-[#6B7280]">
       <p className="mb-1">
         {t('scans_left', { used, total: MAX_FREE_SCANS })}
       </p>
-      <div className="w-full h-2 bg-[#D2D2D7] rounded-full overflow-hidden">
+      <div className="w-full h-2 bg-[#E5E7EB] rounded-full overflow-hidden">
         <div
-          className={`h-full rounded-full transition-all ${
-            pct >= 80 ? 'bg-danger' : pct >= 60 ? 'bg-warning' : 'bg-primary'
-          }`}
-          style={{ width: `${pct}%` }}
+          className="h-full rounded-full transition-all"
+          style={{
+            width: `${pct}%`,
+            backgroundColor: pct >= 80 ? '#DC2626' : '#1A1A2E',
+          }}
         />
       </div>
     </div>

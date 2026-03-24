@@ -25,33 +25,30 @@ export default function DocumentCard({ document: doc }: Props) {
   const isUrgent = daysUntilDeadline !== null && daysUntilDeadline <= 7 && daysUntilDeadline >= 0;
   const isOverdue = daysUntilDeadline !== null && daysUntilDeadline < 0;
 
-  const statusColor =
-    doc.status === 'overdue' || doc.status === 'new'
-      ? 'text-danger'
-      : 'text-success';
-
-  const statusIcon = doc.status === 'done' || doc.status === 'read' ? '\u2705' : '\ud83d\udd34';
+  const isDone = doc.status === 'done' || doc.status === 'read';
 
   return (
     <Link
       href={`/app/doc/${doc.id}`}
-      className="block bg-white border border-[#D2D2D7] rounded-xl p-4 hover:border-[#D2D2D7] transition-colors active:bg-[#F5F5F7]"
+      className="block bg-white rounded-[16px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-black/[0.06] p-4 transition-colors active:bg-[#F5F5F7]"
     >
       <div className="flex items-start gap-3">
-        <span
-          className="text-2xl flex-shrink-0 mt-0.5"
-          style={{ filter: `drop-shadow(0 0 1px ${cat.color})` }}
-        >
-          {cat.icon}
-        </span>
+        {/* Category dot */}
+        <div className="flex-shrink-0 mt-1.5">
+          <div
+            className="w-2 h-2 rounded-full"
+            style={{ backgroundColor: cat.color }}
+          />
+        </div>
+
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-[#1D1D1F] truncate">{doc.title}</h3>
-          <div className="flex items-center gap-2 mt-1 text-sm text-muted">
-            <span style={{ color: cat.color }}>
+          <h3 className="font-semibold text-[#1A1A2E] truncate text-[15px]">{doc.title}</h3>
+          <div className="flex items-center gap-2 mt-1 text-sm">
+            <span className="text-[12px] font-medium" style={{ color: cat.color }}>
               {categories(doc.category as any)}
             </span>
-            <span>{'·'}</span>
-            <span>
+            <span className="text-[#6B7280]">{'·'}</span>
+            <span className="text-[#6B7280] text-[12px]">
               {new Date(doc.createdAt).toLocaleDateString()}
             </span>
           </div>
@@ -59,11 +56,13 @@ export default function DocumentCard({ document: doc }: Props) {
           {hasDeadline && (
             <div
               className={`flex items-center gap-1.5 mt-2 text-sm font-medium ${
-                isOverdue ? 'text-danger' : isUrgent ? 'text-danger' : 'text-muted'
+                isOverdue || isUrgent ? 'text-[#DC2626]' : 'text-[#6B7280]'
               }`}
             >
-              <span>\u23f0</span>
-              <span>
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-[12px]">
                 {isOverdue
                   ? t('overdue')
                   : daysUntilDeadline === 0
@@ -73,8 +72,15 @@ export default function DocumentCard({ document: doc }: Props) {
             </div>
           )}
 
-          <div className={`mt-2 text-sm font-medium ${statusColor}`}>
-            {statusIcon} {statusT(doc.status as any)}
+          <div className={`mt-2 flex items-center gap-1.5 text-sm font-medium ${isDone ? 'text-[#16A34A]' : 'text-[#DC2626]'}`}>
+            {isDone ? (
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+            ) : (
+              <div className="w-2 h-2 rounded-full bg-[#DC2626]" />
+            )}
+            <span className="text-[12px]">{statusT(doc.status as any)}</span>
           </div>
         </div>
       </div>

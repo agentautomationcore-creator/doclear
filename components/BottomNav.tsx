@@ -11,7 +11,7 @@ const tabs = [
 ] as const;
 
 function TabIcon({ name, active }: { name: string; active: boolean }) {
-  const color = active ? '#2563EB' : '#9CA3AF';
+  const color = active ? '#1A1A2E' : '#9CA3AF';
   switch (name) {
     case 'docs':
       return (
@@ -48,7 +48,7 @@ export default function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#D2D2D7] safe-area-inset-bottom">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-black/[0.06] safe-area-inset-bottom">
       <div className="flex items-center justify-around max-w-lg mx-auto">
         {tabs.map((tab) => {
           const isActive =
@@ -61,11 +61,11 @@ export default function BottomNav() {
               key={tab.key}
               href={tab.href}
               className={`flex flex-col items-center justify-center py-2 px-3 min-h-[56px] min-w-[64px] transition-colors ${
-                isActive ? 'text-primary' : 'text-muted'
+                isActive ? 'text-[#1A1A2E]' : 'text-[#9CA3AF]'
               }`}
             >
               <TabIcon name={tab.icon} active={isActive} />
-              <span className={`text-[10px] mt-0.5 ${isActive ? 'font-semibold' : ''}`}>
+              <span className={`text-[10px] mt-0.5 ${isActive ? 'font-semibold text-[#1A1A2E]' : 'text-[#9CA3AF]'}`}>
                 {t(tab.key as any)}
               </span>
             </Link>
