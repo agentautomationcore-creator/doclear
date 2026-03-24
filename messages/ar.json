@@ -1,0 +1,131 @@
+{
+  "app": {
+    "name": "DocLear",
+    "tagline": "صوّر. افهم. تصرّف."
+  },
+  "landing": {
+    "hero_title": "صوّر. افهم. تصرّف.",
+    "hero_subtitle": "صوّر أي مستند رسمي — الذكاء الاصطناعي يشرحه لك خلال 5 ثوانٍ بلغتك.",
+    "cta": "جرّب مجاناً — 5 مسح",
+    "how_title": "كيف يعمل",
+    "step1_title": "صوّر",
+    "step1_desc": "التقط صورة لأي مستند رسمي",
+    "step2_title": "افهم",
+    "step2_desc": "الذكاء الاصطناعي يحلل ويشرح بلغة بسيطة",
+    "step3_title": "نظّم",
+    "step3_desc": "مستنداتك مرتبة مع تذكيرات بالمواعيد النهائية",
+    "for_who_title": "لمن؟",
+    "for_who_desc": "وصلك خطاب بالفرنسية؟ لا تفهم ما يطلبونه؟ DocLear يشرحه خلال 5 ثوانٍ.",
+    "languages_title": "8 لغات",
+    "pricing_title": "الأسعار",
+    "free_plan": "مجاني",
+    "free_desc": "5 مسح",
+    "pro_plan": "Pro",
+    "pro_price": "4.99€/شهر",
+    "pro_desc": "مسح غير محدود",
+    "final_cta": "ابدأ مجاناً"
+  },
+  "onboarding": {
+    "slide1_title": "صوّر مستنداً",
+    "slide1_desc": "التقط صورة لأي خطاب رسمي",
+    "slide2_title": "افهم بلغتك",
+    "slide2_desc": "الذكاء الاصطناعي يشرح المحتوى ببساطة",
+    "slide3_title": "لا تفوّت أي موعد نهائي",
+    "slide3_desc": "تذكيرات تلقائية لكل موعد",
+    "choose_language": "اختر لغتك",
+    "start": "ابدأ",
+    "next": "التالي",
+    "skip": "تخطّي"
+  },
+  "timeline": {
+    "title": "مستنداتي",
+    "search": "بحث...",
+    "deadlines_this_week": "{count} موعد(مواعيد) نهائية هذا الأسبوع",
+    "empty_title": "لا توجد مستندات",
+    "empty_desc": "امسح مستندك الأول",
+    "scan_first": "مسح مستند",
+    "scan": "مسح",
+    "days_left": "{count} يوم",
+    "overdue": "متأخر",
+    "today": "اليوم",
+    "filter_all": "الكل"
+  },
+  "scan": {
+    "title": "مسح",
+    "back": "رجوع",
+    "take_photo": "التقط صورة",
+    "upload_file": "تحميل ملف",
+    "analyze": "تحليل",
+    "analyzing": "جارٍ التحليل...",
+    "step1": "تحديد النوع",
+    "step2": "قراءة المحتوى",
+    "step3": "البحث عن المواعيد"
+  },
+  "document": {
+    "back": "رجوع",
+    "what_is_this": "ما هذا",
+    "what_it_says": "ماذا يقول",
+    "what_to_do": "ماذا تفعل",
+    "ask_question": "اطرح سؤالاً",
+    "ask_placeholder": "اسأل عن هذا المستند...",
+    "send": "إرسال",
+    "original": "المستند الأصلي",
+    "mark_done": "تمّ",
+    "marked_done": "مكتمل",
+    "share": "مشاركة",
+    "deadline": "الموعد النهائي"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "back": "رجوع",
+    "language": "اللغة",
+    "usage": "الاستخدام",
+    "scans_left": "{used} من {total} مسح مجاني",
+    "reminders": "التذكيرات",
+    "reminder_7days": "قبل 7 أيام",
+    "reminder_1day": "قبل يوم",
+    "reminder_today": "في نفس اليوم",
+    "subscription": "الاشتراك",
+    "unlock_pro": "فتح DocLear Pro",
+    "pro_price": "4.99€/شهر أو 29.99€/سنة",
+    "pro_feature1": "مسح غير محدود",
+    "pro_feature2": "ذكاء اصطناعي أولوية",
+    "pro_feature3": "تصدير PDF",
+    "support": "الدعم",
+    "terms": "شروط الاستخدام",
+    "privacy": "سياسة الخصوصية"
+  },
+  "paywall": {
+    "title": "أعجبك؟",
+    "subtitle": "DocLear Pro قادم قريباً. اترك بريدك للحصول على خصم 50% عند الإطلاق.",
+    "email_placeholder": "بريدك الإلكتروني",
+    "submit": "اشترك",
+    "thanks": "شكراً! سنتواصل معك."
+  },
+  "categories": {
+    "taxes": "ضرائب",
+    "insurance": "تأمين",
+    "bank": "بنك",
+    "fines": "غرامات",
+    "housing": "سكن",
+    "health": "صحة",
+    "employment": "عمل",
+    "legal": "قانوني",
+    "other": "أخرى"
+  },
+  "status": {
+    "new": "جديد",
+    "read": "مقروء",
+    "done": "مكتمل",
+    "overdue": "متأخر"
+  },
+  "share": {
+    "analyzed_with": "تم التحليل بواسطة DocLear"
+  },
+  "errors": {
+    "analysis_failed": "فشل التحليل. حاول مرة أخرى.",
+    "no_camera": "الكاميرا غير متاحة",
+    "file_too_large": "الملف كبير جداً (الحد 10 ميغا)",
+    "scan_limit": "تم الوصول للحد الأقصى"
+  }
+}

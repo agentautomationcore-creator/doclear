@@ -1,0 +1,131 @@
+{
+  "app": {
+    "name": "DocLear",
+    "tagline": "Çek. Anla. Harekete geç."
+  },
+  "landing": {
+    "hero_title": "Çek. Anla. Harekete geç.",
+    "hero_subtitle": "Herhangi bir resmi belgeyi fotoğraflayın — yapay zeka 5 saniyede sizin dilinizde açıklar.",
+    "cta": "Ücretsiz deneyin — 5 tarama",
+    "how_title": "Nasıl çalışır",
+    "step1_title": "Fotoğrafla",
+    "step1_desc": "Herhangi bir resmi belgeyi fotoğraflayın",
+    "step2_title": "Anlayın",
+    "step2_desc": "Yapay zeka analiz eder ve basitçe açıklar",
+    "step3_title": "Düzenleyin",
+    "step3_desc": "Belgeleriniz son tarih hatırlatmalarıyla düzenlenir",
+    "for_who_title": "Kimin için?",
+    "for_who_desc": "Fransızca bir mektup aldınız? Ne istediğini anlamıyor musunuz? DocLear 5 saniyede açıklar.",
+    "languages_title": "8 dil",
+    "pricing_title": "Fiyatlar",
+    "free_plan": "Ücretsiz",
+    "free_desc": "5 tarama",
+    "pro_plan": "Pro",
+    "pro_price": "€4,99/ay",
+    "pro_desc": "Sınırsız tarama",
+    "final_cta": "Ücretsiz başlayın"
+  },
+  "onboarding": {
+    "slide1_title": "Belgeyi fotoğraflayın",
+    "slide1_desc": "Herhangi bir resmi mektubun fotoğrafını çekin",
+    "slide2_title": "Kendi dilinizde anlayın",
+    "slide2_desc": "Yapay zeka içeriği basitçe açıklar",
+    "slide3_title": "Hiçbir son tarihi kaçırmayın",
+    "slide3_desc": "Her tarih için otomatik hatırlatma",
+    "choose_language": "Dilinizi seçin",
+    "start": "Başla",
+    "next": "İleri",
+    "skip": "Atla"
+  },
+  "timeline": {
+    "title": "Belgelerim",
+    "search": "Ara...",
+    "deadlines_this_week": "Bu hafta {count} son tarih",
+    "empty_title": "Henüz belge yok",
+    "empty_desc": "İlk belgenizi tarayın",
+    "scan_first": "Belge tara",
+    "scan": "Tara",
+    "days_left": "{count} gün",
+    "overdue": "Gecikmiş",
+    "today": "Bugün",
+    "filter_all": "Tümü"
+  },
+  "scan": {
+    "title": "Tarama",
+    "back": "Geri",
+    "take_photo": "Fotoğraf çek",
+    "upload_file": "Dosya yükle",
+    "analyze": "Analiz et",
+    "analyzing": "Analiz ediliyor...",
+    "step1": "Tür belirleniyor",
+    "step2": "İçerik okunuyor",
+    "step3": "Son tarihler aranıyor"
+  },
+  "document": {
+    "back": "Geri",
+    "what_is_this": "Bu nedir",
+    "what_it_says": "Ne diyor",
+    "what_to_do": "Ne yapmalı",
+    "ask_question": "Soru sor",
+    "ask_placeholder": "Bu belge hakkında sorun...",
+    "send": "Gönder",
+    "original": "Orijinal belge",
+    "mark_done": "Yapıldı olarak işaretle",
+    "marked_done": "Yapıldı",
+    "share": "Paylaş",
+    "deadline": "Son tarih"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "back": "Geri",
+    "language": "Dil",
+    "usage": "Kullanım",
+    "scans_left": "{total} ücretsiz taramadan {used} kullanıldı",
+    "reminders": "Hatırlatmalar",
+    "reminder_7days": "7 gün önce",
+    "reminder_1day": "1 gün önce",
+    "reminder_today": "Aynı gün",
+    "subscription": "Abonelik",
+    "unlock_pro": "DocLear Pro'yu aç",
+    "pro_price": "€4,99/ay veya €29,99/yıl",
+    "pro_feature1": "Sınırsız tarama",
+    "pro_feature2": "Öncelikli yapay zeka",
+    "pro_feature3": "PDF dışa aktarma",
+    "support": "Destek",
+    "terms": "Kullanım koşulları",
+    "privacy": "Gizlilik politikası"
+  },
+  "paywall": {
+    "title": "Beğendiniz mi?",
+    "subtitle": "DocLear Pro yakında. Lansmanda %50 indirim için e-postanızı bırakın.",
+    "email_placeholder": "E-postanız",
+    "submit": "Kaydol",
+    "thanks": "Teşekkürler! Sizinle iletişime geçeceğiz."
+  },
+  "categories": {
+    "taxes": "Vergi",
+    "insurance": "Sigorta",
+    "bank": "Banka",
+    "fines": "Cezalar",
+    "housing": "Konut",
+    "health": "Sağlık",
+    "employment": "İstihdam",
+    "legal": "Hukuki",
+    "other": "Diğer"
+  },
+  "status": {
+    "new": "Yeni",
+    "read": "Okundu",
+    "done": "Yapıldı",
+    "overdue": "Gecikmiş"
+  },
+  "share": {
+    "analyzed_with": "DocLear ile analiz edildi"
+  },
+  "errors": {
+    "analysis_failed": "Analiz başarısız. Tekrar deneyin.",
+    "no_camera": "Kamera kullanılamıyor",
+    "file_too_large": "Dosya çok büyük (maks 10 MB)",
+    "scan_limit": "Tarama limiti doldu"
+  }
+}

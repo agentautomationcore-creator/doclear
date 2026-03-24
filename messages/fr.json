@@ -1,0 +1,131 @@
+{
+  "app": {
+    "name": "DocLear",
+    "tagline": "Photographiez. Comprenez. Agissez."
+  },
+  "landing": {
+    "hero_title": "Photographiez. Comprenez. Agissez.",
+    "hero_subtitle": "Photographiez un document officiel — l'IA vous l'explique en 5 secondes dans votre langue.",
+    "cta": "Essayer gratuitement — 5 scans",
+    "how_title": "Comment ça marche",
+    "step1_title": "Photographiez",
+    "step1_desc": "Prenez en photo n'importe quel document officiel",
+    "step2_title": "Comprenez",
+    "step2_desc": "L'IA analyse et explique en langage simple",
+    "step3_title": "Organisez",
+    "step3_desc": "Vos documents triés avec rappels de délais",
+    "for_who_title": "Pour qui ?",
+    "for_who_desc": "Vous avez reçu un courrier en français ? Vous ne comprenez pas ce qu'on vous demande ? DocLear vous l'explique en 5 secondes.",
+    "languages_title": "8 langues",
+    "pricing_title": "Tarifs",
+    "free_plan": "Gratuit",
+    "free_desc": "5 scans",
+    "pro_plan": "Pro",
+    "pro_price": "4,99€/mois",
+    "pro_desc": "Scans illimités",
+    "final_cta": "Commencez gratuitement"
+  },
+  "onboarding": {
+    "slide1_title": "Photographiez un document",
+    "slide1_desc": "Prenez en photo n'importe quel courrier officiel",
+    "slide2_title": "Comprenez dans votre langue",
+    "slide2_desc": "L'IA vous explique le contenu simplement",
+    "slide3_title": "Ne manquez aucun délai",
+    "slide3_desc": "Rappels automatiques pour chaque échéance",
+    "choose_language": "Choisissez votre langue",
+    "start": "Commencer",
+    "next": "Suivant",
+    "skip": "Passer"
+  },
+  "timeline": {
+    "title": "Mes documents",
+    "search": "Rechercher...",
+    "deadlines_this_week": "{count} échéance(s) cette semaine",
+    "empty_title": "Aucun document",
+    "empty_desc": "Scannez votre premier document",
+    "scan_first": "Scanner un document",
+    "scan": "Scanner",
+    "days_left": "{count} jours",
+    "overdue": "En retard",
+    "today": "Aujourd'hui",
+    "filter_all": "Tous"
+  },
+  "scan": {
+    "title": "Scanner",
+    "back": "Retour",
+    "take_photo": "Prendre une photo",
+    "upload_file": "Importer un fichier",
+    "analyze": "Analyser",
+    "analyzing": "Analyse en cours...",
+    "step1": "Identification du type",
+    "step2": "Lecture du contenu",
+    "step3": "Recherche des délais"
+  },
+  "document": {
+    "back": "Retour",
+    "what_is_this": "Qu'est-ce que c'est",
+    "what_it_says": "Ce que ça dit",
+    "what_to_do": "Que faire",
+    "ask_question": "Poser une question",
+    "ask_placeholder": "Posez une question sur ce document...",
+    "send": "Envoyer",
+    "original": "Document original",
+    "mark_done": "Marquer comme traité",
+    "marked_done": "Traité",
+    "share": "Partager",
+    "deadline": "Échéance"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "back": "Retour",
+    "language": "Langue",
+    "usage": "Utilisation",
+    "scans_left": "{used} sur {total} scans gratuits",
+    "reminders": "Rappels",
+    "reminder_7days": "7 jours avant",
+    "reminder_1day": "1 jour avant",
+    "reminder_today": "Le jour même",
+    "subscription": "Abonnement",
+    "unlock_pro": "Débloquer DocLear Pro",
+    "pro_price": "4,99€/mois ou 29,99€/an",
+    "pro_feature1": "Scans illimités",
+    "pro_feature2": "IA prioritaire",
+    "pro_feature3": "Export PDF",
+    "support": "Support",
+    "terms": "Conditions d'utilisation",
+    "privacy": "Politique de confidentialité"
+  },
+  "paywall": {
+    "title": "Vous avez aimé ?",
+    "subtitle": "DocLear Pro arrive bientôt. Laissez votre email pour obtenir 50% de réduction au lancement.",
+    "email_placeholder": "Votre email",
+    "submit": "M'inscrire",
+    "thanks": "Merci ! Nous vous contacterons."
+  },
+  "categories": {
+    "taxes": "Impôts",
+    "insurance": "Assurance",
+    "bank": "Banque",
+    "fines": "Amendes",
+    "housing": "Logement",
+    "health": "Santé",
+    "employment": "Emploi",
+    "legal": "Juridique",
+    "other": "Autre"
+  },
+  "status": {
+    "new": "Nouveau",
+    "read": "Lu",
+    "done": "Traité",
+    "overdue": "En retard"
+  },
+  "share": {
+    "analyzed_with": "Analysé avec DocLear"
+  },
+  "errors": {
+    "analysis_failed": "L'analyse a échoué. Réessayez.",
+    "no_camera": "Caméra non disponible",
+    "file_too_large": "Fichier trop volumineux (max 10 Mo)",
+    "scan_limit": "Limite de scans atteinte"
+  }
+}

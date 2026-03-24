@@ -1,0 +1,131 @@
+{
+  "app": {
+    "name": "DocLear",
+    "tagline": "Scatta. Capisci. Agisci."
+  },
+  "landing": {
+    "hero_title": "Scatta. Capisci. Agisci.",
+    "hero_subtitle": "Fotografa un documento ufficiale — l'IA te lo spiega in 5 secondi nella tua lingua.",
+    "cta": "Prova gratis — 5 scansioni",
+    "how_title": "Come funziona",
+    "step1_title": "Scatta",
+    "step1_desc": "Fotografa qualsiasi documento ufficiale",
+    "step2_title": "Capisci",
+    "step2_desc": "L'IA analizza e spiega in modo semplice",
+    "step3_title": "Organizza",
+    "step3_desc": "Documenti ordinati con promemoria scadenze",
+    "for_who_title": "Per chi?",
+    "for_who_desc": "Hai ricevuto una lettera in francese? Non capisci cosa vogliono? DocLear te lo spiega in 5 secondi.",
+    "languages_title": "8 lingue",
+    "pricing_title": "Prezzi",
+    "free_plan": "Gratuito",
+    "free_desc": "5 scansioni",
+    "pro_plan": "Pro",
+    "pro_price": "4,99€/mese",
+    "pro_desc": "Scansioni illimitate",
+    "final_cta": "Inizia gratis"
+  },
+  "onboarding": {
+    "slide1_title": "Fotografa un documento",
+    "slide1_desc": "Scatta una foto di qualsiasi lettera ufficiale",
+    "slide2_title": "Capisci nella tua lingua",
+    "slide2_desc": "L'IA spiega il contenuto in modo semplice",
+    "slide3_title": "Non perdere nessuna scadenza",
+    "slide3_desc": "Promemoria automatici per ogni data",
+    "choose_language": "Scegli la tua lingua",
+    "start": "Inizia",
+    "next": "Avanti",
+    "skip": "Salta"
+  },
+  "timeline": {
+    "title": "I miei documenti",
+    "search": "Cerca...",
+    "deadlines_this_week": "{count} scadenza/e questa settimana",
+    "empty_title": "Nessun documento",
+    "empty_desc": "Scansiona il tuo primo documento",
+    "scan_first": "Scansiona un documento",
+    "scan": "Scansiona",
+    "days_left": "{count} giorni",
+    "overdue": "Scaduto",
+    "today": "Oggi",
+    "filter_all": "Tutti"
+  },
+  "scan": {
+    "title": "Scansione",
+    "back": "Indietro",
+    "take_photo": "Scatta una foto",
+    "upload_file": "Carica file",
+    "analyze": "Analizza",
+    "analyzing": "Analisi in corso...",
+    "step1": "Identificazione tipo",
+    "step2": "Lettura contenuto",
+    "step3": "Ricerca scadenze"
+  },
+  "document": {
+    "back": "Indietro",
+    "what_is_this": "Cos'è",
+    "what_it_says": "Cosa dice",
+    "what_to_do": "Cosa fare",
+    "ask_question": "Fai una domanda",
+    "ask_placeholder": "Chiedi di questo documento...",
+    "send": "Invia",
+    "original": "Documento originale",
+    "mark_done": "Segna come fatto",
+    "marked_done": "Fatto",
+    "share": "Condividi",
+    "deadline": "Scadenza"
+  },
+  "settings": {
+    "title": "Impostazioni",
+    "back": "Indietro",
+    "language": "Lingua",
+    "usage": "Utilizzo",
+    "scans_left": "{used} di {total} scansioni gratuite",
+    "reminders": "Promemoria",
+    "reminder_7days": "7 giorni prima",
+    "reminder_1day": "1 giorno prima",
+    "reminder_today": "Il giorno stesso",
+    "subscription": "Abbonamento",
+    "unlock_pro": "Sblocca DocLear Pro",
+    "pro_price": "4,99€/mese o 29,99€/anno",
+    "pro_feature1": "Scansioni illimitate",
+    "pro_feature2": "IA prioritaria",
+    "pro_feature3": "Esporta PDF",
+    "support": "Supporto",
+    "terms": "Termini di utilizzo",
+    "privacy": "Privacy"
+  },
+  "paywall": {
+    "title": "Ti è piaciuto?",
+    "subtitle": "DocLear Pro arriva presto. Lascia la tua email per il 50% di sconto al lancio.",
+    "email_placeholder": "La tua email",
+    "submit": "Iscriviti",
+    "thanks": "Grazie! Ti contatteremo."
+  },
+  "categories": {
+    "taxes": "Tasse",
+    "insurance": "Assicurazione",
+    "bank": "Banca",
+    "fines": "Multe",
+    "housing": "Alloggio",
+    "health": "Salute",
+    "employment": "Lavoro",
+    "legal": "Legale",
+    "other": "Altro"
+  },
+  "status": {
+    "new": "Nuovo",
+    "read": "Letto",
+    "done": "Fatto",
+    "overdue": "Scaduto"
+  },
+  "share": {
+    "analyzed_with": "Analizzato con DocLear"
+  },
+  "errors": {
+    "analysis_failed": "Analisi fallita. Riprova.",
+    "no_camera": "Fotocamera non disponibile",
+    "file_too_large": "File troppo grande (max 10 MB)",
+    "scan_limit": "Limite scansioni raggiunto"
+  }
+}

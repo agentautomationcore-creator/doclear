@@ -1,0 +1,131 @@
+{
+  "app": {
+    "name": "DocLear",
+    "tagline": "拍照。理解。行动。"
+  },
+  "landing": {
+    "hero_title": "拍照。理解。行动。",
+    "hero_subtitle": "拍摄任何官方文件——AI用你的语言5秒内为你解释。",
+    "cta": "免费试用——5次扫描",
+    "how_title": "如何使用",
+    "step1_title": "拍照",
+    "step1_desc": "拍摄任何官方文件",
+    "step2_title": "理解",
+    "step2_desc": "AI分析并用简单语言解释",
+    "step3_title": "整理",
+    "step3_desc": "文件自动分类并提醒截止日期",
+    "for_who_title": "适合谁？",
+    "for_who_desc": "收到法语信件？不明白他们要什么？DocLear 5秒钟为你解释。",
+    "languages_title": "8种语言",
+    "pricing_title": "价格",
+    "free_plan": "免费",
+    "free_desc": "5次扫描",
+    "pro_plan": "Pro",
+    "pro_price": "€4.99/月",
+    "pro_desc": "无限扫描",
+    "final_cta": "免费开始"
+  },
+  "onboarding": {
+    "slide1_title": "拍摄文件",
+    "slide1_desc": "拍摄任何官方信件",
+    "slide2_title": "用你的语言理解",
+    "slide2_desc": "AI简单明了地解释内容",
+    "slide3_title": "不错过任何截止日期",
+    "slide3_desc": "每个到期日自动提醒",
+    "choose_language": "选择你的语言",
+    "start": "开始",
+    "next": "下一步",
+    "skip": "跳过"
+  },
+  "timeline": {
+    "title": "我的文件",
+    "search": "搜索...",
+    "deadlines_this_week": "本周{count}个截止日期",
+    "empty_title": "暂无文件",
+    "empty_desc": "扫描你的第一个文件",
+    "scan_first": "扫描文件",
+    "scan": "扫描",
+    "days_left": "{count}天",
+    "overdue": "已过期",
+    "today": "今天",
+    "filter_all": "全部"
+  },
+  "scan": {
+    "title": "扫描",
+    "back": "返回",
+    "take_photo": "拍照",
+    "upload_file": "上传文件",
+    "analyze": "分析",
+    "analyzing": "分析中...",
+    "step1": "识别类型",
+    "step2": "阅读内容",
+    "step3": "查找截止日期"
+  },
+  "document": {
+    "back": "返回",
+    "what_is_this": "这是什么",
+    "what_it_says": "文件内容",
+    "what_to_do": "怎么做",
+    "ask_question": "提问",
+    "ask_placeholder": "询问关于这份文件...",
+    "send": "发送",
+    "original": "原始文件",
+    "mark_done": "标记完成",
+    "marked_done": "已完成",
+    "share": "分享",
+    "deadline": "截止日期"
+  },
+  "settings": {
+    "title": "设置",
+    "back": "返回",
+    "language": "语言",
+    "usage": "使用量",
+    "scans_left": "已用{used}/{total}次免费扫描",
+    "reminders": "提醒",
+    "reminder_7days": "提前7天",
+    "reminder_1day": "提前1天",
+    "reminder_today": "当天",
+    "subscription": "订阅",
+    "unlock_pro": "解锁 DocLear Pro",
+    "pro_price": "€4.99/月 或 €29.99/年",
+    "pro_feature1": "无限扫描",
+    "pro_feature2": "优先AI",
+    "pro_feature3": "PDF导出",
+    "support": "支持",
+    "terms": "使用条款",
+    "privacy": "隐私政策"
+  },
+  "paywall": {
+    "title": "喜欢吗？",
+    "subtitle": "DocLear Pro即将推出。留下邮箱，上线时享50%折扣。",
+    "email_placeholder": "你的邮箱",
+    "submit": "订阅",
+    "thanks": "谢谢！我们会联系你。"
+  },
+  "categories": {
+    "taxes": "税务",
+    "insurance": "保险",
+    "bank": "银行",
+    "fines": "罚款",
+    "housing": "住房",
+    "health": "健康",
+    "employment": "就业",
+    "legal": "法律",
+    "other": "其他"
+  },
+  "status": {
+    "new": "新的",
+    "read": "已读",
+    "done": "完成",
+    "overdue": "已过期"
+  },
+  "share": {
+    "analyzed_with": "由DocLear分析"
+  },
+  "errors": {
+    "analysis_failed": "分析失败，请重试。",
+    "no_camera": "相机不可用",
+    "file_too_large": "文件过大（最大10MB）",
+    "scan_limit": "扫描次数已用完"
+  }
+}

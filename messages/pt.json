@@ -1,0 +1,131 @@
+{
+  "app": {
+    "name": "DocLear",
+    "tagline": "Fotografe. Entenda. Aja."
+  },
+  "landing": {
+    "hero_title": "Fotografe. Entenda. Aja.",
+    "hero_subtitle": "Fotografe qualquer documento oficial — a IA explica em 5 segundos no seu idioma.",
+    "cta": "Experimente grátis — 5 digitalizações",
+    "how_title": "Como funciona",
+    "step1_title": "Fotografe",
+    "step1_desc": "Tire uma foto de qualquer documento oficial",
+    "step2_title": "Entenda",
+    "step2_desc": "A IA analisa e explica de forma simples",
+    "step3_title": "Organize",
+    "step3_desc": "Documentos organizados com lembretes de prazos",
+    "for_who_title": "Para quem?",
+    "for_who_desc": "Recebeu uma carta em francês? Não entende o que pedem? DocLear explica em 5 segundos.",
+    "languages_title": "8 idiomas",
+    "pricing_title": "Preços",
+    "free_plan": "Grátis",
+    "free_desc": "5 digitalizações",
+    "pro_plan": "Pro",
+    "pro_price": "€4,99/mês",
+    "pro_desc": "Digitalizações ilimitadas",
+    "final_cta": "Comece grátis"
+  },
+  "onboarding": {
+    "slide1_title": "Fotografe um documento",
+    "slide1_desc": "Tire uma foto de qualquer carta oficial",
+    "slide2_title": "Entenda no seu idioma",
+    "slide2_desc": "A IA explica o conteúdo de forma simples",
+    "slide3_title": "Nunca perca um prazo",
+    "slide3_desc": "Lembretes automáticos para cada data",
+    "choose_language": "Escolha seu idioma",
+    "start": "Começar",
+    "next": "Próximo",
+    "skip": "Pular"
+  },
+  "timeline": {
+    "title": "Meus documentos",
+    "search": "Buscar...",
+    "deadlines_this_week": "{count} prazo(s) esta semana",
+    "empty_title": "Nenhum documento",
+    "empty_desc": "Digitalize seu primeiro documento",
+    "scan_first": "Digitalizar documento",
+    "scan": "Digitalizar",
+    "days_left": "{count} dias",
+    "overdue": "Atrasado",
+    "today": "Hoje",
+    "filter_all": "Todos"
+  },
+  "scan": {
+    "title": "Digitalizar",
+    "back": "Voltar",
+    "take_photo": "Tirar foto",
+    "upload_file": "Enviar arquivo",
+    "analyze": "Analisar",
+    "analyzing": "Analisando...",
+    "step1": "Identificando tipo",
+    "step2": "Lendo conteúdo",
+    "step3": "Buscando prazos"
+  },
+  "document": {
+    "back": "Voltar",
+    "what_is_this": "O que é",
+    "what_it_says": "O que diz",
+    "what_to_do": "O que fazer",
+    "ask_question": "Fazer uma pergunta",
+    "ask_placeholder": "Pergunte sobre este documento...",
+    "send": "Enviar",
+    "original": "Documento original",
+    "mark_done": "Marcar como feito",
+    "marked_done": "Feito",
+    "share": "Compartilhar",
+    "deadline": "Prazo"
+  },
+  "settings": {
+    "title": "Configurações",
+    "back": "Voltar",
+    "language": "Idioma",
+    "usage": "Uso",
+    "scans_left": "{used} de {total} digitalizações grátis",
+    "reminders": "Lembretes",
+    "reminder_7days": "7 dias antes",
+    "reminder_1day": "1 dia antes",
+    "reminder_today": "No dia",
+    "subscription": "Assinatura",
+    "unlock_pro": "Desbloquear DocLear Pro",
+    "pro_price": "€4,99/mês ou €29,99/ano",
+    "pro_feature1": "Digitalizações ilimitadas",
+    "pro_feature2": "IA prioritária",
+    "pro_feature3": "Exportar PDF",
+    "support": "Suporte",
+    "terms": "Termos de uso",
+    "privacy": "Política de privacidade"
+  },
+  "paywall": {
+    "title": "Gostou?",
+    "subtitle": "DocLear Pro em breve. Deixe seu email para 50% de desconto no lançamento.",
+    "email_placeholder": "Seu email",
+    "submit": "Inscrever-se",
+    "thanks": "Obrigado! Entraremos em contato."
+  },
+  "categories": {
+    "taxes": "Impostos",
+    "insurance": "Seguro",
+    "bank": "Banco",
+    "fines": "Multas",
+    "housing": "Moradia",
+    "health": "Saúde",
+    "employment": "Emprego",
+    "legal": "Jurídico",
+    "other": "Outro"
+  },
+  "status": {
+    "new": "Novo",
+    "read": "Lido",
+    "done": "Feito",
+    "overdue": "Atrasado"
+  },
+  "share": {
+    "analyzed_with": "Analisado com DocLear"
+  },
+  "errors": {
+    "analysis_failed": "Análise falhou. Tente novamente.",
+    "no_camera": "Câmera indisponível",
+    "file_too_large": "Arquivo muito grande (máx 10 MB)",
+    "scan_limit": "Limite de digitalizações atingido"
+  }
+}

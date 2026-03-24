@@ -1,0 +1,131 @@
+{
+  "app": {
+    "name": "DocLear",
+    "tagline": "Snap. Understand. Act."
+  },
+  "landing": {
+    "hero_title": "Snap. Understand. Act.",
+    "hero_subtitle": "Take a photo of any official document — AI explains it in 5 seconds in your language.",
+    "cta": "Try free — 5 scans",
+    "how_title": "How it works",
+    "step1_title": "Snap",
+    "step1_desc": "Take a photo of any official document",
+    "step2_title": "Understand",
+    "step2_desc": "AI analyzes and explains in simple language",
+    "step3_title": "Organize",
+    "step3_desc": "Documents sorted with deadline reminders",
+    "for_who_title": "Who is it for?",
+    "for_who_desc": "Got a letter in a foreign language? Don't understand what they want? DocLear explains it in 5 seconds.",
+    "languages_title": "8 languages",
+    "pricing_title": "Pricing",
+    "free_plan": "Free",
+    "free_desc": "5 scans",
+    "pro_plan": "Pro",
+    "pro_price": "€4.99/mo",
+    "pro_desc": "Unlimited scans",
+    "final_cta": "Start for free"
+  },
+  "onboarding": {
+    "slide1_title": "Snap a document",
+    "slide1_desc": "Take a photo of any official letter",
+    "slide2_title": "Understand in your language",
+    "slide2_desc": "AI explains the content simply",
+    "slide3_title": "Never miss a deadline",
+    "slide3_desc": "Automatic reminders for every due date",
+    "choose_language": "Choose your language",
+    "start": "Get started",
+    "next": "Next",
+    "skip": "Skip"
+  },
+  "timeline": {
+    "title": "My documents",
+    "search": "Search...",
+    "deadlines_this_week": "{count} deadline(s) this week",
+    "empty_title": "No documents yet",
+    "empty_desc": "Scan your first document",
+    "scan_first": "Scan a document",
+    "scan": "Scan",
+    "days_left": "{count} days",
+    "overdue": "Overdue",
+    "today": "Today",
+    "filter_all": "All"
+  },
+  "scan": {
+    "title": "Scan",
+    "back": "Back",
+    "take_photo": "Take a photo",
+    "upload_file": "Upload file",
+    "analyze": "Analyze",
+    "analyzing": "Analyzing...",
+    "step1": "Identifying type",
+    "step2": "Reading content",
+    "step3": "Finding deadlines"
+  },
+  "document": {
+    "back": "Back",
+    "what_is_this": "What is this",
+    "what_it_says": "What it says",
+    "what_to_do": "What to do",
+    "ask_question": "Ask a question",
+    "ask_placeholder": "Ask about this document...",
+    "send": "Send",
+    "original": "Original document",
+    "mark_done": "Mark as done",
+    "marked_done": "Done",
+    "share": "Share",
+    "deadline": "Deadline"
+  },
+  "settings": {
+    "title": "Settings",
+    "back": "Back",
+    "language": "Language",
+    "usage": "Usage",
+    "scans_left": "{used} of {total} free scans",
+    "reminders": "Reminders",
+    "reminder_7days": "7 days before",
+    "reminder_1day": "1 day before",
+    "reminder_today": "On the day",
+    "subscription": "Subscription",
+    "unlock_pro": "Unlock DocLear Pro",
+    "pro_price": "€4.99/mo or €29.99/year",
+    "pro_feature1": "Unlimited scans",
+    "pro_feature2": "Priority AI",
+    "pro_feature3": "PDF export",
+    "support": "Support",
+    "terms": "Terms of use",
+    "privacy": "Privacy policy"
+  },
+  "paywall": {
+    "title": "Enjoyed it?",
+    "subtitle": "DocLear Pro is coming soon. Leave your email for 50% off at launch.",
+    "email_placeholder": "Your email",
+    "submit": "Sign up",
+    "thanks": "Thanks! We'll be in touch."
+  },
+  "categories": {
+    "taxes": "Taxes",
+    "insurance": "Insurance",
+    "bank": "Bank",
+    "fines": "Fines",
+    "housing": "Housing",
+    "health": "Health",
+    "employment": "Employment",
+    "legal": "Legal",
+    "other": "Other"
+  },
+  "status": {
+    "new": "New",
+    "read": "Read",
+    "done": "Done",
+    "overdue": "Overdue"
+  },
+  "share": {
+    "analyzed_with": "Analyzed with DocLear"
+  },
+  "errors": {
+    "analysis_failed": "Analysis failed. Please try again.",
+    "no_camera": "Camera not available",
+    "file_too_large": "File too large (max 10MB)",
+    "scan_limit": "Scan limit reached"
+  }
+}
