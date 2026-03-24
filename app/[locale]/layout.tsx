@@ -31,7 +31,7 @@ export default async function LocaleLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="min-h-screen bg-bg text-text-primary antialiased">
+      <body className="min-h-screen bg-white text-[#1D1D1F] antialiased">
         <NextIntlClientProvider messages={messages}>
           <ServiceWorkerRegister />
           {children}

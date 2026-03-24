@@ -40,7 +40,7 @@ export default function CategoryFilter({ selected, onChange }: Props) {
             className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors min-h-[36px] ${
               isActive
                 ? 'bg-primary text-white'
-                : 'bg-card text-text-secondary hover:bg-border'
+                : 'bg-[#F5F5F7] text-[#86868B] hover:bg-[#D2D2D7]'
             }`}
           >
             {icon && <span>{icon}</span>}

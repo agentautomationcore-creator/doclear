@@ -114,24 +114,24 @@ export default function DocumentPage() {
   const cat = getCategoryConfig(doc.category);
 
   return (
-    <div className="min-h-screen bg-bg safe-area-inset-top safe-area-inset-bottom pb-4">
+    <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom pb-4">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-bg border-b border-border px-4 py-3">
+      <div className="sticky top-0 z-40 bg-white border-b border-[#D2D2D7] px-4 py-3">
         <div className="flex items-center justify-between">
           <button
             onClick={() => router.back()}
-            className="p-2 hover:bg-card rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="p-2 hover:bg-[#F5F5F7] rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
-            <svg className="w-5 h-5 text-text-secondary rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-[#86868B] rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
             onClick={handleShare}
-            className="p-2 hover:bg-card rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="p-2 hover:bg-[#F5F5F7] rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label={t('share')}
           >
-            <svg className="w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
             </svg>
           </button>
@@ -144,7 +144,7 @@ export default function DocumentPage() {
           <div className="flex items-start gap-3 mb-2">
             <span className="text-3xl">{cat.icon}</span>
             <div>
-              <h1 className="text-xl font-bold text-text-primary">{doc.title}</h1>
+              <h1 className="text-xl font-bold text-[#1D1D1F]">{doc.title}</h1>
               <p className="text-sm text-muted mt-1">
                 <span style={{ color: cat.color }}>
                   {categories(doc.category as any)}
@@ -169,8 +169,8 @@ export default function DocumentPage() {
           <h2 className="text-sm font-semibold text-muted uppercase tracking-wider mb-2">
             {t('what_is_this')}
           </h2>
-          <div className="bg-card rounded-xl p-4">
-            <p className="text-text-primary leading-relaxed">{doc.whatIsThis}</p>
+          <div className="bg-[#F5F5F7] rounded-xl p-4">
+            <p className="text-[#1D1D1F] leading-relaxed">{doc.whatIsThis}</p>
           </div>
         </div>
 
@@ -179,8 +179,8 @@ export default function DocumentPage() {
           <h2 className="text-sm font-semibold text-muted uppercase tracking-wider mb-2">
             {t('what_it_says')}
           </h2>
-          <div className="bg-card rounded-xl p-4">
-            <p className="text-text-primary leading-relaxed">{doc.whatItSays}</p>
+          <div className="bg-[#F5F5F7] rounded-xl p-4">
+            <p className="text-[#1D1D1F] leading-relaxed">{doc.whatItSays}</p>
           </div>
         </div>
 
@@ -189,10 +189,10 @@ export default function DocumentPage() {
           <h2 className="text-sm font-semibold text-muted uppercase tracking-wider mb-2">
             {t('what_to_do')}
           </h2>
-          <div className="bg-card rounded-xl p-4">
+          <div className="bg-[#F5F5F7] rounded-xl p-4">
             <ol className="space-y-2">
               {doc.whatToDo.map((step, i) => (
-                <li key={i} className="flex gap-3 text-text-primary">
+                <li key={i} className="flex gap-3 text-[#1D1D1F]">
                   <span className="flex-shrink-0 w-6 h-6 bg-primary/10 text-primary rounded-full flex items-center justify-center text-sm font-medium">
                     {i + 1}
                   </span>
@@ -211,11 +211,11 @@ export default function DocumentPage() {
             </h2>
             <div className="space-y-2">
               {doc.recommendations.map((rec: Recommendation, i: number) => (
-                <div key={i} className="bg-card rounded-xl p-4 flex items-center justify-between gap-3">
+                <div key={i} className="bg-[#F5F5F7] rounded-xl p-4 flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
                     <span className="text-xl flex-shrink-0">{rec.type === 'website' ? '\ud83c\udf10' : '\u2696\ufe0f'}</span>
                     <div className="min-w-0">
-                      <p className="font-medium text-text-primary truncate">{rec.title}</p>
+                      <p className="font-medium text-[#1D1D1F] truncate">{rec.title}</p>
                       <p className="text-sm text-muted truncate">{rec.description}</p>
                     </div>
                   </div>
@@ -249,14 +249,14 @@ export default function DocumentPage() {
                   className={`rounded-xl p-3 text-sm ${
                     msg.role === 'user'
                       ? 'bg-primary text-white ltr:ml-8 rtl:mr-8'
-                      : 'bg-card text-text-primary ltr:mr-8 rtl:ml-8'
+                      : 'bg-[#F5F5F7] text-[#1D1D1F] ltr:mr-8 rtl:ml-8'
                   }`}
                 >
                   {msg.content}
                 </div>
               ))}
               {chatLoading && (
-                <div className="bg-card rounded-xl p-3 ltr:mr-8 rtl:ml-8">
+                <div className="bg-[#F5F5F7] rounded-xl p-3 ltr:mr-8 rtl:ml-8">
                   <div className="flex gap-1">
                     <span className="w-2 h-2 bg-muted rounded-full animate-bounce" />
                     <span className="w-2 h-2 bg-muted rounded-full animate-bounce [animation-delay:0.1s]" />
@@ -274,7 +274,7 @@ export default function DocumentPage() {
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               placeholder={t('ask_placeholder')}
-              className="flex-1 bg-card rounded-xl px-4 py-3 text-sm placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="flex-1 bg-[#F5F5F7] rounded-xl px-4 py-3 text-sm placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary/30"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') handleAskQuestion();
               }}
@@ -310,14 +310,14 @@ export default function DocumentPage() {
           {!showOriginal && doc.imageData && (
             <div
               onClick={() => setShowOriginal(true)}
-              className="w-20 h-28 rounded-lg overflow-hidden bg-card cursor-pointer border border-border"
+              className="w-20 h-28 rounded-lg overflow-hidden bg-[#F5F5F7] cursor-pointer border border-[#D2D2D7]"
             >
               <img src={doc.imageData} alt="Document" className="w-full h-full object-cover" />
             </div>
           )}
 
           {showOriginal && doc.imageData && (
-            <div className="rounded-2xl overflow-hidden bg-card">
+            <div className="rounded-2xl overflow-hidden bg-[#F5F5F7]">
               <img src={doc.imageData} alt="Document" className="w-full" />
             </div>
           )}

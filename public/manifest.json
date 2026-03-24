@@ -4,8 +4,8 @@
   "description": "Scan documents, understand instantly",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1A1A2E",
-  "theme_color": "#1A1A2E",
+  "background_color": "#FFFFFF",
+  "theme_color": "#2A2A3E",
   "orientation": "portrait",
   "icons": [
     {

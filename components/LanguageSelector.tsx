@@ -33,7 +33,7 @@ export default function LanguageSelector() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-card transition-colors min-h-[44px]"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-[#F5F5F7] transition-colors min-h-[44px]"
         aria-label="Change language"
       >
         <span className="text-xl">{LOCALE_FLAGS[locale]}</span>
@@ -48,13 +48,13 @@ export default function LanguageSelector() {
       </button>
 
       {open && (
-        <div className="absolute top-full mt-1 ltr:right-0 rtl:left-0 bg-card rounded-xl shadow-lg border border-border py-2 min-w-[180px] z-50">
+        <div className="absolute top-full mt-1 ltr:right-0 rtl:left-0 bg-[#F5F5F7] rounded-xl shadow-lg border border-[#D2D2D7] py-2 min-w-[180px] z-50">
           {locales.map((l) => (
             <button
               key={l}
               onClick={() => switchLocale(l)}
-              className={`w-full flex items-center gap-3 px-4 py-2.5 hover:bg-card-hover transition-colors min-h-[44px] ${
-                l === locale ? 'bg-primary/10 text-primary font-medium' : 'text-text-secondary'
+              className={`w-full flex items-center gap-3 px-4 py-2.5 hover:bg-[#EDEDF0] transition-colors min-h-[44px] ${
+                l === locale ? 'bg-primary/10 text-primary font-medium' : 'text-[#86868B]'
               }`}
             >
               <span className="text-xl">{LOCALE_FLAGS[l]}</span>

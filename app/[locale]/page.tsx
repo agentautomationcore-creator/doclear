@@ -12,9 +12,9 @@ export default function LandingPage() {
   const app = useTranslations('app');
 
   return (
-    <div className="min-h-screen bg-bg">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-border">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#D2D2D7]">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <span className="text-xl font-bold text-primary">{app('name')}</span>
           <LanguageSelector />
@@ -23,7 +23,7 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-4 pt-16 pb-12 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-4 leading-tight">
+        <h1 className="text-4xl md:text-5xl font-bold text-[#1D1D1F] mb-4 leading-tight">
           {t('hero_title')}
         </h1>
         <p className="text-lg text-muted max-w-2xl mx-auto mb-8">
@@ -39,7 +39,7 @@ export default function LandingPage() {
 
       {/* How it works */}
       <section className="max-w-4xl mx-auto px-4 py-12">
-        <h2 className="text-2xl font-bold text-center text-text-primary mb-10">
+        <h2 className="text-2xl font-bold text-center text-[#1D1D1F] mb-10">
           {t('how_title')}
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
@@ -50,7 +50,7 @@ export default function LandingPage() {
           ].map((step, i) => (
             <div key={i} className="text-center">
               <div className="text-5xl mb-4">{step.icon}</div>
-              <h3 className="text-lg font-semibold text-text-primary mb-2">
+              <h3 className="text-lg font-semibold text-[#1D1D1F] mb-2">
                 {step.title}
               </h3>
               <p className="text-muted">{step.desc}</p>
@@ -60,9 +60,9 @@ export default function LandingPage() {
       </section>
 
       {/* For who */}
-      <section className="bg-card py-12">
+      <section className="bg-[#F5F5F7] py-12">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold text-text-primary mb-4">
+          <h2 className="text-2xl font-bold text-[#1D1D1F] mb-4">
             {t('for_who_title')}
           </h2>
           <p className="text-lg text-muted max-w-2xl mx-auto">
@@ -73,37 +73,37 @@ export default function LandingPage() {
 
       {/* Languages */}
       <section className="max-w-4xl mx-auto px-4 py-12 text-center">
-        <h2 className="text-2xl font-bold text-text-primary mb-6">
+        <h2 className="text-2xl font-bold text-[#1D1D1F] mb-6">
           {t('languages_title')}
         </h2>
         <div className="flex justify-center gap-4 flex-wrap">
           {locales.map((locale) => (
             <div
               key={locale}
-              className="flex items-center gap-2 bg-card px-4 py-2 rounded-full"
+              className="flex items-center gap-2 bg-[#F5F5F7] px-4 py-2 rounded-full"
             >
               <span className="text-2xl">{LOCALE_FLAGS[locale]}</span>
-              <span className="text-sm text-text-secondary">{LOCALE_NAMES[locale]}</span>
+              <span className="text-sm text-[#86868B]">{LOCALE_NAMES[locale]}</span>
             </div>
           ))}
         </div>
       </section>
 
       {/* Pricing */}
-      <section className="bg-card py-12">
+      <section className="bg-[#F5F5F7] py-12">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-center text-text-primary mb-10">
+          <h2 className="text-2xl font-bold text-center text-[#1D1D1F] mb-10">
             {t('pricing_title')}
           </h2>
           <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <div className="bg-card rounded-2xl p-6 border border-border">
-              <h3 className="text-xl font-bold text-text-primary">{t('free_plan')}</h3>
-              <p className="text-3xl font-bold text-text-primary my-4">0\u20ac</p>
+            <div className="bg-[#F5F5F7] rounded-2xl p-6 border border-[#D2D2D7]">
+              <h3 className="text-xl font-bold text-[#1D1D1F]">{t('free_plan')}</h3>
+              <p className="text-3xl font-bold text-[#1D1D1F] my-4">0\u20ac</p>
               <p className="text-muted">{t('free_desc')}</p>
             </div>
             <div className="bg-primary/10 rounded-2xl p-6 border-2 border-primary">
               <h3 className="text-xl font-bold text-primary">{t('pro_plan')}</h3>
-              <p className="text-3xl font-bold text-text-primary my-4">
+              <p className="text-3xl font-bold text-[#1D1D1F] my-4">
                 {t('pro_price')}
               </p>
               <p className="text-muted">{t('pro_desc')}</p>
@@ -123,7 +123,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-6 text-center text-sm text-muted">
+      <footer className="border-t border-[#D2D2D7] py-6 text-center text-sm text-muted">
         <p>&copy; {new Date().getFullYear()} DocLear. Growthor.ai</p>
       </footer>
     </div>

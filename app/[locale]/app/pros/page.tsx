@@ -64,9 +64,9 @@ export default function ProsPage() {
   }, [filter, langFilter, typeParam]);
 
   return (
-    <div className="min-h-screen bg-bg safe-area-inset-top">
-      <div className="sticky top-0 z-40 bg-bg border-b border-border px-4 pt-3 pb-2">
-        <h1 className="text-xl font-bold text-text-primary mb-1">{t('title')}</h1>
+    <div className="min-h-screen bg-white safe-area-inset-top">
+      <div className="sticky top-0 z-40 bg-white border-b border-[#D2D2D7] px-4 pt-3 pb-2">
+        <h1 className="text-xl font-bold text-[#1D1D1F] mb-1">{t('title')}</h1>
         <p className="text-sm text-muted mb-3">{t('subtitle')}</p>
 
         {/* Category filters */}
@@ -76,7 +76,7 @@ export default function ProsPage() {
               key={cat}
               onClick={() => setFilter(cat)}
               className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors min-h-[36px] ${
-                cat === filter ? 'bg-primary text-white' : 'bg-card text-text-secondary'
+                cat === filter ? 'bg-primary text-white' : 'bg-[#F5F5F7] text-[#86868B]'
               }`}
             >
               {t(`filter_${cat}` as any)}
@@ -89,7 +89,7 @@ export default function ProsPage() {
           <button
             onClick={() => setLangFilter('all')}
             className={`flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-medium ${
-              langFilter === 'all' ? 'bg-text-primary text-white' : 'bg-card text-text-secondary'
+              langFilter === 'all' ? 'bg-text-primary text-white' : 'bg-[#F5F5F7] text-[#86868B]'
             }`}
           >
             {t('filter_all')}
@@ -99,7 +99,7 @@ export default function ProsPage() {
               key={l}
               onClick={() => setLangFilter(l)}
               className={`flex-shrink-0 px-2.5 py-1 rounded-full text-xs ${
-                langFilter === l ? 'bg-text-primary text-white' : 'bg-card text-text-secondary'
+                langFilter === l ? 'bg-text-primary text-white' : 'bg-[#F5F5F7] text-[#86868B]'
               }`}
             >
               {LOCALE_FLAGS[l]}
@@ -116,14 +116,14 @@ export default function ProsPage() {
           </div>
         ) : (
           filtered.map((pro) => (
-            <div key={pro.id} className="bg-bg border border-border rounded-xl p-4">
+            <div key={pro.id} className="bg-white border border-[#D2D2D7] rounded-xl p-4">
               <div className="flex items-start gap-3">
                 <span className="text-2xl flex-shrink-0">
                   {PROFESSIONAL_ICONS[pro.type] || '\ud83d\udc64'}
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-semibold text-text-primary truncate">{pro.name}</h3>
+                    <h3 className="font-semibold text-[#1D1D1F] truncate">{pro.name}</h3>
                     {pro.recommended && (
                       <span className="flex-shrink-0 text-[10px] bg-primary/10 text-primary font-semibold px-2 py-0.5 rounded-full">
                         {t('recommended')}
@@ -165,7 +165,7 @@ export default function ProsPage() {
                     {pro.phone && (
                       <a
                         href={`tel:${pro.phone}`}
-                        className="flex items-center gap-1 bg-primary text-white text-sm font-medium px-3 py-1.5 rounded-lg active:scale-95 transition-transform"
+                        className="flex items-center gap-1 bg-success text-white text-sm font-medium px-3 py-1.5 rounded-lg active:scale-95 transition-transform"
                       >
                         {t('call')}
                       </a>
@@ -173,7 +173,7 @@ export default function ProsPage() {
                     {pro.email && (
                       <a
                         href={`mailto:${pro.email}`}
-                        className="flex items-center gap-1 bg-card text-text-secondary text-sm font-medium px-3 py-1.5 rounded-lg"
+                        className="flex items-center gap-1 bg-[#F5F5F7] text-[#86868B] text-sm font-medium px-3 py-1.5 rounded-lg"
                       >
                         {t('email')}
                       </a>
@@ -183,7 +183,7 @@ export default function ProsPage() {
                         href={pro.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 bg-card text-text-secondary text-sm font-medium px-3 py-1.5 rounded-lg"
+                        className="flex items-center gap-1 bg-[#F5F5F7] text-[#86868B] text-sm font-medium px-3 py-1.5 rounded-lg"
                       >
                         {t('website')}
                       </a>

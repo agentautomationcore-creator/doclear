@@ -35,7 +35,7 @@ export default function DocumentCard({ document: doc }: Props) {
   return (
     <Link
       href={`/app/doc/${doc.id}`}
-      className="block bg-bg border border-border rounded-xl p-4 hover:border-border transition-colors active:bg-card"
+      className="block bg-white border border-[#D2D2D7] rounded-xl p-4 hover:border-[#D2D2D7] transition-colors active:bg-[#F5F5F7]"
     >
       <div className="flex items-start gap-3">
         <span
@@ -45,7 +45,7 @@ export default function DocumentCard({ document: doc }: Props) {
           {cat.icon}
         </span>
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-text-primary truncate">{doc.title}</h3>
+          <h3 className="font-semibold text-[#1D1D1F] truncate">{doc.title}</h3>
           <div className="flex items-center gap-2 mt-1 text-sm text-muted">
             <span style={{ color: cat.color }}>
               {categories(doc.category as any)}
