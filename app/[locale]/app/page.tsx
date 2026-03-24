@@ -75,7 +75,7 @@ export default function TimelinePage() {
   }, [documents, filter, search]);
 
   return (
-    <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom">
+    <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom max-w-2xl mx-auto">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-white border-b border-[#D2D2D7] px-4 pt-3 pb-2">
         <div className="flex items-center justify-between mb-3">

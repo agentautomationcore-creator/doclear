@@ -50,7 +50,7 @@ export default function DocumentCard({ document: doc }: Props) {
             <span style={{ color: cat.color }}>
               {categories(doc.category as any)}
             </span>
-            <span>\u00b7</span>
+            <span>{'·'}</span>
             <span>
               {new Date(doc.createdAt).toLocaleDateString()}
             </span>

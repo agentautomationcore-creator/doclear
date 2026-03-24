@@ -149,7 +149,7 @@ export default function DocumentPage() {
                 <span style={{ color: cat.color }}>
                   {categories(doc.category as any)}
                 </span>
-                {' \u00b7 '}
+                {' · '}
                 {new Date(doc.createdAt).toLocaleDateString()}
               </p>
             </div>

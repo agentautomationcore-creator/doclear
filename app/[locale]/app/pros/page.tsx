@@ -64,7 +64,7 @@ export default function ProsPage() {
   }, [filter, langFilter, typeParam]);
 
   return (
-    <div className="min-h-screen bg-white safe-area-inset-top">
+    <div className="min-h-screen bg-white safe-area-inset-top max-w-2xl mx-auto">
       <div className="sticky top-0 z-40 bg-white border-b border-[#D2D2D7] px-4 pt-3 pb-2">
         <h1 className="text-xl font-bold text-[#1D1D1F] mb-1">{t('title')}</h1>
         <p className="text-sm text-muted mb-3">{t('subtitle')}</p>
@@ -137,11 +137,11 @@ export default function ProsPage() {
 
                   <div className="flex items-center gap-2 mt-2 text-sm">
                     <span className="text-muted">{pro.city}</span>
-                    <span className="text-muted">{'\u00b7'}</span>
+                    <span className="text-muted">{'·'}</span>
                     <span className="text-yellow-500">{'\u2b50'} {pro.rating}</span>
                     {pro.availableOnline && (
                       <>
-                        <span className="text-muted">{'\u00b7'}</span>
+                        <span className="text-muted">{'·'}</span>
                         <span className="text-success text-xs">{t('online')}</span>
                       </>
                     )}

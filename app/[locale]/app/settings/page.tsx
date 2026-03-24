@@ -57,7 +57,7 @@ export default function SettingsPage() {
   if (!settings) return null;
 
   return (
-    <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom">
+    <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom max-w-2xl mx-auto">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-white border-b border-[#D2D2D7] px-4 py-3">
         <div className="flex items-center gap-3">

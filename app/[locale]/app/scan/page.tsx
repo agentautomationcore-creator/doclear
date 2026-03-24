@@ -180,7 +180,7 @@ export default function ScanPage() {
   const hasContent = files.length > 0;
 
   return (
-    <div className="min-h-screen bg-white safe-area-inset-top">
+    <div className="min-h-screen bg-white safe-area-inset-top max-w-2xl mx-auto">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-white border-b border-[#D2D2D7] px-4 py-3">
         <div className="flex items-center gap-3">
