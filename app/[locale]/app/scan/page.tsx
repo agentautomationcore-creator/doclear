@@ -180,39 +180,39 @@ export default function ScanPage() {
   const hasContent = files.length > 0;
 
   return (
-    <div className="min-h-screen bg-white safe-area-inset-top">
+    <div className="min-h-screen bg-bg safe-area-inset-top">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white border-b border-gray-100 px-4 py-3">
+      <div className="sticky top-0 z-40 bg-bg border-b border-border px-4 py-3">
         <div className="flex items-center gap-3">
-          <button onClick={() => router.back()} className="p-2 hover:bg-gray-100 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center">
-            <svg className="w-5 h-5 text-gray-600 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button onClick={() => router.back()} className="p-2 hover:bg-card rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center">
+            <svg className="w-5 h-5 text-text-secondary rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <h1 className="text-lg font-semibold text-gray-900">{t('title')}</h1>
+          <h1 className="text-lg font-semibold text-text-primary">{t('title')}</h1>
         </div>
       </div>
 
       <div className="px-4 py-6">
         {/* Preview area */}
         {preview ? (
-          <div className="mb-6 rounded-2xl overflow-hidden bg-gray-100 aspect-[3/4] max-h-[40vh]">
+          <div className="mb-6 rounded-2xl overflow-hidden bg-card aspect-[3/4] max-h-[40vh]">
             <img src={preview} alt="Document preview" className="w-full h-full object-contain" />
           </div>
         ) : hasContent ? (
-          <div className="mb-6 rounded-2xl bg-gray-50 border border-gray-200 p-6">
+          <div className="mb-6 rounded-2xl bg-card border border-border p-6">
             {isZip ? (
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-4xl">{'\ud83d\udce6'}</span>
                   <div>
-                    <p className="font-semibold text-gray-900">{fileName}</p>
+                    <p className="font-semibold text-text-primary">{fileName}</p>
                     <p className="text-sm text-muted">{files.length} files</p>
                   </div>
                 </div>
                 <div className="space-y-1.5 max-h-[200px] overflow-y-auto">
                   {files.map((f, i) => (
-                    <div key={i} className="flex items-center gap-2 text-sm text-gray-700">
+                    <div key={i} className="flex items-center gap-2 text-sm text-text-secondary">
                       <span>{getFormatIcon(f.originalFormat)}</span>
                       <span className="truncate">{f.fileName}</span>
                     </div>
@@ -223,14 +223,14 @@ export default function ScanPage() {
               <div className="flex items-center gap-3">
                 <span className="text-4xl">{getFormatIcon(files[0]?.originalFormat || '')}</span>
                 <div>
-                  <p className="font-semibold text-gray-900">{fileName}</p>
+                  <p className="font-semibold text-text-primary">{fileName}</p>
                   <p className="text-sm text-muted">{files[0]?.originalFormat.toUpperCase()}</p>
                 </div>
               </div>
             )}
           </div>
         ) : (
-          <div className="bg-gray-50 rounded-2xl aspect-[3/4] max-h-[40vh] flex items-center justify-center mb-6 border-2 border-dashed border-gray-300">
+          <div className="bg-card rounded-2xl aspect-[3/4] max-h-[40vh] flex items-center justify-center mb-6 border-2 border-dashed border-border">
             <div className="text-center text-muted">
               <div className="text-5xl mb-3">{'\ud83d\udcf7'}</div>
               <p>{t('take_photo')}</p>
@@ -245,23 +245,23 @@ export default function ScanPage() {
 
         {/* Analysis progress */}
         {analyzing && (
-          <div className="bg-primary/5 rounded-2xl p-6 mb-6">
-            <p className="font-semibold text-gray-900 mb-4">{t('analyzing')}</p>
+          <div className="bg-primary/10 rounded-2xl p-6 mb-6">
+            <p className="font-semibold text-text-primary mb-4">{t('analyzing')}</p>
             {isZip && batchProgress.total > 0 ? (
               <div>
                 <div className="flex items-center justify-between text-sm text-muted mb-2">
                   <span>{batchProgress.current} / {batchProgress.total}</span>
                   <span>{Math.round((batchProgress.current / batchProgress.total) * 100)}%</span>
                 </div>
-                <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-border rounded-full overflow-hidden">
                   <div className="h-full bg-primary rounded-full transition-all" style={{ width: `${(batchProgress.current / batchProgress.total) * 100}%` }} />
                 </div>
               </div>
             ) : (
               [t('step1'), t('step2'), t('step3')].map((label, i) => (
                 <div key={i} className={`flex items-center gap-3 py-2 transition-opacity duration-300 ${i <= step ? 'opacity-100' : 'opacity-30'}`}>
-                  {i < step ? <span className="text-success">{'\u2705'}</span> : i === step ? <span className="animate-spin text-primary">{'\u23f3'}</span> : <span className="text-gray-400">{'\u25cb'}</span>}
-                  <span className={i <= step ? 'text-gray-900' : 'text-gray-400'}>{label}</span>
+                  {i < step ? <span className="text-success">{'\u2705'}</span> : i === step ? <span className="animate-spin text-primary">{'\u23f3'}</span> : <span className="text-muted">{'\u25cb'}</span>}
+                  <span className={i <= step ? 'text-text-primary' : 'text-muted'}>{label}</span>
                 </div>
               ))
             )}
@@ -278,11 +278,11 @@ export default function ScanPage() {
             )}
             <button
               onClick={() => cameraRef.current?.click()}
-              className={`w-full font-semibold py-3.5 rounded-xl text-lg active:scale-95 transition-transform min-h-[52px] ${hasContent ? 'bg-gray-100 text-gray-700' : 'bg-primary text-white'}`}
+              className={`w-full font-semibold py-3.5 rounded-xl text-lg active:scale-95 transition-transform min-h-[52px] ${hasContent ? 'bg-card text-text-secondary' : 'bg-primary text-white'}`}
             >
               {'\ud83d\udcf7'} {t('take_photo')}
             </button>
-            <button onClick={() => fileRef.current?.click()} className="w-full bg-gray-100 text-gray-700 font-semibold py-3.5 rounded-xl text-lg active:scale-95 transition-transform min-h-[52px]">
+            <button onClick={() => fileRef.current?.click()} className="w-full bg-card text-text-secondary font-semibold py-3.5 rounded-xl text-lg active:scale-95 transition-transform min-h-[52px]">
               {'\ud83d\udcc1'} {t('upload_file')}
             </button>
           </div>

@@ -48,7 +48,7 @@ export default function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 safe-area-inset-bottom">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-bg border-t border-border safe-area-inset-bottom">
       <div className="flex items-center justify-around max-w-lg mx-auto">
         {tabs.map((tab) => {
           const isActive =
@@ -61,7 +61,7 @@ export default function BottomNav() {
               key={tab.key}
               href={tab.href}
               className={`flex flex-col items-center justify-center py-2 px-3 min-h-[56px] min-w-[64px] transition-colors ${
-                isActive ? 'text-primary' : 'text-gray-400'
+                isActive ? 'text-primary' : 'text-muted'
               }`}
             >
               <TabIcon name={tab.icon} active={isActive} />

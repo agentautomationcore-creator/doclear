@@ -33,12 +33,12 @@ export default function LanguageSelector() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-gray-100 transition-colors min-h-[44px]"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-card transition-colors min-h-[44px]"
         aria-label="Change language"
       >
         <span className="text-xl">{LOCALE_FLAGS[locale]}</span>
         <svg
-          className={`w-4 h-4 text-gray-500 transition-transform ${open ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-muted transition-transform ${open ? 'rotate-180' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -48,13 +48,13 @@ export default function LanguageSelector() {
       </button>
 
       {open && (
-        <div className="absolute top-full mt-1 ltr:right-0 rtl:left-0 bg-white rounded-xl shadow-lg border border-gray-200 py-2 min-w-[180px] z-50">
+        <div className="absolute top-full mt-1 ltr:right-0 rtl:left-0 bg-card rounded-xl shadow-lg border border-border py-2 min-w-[180px] z-50">
           {locales.map((l) => (
             <button
               key={l}
               onClick={() => switchLocale(l)}
-              className={`w-full flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 transition-colors min-h-[44px] ${
-                l === locale ? 'bg-primary/5 text-primary font-medium' : 'text-gray-700'
+              className={`w-full flex items-center gap-3 px-4 py-2.5 hover:bg-card-hover transition-colors min-h-[44px] ${
+                l === locale ? 'bg-primary/10 text-primary font-medium' : 'text-text-secondary'
               }`}
             >
               <span className="text-xl">{LOCALE_FLAGS[l]}</span>

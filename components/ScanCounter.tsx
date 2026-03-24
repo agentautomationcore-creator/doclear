@@ -16,7 +16,7 @@ export default function ScanCounter({ used }: Props) {
       <p className="mb-1">
         {t('scans_left', { used, total: MAX_FREE_SCANS })}
       </p>
-      <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+      <div className="w-full h-2 bg-border rounded-full overflow-hidden">
         <div
           className={`h-full rounded-full transition-all ${
             pct >= 80 ? 'bg-danger' : pct >= 60 ? 'bg-warning' : 'bg-primary'

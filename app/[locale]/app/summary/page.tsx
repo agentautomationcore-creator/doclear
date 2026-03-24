@@ -57,15 +57,15 @@ export default function SummaryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white safe-area-inset-top px-4 py-4">
-      <h1 className="text-xl font-bold text-gray-900 mb-1">{t('title')}</h1>
+    <div className="min-h-screen bg-bg safe-area-inset-top px-4 py-4">
+      <h1 className="text-xl font-bold text-text-primary mb-1">{t('title')}</h1>
       <p className="text-sm text-muted mb-6">
         {t('documents_analyzed', { count: summary.totalDocuments })}
       </p>
 
       {/* By category */}
       {summary.byCategory && (
-        <div className="bg-gray-50 rounded-xl p-4 mb-4">
+        <div className="bg-card rounded-xl p-4 mb-4">
           <h2 className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">
             {t('by_category')}
           </h2>
@@ -76,9 +76,9 @@ export default function SummaryPage() {
                 <div key={cat} className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span>{config.icon}</span>
-                    <span className="text-gray-700">{categories(cat as any)}</span>
+                    <span className="text-text-secondary">{categories(cat as any)}</span>
                   </div>
-                  <span className="font-semibold text-gray-900">{count as number}</span>
+                  <span className="font-semibold text-text-primary">{count as number}</span>
                 </div>
               );
             })}
@@ -96,7 +96,7 @@ export default function SummaryPage() {
             {summary.urgentDeadlines.map((d, i) => (
               <div key={i} className="flex items-center gap-2">
                 <span>{d.urgency === 'high' ? '\ud83d\udd34' : '\ud83d\udfe1'}</span>
-                <span className="text-gray-800 text-sm">{d.title}</span>
+                <span className="text-text-primary text-sm">{d.title}</span>
                 <span className="text-muted text-xs ltr:ml-auto rtl:mr-auto">{d.deadline}</span>
               </div>
             ))}
@@ -106,7 +106,7 @@ export default function SummaryPage() {
 
       {/* Finances */}
       {(summary.totalToPay || summary.totalToReceive) && (
-        <div className="bg-gray-50 rounded-xl p-4 mb-4">
+        <div className="bg-card rounded-xl p-4 mb-4">
           <h2 className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">
             {t('finances')}
           </h2>
@@ -133,7 +133,7 @@ export default function SummaryPage() {
           <h2 className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">
             {t('recommendation')}
           </h2>
-          <p className="text-gray-800 text-sm leading-relaxed">{summary.aiRecommendation}</p>
+          <p className="text-text-primary text-sm leading-relaxed">{summary.aiRecommendation}</p>
         </div>
       )}
 

@@ -56,19 +56,19 @@ export default function SettingsPage() {
   if (!settings) return null;
 
   return (
-    <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom">
+    <div className="min-h-screen bg-bg safe-area-inset-top safe-area-inset-bottom">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white border-b border-gray-100 px-4 py-3">
+      <div className="sticky top-0 z-40 bg-bg border-b border-border px-4 py-3">
         <div className="flex items-center gap-3">
           <button
             onClick={() => router.back()}
-            className="p-2 hover:bg-gray-100 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="p-2 hover:bg-card rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
-            <svg className="w-5 h-5 text-gray-600 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-text-secondary rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <h1 className="text-lg font-semibold text-gray-900">{t('title')}</h1>
+          <h1 className="text-lg font-semibold text-text-primary">{t('title')}</h1>
         </div>
       </div>
 
@@ -81,12 +81,12 @@ export default function SettingsPage() {
           >
             <div className="flex items-center gap-3">
               <span className="text-xl">\ud83c\udf10</span>
-              <span className="font-medium text-gray-900">{t('language')}</span>
+              <span className="font-medium text-text-primary">{t('language')}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xl">{LOCALE_FLAGS[locale as Locale]}</span>
               <span className="text-muted">{LOCALE_NAMES[locale as Locale]}</span>
-              <svg className={`w-4 h-4 text-gray-400 transition-transform ${showLangPicker ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className={`w-4 h-4 text-muted transition-transform ${showLangPicker ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -101,7 +101,7 @@ export default function SettingsPage() {
                   className={`flex items-center gap-2 px-3 py-2.5 rounded-xl transition-colors min-h-[44px] ${
                     l === locale
                       ? 'bg-primary/10 border border-primary/30'
-                      : 'bg-gray-50 border border-gray-200'
+                      : 'bg-card border border-border'
                   }`}
                 >
                   <span className="text-xl">{LOCALE_FLAGS[l]}</span>
@@ -112,11 +112,11 @@ export default function SettingsPage() {
           )}
         </div>
 
-        <hr className="border-gray-100" />
+        <hr className="border-border" />
 
         {/* Country */}
         <div>
-          <h3 className="flex items-center gap-2 font-medium text-gray-900 mb-3">
+          <h3 className="flex items-center gap-2 font-medium text-text-primary mb-3">
             <span>{'\ud83c\uddeb\ud83c\uddf7'}</span> {t('country')}
           </h3>
           <div className="grid grid-cols-3 gap-2">
@@ -130,7 +130,7 @@ export default function SettingsPage() {
                   setSettings(updated);
                 }}
                 className={`flex items-center gap-1.5 px-2 py-2 rounded-lg text-xs font-medium transition-colors min-h-[40px] ${
-                  settings?.country === c ? 'bg-primary/10 border border-primary/30' : 'bg-gray-50 border border-gray-200'
+                  settings?.country === c ? 'bg-primary/10 border border-primary/30' : 'bg-card border border-border'
                 }`}
               >
                 <span>{COUNTRY_FLAGS[c]}</span>
@@ -140,11 +140,11 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <hr className="border-gray-100" />
+        <hr className="border-border" />
 
         {/* Status */}
         <div>
-          <h3 className="flex items-center gap-2 font-medium text-gray-900 mb-3">
+          <h3 className="flex items-center gap-2 font-medium text-text-primary mb-3">
             <span>{'\ud83d\udccb'}</span> {t('status')}
           </h3>
           <div className="grid grid-cols-2 gap-2">
@@ -158,7 +158,7 @@ export default function SettingsPage() {
                   setSettings(updated);
                 }}
                 className={`px-3 py-2 rounded-lg text-xs font-medium transition-colors min-h-[40px] text-left rtl:text-right ${
-                  settings?.status === s ? 'bg-primary/10 border border-primary/30' : 'bg-gray-50 border border-gray-200'
+                  settings?.status === s ? 'bg-primary/10 border border-primary/30' : 'bg-card border border-border'
                 }`}
               >
                 {s.replace(/_/g, ' ')}
@@ -167,21 +167,21 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <hr className="border-gray-100" />
+        <hr className="border-border" />
 
         {/* Usage */}
         <div>
-          <h3 className="flex items-center gap-2 font-medium text-gray-900 mb-3">
+          <h3 className="flex items-center gap-2 font-medium text-text-primary mb-3">
             <span>\ud83d\udcca</span> {t('usage')}
           </h3>
           <ScanCounter used={settings.scanCount} />
         </div>
 
-        <hr className="border-gray-100" />
+        <hr className="border-border" />
 
         {/* Reminders */}
         <div>
-          <h3 className="flex items-center gap-2 font-medium text-gray-900 mb-3">
+          <h3 className="flex items-center gap-2 font-medium text-text-primary mb-3">
             <span>\ud83d\udd14</span> {t('reminders')}
           </h3>
           <div className="space-y-2">
@@ -191,15 +191,15 @@ export default function SettingsPage() {
               { key: 'today' as const, label: t('reminder_today') },
             ]).map(({ key, label }) => (
               <div key={key} className="flex items-center justify-between py-2">
-                <span className="text-gray-700">{label}</span>
+                <span className="text-text-secondary">{label}</span>
                 <button
                   onClick={() => toggleNotification(key)}
                   className={`w-12 h-7 rounded-full transition-colors relative ${
-                    settings.notifications[key] ? 'bg-primary' : 'bg-gray-300'
+                    settings.notifications[key] ? 'bg-primary' : 'bg-border'
                   }`}
                 >
                   <div
-                    className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform ${
+                    className={`w-5 h-5 bg-bg rounded-full absolute top-1 transition-transform ${
                       settings.notifications[key] ? 'ltr:translate-x-6 rtl:-translate-x-6' : 'ltr:translate-x-1 rtl:-translate-x-1'
                     }`}
                   />
@@ -209,18 +209,18 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <hr className="border-gray-100" />
+        <hr className="border-border" />
 
         {/* Pro */}
-        <div className="bg-primary/5 rounded-2xl p-5 border border-primary/20">
-          <h3 className="font-bold text-gray-900 text-lg mb-1">
+        <div className="bg-primary/10 rounded-2xl p-5 border border-primary/20">
+          <h3 className="font-bold text-text-primary text-lg mb-1">
             {t('unlock_pro')}
           </h3>
           <p className="text-muted text-sm mb-4">{t('pro_price')}</p>
           <ul className="space-y-2 mb-4">
             {[t('pro_feature1'), t('pro_feature2'), t('pro_feature3')].map(
               (feature, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-gray-700">
+                <li key={i} className="flex items-center gap-2 text-sm text-text-secondary">
                   <span className="text-success">\u2713</span>
                   <span>{feature}</span>
                 </li>
@@ -238,7 +238,7 @@ export default function SettingsPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={paywallT('email_placeholder')}
-                className="flex-1 bg-white rounded-xl px-4 py-2.5 text-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="flex-1 bg-bg rounded-xl px-4 py-2.5 text-sm border border-border focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
               <button
                 onClick={handleEmailSubmit}
@@ -250,17 +250,17 @@ export default function SettingsPage() {
           )}
         </div>
 
-        <hr className="border-gray-100" />
+        <hr className="border-border" />
 
         {/* Links */}
         <div className="space-y-1">
-          <a href="mailto:hello@growthor.ai" className="block py-3 text-gray-700 min-h-[44px]">
+          <a href="mailto:hello@growthor.ai" className="block py-3 text-text-secondary min-h-[44px]">
             \ud83d\udce7 {t('support')}
           </a>
-          <button className="block py-3 text-gray-700 min-h-[44px] w-full text-left rtl:text-right">
+          <button className="block py-3 text-text-secondary min-h-[44px] w-full text-left rtl:text-right">
             \ud83d\udcc4 {t('terms')}
           </button>
-          <button className="block py-3 text-gray-700 min-h-[44px] w-full text-left rtl:text-right">
+          <button className="block py-3 text-text-secondary min-h-[44px] w-full text-left rtl:text-right">
             \ud83d\udd12 {t('privacy')}
           </button>
         </div>

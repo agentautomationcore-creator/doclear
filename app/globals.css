@@ -12,7 +12,7 @@
   }
 
   body {
-    @apply bg-white text-gray-800;
+    @apply bg-bg text-text-primary;
   }
 }
 
@@ -22,6 +22,13 @@
   }
   .safe-area-inset-top {
     padding-top: env(safe-area-inset-top);
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 

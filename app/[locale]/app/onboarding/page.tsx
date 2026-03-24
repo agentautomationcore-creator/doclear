@@ -67,12 +67,12 @@ export default function OnboardingPage() {
       <div className="min-h-screen flex flex-col items-center justify-center px-4 safe-area-inset-top safe-area-inset-bottom">
         <div className="flex gap-2 mb-12">
           {slides.map((_, i) => (
-            <div key={i} className={`w-2 h-2 rounded-full transition-colors ${i === step ? 'bg-primary' : 'bg-gray-300'}`} />
+            <div key={i} className={`w-2 h-2 rounded-full transition-colors ${i === step ? 'bg-primary' : 'bg-border'}`} />
           ))}
         </div>
         <div className="text-center max-w-sm">
           <div className="text-7xl mb-8">{slide.icon}</div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">{t(slide.titleKey as any)}</h2>
+          <h2 className="text-2xl font-bold text-text-primary mb-3">{t(slide.titleKey as any)}</h2>
           <p className="text-muted text-lg">{t(slide.descKey as any)}</p>
         </div>
         <div className="mt-12 flex flex-col gap-3 w-full max-w-sm">
@@ -91,16 +91,16 @@ export default function OnboardingPage() {
   if (step === 3) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-4 safe-area-inset-top safe-area-inset-bottom">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8">{t('choose_language')}</h2>
+        <h2 className="text-2xl font-bold text-text-primary mb-8">{t('choose_language')}</h2>
         <div className="grid grid-cols-2 gap-3 w-full max-w-sm">
           {locales.map((locale) => (
             <button
               key={locale}
               onClick={() => selectLanguage(locale)}
-              className="flex items-center gap-3 bg-gray-50 hover:bg-primary/5 border border-gray-200 hover:border-primary rounded-xl px-4 py-3 transition-colors min-h-[56px]"
+              className="flex items-center gap-3 bg-card hover:bg-card border border-border hover:border-primary rounded-xl px-4 py-3 transition-colors min-h-[56px]"
             >
               <span className="text-2xl">{LOCALE_FLAGS[locale]}</span>
-              <span className="font-medium text-gray-800">{LOCALE_NAMES[locale]}</span>
+              <span className="font-medium text-text-primary">{LOCALE_NAMES[locale]}</span>
             </button>
           ))}
         </div>
@@ -112,7 +112,7 @@ export default function OnboardingPage() {
   return (
     <div className="min-h-screen flex flex-col items-center px-4 pt-12 safe-area-inset-top safe-area-inset-bottom">
       {/* Country */}
-      <h2 className="text-xl font-bold text-gray-900 mb-4">{t('country_title')}</h2>
+      <h2 className="text-xl font-bold text-text-primary mb-4">{t('country_title')}</h2>
       <div className="grid grid-cols-3 gap-2 w-full max-w-md mb-8">
         {countries.map((c) => (
           <button
@@ -121,7 +121,7 @@ export default function OnboardingPage() {
             className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors min-h-[48px] ${
               c === selectedCountry
                 ? 'bg-primary/10 border-2 border-primary'
-                : 'bg-gray-50 border border-gray-200'
+                : 'bg-card border border-border'
             }`}
           >
             <span className="text-lg">{COUNTRY_FLAGS[c]}</span>
@@ -131,7 +131,7 @@ export default function OnboardingPage() {
       </div>
 
       {/* Status */}
-      <h2 className="text-xl font-bold text-gray-900 mb-4">{t('status_title')}</h2>
+      <h2 className="text-xl font-bold text-text-primary mb-4">{t('status_title')}</h2>
       <div className="grid grid-cols-2 gap-2 w-full max-w-md mb-8">
         {statusOptions.map(({ key, icon }) => (
           <button
@@ -140,7 +140,7 @@ export default function OnboardingPage() {
             className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors min-h-[48px] ${
               key === selectedStatus
                 ? 'bg-primary/10 border-2 border-primary'
-                : 'bg-gray-50 border border-gray-200'
+                : 'bg-card border border-border'
             }`}
           >
             <span className="text-lg">{icon}</span>
