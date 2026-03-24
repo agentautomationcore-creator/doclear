@@ -124,7 +124,6 @@ export default function OnboardingPage() {
                 : 'bg-[#F5F5F7] border border-[#D2D2D7]'
             }`}
           >
-            <span className="text-lg">{COUNTRY_FLAGS[c]}</span>
             <span className="truncate">{c === 'OTHER' ? t('other_country') : COUNTRY_NAMES[c]}</span>
           </button>
         ))}

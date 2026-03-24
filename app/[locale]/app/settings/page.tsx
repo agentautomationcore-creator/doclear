@@ -85,7 +85,6 @@ export default function SettingsPage() {
               <span className="font-medium text-[#1D1D1F]">{t('language')}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xl">{LOCALE_FLAGS[locale as Locale]}</span>
               <span className="text-muted">{LOCALE_NAMES[locale as Locale]}</span>
               <svg className={`w-4 h-4 text-muted transition-transform ${showLangPicker ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -105,7 +104,6 @@ export default function SettingsPage() {
                       : 'bg-[#F5F5F7] border border-[#D2D2D7]'
                   }`}
                 >
-                  <span className="text-xl">{LOCALE_FLAGS[l]}</span>
                   <span className="text-sm font-medium">{LOCALE_NAMES[l]}</span>
                 </button>
               ))}
@@ -134,8 +132,7 @@ export default function SettingsPage() {
                   settings?.country === c ? 'bg-primary/10 border border-primary/30' : 'bg-[#F5F5F7] border border-[#D2D2D7]'
                 }`}
               >
-                <span>{COUNTRY_FLAGS[c]}</span>
-                <span className="truncate">{COUNTRY_NAMES[c]}</span>
+                <span className="truncate">{c === 'OTHER' ? onbT('other_country') : COUNTRY_NAMES[c]}</span>
               </button>
             ))}
           </div>
