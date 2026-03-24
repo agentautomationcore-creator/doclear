@@ -21,6 +21,27 @@ export interface ChatMessage {
   timestamp: string;
 }
 
+export interface Recommendation {
+  type: 'website' | 'professional';
+  title: string;
+  description: string;
+  url?: string;
+  professionalType?: ProfessionalType;
+}
+
+export interface AnalysisResponse {
+  document_title: string;
+  category: Category;
+  what_is_this: string;
+  what_it_says: string;
+  what_to_do: string[];
+  deadline: string | null;
+  deadline_description: string | null;
+  urgency: Urgency;
+  amounts: string[];
+  recommendations?: Recommendation[];
+}
+
 export interface Document {
   id: string;
   createdAt: string;
@@ -37,10 +58,31 @@ export interface Document {
   imageData: string;
   chatHistory: ChatMessage[];
   language: string;
+  recommendations?: Recommendation[];
+}
+
+export type ImmigrationStatus =
+  | 'student'
+  | 'work_permit'
+  | 'residence_permit'
+  | 'family_reunion'
+  | 'tourist'
+  | 'eu_citizen'
+  | 'pending'
+  | 'citizen';
+
+export type CountryCode = 'FR' | 'DE' | 'IT' | 'ES' | 'GB' | 'NL' | 'BE' | 'CH' | 'AT' | 'PT' | 'OTHER';
+
+export interface UserProfile {
+  language: Locale;
+  country: CountryCode;
+  status: ImmigrationStatus;
 }
 
 export interface Settings {
   language: Locale;
+  country: CountryCode;
+  status: ImmigrationStatus;
   notifications: {
     sevenDays: boolean;
     oneDay: boolean;
@@ -49,17 +91,100 @@ export interface Settings {
   scanCount: number;
 }
 
-export interface AnalysisResponse {
-  document_title: string;
-  category: Category;
-  what_is_this: string;
-  what_it_says: string;
-  what_to_do: string[];
-  deadline: string | null;
-  deadline_description: string | null;
-  urgency: Urgency;
-  amounts: string[];
+export type ProfessionalType =
+  | 'immigration_lawyer'
+  | 'tax_lawyer'
+  | 'labor_lawyer'
+  | 'family_lawyer'
+  | 'real_estate_lawyer'
+  | 'accountant'
+  | 'sworn_translator'
+  | 'notary'
+  | 'insurance_broker'
+  | 'bank_advisor'
+  | 'doctor'
+  | 'social_worker'
+  | 'realtor'
+  | 'immigration_consultant'
+  | 'hr_consultant'
+  | 'customs_broker'
+  | 'education_consultant';
+
+export interface Professional {
+  id: string;
+  name: string;
+  type: ProfessionalType;
+  specialties: string[];
+  languages: string[];
+  country: string;
+  region: string;
+  city: string;
+  phone?: string;
+  email?: string;
+  website?: string;
+  rating: number;
+  recommended: boolean;
+  description: Record<string, string>;
+  availableOnline: boolean;
+  priceRange?: string;
 }
+
+export const PROFESSIONAL_ICONS: Record<string, string> = {
+  immigration_lawyer: '\u2696\ufe0f',
+  tax_lawyer: '\u2696\ufe0f',
+  labor_lawyer: '\u2696\ufe0f',
+  family_lawyer: '\u2696\ufe0f',
+  real_estate_lawyer: '\u2696\ufe0f',
+  accountant: '\ud83d\udcbc',
+  sworn_translator: '\ud83c\udf10',
+  notary: '\ud83d\udcdc',
+  insurance_broker: '\ud83d\udee1\ufe0f',
+  bank_advisor: '\ud83c\udfe6',
+  doctor: '\ud83e\ude7a',
+  social_worker: '\ud83e\udd1d',
+  realtor: '\ud83c\udfe0',
+  immigration_consultant: '\ud83c\udf0d',
+  hr_consultant: '\ud83d\udc65',
+  customs_broker: '\ud83d\udce6',
+  education_consultant: '\ud83c\udf93',
+};
+
+export interface BatchSummary {
+  totalDocuments: number;
+  byCategory: Record<string, number>;
+  urgentDeadlines: { title: string; deadline: string; urgency: string }[];
+  totalToPay: string;
+  totalToReceive: string;
+  aiRecommendation: string;
+}
+
+export const COUNTRY_FLAGS: Record<CountryCode, string> = {
+  FR: '\ud83c\uddeb\ud83c\uddf7',
+  DE: '\ud83c\udde9\ud83c\uddea',
+  IT: '\ud83c\uddee\ud83c\uddf9',
+  ES: '\ud83c\uddea\ud83c\uddf8',
+  GB: '\ud83c\uddec\ud83c\udde7',
+  NL: '\ud83c\uddf3\ud83c\uddf1',
+  BE: '\ud83c\udde7\ud83c\uddea',
+  CH: '\ud83c\udde8\ud83c\udded',
+  AT: '\ud83c\udde6\ud83c\uddf9',
+  PT: '\ud83c\uddf5\ud83c\uddf9',
+  OTHER: '\ud83c\udf0d',
+};
+
+export const COUNTRY_NAMES: Record<CountryCode, string> = {
+  FR: 'France',
+  DE: 'Deutschland',
+  IT: 'Italia',
+  ES: 'Espa\u00f1a',
+  GB: 'United Kingdom',
+  NL: 'Nederland',
+  BE: 'Belgique',
+  CH: 'Schweiz',
+  AT: '\u00d6sterreich',
+  PT: 'Portugal',
+  OTHER: 'Other',
+};
 
 export const MAX_FREE_SCANS = 5;
 

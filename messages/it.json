@@ -35,7 +35,18 @@
     "choose_language": "Scegli la tua lingua",
     "start": "Inizia",
     "next": "Avanti",
-    "skip": "Salta"
+    "skip": "Salta",
+    "country_title": "Dove vivi?",
+    "status_title": "Il tuo status?",
+    "status_student": "Studente",
+    "status_work": "Permesso di lavoro",
+    "status_residence": "Permesso di soggiorno",
+    "status_family": "Ricongiungimento familiare",
+    "status_tourist": "Turista",
+    "status_eu": "Cittadino UE",
+    "status_pending": "Domanda in corso",
+    "status_citizen": "Cittadino",
+    "other_country": "Altro"
   },
   "timeline": {
     "title": "I miei documenti",
@@ -73,7 +84,10 @@
     "mark_done": "Segna come fatto",
     "marked_done": "Fatto",
     "share": "Condividi",
-    "deadline": "Scadenza"
+    "deadline": "Scadenza",
+    "recommendations": "Raccomandazioni",
+    "visit_portal": "Visita",
+    "find_specialist": "Trova uno specialista"
   },
   "settings": {
     "title": "Impostazioni",
@@ -93,7 +107,9 @@
     "pro_feature3": "Esporta PDF",
     "support": "Supporto",
     "terms": "Termini di utilizzo",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "country": "Paese",
+    "status": "Status"
   },
   "paywall": {
     "title": "Ti è piaciuto?",
@@ -126,6 +142,46 @@
     "analysis_failed": "Analisi fallita. Riprova.",
     "no_camera": "Fotocamera non disponibile",
     "file_too_large": "File troppo grande (max 10 MB)",
-    "scan_limit": "Limite scansioni raggiunto"
+    "scan_limit": "Limite scansioni raggiunto",
+    "unsupported_format": "Formato file non supportato",
+    "zip_too_large": "File ZIP troppo grande (max 50 MB)",
+    "zip_too_many": "Troppi file nello ZIP (max 20)",
+    "zip_pro_only": "Analisi ZIP disponibile in DocLear Pro"
+  },
+  "nav": {
+    "docs": "Documenti",
+    "scan": "Scansione",
+    "pros": "Specialisti",
+    "profile": "Profilo"
+  },
+  "pros": {
+    "title": "Specialisti",
+    "subtitle": "Costa Azzurra",
+    "filter_all": "Tutti",
+    "filter_lawyers": "Avvocati",
+    "filter_accountants": "Commercialisti",
+    "filter_translators": "Traduttori",
+    "filter_notaries": "Notai",
+    "filter_insurance": "Assicurazioni",
+    "filter_doctors": "Medici",
+    "filter_realtors": "Agenti immobiliari",
+    "recommended": "DocLear consiglia",
+    "call": "Chiama",
+    "email": "Email",
+    "website": "Sito web",
+    "online": "Consulenze online",
+    "find_specialist": "Trova uno specialista",
+    "languages": "Lingue"
+  },
+  "summary": {
+    "title": "Riepilogo",
+    "documents_analyzed": "{count} documenti analizzati",
+    "by_category": "Per categoria",
+    "attention": "Richiede attenzione",
+    "finances": "Finanze",
+    "to_pay": "Da pagare",
+    "to_receive": "Da ricevere",
+    "recommendation": "Raccomandazione IA",
+    "view_all": "Vedi tutti i documenti"
   }
 }

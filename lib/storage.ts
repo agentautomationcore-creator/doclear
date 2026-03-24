@@ -1,4 +1,4 @@
-import { Document, Settings, Locale, MAX_FREE_SCANS } from './types';
+import { Document, Settings, Locale, CountryCode, ImmigrationStatus, UserProfile, MAX_FREE_SCANS } from './types';
 
 const DOCUMENTS_KEY = 'doclear_documents';
 const SETTINGS_KEY = 'doclear_settings';
@@ -69,8 +69,19 @@ function defaultSettings(): Settings {
 
   return {
     language,
+    country: 'FR' as CountryCode,
+    status: 'residence_permit' as ImmigrationStatus,
     notifications: { sevenDays: true, oneDay: true, today: true },
     scanCount: 0,
+  };
+}
+
+export function getUserProfile(): UserProfile {
+  const settings = getSettings();
+  return {
+    language: settings.language,
+    country: settings.country || 'FR',
+    status: settings.status || 'residence_permit',
   };
 }
 

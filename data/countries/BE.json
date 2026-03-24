@@ -1,0 +1,18 @@
+{
+  "code": "BE",
+  "name": {"fr": "Belgique", "nl": "België", "de": "Belgien", "en": "Belgium", "ru": "Бельгия", "ar": "بلجيكا", "it": "Belgio", "zh": "比利时", "pt": "Bélgica", "tr": "Belçika"},
+  "portals": [
+    {"id": "spf_finances", "name": "SPF Finances", "url": "https://finances.belgium.be", "for": ["taxes"], "description": {"en": "Federal tax authority — Tax-on-web", "ru": "Федеральная налоговая служба — Tax-on-web"}},
+    {"id": "cpas", "name": "CPAS/OCMW", "url": "https://www.mi-is.be", "for": ["employment", "other"], "description": {"en": "Public social welfare centre — social aid", "ru": "Центр социальной помощи — социальная поддержка"}},
+    {"id": "office_etrangers", "name": "Office des Étrangers", "url": "https://dofi.ibz.be", "for": ["legal"], "description": {"en": "Immigration office — residence permits, visas", "ru": "Миграционная служба — ВНЖ, визы"}},
+    {"id": "onss", "name": "ONSS/RSZ", "url": "https://www.onss.be", "for": ["employment"], "description": {"en": "Social security contributions office", "ru": "Управление социальных взносов"}},
+    {"id": "inami", "name": "INAMI/RIZIV", "url": "https://www.inami.fgov.be", "for": ["health"], "description": {"en": "National health and disability insurance", "ru": "Национальное медицинское страхование"}}
+  ],
+  "rules": {
+    "declaration_impots": "Декларация о доходах: до конца июня (бумажная) или середины июля (Tax-on-web).",
+    "inscription_commune": "Регистрация в коммуне обязательна в течение 8 дней после переезда.",
+    "carte_sejour": "Карта пребывания (carte de séjour) — обратиться в коммуну после получения визы.",
+    "mutuelle": "Регистрация в mutuelle (мед. страховка) обязательна для всех жителей."
+  },
+  "document_types": {}
+}

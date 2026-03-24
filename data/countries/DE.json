@@ -1,0 +1,23 @@
+{
+  "code": "DE",
+  "name": {"de": "Deutschland", "en": "Germany", "ru": "Германия", "fr": "Allemagne", "ar": "ألمانيا", "it": "Germania", "zh": "德国", "pt": "Alemanha", "tr": "Almanya"},
+  "portals": [
+    {"id": "elster", "name": "ELSTER", "url": "https://www.elster.de", "for": ["taxes"], "description": {"en": "Online tax filing system", "ru": "Онлайн подача налоговой декларации"}},
+    {"id": "buergeramt", "name": "Bürgeramt", "url": "https://service.berlin.de", "for": ["legal", "other"], "description": {"en": "Citizens' office — registration, documents", "ru": "Бюро регистрации — прописка, документы"}},
+    {"id": "auslaendbehoerde", "name": "Ausländerbehörde", "url": "", "for": ["legal"], "description": {"en": "Immigration office — residence permits", "ru": "Миграционная служба — ВНЖ"}},
+    {"id": "agentur_arbeit", "name": "Agentur für Arbeit", "url": "https://www.arbeitsagentur.de", "for": ["employment"], "description": {"en": "Employment agency — job search, unemployment", "ru": "Агентство занятости — поиск работы, пособие"}},
+    {"id": "krankenkasse", "name": "Krankenkasse", "url": "", "for": ["health"], "description": {"en": "Health insurance — TK, AOK, Barmer", "ru": "Медицинская страховка — TK, AOK, Barmer"}}
+  ],
+  "rules": {
+    "anmeldung": "Anmeldung (прописка) обязательна в течение 14 дней после переезда.",
+    "steuererklarung": "Налоговая декларация до 31 июля (с консультантом — до конца февраля следующего года).",
+    "bussgeld": "Штрафы оплатить в течение 14 дней. Возражение (Einspruch) в течение 14 дней.",
+    "aufenthaltstitel": "Продление ВНЖ — подать за 6-8 недель до истечения."
+  },
+  "document_types": {
+    "steuerbescheid": {"category": "taxes", "professional_needed": ["accountant"], "portal": "elster"},
+    "bussgeld": {"category": "fines", "professional_needed": ["lawyer"], "portal": null},
+    "mietvertrag": {"category": "housing", "professional_needed": ["lawyer", "realtor"], "portal": null},
+    "aufenthaltstitel": {"category": "legal", "professional_needed": ["immigration_consultant"], "portal": "auslaendbehoerde"}
+  }
+}

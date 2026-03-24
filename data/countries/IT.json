@@ -1,0 +1,21 @@
+{
+  "code": "IT",
+  "name": {"it": "Italia", "en": "Italy", "ru": "Италия", "fr": "Italie", "ar": "إيطاليا", "zh": "意大利", "pt": "Itália", "tr": "İtalya"},
+  "portals": [
+    {"id": "agenzia_entrate", "name": "Agenzia delle Entrate", "url": "https://www.agenziaentrate.gov.it", "for": ["taxes"], "description": {"en": "Tax agency", "ru": "Налоговая служба"}},
+    {"id": "questura", "name": "Questura", "url": "https://questure.poliziadistato.it", "for": ["legal"], "description": {"en": "Police HQ — residence permits", "ru": "Полиция — ВНЖ, permesso di soggiorno"}},
+    {"id": "inps", "name": "INPS", "url": "https://www.inps.it", "for": ["employment", "health"], "description": {"en": "Social security — pensions, benefits", "ru": "Социальное обеспечение — пенсии, пособия"}},
+    {"id": "asl", "name": "ASL", "url": "", "for": ["health"], "description": {"en": "Local health authority — tessera sanitaria", "ru": "Местная поликлиника — медицинская карта"}}
+  ],
+  "rules": {
+    "permesso_soggiorno": "Подать в течение 8 дней после въезда. Kit postale на почте.",
+    "dichiarazione_redditi": "Modello 730 — до 30 сентября, Modello Redditi — до 30 ноября.",
+    "multa": "Штраф: скидка 30% при оплате в течение 5 дней.",
+    "contratto_affitto": "Регистрация контракта (registrazione) обязательна в течение 30 дней."
+  },
+  "document_types": {
+    "modello_730": {"category": "taxes", "professional_needed": ["accountant"], "portal": "agenzia_entrate"},
+    "permesso_soggiorno": {"category": "legal", "professional_needed": ["immigration_consultant"], "portal": "questura"},
+    "multa": {"category": "fines", "professional_needed": ["lawyer"], "portal": null}
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "code": "FR",
+  "name": {"fr": "France", "en": "France", "ru": "Франция", "ar": "فرنسا", "it": "Francia", "zh": "法国", "pt": "França", "tr": "Fransa"},
+  "portals": [
+    {"id": "impots", "name": "impots.gouv.fr", "url": "https://impots.gouv.fr", "for": ["taxes"], "description": {"fr": "Déclaration et paiement des impôts en ligne", "en": "Online tax declaration and payment", "ru": "Декларация и оплата налогов онлайн"}},
+    {"id": "ameli", "name": "ameli.fr", "url": "https://ameli.fr", "for": ["health"], "description": {"fr": "Assurance maladie — remboursements, carte vitale", "en": "Health insurance — reimbursements, carte vitale", "ru": "Медицинское страхование — возмещения, carte vitale"}},
+    {"id": "service_public", "name": "service-public.fr", "url": "https://www.service-public.fr", "for": ["legal", "housing", "employment", "other"], "description": {"fr": "Portail officiel de l'administration française", "en": "Official French government services portal", "ru": "Официальный портал государственных услуг Франции"}},
+    {"id": "caf", "name": "caf.fr", "url": "https://www.caf.fr", "for": ["housing", "other"], "description": {"fr": "Caisse d'Allocations Familiales — APL, RSA, prime d'activité", "en": "Family benefits — housing aid, social benefits", "ru": "Семейные пособия — помощь с жильём, социальные выплаты"}},
+    {"id": "prefectures", "name": "Préfectures", "url": "https://www.prefectures-regions.gouv.fr", "for": ["legal"], "description": {"fr": "Titre de séjour, naturalisation, renouvellement", "en": "Residence permit, naturalization, renewal", "ru": "Вид на жительство, натурализация, продление"}},
+    {"id": "ants", "name": "ANTS", "url": "https://ants.gouv.fr", "for": ["legal", "other"], "description": {"fr": "Carte d'identité, passeport, permis de conduire, carte grise", "en": "ID card, passport, driving license, vehicle registration", "ru": "Удостоверение личности, паспорт, водительские права, ПТС"}},
+    {"id": "france_travail", "name": "France Travail", "url": "https://www.francetravail.fr", "for": ["employment"], "description": {"fr": "Inscription, recherche d'emploi, allocations chômage", "en": "Job search, unemployment benefits registration", "ru": "Регистрация, поиск работы, пособие по безработице"}},
+    {"id": "cpam", "name": "CPAM", "url": "https://www.ameli.fr", "for": ["health"], "description": {"fr": "Caisse Primaire d'Assurance Maladie — affiliation, droits", "en": "Primary health insurance fund — registration, rights", "ru": "Касса медицинского страхования — регистрация, права"}},
+    {"id": "antai", "name": "ANTAI", "url": "https://www.antai.gouv.fr", "for": ["fines"], "description": {"fr": "Paiement et contestation des amendes", "en": "Payment and contestation of fines", "ru": "Оплата и оспаривание штрафов"}},
+    {"id": "urssaf", "name": "URSSAF", "url": "https://www.urssaf.fr", "for": ["taxes", "employment"], "description": {"fr": "Cotisations sociales, auto-entrepreneur", "en": "Social contributions, self-employment", "ru": "Социальные взносы, самозанятость"}}
+  ],
+  "rules": {
+    "fine_discount": "Amende minorée si payée dans les 15 jours (stationnement: 35→25€). Majorée après 45 jours.",
+    "tax_declaration": "Déclaration de revenus: avril-juin chaque année. En ligne obligatoire si revenus > 15,000€/an.",
+    "titre_sejour_renewal": "Renouveler 2-4 mois avant expiration. Récépissé délivré en attendant.",
+    "bail_notice": "Préavis: 1 mois (meublé ou zone tendue), 3 mois (vide hors zone tendue).",
+    "carte_vitale": "Demander dans les 3 mois suivant l'affiliation à la Sécurité sociale.",
+    "contestation_amende": "45 jours pour contester une contravention. En ligne sur antai.gouv.fr.",
+    "prud_hommes": "Saisir le Conseil de Prud'hommes dans les 12 mois suivant le licenciement."
+  },
+  "document_types": {
+    "avis_imposition": {"category": "taxes", "professional_needed": ["accountant"], "portal": "impots", "urgency_rule": "Vérifier le montant. Si trop-perçu → attendre remboursement. Si solde à payer → deadline dans le document."},
+    "amende_forfaitaire": {"category": "fines", "professional_needed": ["lawyer"], "portal": "antai", "urgency_rule": "Payer dans 15 jours pour tarif réduit. Contester dans 45 jours si non justifiée."},
+    "titre_sejour": {"category": "legal", "professional_needed": ["immigration_consultant", "sworn_translator"], "portal": "prefectures", "urgency_rule": "Renouveler 2-4 mois avant expiration. Ne JAMAIS laisser expirer."},
+    "releve_bancaire": {"category": "bank", "professional_needed": [], "portal": null, "urgency_rule": "Document d'information. Conserver pour la déclaration de revenus."},
+    "bail_habitation": {"category": "housing", "professional_needed": ["lawyer", "realtor"], "portal": "service_public", "urgency_rule": "Vérifier les clauses: durée, préavis, charges, dépôt de garantie."},
+    "fiche_de_paie": {"category": "employment", "professional_needed": ["accountant", "hr_consultant"], "portal": "france_travail", "urgency_rule": "Conserver tous les bulletins. Vérifier le net imposable pour la déclaration."},
+    "ordonnance_medicale": {"category": "health", "professional_needed": ["doctor"], "portal": "ameli", "urgency_rule": "Validité: 12 mois maximum. Renouveler avant expiration si traitement en cours."},
+    "convocation_tribunal": {"category": "legal", "professional_needed": ["lawyer"], "portal": "service_public", "urgency_rule": "URGENT. Présence obligatoire à la date indiquée. Consulter un avocat IMMÉDIATEMENT."},
+    "attestation_assurance": {"category": "insurance", "professional_needed": ["insurance_broker"], "portal": null, "urgency_rule": "Conserver. Nécessaire pour location, crédit, immatriculation."}
+  }
+}

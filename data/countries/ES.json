@@ -1,0 +1,19 @@
+{
+  "code": "ES",
+  "name": {"es": "España", "en": "Spain", "ru": "Испания", "fr": "Espagne", "ar": "إسبانيا", "it": "Spagna", "zh": "西班牙", "pt": "Espanha", "tr": "İspanya"},
+  "portals": [
+    {"id": "agencia_tributaria", "name": "Agencia Tributaria", "url": "https://www.agenciatributaria.gob.es", "for": ["taxes"], "description": {"en": "Tax agency — income tax, VAT", "ru": "Налоговая служба — НДФЛ, НДС"}},
+    {"id": "seguridad_social", "name": "Seguridad Social", "url": "https://www.seg-social.es", "for": ["employment", "health"], "description": {"en": "Social security — benefits, pensions", "ru": "Социальное обеспечение — пособия, пенсии"}},
+    {"id": "extranjeria", "name": "Extranjería", "url": "https://extranjeros.inclusion.gob.es", "for": ["legal"], "description": {"en": "Immigration office — residence permits, NIE", "ru": "Миграционная служба — ВНЖ, NIE"}},
+    {"id": "sepe", "name": "SEPE", "url": "https://www.sepe.es", "for": ["employment"], "description": {"en": "Public employment service — unemployment benefits", "ru": "Служба занятости — пособие по безработице"}},
+    {"id": "dgt", "name": "DGT", "url": "https://www.dgt.es", "for": ["fines", "other"], "description": {"en": "Traffic authority — fines, driving license", "ru": "Дорожная служба — штрафы, водительские права"}}
+  ],
+  "rules": {
+    "nie_registration": "NIE необходим для любых официальных действий. Запрос через полицию или консульство.",
+    "declaracion_renta": "Декларация о доходах (Renta): апрель-июнь ежегодно.",
+    "multa_trafico": "Штраф за нарушение ПДД: скидка 50% при оплате в течение 20 дней.",
+    "empadronamiento": "Регистрация по месту жительства (empadronamiento) обязательна в мэрии.",
+    "contrato_alquiler": "Депозит за аренду: максимум 1 месяц (жилье) или 2 месяца (коммерция)."
+  },
+  "document_types": {}
+}

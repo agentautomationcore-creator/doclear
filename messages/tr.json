@@ -35,7 +35,18 @@
     "choose_language": "Dilinizi seçin",
     "start": "Başla",
     "next": "İleri",
-    "skip": "Atla"
+    "skip": "Atla",
+    "country_title": "Nerede yasiyorsunuz?",
+    "status_title": "Durumunuz?",
+    "status_student": "Ogrenci",
+    "status_work": "Calisma izni",
+    "status_residence": "Oturma izni",
+    "status_family": "Aile birlesimi",
+    "status_tourist": "Turist",
+    "status_eu": "AB vatandasi",
+    "status_pending": "Basvuru beklemede",
+    "status_citizen": "Vatandas",
+    "other_country": "Diger"
   },
   "timeline": {
     "title": "Belgelerim",
@@ -73,7 +84,10 @@
     "mark_done": "Yapıldı olarak işaretle",
     "marked_done": "Yapıldı",
     "share": "Paylaş",
-    "deadline": "Son tarih"
+    "deadline": "Son tarih",
+    "recommendations": "Oneriler",
+    "visit_portal": "Ziyaret et",
+    "find_specialist": "Uzman bul"
   },
   "settings": {
     "title": "Ayarlar",
@@ -93,7 +107,9 @@
     "pro_feature3": "PDF dışa aktarma",
     "support": "Destek",
     "terms": "Kullanım koşulları",
-    "privacy": "Gizlilik politikası"
+    "privacy": "Gizlilik politikası",
+    "country": "Ulke",
+    "status": "Durum"
   },
   "paywall": {
     "title": "Beğendiniz mi?",
@@ -126,6 +142,46 @@
     "analysis_failed": "Analiz başarısız. Tekrar deneyin.",
     "no_camera": "Kamera kullanılamıyor",
     "file_too_large": "Dosya çok büyük (maks 10 MB)",
-    "scan_limit": "Tarama limiti doldu"
+    "scan_limit": "Tarama limiti doldu",
+    "unsupported_format": "Desteklenmeyen dosya formati",
+    "zip_too_large": "ZIP dosyasi cok buyuk (maks 50 MB)",
+    "zip_too_many": "ZIP'te cok fazla dosya var (maks 20)",
+    "zip_pro_only": "ZIP analizi DocLear Pro'da mevcut"
+  },
+  "nav": {
+    "docs": "Belgeler",
+    "scan": "Tara",
+    "pros": "Uzmanlar",
+    "profile": "Profil"
+  },
+  "pros": {
+    "title": "Uzmanlar",
+    "subtitle": "Cote d'Azur",
+    "filter_all": "Tumu",
+    "filter_lawyers": "Avukatlar",
+    "filter_accountants": "Muhasebeciler",
+    "filter_translators": "Tercumanlar",
+    "filter_notaries": "Noterler",
+    "filter_insurance": "Sigorta",
+    "filter_doctors": "Doktorlar",
+    "filter_realtors": "Emlakcılar",
+    "recommended": "DocLear onerir",
+    "call": "Ara",
+    "email": "E-posta",
+    "website": "Web sitesi",
+    "online": "Online danismanlik",
+    "find_specialist": "Uzman bul",
+    "languages": "Diller"
+  },
+  "summary": {
+    "title": "Ozet",
+    "documents_analyzed": "{count} belge analiz edildi",
+    "by_category": "Kategoriye gore",
+    "attention": "Dikkat gerekiyor",
+    "finances": "Finans",
+    "to_pay": "Odenmesi gereken",
+    "to_receive": "Alinacak",
+    "recommendation": "Yapay zeka onerisi",
+    "view_all": "Tum belgeleri gor"
   }
 }

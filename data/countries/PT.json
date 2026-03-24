@@ -1,0 +1,19 @@
+{
+  "code": "PT",
+  "name": {"pt": "Portugal", "en": "Portugal", "ru": "Португалия", "fr": "Portugal", "ar": "البرتغال", "it": "Portogallo", "zh": "葡萄牙", "tr": "Portekiz"},
+  "portals": [
+    {"id": "portal_financas", "name": "Portal das Finanças", "url": "https://www.portaldasfinancas.gov.pt", "for": ["taxes"], "description": {"en": "Tax portal — IRS, IRC, IVA", "ru": "Налоговый портал — подоходный налог, НДС"}},
+    {"id": "sef", "name": "SEF/AIMA", "url": "https://www.sef.pt", "for": ["legal"], "description": {"en": "Immigration and Borders Service — residence permits", "ru": "Иммиграционная служба — ВНЖ, визы"}},
+    {"id": "sns", "name": "SNS", "url": "https://www.sns.gov.pt", "for": ["health"], "description": {"en": "National Health Service — healthcare access", "ru": "Национальная служба здравоохранения — медицинская помощь"}},
+    {"id": "seg_social", "name": "Segurança Social", "url": "https://www.seg-social.pt", "for": ["employment"], "description": {"en": "Social security — contributions, benefits, pensions", "ru": "Социальное обеспечение — взносы, пособия, пенсии"}},
+    {"id": "eportugal", "name": "ePortugal", "url": "https://eportugal.gov.pt", "for": ["legal", "other"], "description": {"en": "Government digital services portal", "ru": "Портал цифровых госуслуг"}}
+  ],
+  "rules": {
+    "nif": "NIF (Número de Identificação Fiscal) необходим для любых операций. Получить в Finanças.",
+    "declaracao_irs": "Декларация IRS: апрель-июнь ежегодно через Portal das Finanças.",
+    "titulo_residencia": "Подать запрос на ВНЖ через SEF/AIMA. Срок ожидания может быть длительным.",
+    "niss": "NISS (номер соц. страхования) — получить в Segurança Social для трудоустройства.",
+    "contrato_arrendamento": "Договор аренды регистрируется в Finanças. Депозит: максимум 2 месяца."
+  },
+  "document_types": {}
+}

@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { getSettings, saveSettings } from '@/lib/storage';
-import { LOCALE_FLAGS, LOCALE_NAMES, Locale, MAX_FREE_SCANS, Settings } from '@/lib/types';
+import { LOCALE_FLAGS, LOCALE_NAMES, Locale, MAX_FREE_SCANS, Settings, CountryCode, ImmigrationStatus, COUNTRY_FLAGS, COUNTRY_NAMES } from '@/lib/types';
 import ScanCounter from '@/components/ScanCounter';
 
 const locales: Locale[] = ['fr', 'en', 'ru', 'ar', 'it', 'zh', 'pt', 'tr'];
+const countries: CountryCode[] = ['FR', 'DE', 'IT', 'ES', 'GB', 'NL', 'BE', 'CH', 'AT', 'PT', 'OTHER'];
 
 export default function SettingsPage() {
   const t = useTranslations('settings');
@@ -109,6 +110,61 @@ export default function SettingsPage() {
               ))}
             </div>
           )}
+        </div>
+
+        <hr className="border-gray-100" />
+
+        {/* Country */}
+        <div>
+          <h3 className="flex items-center gap-2 font-medium text-gray-900 mb-3">
+            <span>{'\ud83c\uddeb\ud83c\uddf7'}</span> {t('country')}
+          </h3>
+          <div className="grid grid-cols-3 gap-2">
+            {countries.map((c) => (
+              <button
+                key={c}
+                onClick={() => {
+                  if (!settings) return;
+                  const updated = { ...settings, country: c };
+                  saveSettings(updated);
+                  setSettings(updated);
+                }}
+                className={`flex items-center gap-1.5 px-2 py-2 rounded-lg text-xs font-medium transition-colors min-h-[40px] ${
+                  settings?.country === c ? 'bg-primary/10 border border-primary/30' : 'bg-gray-50 border border-gray-200'
+                }`}
+              >
+                <span>{COUNTRY_FLAGS[c]}</span>
+                <span className="truncate">{COUNTRY_NAMES[c]}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <hr className="border-gray-100" />
+
+        {/* Status */}
+        <div>
+          <h3 className="flex items-center gap-2 font-medium text-gray-900 mb-3">
+            <span>{'\ud83d\udccb'}</span> {t('status')}
+          </h3>
+          <div className="grid grid-cols-2 gap-2">
+            {(['student', 'work_permit', 'residence_permit', 'family_reunion', 'tourist', 'eu_citizen', 'pending', 'citizen'] as const).map((s) => (
+              <button
+                key={s}
+                onClick={() => {
+                  if (!settings) return;
+                  const updated = { ...settings, status: s };
+                  saveSettings(updated);
+                  setSettings(updated);
+                }}
+                className={`px-3 py-2 rounded-lg text-xs font-medium transition-colors min-h-[40px] text-left rtl:text-right ${
+                  settings?.status === s ? 'bg-primary/10 border border-primary/30' : 'bg-gray-50 border border-gray-200'
+                }`}
+              >
+                {s.replace(/_/g, ' ')}
+              </button>
+            ))}
+          </div>
         </div>
 
         <hr className="border-gray-100" />

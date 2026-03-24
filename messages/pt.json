@@ -35,7 +35,18 @@
     "choose_language": "Escolha seu idioma",
     "start": "Começar",
     "next": "Próximo",
-    "skip": "Pular"
+    "skip": "Pular",
+    "country_title": "Onde voce mora?",
+    "status_title": "Seu status?",
+    "status_student": "Estudante",
+    "status_work": "Permissao de trabalho",
+    "status_residence": "Autorizacao de residencia",
+    "status_family": "Reagrupamento familiar",
+    "status_tourist": "Turista",
+    "status_eu": "Cidadao da UE",
+    "status_pending": "Pedido em andamento",
+    "status_citizen": "Cidadao",
+    "other_country": "Outro"
   },
   "timeline": {
     "title": "Meus documentos",
@@ -73,7 +84,10 @@
     "mark_done": "Marcar como feito",
     "marked_done": "Feito",
     "share": "Compartilhar",
-    "deadline": "Prazo"
+    "deadline": "Prazo",
+    "recommendations": "Recomendacoes",
+    "visit_portal": "Visitar",
+    "find_specialist": "Encontrar um especialista"
   },
   "settings": {
     "title": "Configurações",
@@ -93,7 +107,9 @@
     "pro_feature3": "Exportar PDF",
     "support": "Suporte",
     "terms": "Termos de uso",
-    "privacy": "Política de privacidade"
+    "privacy": "Política de privacidade",
+    "country": "Pais",
+    "status": "Status"
   },
   "paywall": {
     "title": "Gostou?",
@@ -126,6 +142,46 @@
     "analysis_failed": "Análise falhou. Tente novamente.",
     "no_camera": "Câmera indisponível",
     "file_too_large": "Arquivo muito grande (máx 10 MB)",
-    "scan_limit": "Limite de digitalizações atingido"
+    "scan_limit": "Limite de digitalizações atingido",
+    "unsupported_format": "Formato de arquivo nao suportado",
+    "zip_too_large": "Arquivo ZIP muito grande (max 50 MB)",
+    "zip_too_many": "Muitos arquivos no ZIP (max 20)",
+    "zip_pro_only": "Analise ZIP disponivel no DocLear Pro"
+  },
+  "nav": {
+    "docs": "Documentos",
+    "scan": "Digitalizar",
+    "pros": "Especialistas",
+    "profile": "Perfil"
+  },
+  "pros": {
+    "title": "Especialistas",
+    "subtitle": "Cote d'Azur",
+    "filter_all": "Todos",
+    "filter_lawyers": "Advogados",
+    "filter_accountants": "Contadores",
+    "filter_translators": "Tradutores",
+    "filter_notaries": "Notarios",
+    "filter_insurance": "Seguros",
+    "filter_doctors": "Medicos",
+    "filter_realtors": "Corretores de imoveis",
+    "recommended": "DocLear recomenda",
+    "call": "Ligar",
+    "email": "Email",
+    "website": "Site",
+    "online": "Consultas online",
+    "find_specialist": "Encontrar um especialista",
+    "languages": "Idiomas"
+  },
+  "summary": {
+    "title": "Resumo",
+    "documents_analyzed": "{count} documentos analisados",
+    "by_category": "Por categoria",
+    "attention": "Precisa de atencao",
+    "finances": "Financas",
+    "to_pay": "A pagar",
+    "to_receive": "A receber",
+    "recommendation": "Recomendacao da IA",
+    "view_all": "Ver todos os documentos"
   }
 }

@@ -1,0 +1,18 @@
+{
+  "code": "AT",
+  "name": {"de": "Österreich", "en": "Austria", "ru": "Австрия", "fr": "Autriche", "ar": "النمسا", "it": "Austria", "zh": "奥地利", "pt": "Áustria", "tr": "Avusturya"},
+  "portals": [
+    {"id": "finanzonline", "name": "FinanzOnline", "url": "https://finanzonline.bmf.gv.at", "for": ["taxes"], "description": {"en": "Online tax portal — income tax, VAT", "ru": "Онлайн налоговый портал — НДФЛ, НДС"}},
+    {"id": "ma35", "name": "MA 35", "url": "https://www.wien.gv.at/kontakte/ma35", "for": ["legal"], "description": {"en": "Immigration and citizenship office (Vienna)", "ru": "Миграционная служба (Вена) — ВНЖ, гражданство"}},
+    {"id": "ams", "name": "AMS", "url": "https://www.ams.at", "for": ["employment"], "description": {"en": "Public employment service — job search, unemployment benefits", "ru": "Служба занятости — поиск работы, пособие по безработице"}},
+    {"id": "oesterreich_gv", "name": "oesterreich.gv.at", "url": "https://www.oesterreich.gv.at", "for": ["legal", "other"], "description": {"en": "Digital government portal — documents, registration", "ru": "Цифровой портал госуслуг — документы, регистрация"}},
+    {"id": "oegk", "name": "ÖGK", "url": "https://www.gesundheitskasse.at", "for": ["health"], "description": {"en": "Austrian Health Insurance Fund", "ru": "Австрийский фонд медицинского страхования"}}
+  ],
+  "rules": {
+    "meldezettel": "Регистрация по месту жительства (Meldezettel) обязательна в течение 3 дней после переезда.",
+    "steuererklaerung": "Налоговая декларация: до 30 апреля (бумажная) или 30 июня (FinanzOnline).",
+    "aufenthaltstitel": "Продление ВНЖ — подать за 3 месяца до истечения срока.",
+    "sozialversicherung": "Социальное страхование автоматически при трудоустройстве. e-card выдается ÖGK."
+  },
+  "document_types": {}
+}

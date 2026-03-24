@@ -7,7 +7,8 @@ import { useParams } from 'next/navigation';
 import { getDocument, updateDocument, canScan, incrementScanCount } from '@/lib/storage';
 import { shareDocument } from '@/lib/share';
 import { getCategoryConfig } from '@/lib/categories';
-import { Document, ChatMessage } from '@/lib/types';
+import { Document, ChatMessage, Recommendation } from '@/lib/types';
+import { Link } from '@/i18n/navigation';
 
 export default function DocumentPage() {
   const t = useTranslations('document');
@@ -201,6 +202,37 @@ export default function DocumentPage() {
             </ol>
           </div>
         </div>
+
+        {/* Recommendations */}
+        {doc.recommendations && doc.recommendations.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-sm font-semibold text-muted uppercase tracking-wider mb-2">
+              {t('recommendations')}
+            </h2>
+            <div className="space-y-2">
+              {doc.recommendations.map((rec: Recommendation, i: number) => (
+                <div key={i} className="bg-gray-50 rounded-xl p-4 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="text-xl flex-shrink-0">{rec.type === 'website' ? '\ud83c\udf10' : '\u2696\ufe0f'}</span>
+                    <div className="min-w-0">
+                      <p className="font-medium text-gray-900 truncate">{rec.title}</p>
+                      <p className="text-sm text-muted truncate">{rec.description}</p>
+                    </div>
+                  </div>
+                  {rec.type === 'website' && rec.url ? (
+                    <a href={rec.url} target="_blank" rel="noopener noreferrer" className="flex-shrink-0 text-primary text-sm font-medium">
+                      {t('visit_portal')} {'\u2192'}
+                    </a>
+                  ) : rec.type === 'professional' && rec.professionalType ? (
+                    <Link href={`/app/pros?type=${rec.professionalType}`} className="flex-shrink-0 text-primary text-sm font-medium">
+                      {t('find_specialist')} {'\u2192'}
+                    </Link>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Chat */}
         <div className="mb-6">

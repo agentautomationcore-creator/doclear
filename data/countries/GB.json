@@ -1,0 +1,18 @@
+{
+  "code": "GB",
+  "name": {"en": "United Kingdom", "ru": "Великобритания", "fr": "Royaume-Uni", "ar": "المملكة المتحدة", "it": "Regno Unito", "zh": "英国", "pt": "Reino Unido", "tr": "Birleşik Krallık"},
+  "portals": [
+    {"id": "gov_uk", "name": "GOV.UK", "url": "https://www.gov.uk", "for": ["legal", "taxes", "employment", "other"], "description": {"en": "Main government services portal", "ru": "Главный портал государственных услуг"}},
+    {"id": "hmrc", "name": "HMRC", "url": "https://www.gov.uk/government/organisations/hm-revenue-customs", "for": ["taxes"], "description": {"en": "Tax authority — self-assessment, PAYE, VAT", "ru": "Налоговая служба — самодекларация, PAYE, НДС"}},
+    {"id": "nhs", "name": "NHS", "url": "https://www.nhs.uk", "for": ["health"], "description": {"en": "National Health Service — GP, prescriptions", "ru": "Национальная служба здравоохранения — терапевт, рецепты"}},
+    {"id": "home_office", "name": "Home Office", "url": "https://www.gov.uk/government/organisations/home-office", "for": ["legal"], "description": {"en": "Immigration — visas, settlement, citizenship", "ru": "Иммиграция — визы, ПМЖ, гражданство"}},
+    {"id": "dwp", "name": "DWP", "url": "https://www.gov.uk/government/organisations/department-for-work-pensions", "for": ["employment"], "description": {"en": "Department for Work and Pensions — Universal Credit, benefits", "ru": "Департамент труда и пенсий — Universal Credit, пособия"}}
+  ],
+  "rules": {
+    "self_assessment": "Self Assessment tax return: deadline 31 January (online) or 31 October (paper).",
+    "visa_renewal": "Apply to extend visa before it expires. You can usually stay while waiting for a decision.",
+    "council_tax": "Council Tax must be paid to the local authority. Discounts available for single occupants.",
+    "tenancy_notice": "Notice period: 1-2 months depending on tenancy type. Section 21 requires 2 months."
+  },
+  "document_types": {}
+}

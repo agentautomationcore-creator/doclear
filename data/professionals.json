@@ -1,0 +1,307 @@
+[
+  {
+    "id": "p1",
+    "name": "Cabinet Maitre Dupont",
+    "type": "immigration_lawyer",
+    "specialties": ["titre de sejour", "naturalisation", "regroupement familial"],
+    "languages": ["fr", "en", "ar"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Nice",
+    "phone": "+33 4 93 00 00 01",
+    "website": "https://www.barreau-nice.com",
+    "rating": 4.5,
+    "recommended": true,
+    "description": {
+      "fr": "Avocat spécialisé en droit des étrangers et immigration",
+      "en": "Lawyer specializing in immigration and foreigners' rights",
+      "ru": "Юрист по иммиграционному праву и правам иностранцев"
+    },
+    "availableOnline": true,
+    "priceRange": "150-300€/consultation"
+  },
+  {
+    "id": "p2",
+    "name": "Expert-Comptable Martin & Associés",
+    "type": "accountant",
+    "specialties": ["declaration revenus", "auto-entrepreneur", "TVA", "creation entreprise"],
+    "languages": ["fr", "en"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Antibes",
+    "phone": "+33 4 93 00 00 02",
+    "website": "https://www.experts-comptables.fr",
+    "rating": 4.8,
+    "recommended": true,
+    "description": {
+      "fr": "Cabinet d'expertise comptable — déclarations, création d'entreprise",
+      "en": "Accounting firm — tax returns, business creation",
+      "ru": "Бухгалтерская фирма — декларации, создание бизнеса"
+    },
+    "availableOnline": true,
+    "priceRange": "80-200€/consultation"
+  },
+  {
+    "id": "p3",
+    "name": "Traductions Assermentées Côte d'Azur",
+    "type": "sworn_translator",
+    "specialties": ["traduction assermentée", "apostille", "documents officiels"],
+    "languages": ["fr", "en", "ru", "ar", "it"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Nice",
+    "phone": "+33 4 93 00 00 03",
+    "email": "contact@traductions-nice.fr",
+    "rating": 4.6,
+    "recommended": true,
+    "description": {
+      "fr": "Traductions assermentées de documents officiels dans 15 langues",
+      "en": "Sworn translations of official documents in 15 languages",
+      "ru": "Присяжные переводы официальных документов на 15 языках"
+    },
+    "availableOnline": false,
+    "priceRange": "30-50€/page"
+  },
+  {
+    "id": "p4",
+    "name": "Notaire Riviera - Me Leroy",
+    "type": "notary",
+    "specialties": ["immobilier", "succession", "mariage", "donations"],
+    "languages": ["fr", "en"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Cannes",
+    "phone": "+33 4 93 00 00 04",
+    "website": "https://www.notaires.fr",
+    "rating": 4.3,
+    "recommended": false,
+    "description": {
+      "fr": "Notaire — immobilier, successions, contrats de mariage",
+      "en": "Notary — real estate, inheritance, marriage contracts",
+      "ru": "Нотариус — недвижимость, наследство, брачные контракты"
+    },
+    "availableOnline": false,
+    "priceRange": "Tarifs réglementés"
+  },
+  {
+    "id": "p5",
+    "name": "Cabinet Fiscal Méditerranée",
+    "type": "tax_lawyer",
+    "specialties": ["contentieux fiscal", "controle fiscal", "optimisation", "SCI"],
+    "languages": ["fr", "en", "it"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Nice",
+    "phone": "+33 4 93 00 00 05",
+    "rating": 4.7,
+    "recommended": true,
+    "description": {
+      "fr": "Avocat fiscaliste — contentieux, optimisation, SCI",
+      "en": "Tax lawyer — disputes, optimization, property companies",
+      "ru": "Налоговый юрист — споры, оптимизация, SCI"
+    },
+    "availableOnline": true,
+    "priceRange": "200-400€/consultation"
+  },
+  {
+    "id": "p6",
+    "name": "Assurances Azur Conseil",
+    "type": "insurance_broker",
+    "specialties": ["habitation", "auto", "sante", "responsabilite civile"],
+    "languages": ["fr", "en", "ru"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Antibes",
+    "phone": "+33 4 93 00 00 06",
+    "rating": 4.4,
+    "recommended": true,
+    "description": {
+      "fr": "Courtier en assurances — habitation, auto, santé, RC pro",
+      "en": "Insurance broker — home, car, health, liability",
+      "ru": "Страховой брокер — жильё, авто, здоровье, ответственность"
+    },
+    "availableOnline": true,
+    "priceRange": "Gratuit (commission assureur)"
+  },
+  {
+    "id": "p7",
+    "name": "Avocat Droit du Travail - Me Blanc",
+    "type": "labor_lawyer",
+    "specialties": ["licenciement", "prudhommes", "contrat travail", "harcelement"],
+    "languages": ["fr", "en"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Nice",
+    "phone": "+33 4 93 00 00 07",
+    "rating": 4.5,
+    "recommended": false,
+    "description": {
+      "fr": "Avocat en droit du travail — licenciement, prud'hommes",
+      "en": "Employment lawyer — dismissal, labor court",
+      "ru": "Юрист по трудовому праву — увольнение, трудовой суд"
+    },
+    "availableOnline": true,
+    "priceRange": "150-250€/consultation"
+  },
+  {
+    "id": "p8",
+    "name": "Immobilier Côte d'Azur - Agence Soleil",
+    "type": "realtor",
+    "specialties": ["location", "achat", "vente", "gestion locative"],
+    "languages": ["fr", "en", "ru", "it"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Juan-les-Pins",
+    "phone": "+33 4 93 00 00 08",
+    "rating": 4.2,
+    "recommended": true,
+    "description": {
+      "fr": "Agence immobilière — location, vente, gestion",
+      "en": "Real estate agency — rental, sales, management",
+      "ru": "Агентство недвижимости — аренда, продажа, управление"
+    },
+    "availableOnline": false,
+    "priceRange": "Commission 3-5%"
+  },
+  {
+    "id": "p9",
+    "name": "Médecin Généraliste Dr. Moreau",
+    "type": "doctor",
+    "specialties": ["medecine generale", "certificats", "vaccinations"],
+    "languages": ["fr", "en"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Antibes",
+    "phone": "+33 4 93 00 00 09",
+    "rating": 4.6,
+    "recommended": false,
+    "description": {
+      "fr": "Médecin généraliste conventionné secteur 1",
+      "en": "General practitioner — sector 1 (regulated fees)",
+      "ru": "Врач общей практики — сектор 1 (регулируемые тарифы)"
+    },
+    "availableOnline": false,
+    "priceRange": "26.50€ (tarif conventionné)"
+  },
+  {
+    "id": "p10",
+    "name": "Consultant Immigration Riviera",
+    "type": "immigration_consultant",
+    "specialties": ["titre sejour", "carte resident", "changement statut", "visa"],
+    "languages": ["fr", "en", "ru", "ar"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Nice",
+    "phone": "+33 4 93 00 00 10",
+    "email": "info@immigration-riviera.fr",
+    "rating": 4.4,
+    "recommended": true,
+    "description": {
+      "fr": "Consultant en immigration — accompagnement démarches administratives",
+      "en": "Immigration consultant — administrative procedures guidance",
+      "ru": "Консультант по иммиграции — сопровождение административных процедур"
+    },
+    "availableOnline": true,
+    "priceRange": "100-200€/consultation"
+  },
+  {
+    "id": "p11",
+    "name": "Assistante Sociale CCAS Antibes",
+    "type": "social_worker",
+    "specialties": ["aide sociale", "logement", "insertion", "droits"],
+    "languages": ["fr"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Antibes",
+    "phone": "+33 4 93 00 00 11",
+    "rating": 4.0,
+    "recommended": false,
+    "description": {
+      "fr": "Service social municipal — aide aux démarches, droits sociaux",
+      "en": "Municipal social services — administrative help, social rights",
+      "ru": "Муниципальная социальная служба — помощь с документами, соц. права"
+    },
+    "availableOnline": false,
+    "priceRange": "Gratuit"
+  },
+  {
+    "id": "p12",
+    "name": "Avocat Famille & Divorce - Me Petit",
+    "type": "family_lawyer",
+    "specialties": ["divorce", "garde enfants", "pension alimentaire", "adoption"],
+    "languages": ["fr", "en", "it"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Cannes",
+    "phone": "+33 4 93 00 00 12",
+    "rating": 4.3,
+    "recommended": false,
+    "description": {
+      "fr": "Avocat en droit de la famille — divorce, garde, pension",
+      "en": "Family lawyer — divorce, custody, alimony",
+      "ru": "Семейный юрист — развод, опека, алименты"
+    },
+    "availableOnline": true,
+    "priceRange": "150-300€/consultation"
+  },
+  {
+    "id": "p13",
+    "name": "Banque Conseil Riviera",
+    "type": "bank_advisor",
+    "specialties": ["ouverture compte", "credit immobilier", "epargne", "non-residents"],
+    "languages": ["fr", "en", "ru"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Nice",
+    "phone": "+33 4 93 00 00 13",
+    "rating": 4.1,
+    "recommended": false,
+    "description": {
+      "fr": "Conseiller bancaire indépendant — ouverture de compte, crédit",
+      "en": "Independent bank advisor — account opening, loans",
+      "ru": "Независимый банковский консультант — открытие счёта, кредиты"
+    },
+    "availableOnline": true,
+    "priceRange": "100-150€/consultation"
+  },
+  {
+    "id": "p14",
+    "name": "Avocat Immobilier Côte d'Azur",
+    "type": "real_estate_lawyer",
+    "specialties": ["bail commercial", "copropriete", "litige locatif", "construction"],
+    "languages": ["fr", "en"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Nice",
+    "phone": "+33 4 93 00 00 14",
+    "rating": 4.4,
+    "recommended": false,
+    "description": {
+      "fr": "Avocat en droit immobilier — baux, copropriété, litiges",
+      "en": "Real estate lawyer — leases, co-ownership, disputes",
+      "ru": "Юрист по недвижимости — аренда, совладение, споры"
+    },
+    "availableOnline": true,
+    "priceRange": "200-350€/consultation"
+  },
+  {
+    "id": "p15",
+    "name": "Consultant RH Azur",
+    "type": "hr_consultant",
+    "specialties": ["contrat travail", "fiche paie", "convention collective", "embauche"],
+    "languages": ["fr", "en"],
+    "country": "FR",
+    "region": "Côte d'Azur",
+    "city": "Sophia Antipolis",
+    "phone": "+33 4 93 00 00 15",
+    "rating": 4.2,
+    "recommended": false,
+    "description": {
+      "fr": "Consultant RH — contrats, paie, droit social",
+      "en": "HR consultant — contracts, payroll, social law",
+      "ru": "HR консультант — контракты, зарплата, трудовое право"
+    },
+    "availableOnline": true,
+    "priceRange": "100-200€/consultation"
+  }
+]

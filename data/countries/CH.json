@@ -1,0 +1,18 @@
+{
+  "code": "CH",
+  "name": {"de": "Schweiz", "fr": "Suisse", "it": "Svizzera", "en": "Switzerland", "ru": "Швейцария", "ar": "سويسرا", "zh": "瑞士", "pt": "Suíça", "tr": "İsviçre"},
+  "portals": [
+    {"id": "sem", "name": "SEM", "url": "https://www.sem.admin.ch", "for": ["legal"], "description": {"en": "State Secretariat for Migration — permits, asylum", "ru": "Государственный секретариат по миграции — разрешения, убежище"}},
+    {"id": "afc", "name": "AFC/ESTV", "url": "https://www.estv.admin.ch", "for": ["taxes"], "description": {"en": "Federal Tax Administration — direct taxes, VAT", "ru": "Федеральная налоговая администрация — прямые налоги, НДС"}},
+    {"id": "suva", "name": "SUVA", "url": "https://www.suva.ch", "for": ["employment", "health"], "description": {"en": "Accident insurance — workplace safety, claims", "ru": "Страхование от несчастных случаев — безопасность на работе"}},
+    {"id": "ahv", "name": "AHV/AVS", "url": "https://www.ahv-iv.ch", "for": ["employment"], "description": {"en": "Old-age and survivors' insurance — pensions, contributions", "ru": "Пенсионное страхование — пенсии, взносы"}},
+    {"id": "ch_admin", "name": "ch.ch", "url": "https://www.ch.ch", "for": ["legal", "other"], "description": {"en": "Official Swiss government portal — general information", "ru": "Официальный портал Швейцарии — общая информация"}}
+  ],
+  "rules": {
+    "anmeldung": "Регистрация в Einwohnerkontrolle обязательна в течение 14 дней после переезда.",
+    "steuererklaerung": "Налоговая декларация: срок зависит от кантона (обычно 31 марта, продление возможно).",
+    "aufenthaltsbewilligung": "Разрешение B (ВНЖ) — продлевать до истечения срока в миграционной службе кантона.",
+    "krankenversicherung": "Обязательная мед. страховка (KVG) — оформить в течение 3 месяцев после прибытия."
+  },
+  "document_types": {}
+}

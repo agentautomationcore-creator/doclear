@@ -1,0 +1,18 @@
+{
+  "code": "NL",
+  "name": {"nl": "Nederland", "en": "Netherlands", "ru": "Нидерланды", "fr": "Pays-Bas", "ar": "هولندا", "it": "Paesi Bassi", "zh": "荷兰", "pt": "Países Baixos", "tr": "Hollanda"},
+  "portals": [
+    {"id": "belastingdienst", "name": "Belastingdienst", "url": "https://www.belastingdienst.nl", "for": ["taxes"], "description": {"en": "Tax authority — income tax, VAT, toeslagen", "ru": "Налоговая служба — НДФЛ, НДС, пособия"}},
+    {"id": "ind", "name": "IND", "url": "https://ind.nl", "for": ["legal"], "description": {"en": "Immigration and Naturalisation Service — residence permits", "ru": "Иммиграционная служба — ВНЖ, натурализация"}},
+    {"id": "uwv", "name": "UWV", "url": "https://www.uwv.nl", "for": ["employment"], "description": {"en": "Employee Insurance Agency — unemployment, disability benefits", "ru": "Страхование работников — пособие по безработице, инвалидности"}},
+    {"id": "digid", "name": "DigiD", "url": "https://www.digid.nl", "for": ["other"], "description": {"en": "Digital identity for government services", "ru": "Цифровая идентификация для госуслуг"}},
+    {"id": "gemeente", "name": "Gemeente", "url": "https://www.amsterdam.nl", "for": ["legal", "other"], "description": {"en": "Municipal services — registration (BRP), documents", "ru": "Муниципальные услуги — регистрация (BRP), документы"}}
+  ],
+  "rules": {
+    "brp_registration": "Регистрация в BRP (gemeente) обязательна в течение 5 дней после прибытия.",
+    "belastingaangifte": "Налоговая декларация: до 1 мая ежегодно. Отсрочка возможна через DigiD.",
+    "bsn": "BSN (burgerservicenummer) необходим для работы, банка, медицины. Получить при регистрации.",
+    "30_percent_ruling": "30% ruling для высококвалифицированных мигрантов — до 5 лет налоговой льготы."
+  },
+  "document_types": {}
+}

@@ -35,7 +35,18 @@
     "choose_language": "Выберите язык",
     "start": "Начать",
     "next": "Далее",
-    "skip": "Пропустить"
+    "skip": "Пропустить",
+    "country_title": "Где вы живёте?",
+    "status_title": "Ваш статус?",
+    "status_student": "Студент",
+    "status_work": "Разрешение на работу",
+    "status_residence": "Вид на жительство",
+    "status_family": "Воссоединение семьи",
+    "status_tourist": "Турист",
+    "status_eu": "Гражданин ЕС",
+    "status_pending": "Заявка на рассмотрении",
+    "status_citizen": "Гражданин",
+    "other_country": "Другая"
   },
   "timeline": {
     "title": "Мои документы",
@@ -73,7 +84,10 @@
     "mark_done": "Отметить как выполнено",
     "marked_done": "Выполнено",
     "share": "Поделиться",
-    "deadline": "Дедлайн"
+    "deadline": "Дедлайн",
+    "recommendations": "Рекомендации",
+    "visit_portal": "Перейти",
+    "find_specialist": "Найти специалиста"
   },
   "settings": {
     "title": "Настройки",
@@ -93,7 +107,9 @@
     "pro_feature3": "Экспорт в PDF",
     "support": "Поддержка",
     "terms": "Условия использования",
-    "privacy": "Политика конфиденциальности"
+    "privacy": "Политика конфиденциальности",
+    "country": "Страна",
+    "status": "Статус"
   },
   "paywall": {
     "title": "Понравилось?",
@@ -126,6 +142,46 @@
     "analysis_failed": "Анализ не удался. Попробуйте снова.",
     "no_camera": "Камера недоступна",
     "file_too_large": "Файл слишком большой (макс. 10 МБ)",
-    "scan_limit": "Лимит сканов исчерпан"
+    "scan_limit": "Лимит сканов исчерпан",
+    "unsupported_format": "Неподдерживаемый формат файла",
+    "zip_too_large": "ZIP-файл слишком большой (макс. 50 МБ)",
+    "zip_too_many": "Слишком много файлов в ZIP (макс. 20)",
+    "zip_pro_only": "Анализ ZIP доступен в DocLear Pro"
+  },
+  "nav": {
+    "docs": "Документы",
+    "scan": "Скан",
+    "pros": "Специалисты",
+    "profile": "Профиль"
+  },
+  "pros": {
+    "title": "Специалисты",
+    "subtitle": "Лазурный Берег",
+    "filter_all": "Все",
+    "filter_lawyers": "Адвокаты",
+    "filter_accountants": "Бухгалтеры",
+    "filter_translators": "Переводчики",
+    "filter_notaries": "Нотариусы",
+    "filter_insurance": "Страхование",
+    "filter_doctors": "Врачи",
+    "filter_realtors": "Риелторы",
+    "recommended": "DocLear рекомендует",
+    "call": "Позвонить",
+    "email": "Email",
+    "website": "Сайт",
+    "online": "Онлайн-консультации",
+    "find_specialist": "Найти специалиста",
+    "languages": "Языки"
+  },
+  "summary": {
+    "title": "Сводка",
+    "documents_analyzed": "Проанализировано документов: {count}",
+    "by_category": "По категориям",
+    "attention": "Требует внимания",
+    "finances": "Финансы",
+    "to_pay": "К оплате",
+    "to_receive": "К получению",
+    "recommendation": "Рекомендация ИИ",
+    "view_all": "Все документы"
   }
 }

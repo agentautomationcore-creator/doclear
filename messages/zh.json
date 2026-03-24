@@ -35,7 +35,18 @@
     "choose_language": "选择你的语言",
     "start": "开始",
     "next": "下一步",
-    "skip": "跳过"
+    "skip": "跳过",
+    "country_title": "你住在哪里？",
+    "status_title": "你的身份？",
+    "status_student": "学生",
+    "status_work": "工作许可",
+    "status_residence": "居留许可",
+    "status_family": "家庭团聚",
+    "status_tourist": "游客",
+    "status_eu": "欧盟公民",
+    "status_pending": "申请审理中",
+    "status_citizen": "公民",
+    "other_country": "其他"
   },
   "timeline": {
     "title": "我的文件",
@@ -73,7 +84,10 @@
     "mark_done": "标记完成",
     "marked_done": "已完成",
     "share": "分享",
-    "deadline": "截止日期"
+    "deadline": "截止日期",
+    "recommendations": "建议",
+    "visit_portal": "访问",
+    "find_specialist": "找专家"
   },
   "settings": {
     "title": "设置",
@@ -93,7 +107,9 @@
     "pro_feature3": "PDF导出",
     "support": "支持",
     "terms": "使用条款",
-    "privacy": "隐私政策"
+    "privacy": "隐私政策",
+    "country": "国家",
+    "status": "身份"
   },
   "paywall": {
     "title": "喜欢吗？",
@@ -126,6 +142,46 @@
     "analysis_failed": "分析失败，请重试。",
     "no_camera": "相机不可用",
     "file_too_large": "文件过大（最大10MB）",
-    "scan_limit": "扫描次数已用完"
+    "scan_limit": "扫描次数已用完",
+    "unsupported_format": "不支持的文件格式",
+    "zip_too_large": "ZIP文件过大（最大50MB）",
+    "zip_too_many": "ZIP中文件过多（最多20个）",
+    "zip_pro_only": "ZIP分析仅在DocLear Pro中可用"
+  },
+  "nav": {
+    "docs": "文档",
+    "scan": "扫描",
+    "pros": "专家",
+    "profile": "个人资料"
+  },
+  "pros": {
+    "title": "专家",
+    "subtitle": "蔚蓝海岸",
+    "filter_all": "全部",
+    "filter_lawyers": "律师",
+    "filter_accountants": "会计师",
+    "filter_translators": "翻译",
+    "filter_notaries": "公证人",
+    "filter_insurance": "保险",
+    "filter_doctors": "医生",
+    "filter_realtors": "房产经纪",
+    "recommended": "DocLear推荐",
+    "call": "拨打电话",
+    "email": "邮件",
+    "website": "网站",
+    "online": "在线咨询",
+    "find_specialist": "找专家",
+    "languages": "语言"
+  },
+  "summary": {
+    "title": "摘要",
+    "documents_analyzed": "已分析{count}份文件",
+    "by_category": "按类别",
+    "attention": "需要关注",
+    "finances": "财务",
+    "to_pay": "待支付",
+    "to_receive": "待收款",
+    "recommendation": "AI建议",
+    "view_all": "查看所有文件"
   }
 }

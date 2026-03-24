@@ -35,7 +35,18 @@
     "choose_language": "اختر لغتك",
     "start": "ابدأ",
     "next": "التالي",
-    "skip": "تخطّي"
+    "skip": "تخطّي",
+    "country_title": "أين تعيش؟",
+    "status_title": "ما وضعك؟",
+    "status_student": "طالب",
+    "status_work": "تصريح عمل",
+    "status_residence": "إقامة",
+    "status_family": "لمّ شمل عائلي",
+    "status_tourist": "سائح",
+    "status_eu": "مواطن أوروبي",
+    "status_pending": "طلب قيد المعالجة",
+    "status_citizen": "مواطن",
+    "other_country": "أخرى"
   },
   "timeline": {
     "title": "مستنداتي",
@@ -73,7 +84,10 @@
     "mark_done": "تمّ",
     "marked_done": "مكتمل",
     "share": "مشاركة",
-    "deadline": "الموعد النهائي"
+    "deadline": "الموعد النهائي",
+    "recommendations": "التوصيات",
+    "visit_portal": "زيارة",
+    "find_specialist": "ابحث عن متخصص"
   },
   "settings": {
     "title": "الإعدادات",
@@ -93,7 +107,9 @@
     "pro_feature3": "تصدير PDF",
     "support": "الدعم",
     "terms": "شروط الاستخدام",
-    "privacy": "سياسة الخصوصية"
+    "privacy": "سياسة الخصوصية",
+    "country": "البلد",
+    "status": "الوضع"
   },
   "paywall": {
     "title": "أعجبك؟",
@@ -126,6 +142,46 @@
     "analysis_failed": "فشل التحليل. حاول مرة أخرى.",
     "no_camera": "الكاميرا غير متاحة",
     "file_too_large": "الملف كبير جداً (الحد 10 ميغا)",
-    "scan_limit": "تم الوصول للحد الأقصى"
+    "scan_limit": "تم الوصول للحد الأقصى",
+    "unsupported_format": "صيغة ملف غير مدعومة",
+    "zip_too_large": "ملف ZIP كبير جداً (الحد 50 ميغا)",
+    "zip_too_many": "عدد كبير جداً من الملفات في ZIP (الحد 20)",
+    "zip_pro_only": "تحليل ZIP متاح في DocLear Pro"
+  },
+  "nav": {
+    "docs": "المستندات",
+    "scan": "مسح",
+    "pros": "متخصصون",
+    "profile": "الملف الشخصي"
+  },
+  "pros": {
+    "title": "المتخصصون",
+    "subtitle": "الريفييرا الفرنسية",
+    "filter_all": "الكل",
+    "filter_lawyers": "محامون",
+    "filter_accountants": "محاسبون",
+    "filter_translators": "مترجمون",
+    "filter_notaries": "كتّاب عدل",
+    "filter_insurance": "تأمين",
+    "filter_doctors": "أطباء",
+    "filter_realtors": "وكلاء عقارات",
+    "recommended": "DocLear يوصي",
+    "call": "اتصل",
+    "email": "بريد إلكتروني",
+    "website": "الموقع",
+    "online": "استشارات عبر الإنترنت",
+    "find_specialist": "ابحث عن متخصص",
+    "languages": "اللغات"
+  },
+  "summary": {
+    "title": "ملخص",
+    "documents_analyzed": "تم تحليل {count} مستند",
+    "by_category": "حسب الفئة",
+    "attention": "يحتاج انتباه",
+    "finances": "المالية",
+    "to_pay": "للدفع",
+    "to_receive": "للاستلام",
+    "recommendation": "توصية الذكاء الاصطناعي",
+    "view_all": "عرض جميع المستندات"
   }
 }
