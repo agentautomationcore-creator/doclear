@@ -18,6 +18,8 @@ export default function SettingsPage() {
   const router = useRouter();
   const [settings, setSettings] = useState<Settings | null>(null);
   const [showLangPicker, setShowLangPicker] = useState(false);
+  const [showCountryPicker, setShowCountryPicker] = useState(false);
+  const [showStatusPicker, setShowStatusPicker] = useState(false);
   const [email, setEmail] = useState('');
   const [emailSent, setEmailSent] = useState(false);
 
@@ -113,56 +115,80 @@ export default function SettingsPage() {
 
         <hr className="border-[#D2D2D7]" />
 
-        {/* Country */}
+        {/* Country — dropdown */}
         <div>
-          <h3 className="flex items-center gap-2 font-medium text-[#1D1D1F] mb-3">
-            <span>{'\ud83c\uddeb\ud83c\uddf7'}</span> {t('country')}
-          </h3>
-          <div className="grid grid-cols-3 gap-2">
-            {countries.map((c) => (
-              <button
-                key={c}
-                onClick={() => {
-                  if (!settings) return;
-                  const updated = { ...settings, country: c };
-                  saveSettings(updated);
-                  setSettings(updated);
-                }}
-                className={`flex items-center gap-1.5 px-2 py-2 rounded-lg text-xs font-medium transition-colors min-h-[40px] ${
-                  settings?.country === c ? 'bg-primary/10 border border-primary/30' : 'bg-[#F5F5F7] border border-[#D2D2D7]'
-                }`}
-              >
-                <span className="truncate">{c === 'OTHER' ? onbT('other_country') : COUNTRY_NAMES[c]}</span>
-              </button>
-            ))}
-          </div>
+          <button
+            onClick={() => setShowCountryPicker(!showCountryPicker)}
+            className="w-full flex items-center justify-between py-3 min-h-[52px]"
+          >
+            <span className="font-medium text-[#1D1D1F]">{t('country')}</span>
+            <div className="flex items-center gap-2">
+              <span className="text-muted">{settings?.country === 'OTHER' ? onbT('other_country') : COUNTRY_NAMES[settings?.country || 'FR']}</span>
+              <svg className={`w-4 h-4 text-muted transition-transform ${showCountryPicker ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
+          {showCountryPicker && (
+            <div className="grid grid-cols-2 gap-2 mt-2 mb-2">
+              {countries.map((c) => (
+                <button
+                  key={c}
+                  onClick={() => {
+                    if (!settings) return;
+                    const updated = { ...settings, country: c };
+                    saveSettings(updated);
+                    setSettings(updated);
+                    setShowCountryPicker(false);
+                  }}
+                  className={`px-3 py-2.5 rounded-xl text-sm font-medium transition-colors min-h-[44px] text-left rtl:text-right ${
+                    settings?.country === c ? 'bg-primary/10 border border-primary/30' : 'bg-[#F5F5F7] border border-[#D2D2D7]'
+                  }`}
+                >
+                  {c === 'OTHER' ? onbT('other_country') : COUNTRY_NAMES[c]}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <hr className="border-[#D2D2D7]" />
 
-        {/* Status */}
+        {/* Status — dropdown */}
         <div>
-          <h3 className="flex items-center gap-2 font-medium text-[#1D1D1F] mb-3">
-            <span>{'\ud83d\udccb'}</span> {t('status')}
-          </h3>
-          <div className="grid grid-cols-2 gap-2">
-            {(['student', 'work_permit', 'residence_permit', 'family_reunion', 'tourist', 'eu_citizen', 'pending', 'citizen'] as const).map((s) => (
-              <button
-                key={s}
-                onClick={() => {
-                  if (!settings) return;
-                  const updated = { ...settings, status: s };
-                  saveSettings(updated);
-                  setSettings(updated);
-                }}
-                className={`px-3 py-2 rounded-lg text-xs font-medium transition-colors min-h-[40px] text-left rtl:text-right ${
-                  settings?.status === s ? 'bg-primary/10 border border-primary/30' : 'bg-[#F5F5F7] border border-[#D2D2D7]'
-                }`}
-              >
-                {onbT(`status_${s}` as any)}
-              </button>
-            ))}
-          </div>
+          <button
+            onClick={() => setShowStatusPicker(!showStatusPicker)}
+            className="w-full flex items-center justify-between py-3 min-h-[52px]"
+          >
+            <span className="font-medium text-[#1D1D1F]">{t('status')}</span>
+            <div className="flex items-center gap-2">
+              <span className="text-muted">{onbT(`status_${settings?.status || 'residence_permit'}` as any)}</span>
+              <svg className={`w-4 h-4 text-muted transition-transform ${showStatusPicker ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
+          {showStatusPicker && (
+            <div className="grid grid-cols-2 gap-2 mt-2 mb-2">
+              {(['student', 'work_permit', 'residence_permit', 'family_reunion', 'tourist', 'eu_citizen', 'pending', 'citizen'] as const).map((s) => (
+                <button
+                  key={s}
+                  onClick={() => {
+                    if (!settings) return;
+                    const updated = { ...settings, status: s };
+                    saveSettings(updated);
+                    setSettings(updated);
+                    setShowStatusPicker(false);
+                  }}
+                  className={`px-3 py-2.5 rounded-xl text-sm font-medium transition-colors min-h-[44px] text-left rtl:text-right ${
+                    settings?.status === s ? 'bg-primary/10 border border-primary/30' : 'bg-[#F5F5F7] border border-[#D2D2D7]'
+                  }`}
+                >
+                  {onbT(`status_${s}` as any)}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <hr className="border-[#D2D2D7]" />

@@ -36,7 +36,7 @@ export default function LanguageSelector() {
         className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-[#F5F5F7] transition-colors min-h-[44px]"
         aria-label="Change language"
       >
-        <span className="text-xl">{LOCALE_FLAGS[locale]}</span>
+        <span className="text-sm font-medium text-[#1D1D1F]">{LOCALE_NAMES[locale]}</span>
         <svg
           className={`w-4 h-4 text-muted transition-transform ${open ? 'rotate-180' : ''}`}
           fill="none"
@@ -57,7 +57,6 @@ export default function LanguageSelector() {
                 l === locale ? 'bg-primary/10 text-primary font-medium' : 'text-[#86868B]'
               }`}
             >
-              <span className="text-xl">{LOCALE_FLAGS[l]}</span>
               <span>{LOCALE_NAMES[l]}</span>
             </button>
           ))}

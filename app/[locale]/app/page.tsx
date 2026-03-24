@@ -75,8 +75,8 @@ export default function TimelinePage() {
   }, [documents, filter, search]);
 
   return (
-    <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom max-w-2xl mx-auto">
-      {/* Header */}
+    <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom">
+      {/* Header — full width */}
       <div className="sticky top-0 z-40 bg-white border-b border-[#D2D2D7] px-4 pt-3 pb-2">
         <div className="flex items-center justify-between mb-3">
           <h1 className="text-xl font-bold text-[#1D1D1F]">DocLear</h1>
@@ -113,7 +113,7 @@ export default function TimelinePage() {
       </div>
 
       {/* Content */}
-      <div className="px-4 py-4">
+      <div className="px-4 py-4 max-w-2xl mx-auto">
         <DeadlineBanner count={deadlineCount} />
 
         <ScanCounter used={scanCount} />
