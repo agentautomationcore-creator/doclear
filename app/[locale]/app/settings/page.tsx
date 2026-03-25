@@ -300,7 +300,14 @@ export default function SettingsPage() {
                 <p className="text-sm text-[#6B7280]">{user?.email}</p>
               </div>
               <button
-                onClick={() => signOut().then(() => window.location.href = '/')}
+                onClick={async () => {
+                  // Clear all local data
+                  localStorage.removeItem('doclear_settings');
+                  localStorage.removeItem('doclear_documents');
+                  localStorage.removeItem('doclear_onboarding_done');
+                  await signOut();
+                  window.location.href = '/';
+                }}
                 className="w-full bg-[#F5F5F7] text-[#1A1A2E] font-medium py-3.5 rounded-[14px] border border-black/[0.06] text-sm"
               >
                 {t('sign_out') || 'Sign out'}
