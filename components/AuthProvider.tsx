@@ -38,23 +38,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const scanLimit = isAuthenticated ? 5 : 3;
   const canScan = scanCount < scanLimit;
 
-  // Fetch usage from Supabase
+  // Fetch usage from Supabase (single source of truth)
   const refreshUsage = useCallback(async () => {
     if (!user) return;
     try {
-      const { data } = await supabase.rpc('get_usage', { p_user_id: user.id });
+      const { data, error } = await supabase.rpc('get_usage', { p_user_id: user.id });
+      if (error) {
+        console.error('get_usage error:', error.message);
+        return;
+      }
       if (data && data.length > 0) {
         setScanCount(data[0].scan_count);
+      } else if (typeof data === 'object' && data !== null && 'scan_count' in data) {
+        setScanCount((data as any).scan_count);
       }
-    } catch {
-      // Fallback to localStorage if Supabase RPC not available
-      try {
-        const stored = localStorage.getItem('doclear_settings');
-        if (stored) {
-          const settings = JSON.parse(stored);
-          setScanCount(settings.scanCount || 0);
-        }
-      } catch {}
+    } catch (err) {
+      console.error('refreshUsage failed:', err);
     }
   }, [user]);
 
