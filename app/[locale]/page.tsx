@@ -22,9 +22,9 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-3">
             <LanguageSelector />
-            {isAuthenticated ? (
+            {isAuthenticated && user?.email ? (
               <Link href="/app" className="w-8 h-8 bg-[#1A1A2E] text-white rounded-full flex items-center justify-center text-sm font-semibold">
-                {user?.email?.[0]?.toUpperCase() || 'U'}
+                {user.email[0].toUpperCase()}
               </Link>
             ) : (
               <>
