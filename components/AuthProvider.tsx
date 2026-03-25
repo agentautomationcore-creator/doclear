@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 import { migrateFromLocalStorage } from '@/lib/supabaseStorage';
+import { getSettings, saveSettings } from '@/lib/storage';
 
 interface AuthContextType {
   user: User | null;
@@ -17,6 +18,18 @@ const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
 });
 
+function resetScanCountForLoggedIn() {
+  try {
+    const settings = getSettings();
+    // If user had more scans than guest limit (3), they were a guest who hit limit
+    // Reset to 0 so they get fresh 5 scans as registered user
+    if (settings.scanCount >= 3) {
+      settings.scanCount = 0;
+      saveSettings(settings);
+    }
+  } catch {}
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -27,8 +40,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(session?.user ?? null);
       setLoading(false);
 
-      // Migrate localStorage data on first login
+      // On login: reset scan count (user gets fresh 5/month) + migrate data
       if (session?.user) {
+        resetScanCountForLoggedIn();
         migrateFromLocalStorage().catch(console.error);
       }
     });
@@ -37,6 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
+        resetScanCountForLoggedIn();
         migrateFromLocalStorage().catch(console.error);
       }
     });
