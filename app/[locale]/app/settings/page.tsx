@@ -75,7 +75,8 @@ export default function SettingsPage() {
     saveSettings(updated);
     setSettings(updated);
     setShowLangPicker(false);
-    router.replace('/app/settings', { locale: newLocale });
+    // Full page reload to apply locale globally (prevents stale locale on back navigation)
+    window.location.href = `/${newLocale}/app/settings`;
   }
 
   function handleEmailSubmit() {
@@ -92,7 +93,7 @@ export default function SettingsPage() {
       <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-black/[0.06] px-4 py-3">
         <div className="flex items-center gap-3">
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push('/app')}
             className="p-2 hover:bg-[#F5F5F7] rounded-[10px] min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors"
           >
             <svg className="w-5 h-5 text-[#1A1A2E] rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
