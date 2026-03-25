@@ -190,7 +190,7 @@ export default function DocumentPage() {
   const cat = getCategoryConfig(doc.category);
 
   return (
-    <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom pb-4 font-[Inter,system-ui,sans-serif]">
+    <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom pb-24 font-[Inter,system-ui,sans-serif]">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-white border-b border-black/[0.06] h-14 flex items-center px-4">
         <button

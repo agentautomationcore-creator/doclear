@@ -9,8 +9,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const isOnboarding = pathname.includes('/onboarding');
-  const isDocView = pathname.includes('/doc/');
-
   useEffect(() => {
     if (!isOnboardingDone()) {
       router.replace('/app/onboarding');
@@ -19,7 +17,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <div className={!isOnboarding && !isDocView ? 'pb-[72px]' : ''}>{children}</div>
+      <div className={!isOnboarding ? 'pb-[72px]' : ''}>{children}</div>
       {!isOnboarding && <BottomNav />}
     </>
   );
