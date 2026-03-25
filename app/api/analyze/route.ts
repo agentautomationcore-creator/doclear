@@ -5,7 +5,7 @@ import { getCountryContext } from '@/lib/countryData';
 import { CountryCode } from '@/lib/types';
 
 // Allow larger request bodies (PDFs can be big)
-export const maxDuration = 60; // seconds
+export const maxDuration = 120; // seconds — large PDFs need more time
 export const dynamic = 'force-dynamic';
 
 const anthropic = new Anthropic();
@@ -101,10 +101,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(analysis);
   } catch (error: any) {
     console.error('Analysis error:', error?.message || error, error?.status);
-    const msg = error?.status === 413 ? 'File too large for analysis'
-      : error?.message?.includes('too large') ? 'File too large for analysis'
-      : error?.message?.includes('timeout') ? 'Analysis timed out, try a smaller file'
-      : 'Analysis failed';
+    const errMsg = error?.message || '';
+    const msg = error?.status === 413 || errMsg.includes('too large')
+      ? 'File too large. Try uploading only the key pages (max 100 pages).'
+      : errMsg.includes('timeout') || errMsg.includes('ETIMEDOUT') || errMsg.includes('529')
+      ? 'Analysis timed out. The document may be too long. Try uploading fewer pages.'
+      : errMsg.includes('credit') || errMsg.includes('balance')
+      ? 'Service temporarily unavailable. Please try again later.'
+      : 'Analysis failed. Please try again.';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
