@@ -240,6 +240,8 @@
     "back_home": "返回首页",
     "sign_in_short": "登录",
     "register_prompt": "注册以继续",
-    "register_prompt_desc": "您已使用5次免费扫描。创建账户以继续。"
+    "register_prompt_desc": "您已使用5次免费扫描。创建账户以继续。",
+    "forgot_password": "忘记密码？",
+    "reset_sent": "重置链接已发送到邮箱"
   }
 }

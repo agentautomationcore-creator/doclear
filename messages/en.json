@@ -240,6 +240,8 @@
     "back_home": "Back to home",
     "sign_in_short": "Sign in",
     "register_prompt": "Sign up to continue scanning",
-    "register_prompt_desc": "You have used your 5 free scans. Create an account to continue."
+    "register_prompt_desc": "You have used your 5 free scans. Create an account to continue.",
+    "forgot_password": "Forgot password?",
+    "reset_sent": "Reset link sent to your email"
   }
 }

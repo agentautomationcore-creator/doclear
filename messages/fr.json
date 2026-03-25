@@ -240,6 +240,8 @@
     "back_home": "Retour à l'accueil",
     "sign_in_short": "Connexion",
     "register_prompt": "Inscrivez-vous pour continuer",
-    "register_prompt_desc": "Vous avez utilisé vos 5 scans gratuits. Créez un compte pour continuer."
+    "register_prompt_desc": "Vous avez utilisé vos 5 scans gratuits. Créez un compte pour continuer.",
+    "forgot_password": "Mot de passe oublié ?",
+    "reset_sent": "Lien de réinitialisation envoyé"
   }
 }

@@ -15,6 +15,7 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [showReset, setShowReset] = useState(false);
 
   function resetScans() {
     const settings = getSettings();
@@ -152,6 +153,25 @@ export default function AuthPage() {
             minLength={6}
             className="w-full bg-[#F5F5F7] rounded-[14px] px-4 py-3.5 text-sm text-[#1A1A2E] placeholder:text-[#6B7280] border border-black/[0.06] focus:outline-none focus:ring-2 focus:ring-[#1A1A2E]/20"
           />
+
+          {mode === 'login' && (
+            <button
+              type="button"
+              onClick={async () => {
+                if (!email) { setError(t('email_placeholder')); return; }
+                setLoading(true);
+                const { error: err } = await supabase.auth.resetPasswordForEmail(email, {
+                  redirectTo: `${window.location.origin}/auth`,
+                });
+                setLoading(false);
+                if (err) { setError(err.message); }
+                else { setSuccess(t('reset_sent')); }
+              }}
+              className="text-sm text-[#6B7280] hover:text-[#1A1A2E] transition-colors self-end"
+            >
+              {t('forgot_password')}
+            </button>
+          )}
 
           {error && <p className="text-[#DC2626] text-sm">{error}</p>}
           {success && <p className="text-[#34C759] text-sm">{success}</p>}

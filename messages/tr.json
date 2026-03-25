@@ -240,6 +240,8 @@
     "back_home": "Ana sayfaya dön",
     "sign_in_short": "Giriş",
     "register_prompt": "Devam etmek için kaydolun",
-    "register_prompt_desc": "5 ücretsiz taramanızı kullandınız. Devam etmek için bir hesap oluşturun."
+    "register_prompt_desc": "5 ücretsiz taramanızı kullandınız. Devam etmek için bir hesap oluşturun.",
+    "forgot_password": "Şifremi unuttum",
+    "reset_sent": "Sıfırlama bağlantısı gönderildi"
   }
 }
