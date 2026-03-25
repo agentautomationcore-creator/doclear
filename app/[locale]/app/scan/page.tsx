@@ -192,7 +192,7 @@ export default function ScanPage() {
   }
 
   async function handleAnalyze() {
-    if (files.length === 0) return;
+    if (files.length === 0 || analyzing) return;
     setAnalyzing(true);
     setError(null);
     setStep(0);

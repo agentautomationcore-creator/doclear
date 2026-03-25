@@ -32,13 +32,16 @@ export interface Recommendation {
 export interface AnalysisResponse {
   document_title: string;
   category: Category;
+  document_country?: string;
   what_is_this: string;
   what_it_says: string;
   what_to_do: string[];
   deadline: string | null;
   deadline_description: string | null;
   urgency: Urgency;
+  urgency_reason?: string | null;
   amounts: string[];
+  confidence?: 'high' | 'medium' | 'low';
   recommendations?: Recommendation[];
 }
 
