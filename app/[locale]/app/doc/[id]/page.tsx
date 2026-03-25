@@ -226,7 +226,8 @@ export default function DocumentPage() {
                 </div>
                 <a
                   href={doc.imageData}
-                  download={`${doc.title}.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-[#1A1A2E] text-white text-sm font-medium px-4 py-2 rounded-[12px] hover:bg-[#2A2A3E] transition-colors"
                 >
                   {t('original')}
