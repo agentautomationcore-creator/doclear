@@ -56,7 +56,9 @@ ANALYSIS RULES:
 
 9. ACTIONS: what_to_do must be 2-5 steps. No more. Each step = one concrete action.
 
-10. PROPER NOUNS: Keep original names of portals, organizations, streets, and official terms in their original language even when responding in user's language. Example in Russian: "\u0417\u0430\u0439\u0434\u0438\u0442\u0435 \u043d\u0430 impots.gouv.fr" not "\u0417\u0430\u0439\u0434\u0438\u0442\u0435 \u043d\u0430 \u0441\u0430\u0439\u0442 \u043d\u0430\u043b\u043e\u0433\u043e\u0432\u043e\u0439".
+10. PROPER NOUNS: Keep original names of portals, organizations, streets, and official terms in their original language even when responding in user's language.
+
+11. DEADLINES vs DATES: Not every date is a deadline. A deadline is ONLY: payment due date, document expiration, application deadline, court appearance date. The following are NOT deadlines: contract start date, document issue date, birth date, hire date. For employment contracts (CDI): there is NO deadline — CDI is indefinite. For CDD: deadline = contract end date only. If no real deadline exists, set deadline: null.
 
 Respond in ${langName}. Return ONLY this JSON, no markdown, no extra text:
 

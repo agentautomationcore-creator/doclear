@@ -213,9 +213,30 @@ export default function DocumentPage() {
         {/* Original document — prominent at top */}
         {doc.imageData && (
           <div className="mb-6">
-            <div className="rounded-[16px] overflow-hidden bg-[#F5F5F7] border border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
-              <img src={doc.imageData} alt={doc.title} className="w-full max-h-[400px] object-contain" />
-            </div>
+            {doc.imageData.startsWith('data:application/pdf') ? (
+              <div className="rounded-[16px] bg-[#F5F5F7] border border-black/[0.06] p-5 flex items-center gap-4">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+                  <svg className="w-6 h-6 text-[#DC2626]" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <p className="font-medium text-[#1A1A2E] text-sm">{doc.title}</p>
+                  <p className="text-xs text-[#6B7280]">PDF</p>
+                </div>
+                <a
+                  href={doc.imageData}
+                  download={`${doc.title}.pdf`}
+                  className="bg-[#1A1A2E] text-white text-sm font-medium px-4 py-2 rounded-[12px] hover:bg-[#2A2A3E] transition-colors"
+                >
+                  {t('original')}
+                </a>
+              </div>
+            ) : doc.imageData.startsWith('data:image') ? (
+              <div className="rounded-[16px] overflow-hidden bg-[#F5F5F7] border border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+                <img src={doc.imageData} alt={doc.title} className="w-full max-h-[400px] object-contain" />
+              </div>
+            ) : null}
           </div>
         )}
 

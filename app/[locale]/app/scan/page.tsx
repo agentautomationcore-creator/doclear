@@ -181,7 +181,7 @@ export default function ScanPage() {
       deadlineDescription: analysis.deadline_description,
       urgency: analysis.urgency,
       amounts: analysis.amounts,
-      imageData: pf.type === 'image' ? pf.data : '',
+      imageData: pf.data || '',
       chatHistory: [],
       language: locale,
       recommendations: analysis.recommendations,
