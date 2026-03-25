@@ -29,15 +29,16 @@ export default function AuthPage() {
     setSuccess('');
 
     if (mode === 'register') {
-      const { error: err } = await supabase.auth.signUp({
+      const { data, error: err } = await supabase.auth.signUp({
         email,
         password,
         options: { emailRedirectTo: `${window.location.origin}/app` },
       });
       if (err) {
         setError(err.message);
-      } else {
-        setSuccess(t('check_email'));
+      } else if (data?.user) {
+        // Auto-confirm is on — go directly to app
+        window.location.href = '/app';
       }
     } else {
       const { error: err } = await supabase.auth.signInWithPassword({ email, password });
