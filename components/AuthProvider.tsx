@@ -114,7 +114,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(session?.user ?? null);
 
       if (event === 'SIGNED_IN' && session?.user) {
-        // Refresh usage on sign in
+        // User just registered/logged in — reset scan count to 0 (fresh 5 scans)
+        if (!session.user.is_anonymous) {
+          setScanCount(0);
+          // Clear localStorage scan count
+          try {
+            const stored = localStorage.getItem('doclear_settings');
+            if (stored) {
+              const settings = JSON.parse(stored);
+              settings.scanCount = 0;
+              localStorage.setItem('doclear_settings', JSON.stringify(settings));
+            }
+          } catch {}
+        }
         setTimeout(() => refreshUsage(), 500);
       }
     });
