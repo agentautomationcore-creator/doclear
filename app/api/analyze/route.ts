@@ -4,6 +4,10 @@ import { getAnalysisSystemPrompt, parseAnalysisResponse } from '@/lib/ai';
 import { getCountryContext } from '@/lib/countryData';
 import { CountryCode } from '@/lib/types';
 
+// Allow larger request bodies (PDFs can be big)
+export const maxDuration = 60; // seconds
+export const dynamic = 'force-dynamic';
+
 const anthropic = new Anthropic();
 
 const rateLimiter = new Map<string, { count: number; resetAt: number }>();
@@ -63,8 +67,8 @@ export async function POST(request: NextRequest) {
       }];
     } else {
       // Image
-      if (image.length > 14_000_000) {
-        return NextResponse.json({ error: 'File too large (max 10MB)' }, { status: 400 });
+      if (image && image.length > 20_000_000) {
+        return NextResponse.json({ error: 'File too large (max 15MB)' }, { status: 400 });
       }
       const base64Data = image.replace(/^data:[^;]+;base64,/, '');
       let mediaType: 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp' = 'image/jpeg';
@@ -95,8 +99,12 @@ export async function POST(request: NextRequest) {
 
     const analysis = parseAnalysisResponse(textBlock.text);
     return NextResponse.json(analysis);
-  } catch (error) {
-    console.error('Analysis error:', error);
-    return NextResponse.json({ error: 'Analysis failed' }, { status: 500 });
+  } catch (error: any) {
+    console.error('Analysis error:', error?.message || error, error?.status);
+    const msg = error?.status === 413 ? 'File too large for analysis'
+      : error?.message?.includes('too large') ? 'File too large for analysis'
+      : error?.message?.includes('timeout') ? 'Analysis timed out, try a smaller file'
+      : 'Analysis failed';
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
