@@ -1,0 +1,111 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img "DocLear" [ref=e6]
+          - generic [ref=e7]: DocLear
+        - generic [ref=e8]:
+          - button "Change language" [ref=e10] [cursor=pointer]:
+            - generic [ref=e11]: 中文
+            - img [ref=e12]
+          - link "登录" [ref=e14] [cursor=pointer]:
+            - /url: /zh/auth
+          - link "免费试用" [ref=e15] [cursor=pointer]:
+            - /url: /zh/app
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]: 免费试用 — 5份文件
+        - heading "拍下任何文件，秒懂内容。" [level=1] [ref=e20]
+        - paragraph [ref=e21]: 税务信函、保险、合同——用通俗易懂的语言解释。告别术语，告别困惑。
+        - link "免费扫描你的第一份文件" [ref=e22] [cursor=pointer]:
+          - /url: /zh/app
+      - generic [ref=e24]:
+        - generic [ref=e25]: 这是什么
+        - heading "退税通知" [level=3] [ref=e26]
+        - paragraph [ref=e28]: 税务机关欠您340€。请在4月15日前确认您的银行信息以接收付款。
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: 1. 前往 impots.gouv.fr
+          - paragraph [ref=e31]: 2. 登录 — 我的账户 — 确认 RIB
+          - paragraph [ref=e32]: 3. 截止日期：2026年4月15日
+        - generic [ref=e33]: 截止日期：2026年4月15日
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - heading "三个步骤，三十秒搞定。" [level=2] [ref=e37]
+        - paragraph [ref=e38]: 无需注册，无需下载，任何手机均可使用。
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: "01"
+          - generic [ref=e42]:
+            - img [ref=e43]
+            - heading "拍照" [level=3] [ref=e45]
+            - paragraph [ref=e46]: 拍摄任何官方文件或上传PDF
+        - generic [ref=e47]:
+          - generic [ref=e48]: "02"
+          - generic [ref=e49]:
+            - img [ref=e50]
+            - heading "理解" [level=3] [ref=e52]
+            - paragraph [ref=e53]: AI阅读、翻译并用简单词汇解释
+        - generic [ref=e54]:
+          - generic [ref=e55]: "03"
+          - generic [ref=e56]:
+            - img [ref=e57]
+            - heading "行动" [level=3] [ref=e59]
+            - paragraph [ref=e60]: 清晰的行动步骤和不会错过的截止日期
+    - generic [ref=e62]:
+      - heading "简单定价，没有意外。" [level=2] [ref=e63]
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - heading "免费" [level=3] [ref=e66]
+          - paragraph [ref=e67]: €0
+          - paragraph [ref=e68]: 5份文件免费试用，无需注册。
+          - list [ref=e69]:
+            - listitem [ref=e70]:
+              - img [ref=e71]
+              - text: 相机 + PDF + DOCX 上传
+            - listitem [ref=e73]:
+              - img [ref=e74]
+              - text: 自动检测，8种语言
+            - listitem [ref=e76]:
+              - img [ref=e77]
+              - text: 截止日期跟踪和提醒
+        - generic [ref=e79]:
+          - heading "Pro" [level=3] [ref=e80]
+          - paragraph [ref=e81]: €4.99 / 月
+          - paragraph [ref=e82]: 或 €29.99/年 — 节省50%
+          - list [ref=e83]:
+            - listitem [ref=e84]:
+              - img [ref=e85]
+              - text: 相机 + PDF + DOCX 上传
+            - listitem [ref=e87]:
+              - img [ref=e88]
+              - text: 自动检测，8种语言
+            - listitem [ref=e90]:
+              - img [ref=e91]
+              - text: 截止日期跟踪和提醒
+            - listitem [ref=e93]:
+              - img [ref=e94]
+              - text: 文件历史记录和整理
+            - listitem [ref=e96]:
+              - img [ref=e97]
+              - text: 优先AI处理
+          - link "立即开始" [ref=e99] [cursor=pointer]:
+            - /url: /zh/auth
+    - generic [ref=e101]:
+      - generic [ref=e102]: 文件不会存储在我们的服务器上
+      - generic [ref=e103]: 5秒内获得结果
+      - generic [ref=e104]: FR / EN / RU / AR / IT / ZH / PT / TR
+    - contentinfo [ref=e105]:
+      - generic [ref=e106]:
+        - paragraph [ref=e107]: DocLear — 读懂任何文件
+        - generic [ref=e108]:
+          - generic [ref=e109]: © 2026
+          - link "Privacy" [ref=e110] [cursor=pointer]:
+            - /url: /zh/privacy
+          - link "Terms" [ref=e111] [cursor=pointer]:
+            - /url: /zh/terms
+  - alert [ref=e112]
+```

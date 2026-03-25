@@ -1,0 +1,111 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img "DocLear" [ref=e6]
+          - generic [ref=e7]: DocLear
+        - generic [ref=e8]:
+          - button "Change language" [ref=e10] [cursor=pointer]:
+            - generic [ref=e11]: Français
+            - img [ref=e12]
+          - link "Connexion" [ref=e14] [cursor=pointer]:
+            - /url: /auth
+          - link "Essai gratuit" [ref=e15] [cursor=pointer]:
+            - /url: /app
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]: Essai gratuit — 5 documents
+        - heading "Photographiez un document. Comprenez-le en secondes." [level=1] [ref=e20]
+        - paragraph [ref=e21]: Impôts, assurance, contrats — expliqués simplement dans votre langue. Sans jargon, sans confusion.
+        - link "Scannez votre premier document — gratuit" [ref=e22] [cursor=pointer]:
+          - /url: /app
+      - generic [ref=e24]:
+        - generic [ref=e25]: Qu’est-ce que c’est
+        - heading "Avis de remboursement d’impôt" [level=3] [ref=e26]
+        - paragraph [ref=e28]: Le fisc vous doit 340€. Confirmez vos coordonnées bancaires avant le 15 avril pour recevoir le paiement.
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: 1. Allez sur impots.gouv.fr
+          - paragraph [ref=e31]: 2. Connectez-vous — Mon Compte — Confirmez le RIB
+          - paragraph [ref=e32]: "3. Délai : 15 avril 2026"
+        - generic [ref=e33]: "DÉLAI : 15 avril 2026"
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - heading "Trois étapes. Trente secondes." [level=2] [ref=e37]
+        - paragraph [ref=e38]: Pas de compte. Pas d’application à télécharger. Fonctionne sur tout téléphone.
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: "01"
+          - generic [ref=e42]:
+            - img [ref=e43]
+            - heading "Photographiez" [level=3] [ref=e45]
+            - paragraph [ref=e46]: Prenez en photo n’importe quel document officiel ou importez un PDF
+        - generic [ref=e47]:
+          - generic [ref=e48]: "02"
+          - generic [ref=e49]:
+            - img [ref=e50]
+            - heading "Comprenez" [level=3] [ref=e52]
+            - paragraph [ref=e53]: L’IA lit, traduit et explique en mots simples
+        - generic [ref=e54]:
+          - generic [ref=e55]: "03"
+          - generic [ref=e56]:
+            - img [ref=e57]
+            - heading "Agissez" [level=3] [ref=e59]
+            - paragraph [ref=e60]: Des actions claires avec des délais à ne pas manquer
+    - generic [ref=e62]:
+      - heading "Tarifs simples. Sans surprises." [level=2] [ref=e63]
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - heading "Gratuit" [level=3] [ref=e66]
+          - paragraph [ref=e67]: €0
+          - paragraph [ref=e68]: 5 documents à essayer. Sans inscription.
+          - list [ref=e69]:
+            - listitem [ref=e70]:
+              - img [ref=e71]
+              - text: Caméra + PDF + DOCX
+            - listitem [ref=e73]:
+              - img [ref=e74]
+              - text: Détection automatique, 8 langues
+            - listitem [ref=e76]:
+              - img [ref=e77]
+              - text: Suivi des délais et rappels
+        - generic [ref=e79]:
+          - heading "Pro" [level=3] [ref=e80]
+          - paragraph [ref=e81]: 4,99€ / mois
+          - paragraph [ref=e82]: ou 29,99€/an — économisez 50%
+          - list [ref=e83]:
+            - listitem [ref=e84]:
+              - img [ref=e85]
+              - text: Caméra + PDF + DOCX
+            - listitem [ref=e87]:
+              - img [ref=e88]
+              - text: Détection automatique, 8 langues
+            - listitem [ref=e90]:
+              - img [ref=e91]
+              - text: Suivi des délais et rappels
+            - listitem [ref=e93]:
+              - img [ref=e94]
+              - text: Historique et organisation
+            - listitem [ref=e96]:
+              - img [ref=e97]
+              - text: Traitement AI prioritaire
+          - link "Commencer" [ref=e99] [cursor=pointer]:
+            - /url: /auth
+    - generic [ref=e101]:
+      - generic [ref=e102]: Aucun document stocké sur nos serveurs
+      - generic [ref=e103]: Résultat en moins de 5 secondes
+      - generic [ref=e104]: FR / EN / RU / AR / IT / ZH / PT / TR
+    - contentinfo [ref=e105]:
+      - generic [ref=e106]:
+        - paragraph [ref=e107]: DocLear — comprenez n’importe quel document
+        - generic [ref=e108]:
+          - generic [ref=e109]: © 2026
+          - link "Privacy" [ref=e110] [cursor=pointer]:
+            - /url: /privacy
+          - link "Terms" [ref=e111] [cursor=pointer]:
+            - /url: /terms
+  - alert [ref=e112]
+```

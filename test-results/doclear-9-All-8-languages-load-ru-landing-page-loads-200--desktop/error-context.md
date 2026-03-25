@@ -1,0 +1,111 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img "DocLear" [ref=e6]
+          - generic [ref=e7]: DocLear
+        - generic [ref=e8]:
+          - button "Change language" [ref=e10] [cursor=pointer]:
+            - generic [ref=e11]: Русский
+            - img [ref=e12]
+          - link "Войти" [ref=e14] [cursor=pointer]:
+            - /url: /ru/auth
+          - link "Попробовать" [ref=e15] [cursor=pointer]:
+            - /url: /ru/app
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]: Бесплатно — 5 документов
+        - heading "Сфотографируйте документ. Поймите за секунды." [level=1] [ref=e20]
+        - paragraph [ref=e21]: Налоги, страховка, контракты — объясним простым языком. Без жаргона, без путаницы.
+        - link "Сканируйте первый документ — бесплатно" [ref=e22] [cursor=pointer]:
+          - /url: /ru/app
+      - generic [ref=e24]:
+        - generic [ref=e25]: Что это
+        - heading "Уведомление о возврате налога" [level=3] [ref=e26]
+        - paragraph [ref=e28]: Налоговая должна вам 340€. Подтвердите банковские реквизиты до 15 апреля.
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: 1. Зайдите на impots.gouv.fr
+          - paragraph [ref=e31]: 2. Войдите — Мой аккаунт — Подтвердите RIB
+          - paragraph [ref=e32]: "3. Срок: 15 апреля 2026"
+        - generic [ref=e33]: "СРОК: 15 апреля 2026"
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - heading "Три шага. Тридцать секунд." [level=2] [ref=e37]
+        - paragraph [ref=e38]: Без регистрации. Без установки. Работает на любом телефоне.
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: "01"
+          - generic [ref=e42]:
+            - img [ref=e43]
+            - heading "Сфотографируйте" [level=3] [ref=e45]
+            - paragraph [ref=e46]: Сделайте фото документа или загрузите PDF
+        - generic [ref=e47]:
+          - generic [ref=e48]: "02"
+          - generic [ref=e49]:
+            - img [ref=e50]
+            - heading "Поймите" [level=3] [ref=e52]
+            - paragraph [ref=e53]: ИИ читает, переводит и объясняет простыми словами
+        - generic [ref=e54]:
+          - generic [ref=e55]: "03"
+          - generic [ref=e56]:
+            - img [ref=e57]
+            - heading "Действуйте" [level=3] [ref=e59]
+            - paragraph [ref=e60]: Понятные шаги с дедлайнами, которые не пропустите
+    - generic [ref=e62]:
+      - heading "Простые цены. Без сюрпризов." [level=2] [ref=e63]
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - heading "Бесплатно" [level=3] [ref=e66]
+          - paragraph [ref=e67]: €0
+          - paragraph [ref=e68]: 5 документов. Без регистрации.
+          - list [ref=e69]:
+            - listitem [ref=e70]:
+              - img [ref=e71]
+              - text: Камера + PDF + DOCX
+            - listitem [ref=e73]:
+              - img [ref=e74]
+              - text: Автоопределение, 8 языков
+            - listitem [ref=e76]:
+              - img [ref=e77]
+              - text: Отслеживание дедлайнов
+        - generic [ref=e79]:
+          - heading "Pro" [level=3] [ref=e80]
+          - paragraph [ref=e81]: 4,99€ / мес
+          - paragraph [ref=e82]: или 29,99€/год — экономия 50%
+          - list [ref=e83]:
+            - listitem [ref=e84]:
+              - img [ref=e85]
+              - text: Камера + PDF + DOCX
+            - listitem [ref=e87]:
+              - img [ref=e88]
+              - text: Автоопределение, 8 языков
+            - listitem [ref=e90]:
+              - img [ref=e91]
+              - text: Отслеживание дедлайнов
+            - listitem [ref=e93]:
+              - img [ref=e94]
+              - text: История и организация
+            - listitem [ref=e96]:
+              - img [ref=e97]
+              - text: Приоритетный ИИ
+          - link "Начать" [ref=e99] [cursor=pointer]:
+            - /url: /ru/auth
+    - generic [ref=e101]:
+      - generic [ref=e102]: Документы не хранятся на сервере
+      - generic [ref=e103]: Результат за 5 секунд
+      - generic [ref=e104]: FR / EN / RU / AR / IT / ZH / PT / TR
+    - contentinfo [ref=e105]:
+      - generic [ref=e106]:
+        - paragraph [ref=e107]: DocLear — поймите любой документ
+        - generic [ref=e108]:
+          - generic [ref=e109]: © 2026
+          - link "Privacy" [ref=e110] [cursor=pointer]:
+            - /url: /ru/privacy
+          - link "Terms" [ref=e111] [cursor=pointer]:
+            - /url: /ru/terms
+  - alert [ref=e112]
+```

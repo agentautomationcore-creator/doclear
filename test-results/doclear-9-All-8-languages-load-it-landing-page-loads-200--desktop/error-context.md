@@ -1,0 +1,111 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img "DocLear" [ref=e6]
+          - generic [ref=e7]: DocLear
+        - generic [ref=e8]:
+          - button "Change language" [ref=e10] [cursor=pointer]:
+            - generic [ref=e11]: Italiano
+            - img [ref=e12]
+          - link "Accedi" [ref=e14] [cursor=pointer]:
+            - /url: /it/auth
+          - link "Prova gratis" [ref=e15] [cursor=pointer]:
+            - /url: /it/app
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]: Prova gratuita — 5 documenti
+        - heading "Fotografa qualsiasi documento. Capiscilo in pochi secondi." [level=1] [ref=e20]
+        - paragraph [ref=e21]: Lettere fiscali, assicurazioni, contratti — spiegati in modo chiaro. Niente gergo, niente confusione.
+        - link "Scansiona il tuo primo documento — gratis" [ref=e22] [cursor=pointer]:
+          - /url: /it/app
+      - generic [ref=e24]:
+        - generic [ref=e25]: Cos'è questo
+        - heading "Avviso di rimborso fiscale" [level=3] [ref=e26]
+        - paragraph [ref=e28]: L'agenzia delle entrate ti deve €340. Conferma i tuoi dati bancari entro il 15 aprile per ricevere il pagamento.
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: 1. Vai su impots.gouv.fr
+          - paragraph [ref=e31]: 2. Accedi — Il mio account — Conferma RIB
+          - paragraph [ref=e32]: "3. Scadenza: 15 aprile 2026"
+        - generic [ref=e33]: "SCADENZA: 15 aprile 2026"
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - heading "Tre passaggi. Trenta secondi." [level=2] [ref=e37]
+        - paragraph [ref=e38]: Nessun account. Nessun download. Funziona su qualsiasi telefono.
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: "01"
+          - generic [ref=e42]:
+            - img [ref=e43]
+            - heading "Scatta" [level=3] [ref=e45]
+            - paragraph [ref=e46]: Fotografa qualsiasi documento ufficiale o carica un PDF
+        - generic [ref=e47]:
+          - generic [ref=e48]: "02"
+          - generic [ref=e49]:
+            - img [ref=e50]
+            - heading "Capisci" [level=3] [ref=e52]
+            - paragraph [ref=e53]: L'IA legge, traduce e spiega con parole semplici
+        - generic [ref=e54]:
+          - generic [ref=e55]: "03"
+          - generic [ref=e56]:
+            - img [ref=e57]
+            - heading "Agisci" [level=3] [ref=e59]
+            - paragraph [ref=e60]: Azioni chiare con scadenze che non dimenticherai
+    - generic [ref=e62]:
+      - heading "Prezzi semplici. Nessuna sorpresa." [level=2] [ref=e63]
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - heading "Gratuito" [level=3] [ref=e66]
+          - paragraph [ref=e67]: €0
+          - paragraph [ref=e68]: 5 documenti per provare. Nessun account richiesto.
+          - list [ref=e69]:
+            - listitem [ref=e70]:
+              - img [ref=e71]
+              - text: Fotocamera + PDF + DOCX
+            - listitem [ref=e73]:
+              - img [ref=e74]
+              - text: Rilevamento automatico, 8 lingue
+            - listitem [ref=e76]:
+              - img [ref=e77]
+              - text: Monitoraggio scadenze e promemoria
+        - generic [ref=e79]:
+          - heading "Pro" [level=3] [ref=e80]
+          - paragraph [ref=e81]: €4,99 / mese
+          - paragraph [ref=e82]: o €29,99/anno — risparmia il 50%
+          - list [ref=e83]:
+            - listitem [ref=e84]:
+              - img [ref=e85]
+              - text: Fotocamera + PDF + DOCX
+            - listitem [ref=e87]:
+              - img [ref=e88]
+              - text: Rilevamento automatico, 8 lingue
+            - listitem [ref=e90]:
+              - img [ref=e91]
+              - text: Monitoraggio scadenze e promemoria
+            - listitem [ref=e93]:
+              - img [ref=e94]
+              - text: Cronologia e organizzazione documenti
+            - listitem [ref=e96]:
+              - img [ref=e97]
+              - text: Elaborazione IA prioritaria
+          - link "Inizia ora" [ref=e99] [cursor=pointer]:
+            - /url: /it/auth
+    - generic [ref=e101]:
+      - generic [ref=e102]: Nessun documento archiviato sui nostri server
+      - generic [ref=e103]: Risultato in meno di 5 secondi
+      - generic [ref=e104]: FR / EN / RU / AR / IT / ZH / PT / TR
+    - contentinfo [ref=e105]:
+      - generic [ref=e106]:
+        - paragraph [ref=e107]: DocLear — comprendi qualsiasi documento
+        - generic [ref=e108]:
+          - generic [ref=e109]: © 2026
+          - link "Privacy" [ref=e110] [cursor=pointer]:
+            - /url: /it/privacy
+          - link "Terms" [ref=e111] [cursor=pointer]:
+            - /url: /it/terms
+  - alert [ref=e112]
+```

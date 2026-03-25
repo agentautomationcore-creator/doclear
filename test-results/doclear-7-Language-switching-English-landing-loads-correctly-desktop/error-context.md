@@ -1,0 +1,111 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img "DocLear" [ref=e6]
+          - generic [ref=e7]: DocLear
+        - generic [ref=e8]:
+          - button "Change language" [ref=e10] [cursor=pointer]:
+            - generic [ref=e11]: English
+            - img [ref=e12]
+          - link "Sign in" [ref=e14] [cursor=pointer]:
+            - /url: /en/auth
+          - link "Try free" [ref=e15] [cursor=pointer]:
+            - /url: /en/app
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]: Free to try — 5 documents
+        - heading "Photograph any document. Understand it in seconds." [level=1] [ref=e20]
+        - paragraph [ref=e21]: Tax letters, insurance, contracts — explained in plain language. No jargon, no confusion.
+        - link "Scan your first document — free" [ref=e22] [cursor=pointer]:
+          - /url: /en/app
+      - generic [ref=e24]:
+        - generic [ref=e25]: What is this
+        - heading "Tax Refund Notice" [level=3] [ref=e26]
+        - paragraph [ref=e28]: The tax authority owes you €340. Confirm your bank details before April 15th to receive payment.
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: 1. Go to impots.gouv.fr
+          - paragraph [ref=e31]: 2. Log in — My Account — Confirm RIB
+          - paragraph [ref=e32]: "3. Deadline: April 15, 2026"
+        - generic [ref=e33]: "DEADLINE: April 15, 2026"
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - heading "Three steps. Thirty seconds." [level=2] [ref=e37]
+        - paragraph [ref=e38]: No account. No app download. Works on any phone.
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: "01"
+          - generic [ref=e42]:
+            - img [ref=e43]
+            - heading "Snap" [level=3] [ref=e45]
+            - paragraph [ref=e46]: Take a photo of any official document or upload a PDF
+        - generic [ref=e47]:
+          - generic [ref=e48]: "02"
+          - generic [ref=e49]:
+            - img [ref=e50]
+            - heading "Understand" [level=3] [ref=e52]
+            - paragraph [ref=e53]: AI reads, translates and explains in simple words
+        - generic [ref=e54]:
+          - generic [ref=e55]: "03"
+          - generic [ref=e56]:
+            - img [ref=e57]
+            - heading "Act" [level=3] [ref=e59]
+            - paragraph [ref=e60]: Clear action steps with deadlines you won't miss
+    - generic [ref=e62]:
+      - heading "Simple pricing. No surprises." [level=2] [ref=e63]
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - heading "Free" [level=3] [ref=e66]
+          - paragraph [ref=e67]: €0
+          - paragraph [ref=e68]: 5 documents to try. No account needed.
+          - list [ref=e69]:
+            - listitem [ref=e70]:
+              - img [ref=e71]
+              - text: Camera + PDF + DOCX upload
+            - listitem [ref=e73]:
+              - img [ref=e74]
+              - text: Auto-detection, 8 languages
+            - listitem [ref=e76]:
+              - img [ref=e77]
+              - text: Deadline tracking & reminders
+        - generic [ref=e79]:
+          - heading "Pro" [level=3] [ref=e80]
+          - paragraph [ref=e81]: €4.99 / month
+          - paragraph [ref=e82]: or €29.99/year — save 50%
+          - list [ref=e83]:
+            - listitem [ref=e84]:
+              - img [ref=e85]
+              - text: Camera + PDF + DOCX upload
+            - listitem [ref=e87]:
+              - img [ref=e88]
+              - text: Auto-detection, 8 languages
+            - listitem [ref=e90]:
+              - img [ref=e91]
+              - text: Deadline tracking & reminders
+            - listitem [ref=e93]:
+              - img [ref=e94]
+              - text: Document history & organization
+            - listitem [ref=e96]:
+              - img [ref=e97]
+              - text: Priority AI processing
+          - link "Get started" [ref=e99] [cursor=pointer]:
+            - /url: /en/auth
+    - generic [ref=e101]:
+      - generic [ref=e102]: No documents stored on our servers
+      - generic [ref=e103]: Result in under 5 seconds
+      - generic [ref=e104]: FR / EN / RU / AR / IT / ZH / PT / TR
+    - contentinfo [ref=e105]:
+      - generic [ref=e106]:
+        - paragraph [ref=e107]: DocLear — understand any document
+        - generic [ref=e108]:
+          - generic [ref=e109]: © 2026
+          - link "Privacy" [ref=e110] [cursor=pointer]:
+            - /url: /en/privacy
+          - link "Terms" [ref=e111] [cursor=pointer]:
+            - /url: /en/terms
+  - alert [ref=e112]
+```

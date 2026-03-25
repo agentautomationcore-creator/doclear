@@ -1,0 +1,111 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img "DocLear" [ref=e6]
+          - generic [ref=e7]: DocLear
+        - generic [ref=e8]:
+          - button "Change language" [ref=e10] [cursor=pointer]:
+            - generic [ref=e11]: Türkçe
+            - img [ref=e12]
+          - link "Giriş" [ref=e14] [cursor=pointer]:
+            - /url: /tr/auth
+          - link "Ücretsiz deneyin" [ref=e15] [cursor=pointer]:
+            - /url: /tr/app
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]: Ücretsiz deneyin — 5 belge
+        - heading "Herhangi bir belgeyi fotoğraflayın. Saniyeler içinde anlayın." [level=1] [ref=e20]
+        - paragraph [ref=e21]: Vergi mektupları, sigorta, sözleşmeler — anlaşılır bir dille açıklanır. Jargon yok, karışıklık yok.
+        - link "İlk belgenizi tarayın — ücretsiz" [ref=e22] [cursor=pointer]:
+          - /url: /tr/app
+      - generic [ref=e24]:
+        - generic [ref=e25]: Bu nedir
+        - heading "Vergi iadesi bildirimi" [level=3] [ref=e26]
+        - paragraph [ref=e28]: Vergi dairesi size €340 borçlu. Ödemeyi almak için 15 Nisan'dan önce banka bilgilerinizi onaylayın.
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: 1. impots.gouv.fr adresine gidin
+          - paragraph [ref=e31]: 2. Giriş yapın — Hesabım — RIB onaylayın
+          - paragraph [ref=e32]: "3. Son tarih: 15 Nisan 2026"
+        - generic [ref=e33]: "SON TARİH: 15 Nisan 2026"
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - heading "Üç adım. Otuz saniye." [level=2] [ref=e37]
+        - paragraph [ref=e38]: Hesap gerekmez. Uygulama indirmeye gerek yok. Her telefonda çalışır.
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: "01"
+          - generic [ref=e42]:
+            - img [ref=e43]
+            - heading "Fotoğrafla" [level=3] [ref=e45]
+            - paragraph [ref=e46]: Herhangi bir resmi belgeyi fotoğraflayın veya PDF yükleyin
+        - generic [ref=e47]:
+          - generic [ref=e48]: "02"
+          - generic [ref=e49]:
+            - img [ref=e50]
+            - heading "Anlayın" [level=3] [ref=e52]
+            - paragraph [ref=e53]: Yapay zeka okur, çevirir ve basit kelimelerle açıklar
+        - generic [ref=e54]:
+          - generic [ref=e55]: "03"
+          - generic [ref=e56]:
+            - img [ref=e57]
+            - heading "Harekete geçin" [level=3] [ref=e59]
+            - paragraph [ref=e60]: Kaçırmayacağınız son tarihlerle net adımlar
+    - generic [ref=e62]:
+      - heading "Basit fiyatlandırma. Sürpriz yok." [level=2] [ref=e63]
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - heading "Ücretsiz" [level=3] [ref=e66]
+          - paragraph [ref=e67]: €0
+          - paragraph [ref=e68]: Denemek için 5 belge. Hesap gerekmez.
+          - list [ref=e69]:
+            - listitem [ref=e70]:
+              - img [ref=e71]
+              - text: Kamera + PDF + DOCX yükleme
+            - listitem [ref=e73]:
+              - img [ref=e74]
+              - text: Otomatik algılama, 8 dil
+            - listitem [ref=e76]:
+              - img [ref=e77]
+              - text: Son tarih takibi ve hatırlatmalar
+        - generic [ref=e79]:
+          - heading "Pro" [level=3] [ref=e80]
+          - paragraph [ref=e81]: €4,99 / ay
+          - paragraph [ref=e82]: veya €29,99/yıl — %50 tasarruf edin
+          - list [ref=e83]:
+            - listitem [ref=e84]:
+              - img [ref=e85]
+              - text: Kamera + PDF + DOCX yükleme
+            - listitem [ref=e87]:
+              - img [ref=e88]
+              - text: Otomatik algılama, 8 dil
+            - listitem [ref=e90]:
+              - img [ref=e91]
+              - text: Son tarih takibi ve hatırlatmalar
+            - listitem [ref=e93]:
+              - img [ref=e94]
+              - text: Belge geçmişi ve düzenleme
+            - listitem [ref=e96]:
+              - img [ref=e97]
+              - text: Öncelikli yapay zeka işleme
+          - link "Hemen başlayın" [ref=e99] [cursor=pointer]:
+            - /url: /tr/auth
+    - generic [ref=e101]:
+      - generic [ref=e102]: Belgeleriniz sunucularımızda saklanmaz
+      - generic [ref=e103]: 5 saniyeden kısa sürede sonuç
+      - generic [ref=e104]: FR / EN / RU / AR / IT / ZH / PT / TR
+    - contentinfo [ref=e105]:
+      - generic [ref=e106]:
+        - paragraph [ref=e107]: DocLear — herhangi bir belgeyi anlayın
+        - generic [ref=e108]:
+          - generic [ref=e109]: © 2026
+          - link "Privacy" [ref=e110] [cursor=pointer]:
+            - /url: /tr/privacy
+          - link "Terms" [ref=e111] [cursor=pointer]:
+            - /url: /tr/terms
+  - alert [ref=e112]
+```

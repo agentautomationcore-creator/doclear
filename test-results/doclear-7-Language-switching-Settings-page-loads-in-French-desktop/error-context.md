@@ -1,0 +1,100 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - button [ref=e6] [cursor=pointer]:
+        - img [ref=e7]
+      - heading "Paramètres" [level=1] [ref=e9]
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - paragraph [ref=e12]: Langue
+        - button "Français" [ref=e13] [cursor=pointer]:
+          - generic [ref=e14]: Français
+          - img [ref=e15]
+      - generic [ref=e17]:
+        - paragraph [ref=e18]: Pays
+        - button "France" [ref=e19] [cursor=pointer]:
+          - generic [ref=e20]: France
+          - img [ref=e21]
+      - generic [ref=e23]:
+        - paragraph [ref=e24]: Statut
+        - button "Titre de sejour" [ref=e25] [cursor=pointer]:
+          - generic [ref=e26]: Titre de sejour
+          - img [ref=e27]
+      - generic [ref=e29]:
+        - paragraph [ref=e30]: Utilisation
+        - paragraph [ref=e34]: 0 sur 3 scans gratuits
+      - generic [ref=e36]:
+        - paragraph [ref=e37]: Rappels
+        - generic [ref=e38]:
+          - generic [ref=e39]:
+            - generic [ref=e40]: 7 jours avant
+            - button [ref=e41] [cursor=pointer]
+          - generic [ref=e43]:
+            - generic [ref=e44]: 1 jour avant
+            - button [ref=e45] [cursor=pointer]
+          - generic [ref=e47]:
+            - generic [ref=e48]: Le jour même
+            - button [ref=e49] [cursor=pointer]
+      - generic [ref=e51]:
+        - paragraph [ref=e52]: Débloquer DocLear Pro
+        - generic [ref=e53]:
+          - heading "Débloquer DocLear Pro" [level=3] [ref=e54]
+          - paragraph [ref=e55]: 4,99€/mois ou 29,99€/an
+          - list [ref=e56]:
+            - listitem [ref=e57]:
+              - img [ref=e58]
+              - generic [ref=e60]: Scans illimités
+            - listitem [ref=e61]:
+              - img [ref=e62]
+              - generic [ref=e64]: IA prioritaire
+            - listitem [ref=e65]:
+              - img [ref=e66]
+              - generic [ref=e68]: Export PDF
+          - generic [ref=e69]:
+            - textbox "Votre email" [ref=e70]
+            - button "M'inscrire" [ref=e71] [cursor=pointer]
+      - generic [ref=e72]:
+        - paragraph [ref=e73]: Account
+        - generic [ref=e74]:
+          - button "Se connecter avec Google" [ref=e75] [cursor=pointer]:
+            - img [ref=e76]
+            - text: Se connecter avec Google
+          - button "Se connecter avec Apple" [ref=e81] [cursor=pointer]:
+            - img [ref=e82]
+            - text: Se connecter avec Apple
+          - link "Se connecter avec Email" [ref=e84] [cursor=pointer]:
+            - /url: /auth
+      - generic [ref=e86]:
+        - link "Support" [ref=e87] [cursor=pointer]:
+          - /url: mailto:hello@growthor.ai
+          - generic [ref=e88]: Support
+          - img [ref=e89]
+        - button "Conditions d'utilisation" [ref=e91] [cursor=pointer]:
+          - generic [ref=e92]: Conditions d'utilisation
+          - img [ref=e93]
+        - button "Politique de confidentialité" [ref=e95] [cursor=pointer]:
+          - generic [ref=e96]: Politique de confidentialité
+          - img [ref=e97]
+  - navigation [ref=e99]:
+    - generic [ref=e100]:
+      - link "Docs" [ref=e101] [cursor=pointer]:
+        - /url: /app
+        - img [ref=e102]
+        - generic [ref=e104]: Docs
+      - link "Scanner" [ref=e105] [cursor=pointer]:
+        - /url: /app/scan
+        - img [ref=e106]
+        - generic [ref=e109]: Scanner
+      - link "Pros" [ref=e110] [cursor=pointer]:
+        - /url: /app/pros
+        - img [ref=e111]
+        - generic [ref=e113]: Pros
+      - link "Profil" [ref=e114] [cursor=pointer]:
+        - /url: /app/settings
+        - img [ref=e115]
+        - generic [ref=e117]: Profil
+  - alert [ref=e118]
+```
