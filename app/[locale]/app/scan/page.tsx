@@ -107,8 +107,8 @@ export default function ScanPage() {
         setError(errT('zip_too_large'));
         return;
       }
-      if (!canScan()) {
-        setError(errT('zip_pro_only'));
+      if (!canScan(isAuthenticated)) {
+        setShowAuthPrompt(true);
         return;
       }
       try {
@@ -132,8 +132,8 @@ export default function ScanPage() {
       setError(errT('file_too_large'));
       return;
     }
-    if (!canScan()) {
-      setError(errT('scan_limit'));
+    if (!canScan(isAuthenticated)) {
+      setShowAuthPrompt(true);
       return;
     }
 
