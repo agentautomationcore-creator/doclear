@@ -99,6 +99,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           const { data, error } = await supabase.auth.signInAnonymously();
           if (!error && data.user) {
             setUser(data.user);
+            localStorage.setItem('doclear_was_anonymous', 'true');
           }
         } catch {
           // Anonymous auth not enabled — fallback to no user
@@ -114,18 +115,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(session?.user ?? null);
 
       if (event === 'SIGNED_IN' && session?.user) {
-        // User just registered/logged in — reset scan count to 0 (fresh 5 scans)
+        // Only reset scan count on FIRST registration (anonymous → Google/Email)
+        // Check if this is a fresh registration (no previous scan data in Supabase)
         if (!session.user.is_anonymous) {
-          setScanCount(0);
-          // Clear localStorage scan count
-          try {
-            const stored = localStorage.getItem('doclear_settings');
-            if (stored) {
-              const settings = JSON.parse(stored);
-              settings.scanCount = 0;
-              localStorage.setItem('doclear_settings', JSON.stringify(settings));
-            }
-          } catch {}
+          const wasAnonymous = localStorage.getItem('doclear_was_anonymous');
+          if (wasAnonymous === 'true') {
+            // First time registering — reset count, give fresh 5 scans
+            setScanCount(0);
+            try {
+              const stored = localStorage.getItem('doclear_settings');
+              if (stored) {
+                const settings = JSON.parse(stored);
+                settings.scanCount = 0;
+                localStorage.setItem('doclear_settings', JSON.stringify(settings));
+              }
+            } catch {}
+            localStorage.removeItem('doclear_was_anonymous');
+          }
         }
         setTimeout(() => refreshUsage(), 500);
       }
