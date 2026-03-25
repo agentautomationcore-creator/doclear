@@ -196,7 +196,9 @@ export const COUNTRY_NAMES: Record<CountryCode, string> = {
   OTHER: 'Other',
 };
 
-export const MAX_FREE_SCANS = 5;
+export const MAX_GUEST_SCANS = 3;      // Without account
+export const MAX_FREE_SCANS = 5;       // Free account (per month)
+// Pro = unlimited
 
 export const RTL_LOCALES: Locale[] = ['ar'];
 

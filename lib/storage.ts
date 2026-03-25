@@ -1,4 +1,4 @@
-import { Document, Settings, Locale, CountryCode, ImmigrationStatus, UserProfile, MAX_FREE_SCANS } from './types';
+import { Document, Settings, Locale, CountryCode, ImmigrationStatus, UserProfile, MAX_FREE_SCANS, MAX_GUEST_SCANS } from './types';
 
 const DOCUMENTS_KEY = 'doclear_documents';
 const SETTINGS_KEY = 'doclear_settings';
@@ -97,14 +97,20 @@ export function incrementScanCount(): number {
   return settings.scanCount;
 }
 
-export function canScan(): boolean {
+export function canScan(isAuthenticated: boolean = false): boolean {
   const settings = getSettings();
-  return settings.scanCount < MAX_FREE_SCANS;
+  const limit = isAuthenticated ? MAX_FREE_SCANS : MAX_GUEST_SCANS;
+  return settings.scanCount < limit;
 }
 
-export function getRemainingScans(): number {
+export function getRemainingScans(isAuthenticated: boolean = false): number {
   const settings = getSettings();
-  return Math.max(0, MAX_FREE_SCANS - settings.scanCount);
+  const limit = isAuthenticated ? MAX_FREE_SCANS : MAX_GUEST_SCANS;
+  return Math.max(0, limit - settings.scanCount);
+}
+
+export function getCurrentLimit(isAuthenticated: boolean = false): number {
+  return isAuthenticated ? MAX_FREE_SCANS : MAX_GUEST_SCANS;
 }
 
 // Onboarding

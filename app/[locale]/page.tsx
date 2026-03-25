@@ -28,10 +28,10 @@ export default function LandingPage() {
               </Link>
             ) : (
               <>
-                <Link href="/auth" className="hidden sm:inline-flex text-sm font-medium text-[#6B7280] hover:text-[#1A1A2E] transition-colors">
+                <Link href="/auth" className="text-sm font-medium text-[#6B7280] hover:text-[#1A1A2E] transition-colors">
                   {tAuth('sign_in_short')}
                 </Link>
-                <Link href="/app" className="hidden sm:inline-flex bg-[#1A1A2E] text-white text-sm font-medium px-5 py-2.5 rounded-[14px] hover:bg-[#2A2A3E] transition-colors">
+                <Link href="/app" className="bg-[#1A1A2E] text-white text-sm font-medium px-4 sm:px-5 py-2 sm:py-2.5 rounded-[14px] hover:bg-[#2A2A3E] transition-colors">
                   {t('cta_short')}
                 </Link>
               </>
@@ -133,7 +133,7 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <Link href="/app" className="block text-center bg-white text-[#1A1A2E] font-medium py-3 rounded-xl hover:bg-white/90 transition-colors">{t('final_cta')}</Link>
+              <Link href="/auth" className="block text-center bg-white text-[#1A1A2E] font-medium py-3 rounded-xl hover:bg-white/90 transition-colors">{t('final_cta')}</Link>
             </div>
           </div>
         </div>
