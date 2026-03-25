@@ -125,7 +125,13 @@
     "terms": "شروط الاستخدام",
     "privacy": "سياسة الخصوصية",
     "country": "البلد",
-    "status": "الوضع"
+    "status": "الوضع",
+    "sign_in_google": "تسجيل الدخول بحساب Google",
+    "sign_out": "تسجيل الخروج",
+    "delete_account": "حذف حسابي",
+    "delete_confirm": "سيتم حذف جميع بياناتك. هل أنت متأكد؟",
+    "delete_yes": "نعم، احذف",
+    "cancel": "إلغاء"
   },
   "paywall": {
     "title": "أعجبك؟",

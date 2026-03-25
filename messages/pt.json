@@ -125,7 +125,13 @@
     "terms": "Termos de uso",
     "privacy": "Política de privacidade",
     "country": "Pais",
-    "status": "Status"
+    "status": "Status",
+    "sign_in_google": "Entrar com Google",
+    "sign_out": "Sair",
+    "delete_account": "Excluir minha conta",
+    "delete_confirm": "Todos os dados serão excluídos. Tem certeza?",
+    "delete_yes": "Sim, excluir",
+    "cancel": "Cancelar"
   },
   "paywall": {
     "title": "Gostou?",

@@ -125,7 +125,13 @@
     "terms": "使用条款",
     "privacy": "隐私政策",
     "country": "国家",
-    "status": "身份"
+    "status": "身份",
+    "sign_in_google": "使用Google登录",
+    "sign_out": "退出",
+    "delete_account": "删除我的账户",
+    "delete_confirm": "所有数据将被永久删除。确定吗？",
+    "delete_yes": "是的，删除",
+    "cancel": "取消"
   },
   "paywall": {
     "title": "喜欢吗？",

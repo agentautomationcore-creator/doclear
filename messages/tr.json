@@ -125,7 +125,13 @@
     "terms": "Kullanım koşulları",
     "privacy": "Gizlilik politikası",
     "country": "Ulke",
-    "status": "Durum"
+    "status": "Durum",
+    "sign_in_google": "Google ile giriş yap",
+    "sign_out": "Çıkış yap",
+    "delete_account": "Hesabımı sil",
+    "delete_confirm": "Tüm veriler silinecek. Emin misiniz?",
+    "delete_yes": "Evet, sil",
+    "cancel": "İptal"
   },
   "paywall": {
     "title": "Beğendiniz mi?",

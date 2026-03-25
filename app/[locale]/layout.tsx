@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { RTL_LOCALES, Locale } from '@/lib/types';
 import ServiceWorkerRegister from '@/app/sw-register';
+import { AuthProvider } from '@/components/AuthProvider';
 
 export default async function LocaleLayout({
   children,
@@ -33,8 +34,10 @@ export default async function LocaleLayout({
       </head>
       <body className="min-h-screen bg-white text-[#1D1D1F] antialiased">
         <NextIntlClientProvider messages={messages}>
-          <ServiceWorkerRegister />
-          {children}
+          <AuthProvider>
+            <ServiceWorkerRegister />
+            {children}
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>
