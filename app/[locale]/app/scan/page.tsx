@@ -107,10 +107,6 @@ export default function ScanPage() {
         setError(errT('zip_too_large'));
         return;
       }
-      if (!canScan(isAuthenticated)) {
-        setShowAuthPrompt(true);
-        return;
-      }
       try {
         const zipFiles = await processZip(file);
         if (zipFiles.length === 0) {
@@ -130,10 +126,6 @@ export default function ScanPage() {
     // Single file
     if (file.size > 20 * 1024 * 1024) {
       setError(errT('file_too_large'));
-      return;
-    }
-    if (!canScan(isAuthenticated)) {
-      setShowAuthPrompt(true);
       return;
     }
 

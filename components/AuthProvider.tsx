@@ -3,7 +3,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
-import { migrateFromLocalStorage } from '@/lib/supabaseStorage';
 import { getSettings, saveSettings } from '@/lib/storage';
 
 interface AuthContextType {
@@ -18,41 +17,39 @@ const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
 });
 
-function resetScanCountForLoggedIn() {
-  try {
-    const settings = getSettings();
-    // If user had more scans than guest limit (3), they were a guest who hit limit
-    // Reset to 0 so they get fresh 5 scans as registered user
-    if (settings.scanCount >= 3) {
-      settings.scanCount = 0;
-      saveSettings(settings);
-    }
-  } catch {}
-}
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
       setLoading(false);
 
-      // On login: reset scan count (user gets fresh 5/month) + migrate data
-      if (session?.user) {
-        resetScanCountForLoggedIn();
-        migrateFromLocalStorage().catch(console.error);
+      if (currentUser) {
+        // User is logged in — reset scan count to give them fresh 5/month
+        const settings = getSettings();
+        settings.scanCount = 0;
+        saveSettings(settings);
       }
     });
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        resetScanCountForLoggedIn();
-        migrateFromLocalStorage().catch(console.error);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+
+      if (event === 'SIGNED_IN' && currentUser) {
+        // Fresh login — reset scan count
+        const settings = getSettings();
+        settings.scanCount = 0;
+        saveSettings(settings);
+        // Reload to apply
+        window.location.href = '/app';
+      }
+
+      if (event === 'SIGNED_OUT') {
+        setUser(null);
       }
     });
 
