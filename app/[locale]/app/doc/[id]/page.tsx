@@ -210,6 +210,15 @@ export default function DocumentPage() {
       </div>
 
       <div className="px-4 py-5 max-w-2xl mx-auto">
+        {/* Original document — prominent at top */}
+        {doc.imageData && (
+          <div className="mb-6">
+            <div className="rounded-[16px] overflow-hidden bg-[#F5F5F7] border border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+              <img src={doc.imageData} alt={doc.title} className="w-full max-h-[400px] object-contain" />
+            </div>
+          </div>
+        )}
+
         {/* Document header */}
         <div className="mb-6">
           <h1 className="text-xl font-bold text-[#1A1A2E] mb-2">{doc.title}</h1>

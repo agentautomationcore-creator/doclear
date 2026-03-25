@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import { processFile, processZip, getFormatIcon, ProcessedFile } from '@/lib/fileProcessor';
-import { addDocument, incrementScanCount, canScan, getUserProfile } from '@/lib/storage';
+import { addDocument, getUserProfile } from '@/lib/storage';
 import { AnalysisResponse, Document } from '@/lib/types';
 import { useAuth } from '@/components/AuthProvider';
 import Paywall from '@/components/Paywall';
@@ -92,7 +92,7 @@ export default function ScanPage() {
   const [batchProgress, setBatchProgress] = useState({ current: 0, total: 0 });
   const [error, setError] = useState<string | null>(null);
   const [showAuthPrompt, setShowAuthPrompt] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const auth = useAuth();
   const tAuth = useTranslations('auth');
   const fileRef = useRef<HTMLInputElement>(null);
   const cameraRef = useRef<HTMLInputElement>(null);
@@ -166,7 +166,7 @@ export default function ScanPage() {
 
     if (!response.ok) return null;
     const analysis: AnalysisResponse = await response.json();
-    incrementScanCount();
+    await auth.incrementScan();
 
     return {
       id: uuidv4(),
@@ -192,7 +192,7 @@ export default function ScanPage() {
     if (files.length === 0 || analyzing) return;
 
     // Check scan limit
-    if (!canScan(isAuthenticated)) {
+    if (!auth.canScan) {
       setShowAuthPrompt(true);
       return;
     }
@@ -320,7 +320,7 @@ export default function ScanPage() {
 
         {/* Paywall — scan limit reached */}
         {showAuthPrompt && (
-          <Paywall type={isAuthenticated ? 'free_limit' : 'guest_limit'} />
+          <Paywall type={auth.isAuthenticated ? 'free_limit' : 'guest_limit'} />
         )}
 
         {/* Error */}

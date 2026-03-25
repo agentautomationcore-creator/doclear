@@ -3,30 +3,24 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { useAuth } from './AuthProvider';
-import { MAX_FREE_SCANS, MAX_GUEST_SCANS } from '@/lib/types';
 
-interface Props {
-  used: number;
-}
-
-export default function ScanCounter({ used }: Props) {
+export default function ScanCounter() {
   const t = useTranslations('settings');
   const tPaywall = useTranslations('paywall');
-  const { isAuthenticated } = useAuth();
+  const { scanCount, scanLimit, isAuthenticated, isAnonymous, canScan } = useAuth();
 
-  const limit = isAuthenticated ? MAX_FREE_SCANS : MAX_GUEST_SCANS;
-  const remaining = Math.max(0, limit - used);
-  const pct = Math.min(100, Math.round((used / limit) * 100));
+  const remaining = Math.max(0, scanLimit - scanCount);
+  const pct = Math.min(100, Math.round((scanCount / scanLimit) * 100));
   const isLow = remaining <= 1 && remaining > 0;
-  const isExhausted = remaining === 0;
+  const isExhausted = !canScan;
 
   return (
     <div className="mb-4">
       <div className="flex items-center justify-between mb-1">
         <p className="text-sm text-[#6B7280]">
-          {t('scans_left', { used, total: limit })}
+          {t('scans_left', { used: scanCount, total: scanLimit })}
         </p>
-        {isExhausted && !isAuthenticated && (
+        {isExhausted && isAnonymous && (
           <Link href="/auth" className="text-xs font-medium text-[#1A1A2E] hover:underline">
             {tPaywall('guest_bonus')}
           </Link>

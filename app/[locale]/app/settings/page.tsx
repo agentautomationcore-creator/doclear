@@ -217,7 +217,7 @@ export default function SettingsPage() {
         <div>
           <p className="text-[11px] uppercase tracking-wider text-[#6B7280] font-semibold mb-2">{t('usage')}</p>
           <div className="bg-white rounded-[14px] border border-black/[0.06] p-4">
-            <ScanCounter used={settings.scanCount} />
+            <ScanCounter />
           </div>
         </div>
 

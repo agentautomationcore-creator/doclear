@@ -52,19 +52,34 @@ export default function AuthPage() {
   }
 
   async function handleGoogle() {
-    resetScans();
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: `${window.location.origin}/app` },
-    });
+    // Try linkIdentity first (for anonymous → registered upgrade)
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session?.user?.app_metadata?.provider === 'anonymous') {
+      await supabase.auth.linkIdentity({
+        provider: 'google',
+        options: { redirectTo: `${window.location.origin}/app` },
+      });
+    } else {
+      await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: `${window.location.origin}/app` },
+      });
+    }
   }
 
   async function handleApple() {
-    resetScans();
-    await supabase.auth.signInWithOAuth({
-      provider: 'apple',
-      options: { redirectTo: `${window.location.origin}/app` },
-    });
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session?.user?.app_metadata?.provider === 'anonymous') {
+      await supabase.auth.linkIdentity({
+        provider: 'apple',
+        options: { redirectTo: `${window.location.origin}/app` },
+      });
+    } else {
+      await supabase.auth.signInWithOAuth({
+        provider: 'apple',
+        options: { redirectTo: `${window.location.origin}/app` },
+      });
+    }
   }
 
   return (

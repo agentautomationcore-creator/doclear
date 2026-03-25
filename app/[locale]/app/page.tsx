@@ -110,7 +110,7 @@ export default function TimelinePage() {
       <div className="px-4 py-4 max-w-2xl mx-auto">
         <DeadlineBanner count={deadlineCount} />
 
-        <ScanCounter used={scanCount} />
+        <ScanCounter />
 
         {filteredDocs.length === 0 ? (
           <div className="text-center py-16">
