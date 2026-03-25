@@ -242,6 +242,10 @@
     "register_prompt": "Devam etmek için kaydolun",
     "register_prompt_desc": "5 ücretsiz taramanızı kullandınız. Devam etmek için bir hesap oluşturun.",
     "forgot_password": "Şifremi unuttum",
-    "reset_sent": "Sıfırlama bağlantısı gönderildi"
+    "reset_sent": "Sıfırlama bağlantısı gönderildi",
+    "new_password_title": "Yeni şifre",
+    "new_password_placeholder": "Yeni şifre (min 6 karakter)",
+    "update_password": "Güncelle",
+    "password_updated": "Şifre güncellendi!"
   }
 }

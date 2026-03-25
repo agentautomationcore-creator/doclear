@@ -242,6 +242,10 @@
     "register_prompt": "سجل للمتابعة",
     "register_prompt_desc": "لقد استخدمت 5 مسح مجاني. أنشئ حساباً للمتابعة.",
     "forgot_password": "نسيت كلمة المرور؟",
-    "reset_sent": "تم إرسال رابط إعادة التعيين"
+    "reset_sent": "تم إرسال رابط إعادة التعيين",
+    "new_password_title": "كلمة مرور جديدة",
+    "new_password_placeholder": "كلمة مرور جديدة (6 أحرف كحد أدنى)",
+    "update_password": "تحديث",
+    "password_updated": "تم تحديث كلمة المرور!"
   }
 }

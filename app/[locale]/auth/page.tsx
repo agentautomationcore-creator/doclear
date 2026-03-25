@@ -16,6 +16,18 @@ export default function AuthPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [showReset, setShowReset] = useState(false);
+  const [isResetMode, setIsResetMode] = useState(false);
+  const [newPassword, setNewPassword] = useState('');
+
+  // Check if user came from password reset link
+  useState(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash;
+      if (hash.includes('type=recovery') || hash.includes('type=signup')) {
+        setIsResetMode(true);
+      }
+    }
+  });
 
   function resetScans() {
     const settings = getSettings();
@@ -82,6 +94,53 @@ export default function AuthPage() {
         options: { redirectTo: `${window.location.origin}/app` },
       });
     }
+  }
+
+  // Password reset form
+  if (isResetMode) {
+    return (
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
+        <div className="w-full max-w-sm">
+          <div className="flex items-center justify-center gap-2.5 mb-8">
+            <img src="/icon-192.png" alt="DocLear" width={36} height={36} className="rounded-lg" />
+            <span className="text-2xl font-bold text-[#1A1A2E]">{app('name')}</span>
+          </div>
+          <h1 className="text-2xl font-bold text-[#1A1A2E] text-center mb-6">{t('new_password_title')}</h1>
+          <form onSubmit={async (e) => {
+            e.preventDefault();
+            setLoading(true);
+            setError('');
+            const { error: err } = await supabase.auth.updateUser({ password: newPassword });
+            setLoading(false);
+            if (err) {
+              setError(err.message);
+            } else {
+              setSuccess(t('password_updated'));
+              setTimeout(() => { window.location.href = '/app'; }, 1500);
+            }
+          }} className="space-y-3">
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder={t('new_password_placeholder')}
+              required
+              minLength={6}
+              className="w-full bg-[#F5F5F7] rounded-[14px] px-4 py-3.5 text-sm text-[#1A1A2E] placeholder:text-[#6B7280] border border-black/[0.06] focus:outline-none focus:ring-2 focus:ring-[#1A1A2E]/20"
+            />
+            {error && <p className="text-[#DC2626] text-sm">{error}</p>}
+            {success && <p className="text-[#34C759] text-sm">{success}</p>}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#1A1A2E] text-white font-medium py-3.5 rounded-[14px] hover:bg-[#2A2A3E] transition-colors disabled:opacity-50"
+            >
+              {loading ? '...' : t('update_password')}
+            </button>
+          </form>
+        </div>
+      </div>
+    );
   }
 
   return (

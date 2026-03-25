@@ -242,6 +242,10 @@
     "register_prompt": "Sign up to continue scanning",
     "register_prompt_desc": "You have used your 5 free scans. Create an account to continue.",
     "forgot_password": "Forgot password?",
-    "reset_sent": "Reset link sent to your email"
+    "reset_sent": "Reset link sent to your email",
+    "new_password_title": "Set new password",
+    "new_password_placeholder": "New password (min 6 characters)",
+    "update_password": "Update password",
+    "password_updated": "Password updated! Redirecting..."
   }
 }

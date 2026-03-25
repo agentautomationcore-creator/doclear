@@ -242,6 +242,10 @@
     "register_prompt": "Inscrivez-vous pour continuer",
     "register_prompt_desc": "Vous avez utilisé vos 5 scans gratuits. Créez un compte pour continuer.",
     "forgot_password": "Mot de passe oublié ?",
-    "reset_sent": "Lien de réinitialisation envoyé"
+    "reset_sent": "Lien de réinitialisation envoyé",
+    "new_password_title": "Nouveau mot de passe",
+    "new_password_placeholder": "Nouveau mot de passe (min 6 caractères)",
+    "update_password": "Mettre à jour",
+    "password_updated": "Mot de passe mis à jour ! Redirection..."
   }
 }

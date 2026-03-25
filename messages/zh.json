@@ -242,6 +242,10 @@
     "register_prompt": "注册以继续",
     "register_prompt_desc": "您已使用5次免费扫描。创建账户以继续。",
     "forgot_password": "忘记密码？",
-    "reset_sent": "重置链接已发送到邮箱"
+    "reset_sent": "重置链接已发送到邮箱",
+    "new_password_title": "设置新密码",
+    "new_password_placeholder": "新密码（至少6位）",
+    "update_password": "更新密码",
+    "password_updated": "密码已更新！"
   }
 }

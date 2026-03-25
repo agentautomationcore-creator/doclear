@@ -242,6 +242,10 @@
     "register_prompt": "Registre-se para continuar",
     "register_prompt_desc": "Você usou seus 5 scans gratuitos. Crie uma conta para continuar.",
     "forgot_password": "Esqueceu a senha?",
-    "reset_sent": "Link de redefinição enviado"
+    "reset_sent": "Link de redefinição enviado",
+    "new_password_title": "Nova senha",
+    "new_password_placeholder": "Nova senha (mín. 6 caracteres)",
+    "update_password": "Atualizar",
+    "password_updated": "Senha atualizada!"
   }
 }
