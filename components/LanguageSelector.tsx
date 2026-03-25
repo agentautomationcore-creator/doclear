@@ -36,7 +36,8 @@ export default function LanguageSelector() {
         className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-[#F5F5F7] transition-colors min-h-[44px]"
         aria-label="Change language"
       >
-        <span className="text-sm font-medium text-[#1D1D1F]">{LOCALE_NAMES[locale]}</span>
+        <span className="text-sm font-medium text-[#1D1D1F] hidden sm:inline">{LOCALE_NAMES[locale]}</span>
+        <span className="text-sm font-medium text-[#1D1D1F] sm:hidden">{locale.toUpperCase()}</span>
         <svg
           className={`w-4 h-4 text-muted transition-transform ${open ? 'rotate-180' : ''}`}
           fill="none"

@@ -28,10 +28,10 @@ export default function LandingPage() {
               </Link>
             ) : (
               <>
-                <Link href="/auth" className="text-sm font-medium text-[#6B7280] hover:text-[#1A1A2E] transition-colors">
+                <Link href="/auth" className="text-xs sm:text-sm font-medium text-[#6B7280] hover:text-[#1A1A2E] transition-colors whitespace-nowrap">
                   {tAuth('sign_in_short')}
                 </Link>
-                <Link href="/app" className="bg-[#1A1A2E] text-white text-sm font-medium px-4 sm:px-5 py-2 sm:py-2.5 rounded-[14px] hover:bg-[#2A2A3E] transition-colors">
+                <Link href="/app" className="bg-[#1A1A2E] text-white text-xs sm:text-sm font-medium px-3 sm:px-5 py-2 sm:py-2.5 rounded-[14px] hover:bg-[#2A2A3E] transition-colors whitespace-nowrap">
                   {t('cta_short')}
                 </Link>
               </>
