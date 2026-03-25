@@ -91,20 +91,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (session?.user) {
         setUser(session.user);
-        setLoading(false);
       } else {
-        // 2. No session — create anonymous user
-        try {
-          const { data, error } = await supabase.auth.signInAnonymously();
-          if (!error && data.user) {
+        // 2. No session — create anonymous user in background
+        supabase.auth.signInAnonymously().then(({ data, error }) => {
+          if (!error && data?.user) {
             setUser(data.user);
             localStorage.setItem('doclear_was_anonymous', 'true');
           }
-        } catch {
-          // Anonymous auth not enabled — fallback to no user
-        }
-        setLoading(false);
+        }).catch(() => {});
       }
+      // Always show page immediately — don't wait for anonymous auth
+      setLoading(false);
     }
 
     initAuth();
