@@ -131,7 +131,9 @@
     "delete_account": "Hesabımı sil",
     "delete_confirm": "Tüm veriler silinecek. Emin misiniz?",
     "delete_yes": "Evet, sil",
-    "cancel": "İptal"
+    "cancel": "İptal",
+    "sign_in_apple": "Apple ile giriş yap",
+    "sign_in_email": "E-posta ile giriş yap"
   },
   "paywall": {
     "title": "Beğendiniz mi?",

@@ -131,7 +131,9 @@
     "delete_account": "حذف حسابي",
     "delete_confirm": "سيتم حذف جميع بياناتك. هل أنت متأكد؟",
     "delete_yes": "نعم، احذف",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "sign_in_apple": "تسجيل الدخول بحساب Apple",
+    "sign_in_email": "تسجيل الدخول بالبريد"
   },
   "paywall": {
     "title": "أعجبك؟",

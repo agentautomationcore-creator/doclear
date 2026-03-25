@@ -131,7 +131,9 @@
     "delete_account": "Delete my account",
     "delete_confirm": "All data will be permanently deleted. Are you sure?",
     "delete_yes": "Yes, delete",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "sign_in_apple": "Sign in with Apple",
+    "sign_in_email": "Sign in with Email"
   },
   "paywall": {
     "title": "Enjoyed it?",

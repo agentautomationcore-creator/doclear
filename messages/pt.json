@@ -131,7 +131,9 @@
     "delete_account": "Excluir minha conta",
     "delete_confirm": "Todos os dados serão excluídos. Tem certeza?",
     "delete_yes": "Sim, excluir",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "sign_in_apple": "Entrar com Apple",
+    "sign_in_email": "Entrar com Email"
   },
   "paywall": {
     "title": "Gostou?",

@@ -131,7 +131,9 @@
     "delete_account": "Удалить аккаунт",
     "delete_confirm": "Все данные будут удалены навсегда. Вы уверены?",
     "delete_yes": "Да, удалить",
-    "cancel": "Отмена"
+    "cancel": "Отмена",
+    "sign_in_apple": "Войти через Apple",
+    "sign_in_email": "Войти через Email"
   },
   "paywall": {
     "title": "Понравилось?",
