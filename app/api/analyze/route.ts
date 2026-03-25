@@ -85,12 +85,28 @@ export async function POST(request: NextRequest) {
       }];
     }
 
-    const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 2000,
-      system: systemPrompt,
-      messages,
-    });
+    // Auto-retry on 529 (overloaded) — up to 3 attempts
+    let response;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        response = await anthropic.messages.create({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 2000,
+          system: systemPrompt,
+          messages,
+        });
+        break; // success
+      } catch (retryErr: any) {
+        if (retryErr?.status === 529 && attempt < 3) {
+          await new Promise(r => setTimeout(r, 5000 * attempt)); // 5s, 10s
+          continue;
+        }
+        throw retryErr;
+      }
+    }
+    if (!response) {
+      return NextResponse.json({ error: 'AI service temporarily unavailable' }, { status: 503 });
+    }
 
     const textBlock = response.content.find((b) => b.type === 'text');
     if (!textBlock || textBlock.type !== 'text') {
