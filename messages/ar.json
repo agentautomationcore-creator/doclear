@@ -205,5 +205,23 @@
     "to_receive": "للاستلام",
     "recommendation": "توصية الذكاء الاصطناعي",
     "view_all": "عرض جميع المستندات"
+  },
+  "auth": {
+    "sign_in": "تسجيل الدخول",
+    "create_account": "إنشاء حساب",
+    "subtitle": "الوصول إلى مستنداتك من أي جهاز",
+    "with_google": "المتابعة مع Google",
+    "with_apple": "المتابعة مع Apple",
+    "or": "أو",
+    "email_placeholder": "البريد الإلكتروني",
+    "password_placeholder": "كلمة المرور (6 أحرف كحد أدنى)",
+    "check_email": "تحقق من بريدك الإلكتروني",
+    "invalid_credentials": "بريد إلكتروني أو كلمة مرور غير صالحة",
+    "no_account": "ليس لديك حساب؟",
+    "have_account": "لديك حساب بالفعل؟",
+    "back_home": "العودة للرئيسية",
+    "sign_in_short": "دخول",
+    "register_prompt": "سجل للمتابعة",
+    "register_prompt_desc": "لقد استخدمت 5 مسح مجاني. أنشئ حساباً للمتابعة."
   }
 }

@@ -205,5 +205,23 @@
     "to_receive": "To receive",
     "recommendation": "AI recommendation",
     "view_all": "View all documents"
+  },
+  "auth": {
+    "sign_in": "Sign in",
+    "create_account": "Create account",
+    "subtitle": "Access your documents from any device",
+    "with_google": "Continue with Google",
+    "with_apple": "Continue with Apple",
+    "or": "or",
+    "email_placeholder": "Email address",
+    "password_placeholder": "Password (min 6 characters)",
+    "check_email": "Check your email to confirm",
+    "invalid_credentials": "Invalid email or password",
+    "no_account": "No account?",
+    "have_account": "Already have an account?",
+    "back_home": "Back to home",
+    "sign_in_short": "Sign in",
+    "register_prompt": "Sign up to continue scanning",
+    "register_prompt_desc": "You have used your 5 free scans. Create an account to continue."
   }
 }

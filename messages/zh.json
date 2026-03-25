@@ -205,5 +205,23 @@
     "to_receive": "待收款",
     "recommendation": "AI建议",
     "view_all": "查看所有文件"
+  },
+  "auth": {
+    "sign_in": "登录",
+    "create_account": "创建账户",
+    "subtitle": "从任何设备访问您的文档",
+    "with_google": "使用Google继续",
+    "with_apple": "使用Apple继续",
+    "or": "或",
+    "email_placeholder": "邮箱地址",
+    "password_placeholder": "密码（至少6位）",
+    "check_email": "请检查邮箱确认",
+    "invalid_credentials": "邮箱或密码无效",
+    "no_account": "没有账户？",
+    "have_account": "已有账户？",
+    "back_home": "返回首页",
+    "sign_in_short": "登录",
+    "register_prompt": "注册以继续",
+    "register_prompt_desc": "您已使用5次免费扫描。创建账户以继续。"
   }
 }

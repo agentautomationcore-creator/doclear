@@ -3,10 +3,13 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import LanguageSelector from '@/components/LanguageSelector';
+import { useAuth } from '@/components/AuthProvider';
 
 export default function LandingPage() {
   const t = useTranslations('landing');
+  const tAuth = useTranslations('auth');
   const app = useTranslations('app');
+  const { user, isAuthenticated } = useAuth();
 
   return (
     <div className="min-h-screen bg-white">
@@ -19,9 +22,20 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-3">
             <LanguageSelector />
-            <Link href="/app" className="hidden sm:inline-flex bg-[#1A1A2E] text-white text-sm font-medium px-5 py-2.5 rounded-[14px] hover:bg-[#2A2A3E] transition-colors">
-              {t('cta_short')}
-            </Link>
+            {isAuthenticated ? (
+              <Link href="/app" className="w-8 h-8 bg-[#1A1A2E] text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                {user?.email?.[0]?.toUpperCase() || 'U'}
+              </Link>
+            ) : (
+              <>
+                <Link href="/auth" className="hidden sm:inline-flex text-sm font-medium text-[#6B7280] hover:text-[#1A1A2E] transition-colors">
+                  {tAuth('sign_in_short')}
+                </Link>
+                <Link href="/app" className="hidden sm:inline-flex bg-[#1A1A2E] text-white text-sm font-medium px-5 py-2.5 rounded-[14px] hover:bg-[#2A2A3E] transition-colors">
+                  {t('cta_short')}
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </header>

@@ -205,5 +205,23 @@
     "to_receive": "К получению",
     "recommendation": "Рекомендация ИИ",
     "view_all": "Все документы"
+  },
+  "auth": {
+    "sign_in": "Войти",
+    "create_account": "Создать аккаунт",
+    "subtitle": "Доступ к документам с любого устройства",
+    "with_google": "Войти через Google",
+    "with_apple": "Войти через Apple",
+    "or": "или",
+    "email_placeholder": "Email",
+    "password_placeholder": "Пароль (мин. 6 символов)",
+    "check_email": "Проверьте email для подтверждения",
+    "invalid_credentials": "Неверный email или пароль",
+    "no_account": "Нет аккаунта?",
+    "have_account": "Уже есть аккаунт?",
+    "back_home": "На главную",
+    "sign_in_short": "Войти",
+    "register_prompt": "Зарегистрируйтесь чтобы продолжить",
+    "register_prompt_desc": "Вы использовали 5 бесплатных сканов. Создайте аккаунт чтобы продолжить."
   }
 }

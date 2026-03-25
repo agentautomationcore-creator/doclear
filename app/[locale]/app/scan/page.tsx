@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { processFile, processZip, getFormatIcon, ProcessedFile } from '@/lib/fileProcessor';
 import { addDocument, incrementScanCount, canScan, getUserProfile } from '@/lib/storage';
 import { AnalysisResponse, Document } from '@/lib/types';
+import { useAuth } from '@/components/AuthProvider';
 
 /* ---- SVG Icon Components ---- */
 function IconCamera({ className = 'w-6 h-6' }: { className?: string }) {
@@ -89,6 +90,9 @@ export default function ScanPage() {
   const [step, setStep] = useState(0);
   const [batchProgress, setBatchProgress] = useState({ current: 0, total: 0 });
   const [error, setError] = useState<string | null>(null);
+  const [showAuthPrompt, setShowAuthPrompt] = useState(false);
+  const { isAuthenticated } = useAuth();
+  const tAuth = useTranslations('auth');
   const fileRef = useRef<HTMLInputElement>(null);
   const cameraRef = useRef<HTMLInputElement>(null);
 
@@ -193,6 +197,13 @@ export default function ScanPage() {
 
   async function handleAnalyze() {
     if (files.length === 0 || analyzing) return;
+
+    // Check scan limit — if exceeded and not logged in, show auth prompt
+    if (!canScan() && !isAuthenticated) {
+      setShowAuthPrompt(true);
+      return;
+    }
+
     setAnalyzing(true);
     setError(null);
     setStep(0);
@@ -311,6 +322,23 @@ export default function ScanPage() {
               </div>
               <p className="text-[#6B7280] text-sm font-medium">{t('take_photo')}</p>
             </div>
+          </div>
+        )}
+
+        {/* Auth prompt — scan limit reached */}
+        {showAuthPrompt && (
+          <div className="bg-[#F5F5F7] rounded-[20px] p-6 mb-4 border border-black/[0.06] text-center">
+            <h3 className="text-lg font-bold text-[#1A1A2E] mb-2">{tAuth('register_prompt')}</h3>
+            <p className="text-sm text-[#6B7280] mb-5">{tAuth('register_prompt_desc')}</p>
+            <a
+              href="/auth"
+              className="inline-block w-full bg-[#1A1A2E] text-white font-medium py-3.5 rounded-[14px] hover:bg-[#2A2A3E] transition-colors"
+            >
+              {tAuth('create_account')}
+            </a>
+            <a href="/auth" className="block mt-3 text-sm text-[#6B7280] hover:text-[#1A1A2E]">
+              {tAuth('sign_in')}
+            </a>
           </div>
         )}
 

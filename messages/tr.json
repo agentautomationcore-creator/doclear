@@ -205,5 +205,23 @@
     "to_receive": "Alinacak",
     "recommendation": "Yapay zeka onerisi",
     "view_all": "Tum belgeleri gor"
+  },
+  "auth": {
+    "sign_in": "Giriş yap",
+    "create_account": "Hesap oluştur",
+    "subtitle": "Belgelerinize herhangi bir cihazdan erişin",
+    "with_google": "Google ile devam et",
+    "with_apple": "Apple ile devam et",
+    "or": "veya",
+    "email_placeholder": "E-posta adresi",
+    "password_placeholder": "Şifre (min 6 karakter)",
+    "check_email": "Onaylamak için e-postanızı kontrol edin",
+    "invalid_credentials": "Geçersiz e-posta veya şifre",
+    "no_account": "Hesabınız yok mu?",
+    "have_account": "Zaten hesabınız var mı?",
+    "back_home": "Ana sayfaya dön",
+    "sign_in_short": "Giriş",
+    "register_prompt": "Devam etmek için kaydolun",
+    "register_prompt_desc": "5 ücretsiz taramanızı kullandınız. Devam etmek için bir hesap oluşturun."
   }
 }

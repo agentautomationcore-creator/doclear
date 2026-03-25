@@ -205,5 +205,23 @@
     "to_receive": "Da ricevere",
     "recommendation": "Raccomandazione IA",
     "view_all": "Vedi tutti i documenti"
+  },
+  "auth": {
+    "sign_in": "Accedi",
+    "create_account": "Crea account",
+    "subtitle": "Accedi ai tuoi documenti da qualsiasi dispositivo",
+    "with_google": "Continua con Google",
+    "with_apple": "Continua con Apple",
+    "or": "oppure",
+    "email_placeholder": "Indirizzo email",
+    "password_placeholder": "Password (min 6 caratteri)",
+    "check_email": "Controlla la tua email per confermare",
+    "invalid_credentials": "Email o password non validi",
+    "no_account": "Non hai un account?",
+    "have_account": "Hai già un account?",
+    "back_home": "Torna alla home",
+    "sign_in_short": "Accedi",
+    "register_prompt": "Registrati per continuare",
+    "register_prompt_desc": "Hai usato i tuoi 5 scan gratuiti. Crea un account per continuare."
   }
 }
