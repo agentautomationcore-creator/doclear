@@ -33,6 +33,8 @@ export interface AnalysisResponse {
   document_title: string;
   category: Category;
   document_country?: string;
+  document_language?: string;
+  confidence?: 'high' | 'medium' | 'low';
   what_is_this: string;
   what_it_says: string;
   what_to_do: string[];
@@ -41,7 +43,12 @@ export interface AnalysisResponse {
   urgency: Urgency;
   urgency_reason?: string | null;
   amounts: string[];
-  confidence?: 'high' | 'medium' | 'low';
+  key_entities?: {
+    reference_numbers?: string[];
+    organizations?: string[];
+    addresses?: string[];
+  };
+  related_documents?: string[];
   recommendations?: Recommendation[];
 }
 
