@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { supabase } from '@/lib/supabase';
+import { getSettings, saveSettings } from '@/lib/storage';
 
 export default function AuthPage() {
   const t = useTranslations('auth');
@@ -14,6 +15,12 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  function resetScans() {
+    const settings = getSettings();
+    settings.scanCount = 0;
+    saveSettings(settings);
+  }
 
   async function handleEmailAuth(e: React.FormEvent) {
     e.preventDefault();
@@ -37,6 +44,7 @@ export default function AuthPage() {
       if (err) {
         setError(t('invalid_credentials'));
       } else {
+        resetScans();
         window.location.href = '/app';
       }
     }
@@ -44,6 +52,7 @@ export default function AuthPage() {
   }
 
   async function handleGoogle() {
+    resetScans();
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: `${window.location.origin}/app` },
@@ -51,6 +60,7 @@ export default function AuthPage() {
   }
 
   async function handleApple() {
+    resetScans();
     await supabase.auth.signInWithOAuth({
       provider: 'apple',
       options: { redirectTo: `${window.location.origin}/app` },
