@@ -1,104 +1,82 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useParams } from 'next/navigation';
-import { getDocument, updateDocument, canScan, incrementScanCount } from '@/lib/storage';
-import { shareDocument } from '@/lib/share';
-import { getCategoryConfig } from '@/lib/categories';
-import { Document, ChatMessage, Recommendation } from '@/lib/types';
-import { Link } from '@/i18n/navigation';
+import { getDocument, updateDocument } from '@/lib/storage';
+import { Document, ChatMessage, RiskFlag } from '@/lib/types';
+import { useAuth } from '@/components/AuthProvider';
+import dynamic from 'next/dynamic';
+import type { PDFViewerRef } from '@/components/PDFViewer';
 
-/* ---- SVG Icon Components ---- */
-function IconBack({ className = 'w-5 h-5' }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-    </svg>
-  );
+const PDFViewer = dynamic(() => import('@/components/PDFViewer'), { ssr: false });
+
+/* ---- Citation parser ---- */
+const CITATION_REGEX = /\[(?:стр\.|p\.|page\s*)(\d+)\]/gi;
+
+function renderWithCitations(text: string, onCitationClick: (page: number) => void) {
+  const parts: (string | { page: number; match: string })[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  const regex = new RegExp(CITATION_REGEX.source, 'gi');
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    parts.push({ page: parseInt(match[1], 10), match: match[0] });
+    lastIndex = regex.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts.map((part, i) => {
+    if (typeof part === 'string') return <span key={i}>{part}</span>;
+    return (
+      <button
+        key={i}
+        onClick={() => onCitationClick(part.page)}
+        className="inline-flex items-center px-1.5 py-0.5 mx-0.5 bg-[#1a56db]/10 text-[#1a56db] rounded-md text-xs font-medium hover:bg-[#1a56db]/20 transition-colors cursor-pointer"
+        title={`Go to page ${part.page}`}
+      >
+        p.{part.page}
+      </button>
+    );
+  });
 }
 
-function IconShare({ className = 'w-5 h-5' }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3v11.25" />
-    </svg>
-  );
+/* ---- Health score color ---- */
+function getScoreColor(score: number): string {
+  if (score >= 80) return '#16a34a';
+  if (score >= 50) return '#f59e0b';
+  return '#dc2626';
 }
 
-function IconClock({ className = 'w-4 h-4' }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-  );
-}
-
-function IconGlobe({ className = 'w-5 h-5' }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-    </svg>
-  );
-}
-
-function IconUsers({ className = 'w-5 h-5' }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-    </svg>
-  );
-}
-
-function IconArrowRight({ className = 'w-4 h-4' }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-    </svg>
-  );
-}
-
-function IconCamera({ className = 'w-4 h-4' }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
-    </svg>
-  );
-}
-
-function IconChevronDown({ className = 'w-4 h-4' }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-    </svg>
-  );
-}
-
-function IconCheckCircle({ className = 'w-5 h-5' }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-  );
+function getScoreBg(score: number): string {
+  if (score >= 80) return '#f0fdf4';
+  if (score >= 50) return '#fffbeb';
+  return '#fef2f2';
 }
 
 export default function DocumentPage() {
   const t = useTranslations('document');
-  const categories = useTranslations('categories');
-  const shareT = useTranslations('share');
-  const errT = useTranslations('errors');
   const locale = useLocale();
   const router = useRouter();
   const params = useParams();
   const id = params.id as string;
+  const auth = useAuth();
 
   const [doc, setDoc] = useState<Document | null>(null);
-  const [showOriginal, setShowOriginal] = useState(false);
   const [question, setQuestion] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
+  const [streamingText, setStreamingText] = useState('');
+  const [showPdf, setShowPdf] = useState(true);
+  const [activeTab, setActiveTab] = useState<'chat' | 'document'>('chat');
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const pdfViewerRef = useRef<PDFViewerRef>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const d = getDocument(id);
@@ -106,42 +84,36 @@ export default function DocumentPage() {
       router.replace('/app');
       return;
     }
-    // Mark as read
     if (d.status === 'new') {
       updateDocument(id, { status: 'read' });
       d.status = 'read';
     }
     setDoc(d);
-    // Auto-scroll to last chat message
-    setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
   }, [id, router]);
 
-  function handleMarkDone() {
-    if (!doc) return;
-    const newStatus = doc.status === 'done' ? 'read' : 'done';
-    updateDocument(id, { status: newStatus });
-    setDoc({ ...doc, status: newStatus });
-  }
+  const scrollToChat = useCallback(() => {
+    setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+  }, []);
 
-  async function handleShare() {
-    if (!doc) return;
-    try {
-      await shareDocument(doc, shareT('analyzed_with'));
-    } catch {
-      // User cancelled share
+  const handleCitationClick = useCallback((page: number) => {
+    // Desktop: scroll PDF
+    if (window.innerWidth >= 768) {
+      pdfViewerRef.current?.scrollToPage(page);
+      if (!showPdf) setShowPdf(true);
+    } else {
+      // Mobile: switch to document tab, scroll
+      setActiveTab('document');
+      setTimeout(() => pdfViewerRef.current?.scrollToPage(page), 300);
     }
-  }
+  }, [showPdf]);
 
-  async function handleAskQuestion() {
-    if (!doc || !question.trim() || chatLoading) return;
-
-    if (!canScan()) {
-      return;
-    }
+  async function handleAskQuestion(q?: string) {
+    const questionText = q || question.trim();
+    if (!doc || !questionText || chatLoading) return;
 
     const userMsg: ChatMessage = {
       role: 'user',
-      content: question.trim(),
+      content: questionText,
       timestamp: new Date().toISOString(),
     };
 
@@ -149,299 +121,423 @@ export default function DocumentPage() {
     setDoc({ ...doc, chatHistory: updatedHistory });
     setQuestion('');
     setChatLoading(true);
+    setStreamingText('');
 
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          question: userMsg.content,
-          document: { ...doc, chatHistory: updatedHistory },
+          question: questionText,
+          document: {
+            ...doc,
+            chatHistory: updatedHistory,
+            userId: auth.user?.id,
+          },
           language: locale,
+          documentId: id,
+          useSupabase: !!auth.user,
         }),
       });
 
       if (!response.ok) throw new Error('Chat failed');
 
-      const { answer } = await response.json();
+      // Parse SSE stream
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      let fullText = '';
 
-      incrementScanCount();
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          const chunk = decoder.decode(value, { stream: true });
+          const lines = chunk.split('\n');
+
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue;
+            try {
+              const data = JSON.parse(line.slice(6));
+              if (data.type === 'delta') {
+                fullText += data.text;
+                setStreamingText(fullText);
+                scrollToChat();
+              } else if (data.type === 'done') {
+                fullText = data.text;
+              }
+            } catch {}
+          }
+        }
+      }
 
       const assistantMsg: ChatMessage = {
         role: 'assistant',
-        content: answer,
+        content: fullText,
         timestamp: new Date().toISOString(),
       };
 
       const finalHistory = [...updatedHistory, assistantMsg];
       updateDocument(id, { chatHistory: finalHistory });
-      setDoc({ ...doc, chatHistory: finalHistory });
+      setDoc(prev => prev ? { ...prev, chatHistory: finalHistory } : prev);
+      setStreamingText('');
     } catch {
-      // Remove user message on error
-      setDoc({ ...doc, chatHistory: doc.chatHistory });
+      setDoc(prev => prev ? { ...prev, chatHistory: doc.chatHistory } : prev);
+      setStreamingText('');
     } finally {
       setChatLoading(false);
-      chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      scrollToChat();
     }
   }
 
   if (!doc) return null;
 
-  const cat = getCategoryConfig(doc.category);
+  const hasPdf = doc.imageData?.startsWith('data:application/pdf') || doc.fileType === 'pdf';
+  const hasImage = doc.imageData?.startsWith('data:image');
+  const healthScore = doc.healthScore;
+  const riskFlags = doc.riskFlags || [];
+  const positivePoints = doc.positivePoints || [];
+  const keyFacts = doc.keyFacts || [];
+  const suggestedQuestions = doc.suggestedQuestions || [];
 
-  return (
-    <div className="min-h-screen bg-white safe-area-inset-top safe-area-inset-bottom pb-24 font-[Inter,system-ui,sans-serif]">
-      {/* Header */}
-      <div className="sticky top-0 z-40 bg-white border-b border-black/[0.06] h-14 flex items-center px-4">
-        <button
-          onClick={() => router.back()}
-          className="p-2 hover:bg-[#F5F5F7] rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center absolute left-2"
-        >
-          <IconBack className="w-5 h-5 text-[#1A1A2E] rtl:rotate-180" />
-        </button>
-        <div className="mx-auto" />
-        <button
-          onClick={handleShare}
-          className="p-2 hover:bg-[#F5F5F7] rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center absolute right-2"
-          aria-label={t('share')}
-        >
-          <IconShare className="w-5 h-5 text-[#6B7280]" />
-        </button>
-      </div>
-
-      <div className="px-4 py-5 max-w-2xl mx-auto">
-        {/* Original document — prominent at top */}
-        {doc.imageData && (
-          <div className="mb-6">
-            {doc.imageData.startsWith('data:application/pdf') ? (
-              <div className="rounded-[16px] bg-[#F5F5F7] border border-black/[0.06] p-5 flex items-center gap-4">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
-                  <svg className="w-6 h-6 text-[#DC2626]" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                  </svg>
-                </div>
-                <div className="flex-1">
-                  <p className="font-medium text-[#1A1A2E] text-sm">{doc.title}</p>
-                  <p className="text-xs text-[#6B7280]">PDF</p>
-                </div>
-                <a
-                  href={doc.imageData}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-[#1A1A2E] text-white text-sm font-medium px-4 py-2 rounded-[12px] hover:bg-[#2A2A3E] transition-colors"
-                >
-                  {t('original')}
-                </a>
-              </div>
-            ) : doc.imageData.startsWith('data:image') ? (
-              <div className="rounded-[16px] overflow-hidden bg-[#F5F5F7] border border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
-                <img src={doc.imageData} alt={doc.title} className="w-full max-h-[400px] object-contain" />
-              </div>
-            ) : null}
-          </div>
-        )}
-
-        {/* Document header */}
-        <div className="mb-6">
-          <h1 className="text-xl font-bold text-[#1A1A2E] mb-2">{doc.title}</h1>
-          <div className="flex items-center gap-2">
-            <span
-              className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold"
-              style={{
-                backgroundColor: `${cat.color}1A`,
-                color: cat.color,
-              }}
-            >
-              {categories(doc.category as any)}
-            </span>
-            <span className="text-xs text-[#6B7280]">
-              {new Date(doc.createdAt).toLocaleDateString()}
-            </span>
-          </div>
-          {doc.deadline && (
-            <div className="mt-3">
-              <span className="inline-flex items-center gap-1.5 bg-[#FEE2E2] text-[#DC2626] rounded-lg px-3 py-1.5 text-xs font-bold">
-                <IconClock className="w-3.5 h-3.5" />
-                {t('deadline')}: {doc.deadlineDescription || doc.deadline}
+  /* ---- Chat Panel Content ---- */
+  const chatPanel = (
+    <div className="flex flex-col h-full">
+      {/* Scrollable chat area */}
+      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+        {/* Document summary card */}
+        <div className="bg-[#f8fafc] border border-gray-200 rounded-2xl p-4">
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="font-semibold text-[#1A1A2E] text-base">{doc.title}</h2>
+            {doc.docTypeLabel && (
+              <span className="text-xs bg-[#1a56db]/10 text-[#1a56db] px-2 py-1 rounded-lg font-medium">
+                {doc.docTypeLabel}
               </span>
-            </div>
+            )}
+          </div>
+          {doc.summary && (
+            <p className="text-sm text-gray-600 mb-3">{doc.summary}</p>
+          )}
+          {doc.pageCount && doc.pageCount > 1 && (
+            <p className="text-xs text-gray-400">{doc.pageCount} pages</p>
           )}
         </div>
 
-        {/* What is this */}
-        <div className="mb-4">
-          <h2 className="uppercase text-[11px] tracking-[0.08em] text-[#6B7280] font-semibold mb-2">
-            {t('what_is_this')}
-          </h2>
-          <div className="bg-[#F5F5F7] rounded-[16px] p-4">
-            <p className="text-[#1A1A2E] leading-relaxed text-[15px]">{doc.whatIsThis}</p>
+        {/* Health Score */}
+        {healthScore !== undefined && healthScore !== null && (
+          <div className="rounded-2xl p-4" style={{ backgroundColor: getScoreBg(healthScore) }}>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-semibold text-gray-700">Health Score</span>
+              <span className="text-2xl font-bold" style={{ color: getScoreColor(healthScore) }}>
+                {healthScore}/100
+              </span>
+            </div>
+            <div className="w-full h-2 bg-white/60 rounded-full overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all"
+                style={{
+                  width: `${healthScore}%`,
+                  backgroundColor: getScoreColor(healthScore),
+                }}
+              />
+            </div>
+            {doc.healthScoreExplanation && (
+              <p className="text-xs text-gray-500 mt-2">{doc.healthScoreExplanation}</p>
+            )}
           </div>
-        </div>
+        )}
 
-        {/* What it says */}
-        <div className="mb-4">
-          <h2 className="uppercase text-[11px] tracking-[0.08em] text-[#6B7280] font-semibold mb-2">
-            {t('what_it_says')}
-          </h2>
-          <div className="bg-[#F5F5F7] rounded-[16px] p-4">
-            <p className="text-[#1A1A2E] leading-relaxed text-[15px]">{doc.whatItSays}</p>
-          </div>
-        </div>
-
-        {/* What to do */}
-        <div className="mb-6">
-          <h2 className="uppercase text-[11px] tracking-[0.08em] text-[#6B7280] font-semibold mb-2">
-            {t('what_to_do')}
-          </h2>
-          <div className="bg-[#F5F5F7] rounded-[16px] p-4">
-            <ol className="space-y-2.5">
-              {doc.whatToDo.map((step, i) => (
-                <li key={i} className="flex gap-3 text-[#1A1A2E]">
-                  <span className="flex-shrink-0 w-6 h-6 bg-[#1A1A2E]/10 text-[#1A1A2E] rounded-full flex items-center justify-center text-xs font-semibold">
+        {/* Key Facts */}
+        {keyFacts.length > 0 && (
+          <div className="bg-white border border-gray-200 rounded-2xl p-4">
+            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+              {t('key_facts') || '5 Key Facts'}
+            </h3>
+            <ol className="space-y-2">
+              {keyFacts.map((fact, i) => (
+                <li key={i} className="flex gap-2.5 text-sm text-[#1A1A2E]">
+                  <span className="flex-shrink-0 w-5 h-5 bg-[#1a56db]/10 text-[#1a56db] rounded-full flex items-center justify-center text-xs font-bold">
                     {i + 1}
                   </span>
-                  <span className="leading-relaxed text-[15px]">{step}</span>
+                  <span className="leading-relaxed">{fact}</span>
                 </li>
               ))}
             </ol>
           </div>
-        </div>
+        )}
 
-        {/* Recommendations */}
-        {doc.recommendations && doc.recommendations.length > 0 && (
-          <div className="mb-6">
-            <h2 className="uppercase text-[11px] tracking-[0.08em] text-[#6B7280] font-semibold mb-2">
-              {t('recommendations')}
-            </h2>
+        {/* Risk Flags */}
+        {riskFlags.length > 0 && (
+          <div className="bg-white border border-gray-200 rounded-2xl p-4">
+            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+              Risks & Warnings
+            </h3>
             <div className="space-y-2">
-              {doc.recommendations.map((rec: Recommendation, i: number) => (
-                <div key={i} className="bg-[#F5F5F7] rounded-[16px] p-4 flex items-center justify-between gap-3 border border-black/[0.06]">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center flex-shrink-0 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
-                      {rec.type === 'website' ? (
-                        <IconGlobe className="w-5 h-5 text-[#6B7280]" />
-                      ) : (
-                        <IconUsers className="w-5 h-5 text-[#6B7280]" />
+              {riskFlags.map((flag: RiskFlag, i: number) => (
+                <div key={i} className={`rounded-xl p-3 ${
+                  flag.severity === 'high' ? 'bg-red-50 border border-red-200' :
+                  flag.severity === 'medium' ? 'bg-amber-50 border border-amber-200' :
+                  'bg-blue-50 border border-blue-200'
+                }`}>
+                  <div className="flex items-start gap-2">
+                    <span className={`text-xs font-bold px-1.5 py-0.5 rounded ${
+                      flag.severity === 'high' ? 'bg-red-100 text-red-700' :
+                      flag.severity === 'medium' ? 'bg-amber-100 text-amber-700' :
+                      'bg-blue-100 text-blue-700'
+                    }`}>
+                      {flag.severity.toUpperCase()}
+                    </span>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-gray-800">{flag.title}</p>
+                      <p className="text-xs text-gray-600 mt-0.5">{flag.description}</p>
+                      {flag.page && (
+                        <button
+                          onClick={() => handleCitationClick(flag.page!)}
+                          className="text-xs text-[#1a56db] mt-1 hover:underline"
+                        >
+                          p.{flag.page}
+                        </button>
                       )}
                     </div>
-                    <div className="min-w-0">
-                      <p className="font-medium text-[#1A1A2E] truncate text-[15px]">{rec.title}</p>
-                      <p className="text-sm text-[#6B7280] truncate">{rec.description}</p>
-                    </div>
                   </div>
-                  {rec.type === 'website' && rec.url ? (
-                    <a href={rec.url} target="_blank" rel="noopener noreferrer" className="flex-shrink-0 flex items-center gap-1 text-[#1A1A2E] text-sm font-medium">
-                      <span>{t('visit_portal')}</span>
-                      <IconArrowRight className="w-3.5 h-3.5" />
-                    </a>
-                  ) : rec.type === 'professional' && rec.professionalType ? (
-                    <Link href={`/app/pros?type=${rec.professionalType}`} className="flex-shrink-0 flex items-center gap-1 text-[#1A1A2E] text-sm font-medium">
-                      <span>{t('find_specialist')}</span>
-                      <IconArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  ) : null}
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* Chat */}
-        <div className="mb-6">
-          <h2 className="uppercase text-[11px] tracking-[0.08em] text-[#6B7280] font-semibold mb-2">
-            {t('ask_question')}
-          </h2>
-
-          {/* Chat history */}
-          {doc.chatHistory.length > 0 && (
-            <div className="space-y-3 mb-3">
-              {doc.chatHistory.map((msg, i) => (
-                <div
-                  key={i}
-                  className={`rounded-[16px] p-3.5 text-sm leading-relaxed ${
-                    msg.role === 'user'
-                      ? 'bg-[#1A1A2E] text-white ltr:ml-8 rtl:mr-8'
-                      : 'bg-[#F5F5F7] text-[#1A1A2E] ltr:mr-8 rtl:ml-8'
-                  }`}
-                >
-                  {msg.content}
-                </div>
-              ))}
-              {chatLoading && (
-                <div className="bg-[#F5F5F7] rounded-[16px] p-3.5 ltr:mr-8 rtl:ml-8">
-                  <div className="flex gap-1.5">
-                    <span className="w-2 h-2 bg-[#6B7280] rounded-full animate-bounce" />
-                    <span className="w-2 h-2 bg-[#6B7280] rounded-full animate-bounce [animation-delay:0.1s]" />
-                    <span className="w-2 h-2 bg-[#6B7280] rounded-full animate-bounce [animation-delay:0.2s]" />
+        {/* Positive Points */}
+        {positivePoints.length > 0 && (
+          <div className="bg-white border border-gray-200 rounded-2xl p-4">
+            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+              Positive Points
+            </h3>
+            <div className="space-y-2">
+              {positivePoints.map((point, i) => (
+                <div key={i} className="flex gap-2 text-sm">
+                  <span className="text-green-500 flex-shrink-0">✓</span>
+                  <div>
+                    <span className="font-medium text-gray-800">{point.title}</span>
+                    {point.description && <span className="text-gray-500"> — {point.description}</span>}
                   </div>
                 </div>
-              )}
-              <div ref={chatEndRef} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* What is this / What it says / What to do — collapsible */}
+        <details className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+          <summary className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-50">
+            {t('what_is_this')} / {t('what_it_says')} / {t('what_to_do')}
+          </summary>
+          <div className="px-4 pb-4 space-y-3">
+            <div>
+              <h4 className="text-xs font-semibold text-gray-400 mb-1">{t('what_is_this')}</h4>
+              <p className="text-sm text-gray-700 leading-relaxed">{doc.whatIsThis}</p>
+            </div>
+            <div>
+              <h4 className="text-xs font-semibold text-gray-400 mb-1">{t('what_it_says')}</h4>
+              <p className="text-sm text-gray-700 leading-relaxed">{doc.whatItSays}</p>
+            </div>
+            <div>
+              <h4 className="text-xs font-semibold text-gray-400 mb-1">{t('what_to_do')}</h4>
+              <ol className="space-y-1.5">
+                {(doc.whatToDo || []).map((step, i) => (
+                  <li key={i} className="flex gap-2 text-sm text-gray-700">
+                    <span className="flex-shrink-0 text-gray-400">{i + 1}.</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </details>
+
+        {/* Suggested Questions */}
+        {suggestedQuestions.length > 0 && doc.chatHistory.length === 0 && (
+          <div className="space-y-2">
+            <p className="text-xs text-gray-400 font-medium">Try asking:</p>
+            <div className="flex flex-wrap gap-2">
+              {suggestedQuestions.map((q, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleAskQuestion(q)}
+                  className="text-sm bg-white border border-gray-200 rounded-xl px-3 py-2 text-gray-700 hover:bg-gray-50 hover:border-[#1a56db]/30 transition-colors text-left"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Chat messages */}
+        {doc.chatHistory.length > 0 && (
+          <div className="space-y-3">
+            {doc.chatHistory.map((msg, i) => (
+              <div
+                key={i}
+                className={`rounded-2xl p-3.5 text-sm leading-relaxed ${
+                  msg.role === 'user'
+                    ? 'bg-[#1a56db] text-white ml-8'
+                    : 'bg-gray-100 text-[#1A1A2E] mr-8'
+                }`}
+              >
+                {msg.role === 'assistant'
+                  ? renderWithCitations(msg.content, handleCitationClick)
+                  : msg.content
+                }
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Streaming response */}
+        {streamingText && (
+          <div className="bg-gray-100 rounded-2xl p-3.5 text-sm leading-relaxed mr-8">
+            {renderWithCitations(streamingText, handleCitationClick)}
+            <span className="inline-block w-1.5 h-4 bg-gray-400 ml-0.5 animate-pulse" />
+          </div>
+        )}
+
+        {/* Loading dots */}
+        {chatLoading && !streamingText && (
+          <div className="bg-gray-100 rounded-2xl p-3.5 mr-8">
+            <div className="flex gap-1.5">
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.1s]" />
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]" />
+            </div>
+          </div>
+        )}
+
+        <div ref={chatEndRef} />
+      </div>
+
+      {/* Input bar */}
+      <div className="border-t border-gray-200 bg-white px-4 py-3 flex-shrink-0" style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}>
+        <div className="flex gap-2">
+          <input
+            ref={inputRef}
+            type="text"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder={t('ask_placeholder')}
+            className="flex-1 bg-gray-100 rounded-xl px-4 py-3 text-[16px] placeholder:text-gray-400 text-[#1A1A2E] focus:outline-none focus:ring-2 focus:ring-[#1a56db]/20 border border-gray-200"
+            onKeyDown={(e) => { if (e.key === 'Enter') handleAskQuestion(); }}
+          />
+          <button
+            onClick={() => handleAskQuestion()}
+            disabled={!question.trim() || chatLoading}
+            className="bg-[#1a56db] text-white px-4 py-3 rounded-xl font-medium text-sm disabled:opacity-40 min-w-[52px] min-h-[44px] flex items-center justify-center"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  /* ---- PDF/Image Panel Content ---- */
+  const documentPanel = (
+    <div className="h-full flex flex-col">
+      {hasPdf && doc.imageData ? (
+        <PDFViewer ref={pdfViewerRef} src={doc.imageData} />
+      ) : hasImage && doc.imageData ? (
+        <div className="flex-1 overflow-auto p-4 bg-gray-100">
+          <img src={doc.imageData} alt={doc.title} className="w-full rounded-lg shadow-sm" />
+        </div>
+      ) : (
+        <div className="flex-1 flex items-center justify-center text-gray-400 text-sm">
+          No document preview available
+        </div>
+      )}
+    </div>
+  );
+
+  /* ---- DESKTOP LAYOUT (≥768px): Split Panel ---- */
+  /* ---- MOBILE LAYOUT (<768px): Tabs ---- */
+  return (
+    <div className="h-screen flex flex-col bg-white" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+      {/* Header */}
+      <div className="flex-shrink-0 border-b border-gray-200 h-14 flex items-center px-4 bg-white z-10">
+        <button
+          onClick={() => router.back()}
+          className="p-2 hover:bg-gray-100 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
+        >
+          <svg className="w-5 h-5 text-gray-700 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <div className="flex-1 text-center">
+          <h1 className="text-sm font-semibold text-[#1A1A2E] truncate max-w-[200px] mx-auto">
+            {doc.title}
+          </h1>
+        </div>
+        {/* Toggle PDF panel button (desktop) */}
+        {(hasPdf || hasImage) && (
+          <button
+            onClick={() => setShowPdf(!showPdf)}
+            className="hidden md:flex p-2 hover:bg-gray-100 rounded-lg min-h-[44px] min-w-[44px] items-center justify-center text-gray-500"
+            title={showPdf ? 'Hide document' : 'Show document'}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+            </svg>
+          </button>
+        )}
+        <div className="w-[44px] md:hidden" /> {/* Spacer for mobile */}
+      </div>
+
+      {/* Mobile tabs */}
+      {(hasPdf || hasImage) && (
+        <div className="md:hidden flex border-b border-gray-200 bg-white flex-shrink-0">
+          <button
+            onClick={() => setActiveTab('chat')}
+            className={`flex-1 py-2.5 text-sm font-medium transition-colors ${
+              activeTab === 'chat'
+                ? 'text-[#1a56db] border-b-2 border-[#1a56db]'
+                : 'text-gray-500'
+            }`}
+          >
+            Chat
+          </button>
+          <button
+            onClick={() => setActiveTab('document')}
+            className={`flex-1 py-2.5 text-sm font-medium transition-colors ${
+              activeTab === 'document'
+                ? 'text-[#1a56db] border-b-2 border-[#1a56db]'
+                : 'text-gray-500'
+            }`}
+          >
+            Document
+          </button>
+        </div>
+      )}
+
+      {/* Content */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Desktop: split panel */}
+        <div className="hidden md:flex flex-1">
+          {/* PDF panel */}
+          {showPdf && (hasPdf || hasImage) && (
+            <div className="border-r border-gray-200" style={{ width: '40%', minWidth: '300px' }}>
+              {documentPanel}
             </div>
           )}
-
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              placeholder={t('ask_placeholder')}
-              className="flex-1 bg-[#F5F5F7] rounded-[14px] px-4 py-3 text-sm placeholder:text-[#6B7280] text-[#1A1A2E] focus:outline-none focus:ring-2 focus:ring-[#1A1A2E]/20 border border-black/[0.06]"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') handleAskQuestion();
-              }}
-            />
-            <button
-              onClick={handleAskQuestion}
-              disabled={!question.trim() || chatLoading}
-              className="bg-[#1A1A2E] text-white px-4 py-3 rounded-[14px] font-medium text-sm disabled:opacity-40 active:scale-[0.98] transition-transform min-w-[64px]"
-            >
-              {t('send')}
-            </button>
+          {/* Chat panel */}
+          <div className="flex-1 flex flex-col min-w-0">
+            {chatPanel}
           </div>
         </div>
 
-        {/* Original image */}
-        {doc.imageData && (
-          <div className="mb-6">
-            <button
-              onClick={() => setShowOriginal(!showOriginal)}
-              className="flex items-center gap-2 uppercase text-[11px] tracking-[0.08em] text-[#6B7280] font-semibold mb-2"
-            >
-              <IconCamera className="w-3.5 h-3.5" />
-              <span>{t('original')}</span>
-              <IconChevronDown className={`w-3.5 h-3.5 transition-transform ${showOriginal ? 'rotate-180' : ''}`} />
-            </button>
-
-            {!showOriginal && (
-              <div
-                onClick={() => setShowOriginal(true)}
-                className="w-20 h-28 rounded-xl overflow-hidden bg-[#F5F5F7] cursor-pointer border border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
-              >
-                <img src={doc.imageData} alt="Document" className="w-full h-full object-cover" />
-              </div>
-            )}
-
-            {showOriginal && (
-              <div className="rounded-[20px] overflow-hidden bg-[#F5F5F7] border border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
-                <img src={doc.imageData} alt="Document" className="w-full" />
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Mark as done */}
-        <button
-          onClick={handleMarkDone}
-          className={`w-full font-medium py-3.5 rounded-[14px] text-lg active:scale-[0.98] transition-transform h-[52px] flex items-center justify-center gap-2 ${
-            doc.status === 'done'
-              ? 'bg-[#F5F5F7] text-[#22C55E] border border-[#22C55E]/30'
-              : 'bg-[#1A1A2E] text-white'
-          }`}
-        >
-          <IconCheckCircle className="w-5 h-5" />
-          <span>{doc.status === 'done' ? t('marked_done') : t('mark_done')}</span>
-        </button>
+        {/* Mobile: tab content */}
+        <div className="md:hidden flex-1 flex flex-col">
+          {activeTab === 'chat' ? chatPanel : documentPanel}
+        </div>
       </div>
     </div>
   );

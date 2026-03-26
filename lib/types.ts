@@ -29,27 +29,74 @@ export interface Recommendation {
   professionalType?: ProfessionalType;
 }
 
+export type DocType =
+  | 'lease'
+  | 'nda'
+  | 'employment'
+  | 'medical'
+  | 'tax'
+  | 'insurance'
+  | 'court'
+  | 'invoice'
+  | 'academic'
+  | 'other';
+
+export interface RiskFlag {
+  title: string;
+  description: string;
+  severity: 'high' | 'medium' | 'low';
+  page?: number;
+  recommendation?: string;
+}
+
+export interface PositivePoint {
+  title: string;
+  description: string;
+}
+
 export interface AnalysisResponse {
   document_title: string;
   category: Category;
+  doc_type: DocType;
+  doc_type_label?: string;
   document_country?: string;
   document_language?: string;
   confidence?: 'high' | 'medium' | 'low';
+  summary?: string;
   what_is_this: string;
   what_it_says: string;
   what_to_do: string[];
+  what_does_it_say?: string;
   deadline: string | null;
   deadline_description: string | null;
   urgency: Urgency;
   urgency_reason?: string | null;
   amounts: string[];
+  health_score?: number;
+  health_score_explanation?: string;
+  risk_flags?: RiskFlag[];
+  positive_points?: PositivePoint[];
+  key_facts?: string[];
+  suggested_questions?: string[];
   key_entities?: {
+    parties?: string[];
     reference_numbers?: string[];
     organizations?: string[];
     addresses?: string[];
+    dates?: string[];
+    amounts?: string[];
+    references?: string[];
+  };
+  entities?: {
+    parties?: string[];
+    dates?: string[];
+    amounts?: string[];
+    references?: string[];
   };
   related_documents?: string[];
   recommendations?: Recommendation[];
+  specialist_type?: string;
+  specialist_recommendation?: string;
 }
 
 export interface Document {
@@ -57,7 +104,10 @@ export interface Document {
   createdAt: string;
   title: string;
   category: Category;
+  docType?: DocType;
+  docTypeLabel?: string;
   status: Status;
+  summary?: string;
   whatIsThis: string;
   whatItSays: string;
   whatToDo: string[];
@@ -65,7 +115,18 @@ export interface Document {
   deadlineDescription: string | null;
   urgency: Urgency;
   amounts: string[];
+  healthScore?: number;
+  healthScoreExplanation?: string;
+  riskFlags?: RiskFlag[];
+  positivePoints?: PositivePoint[];
+  keyFacts?: string[];
+  suggestedQuestions?: string[];
   imageData: string;
+  fileUrl?: string;
+  fileType?: string;
+  pageCount?: number;
+  rawText?: string;
+  pageTexts?: Record<string, string>;
   chatHistory: ChatMessage[];
   language: string;
   recommendations?: Recommendation[];
@@ -196,9 +257,9 @@ export const COUNTRY_NAMES: Record<CountryCode, string> = {
   OTHER: 'Other',
 };
 
-export const MAX_GUEST_SCANS = 3;      // Without account
-export const MAX_FREE_SCANS = 5;       // Free account (per month)
-// Pro = unlimited
+export const MAX_GUEST_SCANS = 2;      // Without account — 2 docs total
+export const MAX_FREE_SCANS = 2;       // Free account — 2 docs total
+// Starter = 20/month, Pro = unlimited
 
 export const RTL_LOCALES: Locale[] = ['ar'];
 

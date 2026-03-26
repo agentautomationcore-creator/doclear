@@ -142,10 +142,13 @@ export default function ScanPage() {
 
   async function analyzeFile(pf: ProcessedFile): Promise<Document | null> {
     const profile = getUserProfile();
+    const docId = uuidv4();
     const body: Record<string, any> = {
       language: locale,
       country: profile.country,
       status: profile.status,
+      userId: auth.user?.id || null,
+      documentId: docId,
     };
 
     if (pf.type === 'text') {
@@ -165,23 +168,41 @@ export default function ScanPage() {
     });
 
     if (!response.ok) return null;
-    const analysis: AnalysisResponse = await response.json();
+    const analysis: AnalysisResponse & {
+      _pageTexts?: Record<string, string>;
+      _rawText?: string;
+      _pageCount?: number;
+      _fileType?: string;
+    } = await response.json();
     await auth.incrementScan();
 
     return {
-      id: uuidv4(),
+      id: docId,
       createdAt: new Date().toISOString(),
       title: analysis.document_title,
       category: analysis.category,
+      docType: analysis.doc_type || 'other',
+      docTypeLabel: analysis.doc_type_label,
       status: 'new',
+      summary: analysis.summary,
       whatIsThis: analysis.what_is_this,
       whatItSays: analysis.what_it_says,
-      whatToDo: analysis.what_to_do,
+      whatToDo: Array.isArray(analysis.what_to_do) ? analysis.what_to_do : [analysis.what_to_do].filter(Boolean),
       deadline: analysis.deadline,
       deadlineDescription: analysis.deadline_description,
       urgency: analysis.urgency,
-      amounts: analysis.amounts,
-      imageData: pf.data || '',
+      amounts: analysis.amounts || [],
+      healthScore: analysis.health_score,
+      healthScoreExplanation: analysis.health_score_explanation,
+      riskFlags: analysis.risk_flags || [],
+      positivePoints: analysis.positive_points || [],
+      keyFacts: analysis.key_facts || [],
+      suggestedQuestions: analysis.suggested_questions || [],
+      imageData: pf.type === 'image' ? pf.data : '',
+      fileType: analysis._fileType || pf.type,
+      pageCount: analysis._pageCount,
+      rawText: analysis._rawText,
+      pageTexts: analysis._pageTexts,
       chatHistory: [],
       language: locale,
       recommendations: analysis.recommendations,

@@ -32,6 +32,43 @@ export async function updateProfile(updates: {
     .eq('id', user.id);
 }
 
+// ==================== HELPERS ====================
+
+function mapDbToDocument(d: any, chatHistory: ChatMessage[] = []): Document {
+  return {
+    id: d.id,
+    createdAt: d.created_at,
+    title: d.title,
+    category: d.category,
+    docType: d.doc_type || undefined,
+    docTypeLabel: d.doc_type_label || undefined,
+    status: d.status,
+    summary: d.summary || undefined,
+    whatIsThis: d.what_is_this || '',
+    whatItSays: d.what_it_says || '',
+    whatToDo: d.what_to_do || [],
+    deadline: d.deadline,
+    deadlineDescription: d.deadline_description,
+    urgency: d.urgency || 'none',
+    amounts: d.amounts || [],
+    healthScore: d.health_score ?? undefined,
+    healthScoreExplanation: d.health_score_explanation || undefined,
+    riskFlags: d.risk_flags || [],
+    positivePoints: d.positive_points || [],
+    keyFacts: d.key_facts || [],
+    suggestedQuestions: d.suggested_questions || [],
+    imageData: d.image_url || '',
+    fileUrl: d.file_url || undefined,
+    fileType: d.file_type || undefined,
+    pageCount: d.page_count || undefined,
+    rawText: d.raw_text || undefined,
+    pageTexts: d.page_texts || undefined,
+    chatHistory,
+    language: d.language || 'fr',
+    recommendations: d.recommendations || [],
+  };
+}
+
 // ==================== DOCUMENTS ====================
 
 export async function getDocumentsFromDb(): Promise<Document[]> {
@@ -66,27 +103,7 @@ export async function getDocumentsFromDb(): Promise<Document[]> {
     }
   }
 
-  return data.map((d: any) => ({
-    id: d.id,
-    createdAt: d.created_at,
-    title: d.title,
-    category: d.category,
-    status: d.status,
-    whatIsThis: d.what_is_this || '',
-    whatItSays: d.what_it_says || '',
-    whatToDo: d.what_to_do || [],
-    deadline: d.deadline,
-    deadlineDescription: d.deadline_description,
-    urgency: d.urgency || 'none',
-    urgencyReason: d.urgency_reason,
-    amounts: d.amounts || [],
-    imageData: d.image_url || '',
-    chatHistory: messagesByDoc[d.id] || [],
-    language: d.language || 'fr',
-    confidence: d.confidence,
-    documentCountry: d.document_country,
-    recommendations: d.recommendations || [],
-  }));
+  return data.map((d: any) => mapDbToDocument(d, messagesByDoc[d.id] || []));
 }
 
 export async function getDocumentFromDb(id: string): Promise<Document | null> {
@@ -108,28 +125,13 @@ export async function getDocumentFromDb(id: string): Promise<Document | null> {
     .eq('document_id', id)
     .order('created_at', { ascending: true });
 
-  return {
-    id: data.id,
-    createdAt: data.created_at,
-    title: data.title,
-    category: data.category,
-    status: data.status,
-    whatIsThis: data.what_is_this || '',
-    whatItSays: data.what_it_says || '',
-    whatToDo: data.what_to_do || [],
-    deadline: data.deadline,
-    deadlineDescription: data.deadline_description,
-    urgency: data.urgency || 'none',
-    amounts: data.amounts || [],
-    imageData: data.image_url || '',
-    chatHistory: (messages || []).map((m: any) => ({
-      role: m.role,
-      content: m.content,
-      timestamp: m.created_at,
-    })),
-    language: data.language || 'fr',
-    recommendations: data.recommendations || [],
-  };
+  const chatHistory: ChatMessage[] = (messages || []).map((m: any) => ({
+    role: m.role,
+    content: m.content,
+    timestamp: m.created_at,
+  }));
+
+  return mapDbToDocument(data, chatHistory);
 }
 
 export async function addDocumentToDb(doc: Document): Promise<string> {
@@ -147,7 +149,10 @@ export async function addDocumentToDb(doc: Document): Promise<string> {
     user_id: user.id,
     title: doc.title,
     category: doc.category,
+    doc_type: doc.docType || null,
+    doc_type_label: doc.docTypeLabel || null,
     status: doc.status,
+    summary: doc.summary || null,
     what_is_this: doc.whatIsThis,
     what_it_says: doc.whatItSays,
     what_to_do: doc.whatToDo,
@@ -155,6 +160,17 @@ export async function addDocumentToDb(doc: Document): Promise<string> {
     deadline_description: doc.deadlineDescription,
     urgency: doc.urgency,
     amounts: doc.amounts,
+    health_score: doc.healthScore ?? null,
+    health_score_explanation: doc.healthScoreExplanation || null,
+    risk_flags: doc.riskFlags || [],
+    positive_points: doc.positivePoints || [],
+    key_facts: doc.keyFacts || [],
+    suggested_questions: doc.suggestedQuestions || [],
+    raw_text: doc.rawText || null,
+    page_texts: doc.pageTexts || null,
+    page_count: doc.pageCount || null,
+    file_type: doc.fileType || null,
+    file_url: doc.fileUrl || null,
     image_url: imageUrl,
     language: doc.language,
     recommendations: doc.recommendations,

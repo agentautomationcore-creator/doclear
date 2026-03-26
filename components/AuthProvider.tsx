@@ -35,7 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const isAnonymous = user?.app_metadata?.provider === 'anonymous' || !user?.email;
   const isAuthenticated = !!user && !isAnonymous;
-  const scanLimit = isAuthenticated ? 5 : 3;
+  const scanLimit = 2; // Free: 2 docs total (Starter/Pro via Stripe)
   const canScan = scanCount < scanLimit;
 
   // Fetch usage from Supabase (single source of truth)
