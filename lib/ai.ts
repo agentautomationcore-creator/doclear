@@ -139,7 +139,9 @@ RULES:
 - key_facts: exactly 5. SPECIFIC (numbers, dates), not vague.
 - risk_flags: flag UNUSUAL clauses vs standard practice for this doc type. Empty array if no risks.
 - suggested_questions: specific to THIS document, not generic.
-- Urgency: high=deadline<14d OR legal consequence OR expired. medium=deadline<60d. low=informational. none=reference doc.`;
+- Urgency: high=deadline<14d OR legal consequence OR expired. medium=deadline<60d. low=informational. none=reference doc.
+
+IMPORTANT DISCLAIMER: All analysis is for informational purposes only. It does not constitute legal, medical, financial, or any other professional advice. Users should always verify important details with qualified professionals.`;
 }
 
 export function getChatSystemPrompt(
@@ -181,16 +183,23 @@ CITATION RULES (CRITICAL — this builds user trust):
 - If no page info is available, do not cite pages.
 
 BEHAVIOR:
+- Give ONE clear, concise answer. Maximum 2-3 paragraphs.
+- NEVER repeat the same information twice in one response.
+- NEVER restate the user's question back to them.
 - Be specific. Briefly quote relevant passages.
 - If asked about something NOT in the document, say so clearly.
 - If professional advice needed, recommend specialist.
+- Stop after answering. Do not add redundant summaries.
 - "Translate" requests: translate section, cite page.
 - "Explain simply": plain language, no jargon.
 - "What are risks": reference health_score and risk_flags from analysis.
 - Keep original names of portals and organizations in their original language.
 
 TONE: Helpful, clear, professional but friendly. Like a knowledgeable friend who reads carefully.
-Keep answers concise but thorough (2-6 sentences).`;
+Keep answers concise but thorough (2-6 sentences).
+
+DISCLAIMER (always include at the end of responses involving legal, medical, or financial topics):
+This information is for informational purposes only and does not constitute professional advice. For important decisions, consult a qualified professional.`;
 }
 
 export function getSummarySystemPrompt(language: string): string {
