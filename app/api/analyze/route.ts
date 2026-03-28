@@ -129,8 +129,75 @@ export async function POST(request: NextRequest) {
           ],
         }];
       }
+    } else if (type === 'docx' || image?.startsWith('data:application/vnd.openxmlformats-officedocument.wordprocessingml')) {
+      // DOCX — extract text with mammoth
+      fileType = 'docx';
+      const base64Data = image.replace(/^data:[^;]+;base64,/, '');
+      try {
+        const mammoth = await import('mammoth');
+        const { value: extractedText } = await mammoth.default.extractRawText({ buffer: Buffer.from(base64Data, 'base64') });
+        rawText = extractedText;
+        messages = [{
+          role: 'user' as const,
+          content: `Analyze this DOCX document:\n\n${extractedText.slice(0, 100000)}`,
+        }];
+      } catch (err) {
+        console.error('DOCX parsing failed:', err);
+        return NextResponse.json({ error: 'Failed to parse DOCX file' }, { status: 400 });
+      }
+    } else if (type === 'xlsx' || image?.startsWith('data:application/vnd.openxmlformats-officedocument.spreadsheetml') || image?.startsWith('data:application/vnd.ms-excel')) {
+      // XLSX/XLS — extract with SheetJS
+      fileType = 'xlsx';
+      const base64Data = image.replace(/^data:[^;]+;base64,/, '');
+      try {
+        const XLSX = await import('xlsx');
+        const workbook = XLSX.read(Buffer.from(base64Data, 'base64'), { type: 'buffer' });
+        rawText = workbook.SheetNames.map((name: string) => {
+          const csv = XLSX.utils.sheet_to_csv(workbook.Sheets[name]);
+          return `--- Sheet: ${name} ---\n${csv}`;
+        }).join('\n\n');
+        pageCount = workbook.SheetNames.length;
+        messages = [{
+          role: 'user' as const,
+          content: `Analyze this Excel spreadsheet (${pageCount} sheets):\n\n${rawText.slice(0, 100000)}`,
+        }];
+      } catch (err) {
+        console.error('XLSX parsing failed:', err);
+        return NextResponse.json({ error: 'Failed to parse Excel file' }, { status: 400 });
+      }
+    } else if (type === 'pptx' || image?.startsWith('data:application/vnd.openxmlformats-officedocument.presentationml')) {
+      // PPTX — extract with officeparser
+      fileType = 'pptx';
+      const base64Data = image.replace(/^data:[^;]+;base64,/, '');
+      try {
+        const officeparser = await import('officeparser');
+        const pptxBuffer = Buffer.from(base64Data, 'base64');
+        rawText = await new Promise<string>((resolve, reject) => {
+          // @ts-ignore — officeparser callback types
+          officeparser.default.parseOffice(pptxBuffer, function(result: any, err: any) {
+            if (err) reject(err);
+            else resolve(String(result));
+          });
+        });
+        messages = [{
+          role: 'user' as const,
+          content: `Analyze this PowerPoint presentation:\n\n${rawText.slice(0, 100000)}`,
+        }];
+      } catch (err) {
+        console.error('PPTX parsing failed:', err);
+        return NextResponse.json({ error: 'Failed to parse PowerPoint file' }, { status: 400 });
+      }
+    } else if (image?.startsWith('data:text/csv') || type === 'csv') {
+      // CSV
+      fileType = 'csv';
+      const base64Data = image.replace(/^data:[^;]+;base64,/, '');
+      rawText = Buffer.from(base64Data, 'base64').toString('utf-8').replace(/^\uFEFF/, '');
+      messages = [{
+        role: 'user' as const,
+        content: `Analyze this CSV data:\n\n${rawText.slice(0, 100000)}`,
+      }];
     } else {
-      // Image
+      // Image (JPEG, PNG, HEIC, etc.)
       fileType = 'image';
       if (image && image.length > 20_000_000) {
         return NextResponse.json({ error: 'File too large (max 15MB)' }, { status: 400 });
