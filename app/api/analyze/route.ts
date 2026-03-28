@@ -166,22 +166,27 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Failed to parse Excel file' }, { status: 400 });
       }
     } else if (type === 'pptx' || image?.startsWith('data:application/vnd.openxmlformats-officedocument.presentationml')) {
-      // PPTX — extract with officeparser
+      // PPTX — extract text via JSZip (PPTX = ZIP with XML slides)
       fileType = 'pptx';
       const base64Data = image.replace(/^data:[^;]+;base64,/, '');
       try {
-        const officeparser = await import('officeparser');
-        const pptxBuffer = Buffer.from(base64Data, 'base64');
-        rawText = await new Promise<string>((resolve, reject) => {
-          // @ts-ignore — officeparser callback types
-          officeparser.default.parseOffice(pptxBuffer, function(result: any, err: any) {
-            if (err) reject(err);
-            else resolve(String(result));
-          });
-        });
+        const JSZip = (await import('jszip')).default;
+        const zip = await JSZip.loadAsync(Buffer.from(base64Data, 'base64'));
+        const slideTexts: string[] = [];
+        const slideFiles = Object.keys(zip.files).filter(f => f.match(/ppt\/slides\/slide\d+\.xml/)).sort();
+        for (const slidePath of slideFiles) {
+          const xml = await zip.files[slidePath].async('string');
+          // Extract text from <a:t> tags
+          const texts = xml.match(/<a:t>([^<]*)<\/a:t>/g)?.map(t => t.replace(/<\/?a:t>/g, '')) || [];
+          if (texts.length > 0) {
+            slideTexts.push(`--- Slide ${slideTexts.length + 1} ---\n${texts.join(' ')}`);
+          }
+        }
+        rawText = slideTexts.join('\n\n');
+        pageCount = slideTexts.length;
         messages = [{
           role: 'user' as const,
-          content: `Analyze this PowerPoint presentation:\n\n${rawText.slice(0, 100000)}`,
+          content: `Analyze this PowerPoint presentation (${pageCount} slides):\n\n${rawText.slice(0, 100000)}`,
         }];
       } catch (err) {
         console.error('PPTX parsing failed:', err);

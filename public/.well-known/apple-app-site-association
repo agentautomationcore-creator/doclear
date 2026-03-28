@@ -1,0 +1,20 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["PT88KA7TD8.app.doclear.mobile"],
+        "components": [
+          {
+            "/": "/doc/*",
+            "comment": "Open document detail in app"
+          },
+          {
+            "/": "/app/*",
+            "comment": "Open app screens"
+          }
+        ]
+      }
+    ]
+  }
+}
