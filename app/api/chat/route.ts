@@ -7,7 +7,7 @@ const anthropic = new Anthropic();
 
 export async function POST(request: NextRequest) {
   try {
-    const { question, document: doc, language, documentId, useSupabase } = await request.json();
+    const { question, document: doc, language, documentId, useSupabase, chatHistory: clientChatHistory } = await request.json();
 
     if (!question || !language) {
       return new Response(JSON.stringify({ error: 'Missing question or language' }), {
@@ -83,10 +83,13 @@ export async function POST(request: NextRequest) {
 
     const chatMessages: Anthropic.MessageParam[] = [];
 
-    // Add chat history
-    if (doc?.chatHistory && doc.chatHistory.length > 0) {
-      for (const msg of doc.chatHistory) {
-        chatMessages.push({ role: msg.role, content: msg.content });
+    // Add chat history from client (mobile app sends chatHistory as top-level field)
+    const history = clientChatHistory || doc?.chatHistory || [];
+    if (history.length > 0) {
+      for (const msg of history) {
+        if (msg.role && msg.content) {
+          chatMessages.push({ role: msg.role, content: msg.content });
+        }
       }
     }
 
@@ -120,16 +123,7 @@ export async function POST(request: NextRequest) {
             .map((b) => (b as any).text)
             .join('');
 
-          // Save chat messages to Supabase
-          if (documentId && doc?.userId) {
-            try {
-              const supabase = createServiceClient();
-              await supabase.from('chat_messages').insert([
-                { document_id: documentId, user_id: doc.userId, role: 'user', content: question },
-                { document_id: documentId, user_id: doc.userId, role: 'assistant', content: fullText },
-              ]);
-            } catch {}
-          }
+          // Chat messages are saved by the client (mobile app) — no server-side save to avoid duplicates
 
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'done', text: fullText })}\n\n`));
           controller.close();
