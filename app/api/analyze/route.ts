@@ -252,6 +252,20 @@ export async function POST(request: NextRequest) {
 
     const analysis = parseAnalysisResponse(textBlock.text);
 
+    // For scanned PDFs and images: rawText is empty because Vision API was used.
+    // Build a fallback rawText from analysis fields so translation feature works.
+    if (!rawText && analysis) {
+      const parts: string[] = [];
+      if (analysis.what_is_this) parts.push(analysis.what_is_this);
+      if (analysis.what_it_says) parts.push(analysis.what_it_says);
+      if (analysis.summary) parts.push(analysis.summary);
+      if (analysis.key_facts?.length) parts.push(analysis.key_facts.join('\n'));
+      if (analysis.what_to_do?.length) parts.push(analysis.what_to_do.join('\n'));
+      if (parts.length > 0) {
+        rawText = parts.join('\n\n');
+      }
+    }
+
     // Save to Supabase if userId and documentId provided
     if (userId && documentId) {
       try {
