@@ -178,7 +178,8 @@ CITATION RULES (CRITICAL — this builds user trust):
 - Example: "According to clause 5.3 [p.8], a penalty applies..."
 - Multiple sources: [p.8] [p.12]
 - NEVER fabricate page numbers. Only cite pages where info actually appears.
-- If no page info is available, do not cite pages.
+- If no page numbers are available, cite the section name instead: [section: What to do] or [section: Key facts]
+- Always ground your answer in specific parts of the document.
 
 STRICT RULES:
 1. Give ONE answer. STOP after answering. Do NOT continue writing after your answer is complete.
