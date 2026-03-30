@@ -3,7 +3,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { getAnalysisSystemPrompt, parseAnalysisResponse } from '@/lib/ai';
 import { getCountryContext } from '@/lib/countryData';
 import { CountryCode } from '@/lib/types';
-import { createServiceClient } from '@/lib/supabase';
+import { createServiceClient, validateToken } from '@/lib/supabase';
 
 export const maxDuration = 120;
 export const dynamic = 'force-dynamic';
@@ -72,8 +72,26 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
     }
 
+    // Verify JWT and enforce server-side upload limit
+    const authHeader = request.headers.get('authorization');
+    const { user: authedUser, error: authError } = await validateToken(authHeader);
+    if (authError || !authedUser) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Server-side scan limit check via DB function
+    const supabaseAdmin = createServiceClient();
+    const { data: canUpload } = await supabaseAdmin.rpc('can_upload', { p_user_id: authedUser.id });
+    if (!canUpload) {
+      return NextResponse.json(
+        { error: 'Upload limit reached. Upgrade your plan for more documents.' },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
-    const { image, language, isPdf, type, textContent, country, status, userId, documentId } = body;
+    const { image, language, isPdf, type, textContent, country, status, documentId } = body;
+    const userId = authedUser.id; // Always use authenticated user ID, never trust client
 
     if ((!image && !textContent) || !language) {
       return NextResponse.json({ error: 'Missing data or language' }, { status: 400 });

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createServiceClient } from '@/lib/supabase';
+import { createServiceClient, validateToken } from '@/lib/supabase';
 
 /**
  * Migrate Anonymous User to Registered Account
@@ -14,8 +14,10 @@ import { createServiceClient } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
   try {
+    // Verify JWT token server-side
     const authHeader = request.headers.get('authorization');
-    if (!authHeader?.startsWith('Bearer ')) {
+    const { user: authedUser, error: authError } = await validateToken(authHeader);
+    if (authError || !authedUser) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -34,6 +36,11 @@ export async function POST(request: NextRequest) {
         { error: 'old and new user IDs must be different' },
         { status: 400 }
       );
+    }
+
+    // Authenticated user must be either the old or new user
+    if (authedUser.id !== old_user_id && authedUser.id !== new_user_id) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const supabase = createServiceClient();

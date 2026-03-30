@@ -1,12 +1,46 @@
 import { NextRequest } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { getChatSystemPrompt } from '@/lib/ai';
-import { createServiceClient } from '@/lib/supabase';
+import { createServiceClient, validateToken } from '@/lib/supabase';
 
 const anthropic = new Anthropic();
 
+const chatRateLimiter = new Map<string, { count: number; resetAt: number }>();
+const CHAT_RATE_LIMIT = 30;
+const CHAT_RATE_WINDOW = 60 * 1000;
+
+function checkChatRateLimit(userId: string): boolean {
+  const now = Date.now();
+  const entry = chatRateLimiter.get(userId);
+  if (!entry || now > entry.resetAt) {
+    chatRateLimiter.set(userId, { count: 1, resetAt: now + CHAT_RATE_WINDOW });
+    return true;
+  }
+  if (entry.count >= CHAT_RATE_LIMIT) return false;
+  entry.count++;
+  return true;
+}
+
 export async function POST(request: NextRequest) {
   try {
+    // Verify JWT token
+    const authHeader = request.headers.get('authorization');
+    const { user: authedUser, error: authError } = await validateToken(authHeader);
+    if (authError || !authedUser) {
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Per-user rate limiting
+    if (!checkChatRateLimit(authedUser.id)) {
+      return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     const { question, document: doc, language, documentId, useSupabase, chatHistory: clientChatHistory } = await request.json();
 
     if (!question || !language) {
@@ -25,10 +59,12 @@ export async function POST(request: NextRequest) {
     if (documentId && useSupabase) {
       try {
         const supabase = createServiceClient();
+        // Verify document belongs to authenticated user
         const { data: dbDoc } = await supabase
           .from('documents')
           .select('title, raw_text, page_texts, what_is_this, what_it_says, what_to_do, health_score, risk_flags, key_facts, doc_type, summary, amounts, deadline')
           .eq('id', documentId)
+          .eq('user_id', authedUser.id)
           .single();
 
         if (dbDoc) {

@@ -1,27 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createServiceClient } from '@/lib/supabase';
+import { createServiceClient, validateToken } from '@/lib/supabase';
 
 /**
  * Delete Account API
  * Removes all user data: documents, chat messages, storage files, and the user account.
- *
- * Demo review account: review@doclear.app / AppReview2026!
  */
 
 export async function POST(request: NextRequest) {
   try {
-    // Verify authorization
+    // Verify JWT token server-side
     const authHeader = request.headers.get('authorization');
-    if (!authHeader?.startsWith('Bearer ')) {
+    const { user: authedUser, error: authError } = await validateToken(authHeader);
+    if (authError || !authedUser) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const body = await request.json();
-    const { userId } = body;
-
-    if (!userId) {
-      return NextResponse.json({ error: 'userId required' }, { status: 400 });
-    }
+    // User can only delete their own account
+    const userId = authedUser.id;
 
     const supabase = createServiceClient();
 
@@ -37,8 +32,7 @@ export async function POST(request: NextRequest) {
           },
         });
       } catch {
-        // RevenueCat cleanup is best-effort — don't block deletion
-        console.warn(`Delete account: RevenueCat cleanup failed for ${userId}`);
+        // RevenueCat cleanup is best-effort
       }
     }
 
@@ -72,11 +66,11 @@ export async function POST(request: NextRequest) {
     const { error: deleteError } = await supabase.auth.admin.deleteUser(userId);
 
     if (deleteError) {
-      console.error(`Delete account: failed to delete user ${userId}:`, deleteError.message);
+      console.error('Delete account: failed to delete user:', deleteError.message);
       return NextResponse.json({ error: 'Failed to delete user' }, { status: 500 });
     }
 
-    console.log(`Delete account: user ${userId} deleted successfully`);
+    // Account deleted successfully
     return NextResponse.json({ deleted: true });
   } catch (error: any) {
     console.error('Delete account error:', error?.message);
