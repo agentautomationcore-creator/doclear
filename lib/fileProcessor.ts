@@ -32,16 +32,9 @@ export async function processFile(file: File): Promise<ProcessedFile> {
     return { type: 'text', data: result.value, mediaType: 'text/plain', fileName, originalFormat: ext };
   }
 
-  // XLSX/XLS
+  // XLSX/XLS — not supported (xlsx package removed due to CVE)
   if (['xlsx', 'xls'].includes(ext)) {
-    const XLSX = await import('xlsx');
-    const arrayBuffer = await file.arrayBuffer();
-    const workbook = XLSX.read(arrayBuffer);
-    const sheets = workbook.SheetNames.map((name) => {
-      const csv = XLSX.utils.sheet_to_csv(workbook.Sheets[name]);
-      return `--- ${name} ---\n${csv}`;
-    });
-    return { type: 'text', data: sheets.join('\n\n'), mediaType: 'text/plain', fileName, originalFormat: ext };
+    throw new Error('Excel files are not supported yet. Please convert to PDF or CSV.');
   }
 
   // Plain text / RTF / EML

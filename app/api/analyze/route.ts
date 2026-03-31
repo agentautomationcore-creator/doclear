@@ -164,25 +164,8 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Failed to parse DOCX file' }, { status: 400 });
       }
     } else if (type === 'xlsx' || image?.startsWith('data:application/vnd.openxmlformats-officedocument.spreadsheetml') || image?.startsWith('data:application/vnd.ms-excel')) {
-      // XLSX/XLS — extract with SheetJS
-      fileType = 'xlsx';
-      const base64Data = image.replace(/^data:[^;]+;base64,/, '');
-      try {
-        const XLSX = await import('xlsx');
-        const workbook = XLSX.read(Buffer.from(base64Data, 'base64'), { type: 'buffer' });
-        rawText = workbook.SheetNames.map((name: string) => {
-          const csv = XLSX.utils.sheet_to_csv(workbook.Sheets[name]);
-          return `--- Sheet: ${name} ---\n${csv}`;
-        }).join('\n\n');
-        pageCount = workbook.SheetNames.length;
-        messages = [{
-          role: 'user' as const,
-          content: `Analyze this Excel spreadsheet (${pageCount} sheets):\n\n${rawText.slice(0, 100000)}`,
-        }];
-      } catch (err) {
-        console.error('XLSX parsing failed:', err);
-        return NextResponse.json({ error: 'Failed to parse Excel file' }, { status: 400 });
-      }
+      // Excel files not supported (xlsx removed due to CVE)
+      return NextResponse.json({ error: 'Excel files are not supported yet. Please convert to PDF or CSV.' }, { status: 400 });
     } else if (type === 'pptx' || image?.startsWith('data:application/vnd.openxmlformats-officedocument.presentationml')) {
       // PPTX — extract text via JSZip (PPTX = ZIP with XML slides)
       fileType = 'pptx';

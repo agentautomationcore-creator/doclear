@@ -33,9 +33,22 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Per-user rate limiting
+    // Per-user rate limiting (burst protection)
     if (!checkChatRateLimit(authedUser.id)) {
       return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Server-side plan-based question limit (Free: 10/month)
+    const supabaseAdmin = createServiceClient();
+    const { data: canAsk } = await supabaseAdmin.rpc('can_ask_question', { p_user_id: authedUser.id });
+    if (!canAsk) {
+      return new Response(JSON.stringify({
+        error: 'Monthly question limit reached. Upgrade to Pro for unlimited questions.',
+        limit_reached: true,
+      }), {
         status: 429,
         headers: { 'Content-Type': 'application/json' },
       });

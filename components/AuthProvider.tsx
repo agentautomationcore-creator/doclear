@@ -92,13 +92,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (session?.user) {
         setUser(session.user);
       } else {
-        // 2. No session — create anonymous user in background
-        supabase.auth.signInAnonymously().then(({ data, error }) => {
-          if (!error && data?.user) {
-            setUser(data.user);
-            localStorage.setItem('doclear_was_anonymous', 'true');
+        // 2. No session — create anonymous user via rate-limited endpoint (DS5)
+        try {
+          const res = await fetch('/api/auth/anonymous', { method: 'POST' });
+          if (res.status === 429) {
+            // Rate limited — don't create account, user can still browse
+            console.warn('Anonymous account rate limited');
+          } else {
+            // Sign in anonymously after rate limit check passed
+            const { data, error } = await supabase.auth.signInAnonymously();
+            if (!error && data?.user) {
+              setUser(data.user);
+              localStorage.setItem('doclear_was_anonymous', 'true');
+            }
           }
-        }).catch(() => {});
+        } catch {
+          // Network error — try direct signIn as fallback
+          supabase.auth.signInAnonymously().then(({ data, error }) => {
+            if (!error && data?.user) {
+              setUser(data.user);
+              localStorage.setItem('doclear_was_anonymous', 'true');
+            }
+          }).catch(() => {});
+        }
       }
       // Always show page immediately — don't wait for anonymous auth
       setLoading(false);
