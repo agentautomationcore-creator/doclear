@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { createServiceClient } from '@/lib/supabase';
+import { createServiceClient, validateToken } from '@/lib/supabase';
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -8,11 +8,14 @@ function getStripe() {
 
 export async function POST(request: NextRequest) {
   try {
-    const { userId, locale } = await request.json();
-
-    if (!userId) {
-      return NextResponse.json({ error: 'Missing userId' }, { status: 400 });
+    const authHeader = request.headers.get('authorization');
+    const { user: authedUser, error: authError } = await validateToken(authHeader);
+    if (authError || !authedUser) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+
+    const { locale } = await request.json();
+    const userId = authedUser.id; // NEVER trust client
 
     const supabase = createServiceClient();
     const { data: profile } = await supabase

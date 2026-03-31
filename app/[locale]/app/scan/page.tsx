@@ -8,6 +8,7 @@ import { processFile, processZip, getFormatIcon, ProcessedFile } from '@/lib/fil
 import { addDocument, getUserProfile } from '@/lib/storage';
 import { AnalysisResponse, Document } from '@/lib/types';
 import { useAuth } from '@/components/AuthProvider';
+import { supabase } from '@/lib/supabase';
 import Paywall from '@/components/Paywall';
 
 /* ---- SVG Icon Components ---- */
@@ -161,9 +162,14 @@ export default function ScanPage() {
       body.image = pf.data;
     }
 
+    const { data: { session } } = await supabase.auth.getSession();
+    const analyzeHeaders: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (session?.access_token) {
+      analyzeHeaders['Authorization'] = `Bearer ${session.access_token}`;
+    }
     const response = await fetch('/api/analyze', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: analyzeHeaders,
       body: JSON.stringify(body),
     });
 

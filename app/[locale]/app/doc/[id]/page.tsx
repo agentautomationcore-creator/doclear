@@ -5,8 +5,10 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useParams } from 'next/navigation';
 import { getDocument, updateDocument } from '@/lib/storage';
+import { getDocumentFromDb } from '@/lib/supabaseStorage';
 import { Document, ChatMessage, RiskFlag } from '@/lib/types';
 import { useAuth } from '@/components/AuthProvider';
+import { supabase } from '@/lib/supabase';
 import dynamic from 'next/dynamic';
 import type { PDFViewerRef } from '@/components/PDFViewer';
 
@@ -79,17 +81,33 @@ export default function DocumentPage() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const d = getDocument(id);
-    if (!d) {
-      router.replace('/app');
-      return;
+    async function loadDoc() {
+      let d: Document | null | undefined = null;
+
+      if (auth.user && auth.isAuthenticated) {
+        // Authenticated: load from Supabase
+        try {
+          d = await getDocumentFromDb(id);
+        } catch {
+          // Fallback to localStorage
+          d = getDocument(id);
+        }
+      } else {
+        d = getDocument(id);
+      }
+
+      if (!d) {
+        router.replace('/app');
+        return;
+      }
+      if (d.status === 'new') {
+        updateDocument(id, { status: 'read' });
+        d.status = 'read';
+      }
+      setDoc(d);
     }
-    if (d.status === 'new') {
-      updateDocument(id, { status: 'read' });
-      d.status = 'read';
-    }
-    setDoc(d);
-  }, [id, router]);
+    loadDoc();
+  }, [id, router, auth.user, auth.isAuthenticated]);
 
   const scrollToChat = useCallback(() => {
     setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
@@ -124,9 +142,13 @@ export default function DocumentPage() {
     setStreamingText('');
 
     try {
+      const { data: { session } } = await supabase.auth.getSession();
       const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(session?.access_token ? { 'Authorization': `Bearer ${session.access_token}` } : {}),
+        },
         body: JSON.stringify({
           question: questionText,
           document: {

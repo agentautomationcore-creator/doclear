@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { useAuth } from './AuthProvider';
+import { supabase } from '@/lib/supabase';
 
 interface Props {
   type: 'guest_limit' | 'free_limit';
@@ -28,9 +29,13 @@ export default function Paywall({ type }: Props) {
     if (!auth.user) return;
     setLoading(plan);
     try {
+      const { data: { session } } = await supabase.auth.getSession();
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(session?.access_token ? { 'Authorization': `Bearer ${session.access_token}` } : {}),
+        },
         body: JSON.stringify({ plan, userId: auth.user.id, locale }),
       });
       const { url, error } = await res.json();

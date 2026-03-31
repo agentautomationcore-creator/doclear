@@ -35,7 +35,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const isAnonymous = user?.app_metadata?.provider === 'anonymous' || !user?.email;
   const isAuthenticated = !!user && !isAnonymous;
-  const scanLimit = 2; // Free: 2 docs total (Starter/Pro via Stripe)
+  const [plan, setPlan] = useState<string>('free');
+  const scanLimit = plan === 'pro' ? Infinity : plan === 'starter' ? 20 : 3;
   const canScan = scanCount < scanLimit;
 
   // Fetch usage from Supabase (single source of truth)
@@ -49,12 +50,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
       if (data && data.length > 0) {
         setScanCount(data[0].scan_count);
+        if (data[0].plan) setPlan(data[0].plan);
       } else if (typeof data === 'object' && data !== null && 'scan_count' in data) {
         setScanCount((data as any).scan_count);
+        if ((data as any).plan) setPlan((data as any).plan);
       }
     } catch (err) {
       console.error('refreshUsage failed:', err);
     }
+    // Also fetch plan from profile as fallback
+    try {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('plan')
+        .eq('id', user.id)
+        .single();
+      if (profile?.plan) setPlan(profile.plan);
+    } catch {}
   }, [user]);
 
   // Increment scan count

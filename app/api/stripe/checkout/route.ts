@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { createServiceClient } from '@/lib/supabase';
+import { createServiceClient, validateToken } from '@/lib/supabase';
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -14,9 +14,16 @@ const PRICES: Record<string, { amount: number; interval: 'month' | 'year' }> = {
 
 export async function POST(request: NextRequest) {
   try {
-    const { plan, userId, locale } = await request.json();
+    const authHeader = request.headers.get('authorization');
+    const { user: authedUser, error: authError } = await validateToken(authHeader);
+    if (authError || !authedUser) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
-    if (!plan || !userId || !PRICES[plan]) {
+    const { plan, locale } = await request.json();
+    const userId = authedUser.id; // NEVER trust client
+
+    if (!plan || !PRICES[plan]) {
       return NextResponse.json({ error: 'Invalid plan' }, { status: 400 });
     }
 

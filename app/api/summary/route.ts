@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { getSummarySystemPrompt, parseAnalysisResponse } from '@/lib/ai';
+import { validateToken, createServiceClient } from '@/lib/supabase';
 
 const anthropic = new Anthropic();
 
 export async function POST(request: NextRequest) {
   try {
+    const authHeader = request.headers.get('authorization');
+    const { user: authedUser, error: authError } = await validateToken(authHeader);
+    if (authError || !authedUser) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { documents, language } = await request.json();
 
     if (!documents || !language) {

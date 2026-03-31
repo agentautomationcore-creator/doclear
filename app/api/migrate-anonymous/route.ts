@@ -51,6 +51,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Old user not found' }, { status: 404 });
     }
 
+    const isAnonymous = oldUser.user.app_metadata?.provider === 'anonymous'
+      || !oldUser.user.email;
+    if (!isAnonymous) {
+      return NextResponse.json({ error: 'Source account is not anonymous' }, { status: 403 });
+    }
+
     // Verify new user exists
     const { data: newUser } = await supabase.auth.admin.getUserById(new_user_id);
     if (!newUser?.user) {

@@ -8,15 +8,18 @@ import {
   getDeadlinesThisWeek,
   getSettings,
 } from '@/lib/storage';
+import { getDocumentsFromDb } from '@/lib/supabaseStorage';
 import { requestNotificationPermission, checkDeadlineNotifications } from '@/lib/notifications';
 import { Document, Category } from '@/lib/types';
 import DocumentCard from '@/components/DocumentCard';
 import DeadlineBanner from '@/components/DeadlineBanner';
 import CategoryFilter from '@/components/CategoryFilter';
 import ScanCounter from '@/components/ScanCounter';
+import { useAuth } from '@/components/AuthProvider';
 
 export default function TimelinePage() {
   const t = useTranslations('timeline');
+  const { user, isAuthenticated } = useAuth();
   const [documents, setDocuments] = useState<Document[]>([]);
   const [filter, setFilter] = useState<Category | 'all'>('all');
   const [search, setSearch] = useState('');
@@ -24,21 +27,39 @@ export default function TimelinePage() {
   const [scanCount, setScanCount] = useState(0);
 
   useEffect(() => {
-    const docs = checkAndUpdateOverdue();
-    setDocuments(docs);
-    setDeadlineCount(getDeadlinesThisWeek().length);
-    setScanCount(getSettings().scanCount);
+    async function loadDocuments() {
+      let docs: Document[];
 
-    requestNotificationPermission().then((granted) => {
-      if (granted) {
-        checkDeadlineNotifications(docs, {
-          sevenDays: 'Deadline in 7 days',
-          oneDayBefore: 'Deadline tomorrow',
-          todayDeadline: 'Deadline today',
-        });
+      if (user && isAuthenticated) {
+        // Authenticated users: fetch from Supabase (source of truth)
+        try {
+          docs = await getDocumentsFromDb();
+        } catch {
+          // Fallback to localStorage if Supabase fails
+          docs = checkAndUpdateOverdue();
+        }
+      } else {
+        // Anonymous / no user: use localStorage
+        docs = checkAndUpdateOverdue();
       }
-    });
-  }, []);
+
+      setDocuments(docs);
+      setDeadlineCount(getDeadlinesThisWeek().length);
+      setScanCount(getSettings().scanCount);
+
+      requestNotificationPermission().then((granted) => {
+        if (granted) {
+          checkDeadlineNotifications(docs, {
+            sevenDays: 'Deadline in 7 days',
+            oneDayBefore: 'Deadline tomorrow',
+            todayDeadline: 'Deadline today',
+          });
+        }
+      });
+    }
+
+    loadDocuments();
+  }, [user, isAuthenticated]);
 
   const filteredDocs = useMemo(() => {
     let result = documents;

@@ -97,34 +97,22 @@ export async function POST(request: NextRequest) {
             deadline: dbDoc.deadline,
           });
         } else {
-          docTitle = doc?.title || 'Document';
-          analysisJson = JSON.stringify({
-            what_is_this: doc?.whatIsThis,
-            what_it_says: doc?.whatItSays,
-            what_to_do: doc?.whatToDo,
+          return new Response(JSON.stringify({ error: 'Document not found' }), {
+            status: 404,
+            headers: { 'Content-Type': 'application/json' },
           });
         }
       } catch {
-        docTitle = doc?.title || 'Document';
-        analysisJson = JSON.stringify({
-          what_is_this: doc?.whatIsThis,
-          what_it_says: doc?.whatItSays,
-          what_to_do: doc?.whatToDo,
+        return new Response(JSON.stringify({ error: 'Failed to load document' }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' },
         });
       }
     } else {
-      // Fallback: use client-side data
-      docTitle = doc?.title || 'Document';
-      pageTexts = doc?.pageTexts;
-      rawText = doc?.rawText;
-      analysisJson = JSON.stringify({
-        what_is_this: doc?.whatIsThis,
-        what_it_says: doc?.whatItSays,
-        what_to_do: doc?.whatToDo,
-        health_score: doc?.healthScore,
-        risk_flags: doc?.riskFlags,
-        key_facts: doc?.keyFacts,
-        summary: doc?.summary,
+      // No documentId provided — require it
+      return new Response(JSON.stringify({ error: 'documentId is required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
       });
     }
 
@@ -132,13 +120,14 @@ export async function POST(request: NextRequest) {
 
     const chatMessages: Anthropic.MessageParam[] = [];
 
-    // Add chat history from client (mobile app sends chatHistory as top-level field)
-    const history = clientChatHistory || doc?.chatHistory || [];
-    if (history.length > 0) {
-      for (const msg of history) {
-        if (msg.role && msg.content) {
-          chatMessages.push({ role: msg.role, content: msg.content });
-        }
+    // Validate chat history roles — only allow 'user' and 'assistant'
+    const history = clientChatHistory || [];
+    const validHistory = history.filter((msg: any) =>
+      msg.role && ['user', 'assistant'].includes(msg.role) && typeof msg.content === 'string'
+    ).slice(-20); // Limit to 20 messages
+    if (validHistory.length > 0) {
+      for (const msg of validHistory) {
+        chatMessages.push({ role: msg.role, content: msg.content });
       }
     }
 

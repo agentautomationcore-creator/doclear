@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Document, BatchSummary } from '@/lib/types';
 import { getCategoryConfig } from '@/lib/categories';
+import { supabase } from '@/lib/supabase';
 
 export default function SummaryPage() {
   const t = useTranslations('summary');
@@ -24,15 +25,20 @@ export default function SummaryPage() {
     const batchDocs: Document[] = JSON.parse(raw);
     setDocs(batchDocs);
 
-    fetch('/api/summary', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ documents: batchDocs, language: locale }),
-    })
-      .then((r) => r.json())
-      .then((data) => setSummary(data))
-      .catch(() => {})
-      .finally(() => setLoading(false));
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      fetch('/api/summary', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(session?.access_token ? { 'Authorization': `Bearer ${session.access_token}` } : {}),
+        },
+        body: JSON.stringify({ documents: batchDocs, language: locale }),
+      })
+        .then((r) => r.json())
+        .then((data) => setSummary(data))
+        .catch(() => {})
+        .finally(() => setLoading(false));
+    });
   }, [locale]);
 
   if (loading) {

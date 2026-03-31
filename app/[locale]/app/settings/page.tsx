@@ -7,7 +7,8 @@ import { getSettings, saveSettings } from '@/lib/storage';
 import { LOCALE_NAMES, Locale, MAX_FREE_SCANS, Settings, CountryCode, ImmigrationStatus, COUNTRY_NAMES } from '@/lib/types';
 import ScanCounter from '@/components/ScanCounter';
 import { useAuth } from '@/components/AuthProvider';
-import { signInWithGoogle, signOut, deleteAccount } from '@/lib/auth';
+import { signInWithGoogle, signOut } from '@/lib/auth';
+import { supabase } from '@/lib/supabase';
 
 const locales: Locale[] = ['fr', 'en', 'ru', 'ar', 'it', 'zh', 'pt', 'tr'];
 const countries: CountryCode[] = ['FR', 'DE', 'IT', 'ES', 'GB', 'NL', 'BE', 'CH', 'AT', 'PT', 'OTHER'];
@@ -324,7 +325,23 @@ export default function SettingsPage() {
                   <p className="text-sm text-[#DC2626] mb-3">{t('delete_confirm') || 'This will permanently delete all your data. Are you sure?'}</p>
                   <div className="flex gap-2">
                     <button
-                      onClick={() => deleteAccount().then(() => window.location.href = '/')}
+                      onClick={async () => {
+                        const { data: { session } } = await supabase.auth.getSession();
+                        const res = await fetch('/api/account/delete', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json',
+                            ...(session?.access_token ? { 'Authorization': `Bearer ${session.access_token}` } : {}),
+                          },
+                        });
+                        if (res.ok) {
+                          localStorage.removeItem('doclear_settings');
+                          localStorage.removeItem('doclear_documents');
+                          localStorage.removeItem('doclear_onboarding_done');
+                          await signOut();
+                          window.location.href = '/';
+                        }
+                      }}
                       className="bg-[#DC2626] text-white text-sm font-medium px-4 py-2 rounded-[12px]"
                     >
                       {t('delete_yes') || 'Yes, delete'}

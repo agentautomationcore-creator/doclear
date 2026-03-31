@@ -21,7 +21,16 @@ export function getDocuments(): Document[] {
 
 export function saveDocuments(docs: Document[]): void {
   if (!isBrowser()) return;
-  localStorage.setItem(DOCUMENTS_KEY, JSON.stringify(docs));
+  try {
+    localStorage.setItem(DOCUMENTS_KEY, JSON.stringify(docs));
+  } catch {
+    // Storage full — remove oldest documents and retry
+    const keys = Object.keys(localStorage).filter(k => k.startsWith('doc_'));
+    if (keys.length > 0) {
+      localStorage.removeItem(keys[0]);
+      try { localStorage.setItem(DOCUMENTS_KEY, JSON.stringify(docs)); } catch { /* give up */ }
+    }
+  }
 }
 
 export function getDocument(id: string): Document | undefined {
@@ -87,7 +96,16 @@ export function getUserProfile(): UserProfile {
 
 export function saveSettings(settings: Settings): void {
   if (!isBrowser()) return;
-  localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  try {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  } catch {
+    // Storage full — remove oldest doc entries and retry
+    const keys = Object.keys(localStorage).filter(k => k.startsWith('doc_'));
+    if (keys.length > 0) {
+      localStorage.removeItem(keys[0]);
+      try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch { /* give up */ }
+    }
+  }
 }
 
 export function incrementScanCount(): number {
@@ -121,7 +139,9 @@ export function isOnboardingDone(): boolean {
 
 export function setOnboardingDone(): void {
   if (!isBrowser()) return;
-  localStorage.setItem(ONBOARDING_KEY, 'true');
+  try {
+    localStorage.setItem(ONBOARDING_KEY, 'true');
+  } catch { /* storage full — non-critical */ }
 }
 
 // Deadline checker
