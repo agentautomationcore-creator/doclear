@@ -72,12 +72,14 @@ export async function POST(request: NextRequest) {
     // GDPR: Verify AI consent before processing
     const { data: profile } = await supabaseAdmin
       .from('profiles')
-      .select('ai_consent')
+      .select('ai_consent, plan')
       .eq('id', authedUser.id)
       .single();
     if (!profile?.ai_consent) {
       return NextResponse.json({ error: 'AI consent required' }, { status: 403 });
     }
+    const isPro = profile.plan === 'pro' || profile.plan === 'year' || profile.plan === 'trial';
+    const maxPages = isPro ? 100 : 50;
 
     const { data: canUpload } = await supabaseAdmin.rpc('can_upload', { p_user_id: authedUser.id });
     if (!canUpload) {
@@ -125,6 +127,14 @@ export async function POST(request: NextRequest) {
       pageTexts = extracted.pageTexts;
       rawText = extracted.rawText;
       pageCount = extracted.pageCount;
+
+      // Page limit check
+      if (pageCount > maxPages) {
+        return NextResponse.json(
+          { error: `PDF too long (${pageCount} pages). Maximum ${maxPages} pages allowed.${!isPro ? ' Upgrade to Pro for up to 100 pages.' : ''}` },
+          { status: 400 }
+        );
+      }
 
       // If we got text, send as text (cheaper, more reliable)
       // If no text extracted (scanned PDF), use Claude Vision

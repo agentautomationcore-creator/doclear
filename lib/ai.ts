@@ -153,6 +153,8 @@ export function getChatSystemPrompt(
 ): string {
   const langName = LANGUAGE_NAMES[language] || 'French';
 
+  const MAX_CONTEXT_CHARS = 10_000;
+
   let pageContext = '';
   if (pageTexts && Object.keys(pageTexts).length > 0) {
     pageContext = Object.entries(pageTexts)
@@ -160,6 +162,11 @@ export function getChatSystemPrompt(
       .join('\n\n');
   } else if (rawText) {
     pageContext = rawText;
+  }
+
+  // Truncate to prevent excessive token usage in system prompt
+  if (pageContext.length > MAX_CONTEXT_CHARS) {
+    pageContext = pageContext.slice(0, MAX_CONTEXT_CHARS) + '\n\n[...truncated]';
   }
 
   const docContext = pageContext

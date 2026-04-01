@@ -22,13 +22,13 @@ export async function checkRateLimit(
       p_window_seconds: windowSeconds,
     });
     if (error) {
-      // Fail open only on DB error — log and allow (don't block users if DB is down)
+      // Fail-closed: block request if rate limit check fails
       console.error('Rate limit check failed:', error.message);
-      return true;
+      return false;
     }
     return data === true;
   } catch (err) {
     console.error('Rate limit error:', err);
-    return true;
+    return false;
   }
 }
