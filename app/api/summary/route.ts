@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
         role: 'user',
         content: `Summarize these ${documents.length} documents:\n\n${docsText}`,
       }],
-    });
+    }, { timeout: 60000 });
 
     const textBlock = response.content.find((b) => b.type === 'text');
     if (!textBlock || textBlock.type !== 'text') {

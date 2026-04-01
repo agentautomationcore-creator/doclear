@@ -126,7 +126,7 @@ export async function POST(request: NextRequest) {
       max_tokens: 2048,
       system: systemPrompt,
       messages: chatMessages,
-    });
+    }, { timeout: 60000 });
 
     // Convert to SSE stream
     const encoder = new TextEncoder();

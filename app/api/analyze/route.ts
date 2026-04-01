@@ -230,7 +230,7 @@ export async function POST(request: NextRequest) {
           max_tokens: 3000,
           system: systemPrompt,
           messages,
-        });
+        }, { timeout: 60000 });
         break;
       } catch (retryErr: any) {
         if (retryErr?.status === 529 && attempt < 3) {
