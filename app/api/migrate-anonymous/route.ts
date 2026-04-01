@@ -63,75 +63,61 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'New user not found' }, { status: 404 });
     }
 
-    // 1. Transfer documents
-    const { error: docsError, count: docsCount } = await supabase
+    // MIG-6: Wrap migration in a transaction via Supabase RPC
+    // All data transfers happen atomically — rollback on any failure
+    const { data: migrationResult, error: migrationError } = await supabase.rpc('migrate_anonymous_user', {
+      p_old_user_id: old_user_id,
+      p_new_user_id: new_user_id,
+    });
+
+    if (migrationError) {
+      console.error(`Migrate: transaction failed:`, migrationError.message);
+      return NextResponse.json({ error: 'Migration failed' }, { status: 500 });
+    }
+
+    // MIG-4: Move storage files from old_user_id path to new_user_id path
+    // Storage RLS checks auth.uid() vs path prefix — files must be under new user's folder
+    const { data: docs } = await supabase
       .from('documents')
-      .update({ user_id: new_user_id })
-      .eq('user_id', old_user_id);
+      .select('id, file_url')
+      .eq('user_id', new_user_id)
+      .not('file_url', 'is', null);
 
-    if (docsError) {
-      console.error(`Migrate: failed to transfer documents:`, docsError.message);
-      return NextResponse.json({ error: 'Failed to transfer documents' }, { status: 500 });
-    }
-
-    // 2. Transfer chat messages
-    const { error: chatError, count: chatCount } = await supabase
-      .from('chat_messages')
-      .update({ user_id: new_user_id })
-      .eq('user_id', old_user_id);
-
-    if (chatError) {
-      console.error(`Migrate: failed to transfer chat messages:`, chatError.message);
-      return NextResponse.json({ error: 'Failed to transfer chat messages' }, { status: 500 });
-    }
-
-    // 3. Update storage file ownership (rename paths if needed)
-    // Storage files are referenced by file_url in documents table,
-    // which already points to the correct path — no rename needed.
-
-    // 4. Merge profile data: carry over scan_count to new profile
-    const { data: oldProfile } = await supabase
-      .from('profiles')
-      .select('scan_count, language, country, status')
-      .eq('id', old_user_id)
-      .single();
-
-    if (oldProfile) {
-      // Update new profile with old profile's data if new profile has defaults
-      const { data: newProfile } = await supabase
-        .from('profiles')
-        .select('scan_count')
-        .eq('id', new_user_id)
-        .single();
-
-      if (newProfile) {
-        await supabase
-          .from('profiles')
-          .update({
-            scan_count: (newProfile.scan_count ?? 0) + (oldProfile.scan_count ?? 0),
-            language: oldProfile.language,
-            country: oldProfile.country,
-            status: oldProfile.status,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', new_user_id);
+    let filesMovedCount = 0;
+    if (docs) {
+      for (const doc of docs) {
+        if (doc.file_url && doc.file_url.startsWith(`${old_user_id}/`)) {
+          const newPath = doc.file_url.replace(`${old_user_id}/`, `${new_user_id}/`);
+          const { error: moveError } = await supabase.storage
+            .from('documents')
+            .move(doc.file_url, newPath);
+          if (!moveError) {
+            // Update file_url and image_url in document record
+            await supabase
+              .from('documents')
+              .update({ file_url: newPath, image_url: newPath })
+              .eq('id', doc.id)
+              .eq('user_id', new_user_id);
+            filesMovedCount++;
+          } else {
+            console.error(`Migrate: failed to move file ${doc.file_url}:`, moveError.message);
+          }
+        }
       }
     }
 
-    // 5. Delete old anonymous profile
-    await supabase.from('profiles').delete().eq('id', old_user_id);
-
-    // 6. Delete old anonymous user
+    // Delete old anonymous user (profile already deleted in transaction)
     await supabase.auth.admin.deleteUser(old_user_id);
 
     console.log(
-      `Migrate: ${old_user_id} → ${new_user_id} | ${docsCount ?? 0} docs, ${chatCount ?? 0} messages`
+      `Migrate: ${old_user_id} → ${new_user_id} | ${migrationResult?.docs_count ?? 0} docs, ${migrationResult?.msgs_count ?? 0} msgs, ${filesMovedCount} files`
     );
 
     return NextResponse.json({
       migrated: true,
-      documents_transferred: docsCount ?? 0,
-      messages_transferred: chatCount ?? 0,
+      documents_transferred: migrationResult?.docs_count ?? 0,
+      messages_transferred: migrationResult?.msgs_count ?? 0,
+      files_moved: filesMovedCount,
     });
   } catch (error: any) {
     console.error('Migrate anonymous error:', error?.message);
