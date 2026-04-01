@@ -66,8 +66,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Server-side scan limit check via DB function
+    // Server-side consent + scan limit check
     const supabaseAdmin = createServiceClient();
+
+    // GDPR: Verify AI consent before processing
+    const { data: profile } = await supabaseAdmin
+      .from('profiles')
+      .select('ai_consent')
+      .eq('id', authedUser.id)
+      .single();
+    if (!profile?.ai_consent) {
+      return NextResponse.json({ error: 'AI consent required' }, { status: 403 });
+    }
+
     const { data: canUpload } = await supabaseAdmin.rpc('can_upload', { p_user_id: authedUser.id });
     if (!canUpload) {
       return NextResponse.json(
