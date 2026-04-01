@@ -40,8 +40,20 @@ export default function PrivacyPage() {
           </section>
 
           <section>
+            <h2 className="text-lg font-semibold text-[#1D1D1F] mb-2">Third-party services</h2>
+            <ul className="list-disc list-inside space-y-1">
+              <li><strong>Anthropic (Claude API)</strong> — document analysis, EU data processing, no model training on inputs</li>
+              <li><strong>PostHog</strong> — anonymous usage analytics, EU servers (Frankfurt). No personal data collected. Initialized only after your opt-in consent.</li>
+              <li><strong>RevenueCat</strong> — subscription management, USA (DPA signed). Processes only subscription status and anonymous user identifiers.</li>
+              <li><strong>Stripe</strong> — payment processing (PCI DSS compliant). We never see or store your card details.</li>
+              <li><strong>Supabase</strong> — database and file storage, EU servers (Frankfurt)</li>
+            </ul>
+          </section>
+
+          <section>
             <h2 className="text-lg font-semibold text-[#1D1D1F] mb-2">How we use AI</h2>
             <p>Your documents are sent to Anthropic&apos;s Claude API for analysis. Anthropic does not use API inputs to train models. Documents are processed in real-time and not stored on Anthropic&apos;s servers after processing.</p>
+            <p className="mt-2"><strong>Legal basis:</strong> your explicit consent (Article 6(1)(a) GDPR). You provide consent before your first document analysis. You can withdraw consent at any time in Settings.</p>
           </section>
 
           <section>
@@ -64,6 +76,16 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-semibold text-[#1D1D1F] mb-2">Cookies</h2>
             <p>We use only essential cookies for functionality (language preference, session). No tracking cookies, no advertising cookies.</p>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-[#1D1D1F] mb-2">Data Retention</h2>
+            <ul className="list-disc list-inside space-y-1">
+              <li>Documents and analyses: retained while your account is active</li>
+              <li>After account deletion: all data is permanently deleted within 30 days</li>
+              <li>Inactive anonymous accounts: automatically deleted after 90 days of inactivity</li>
+              <li>Payment records: retained as required by tax law (typically 7 years)</li>
+            </ul>
           </section>
 
           <section>
