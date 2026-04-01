@@ -6,10 +6,12 @@ import { useRouter } from '@/i18n/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import { processFile, processZip, getFormatIcon, ProcessedFile } from '@/lib/fileProcessor';
 import { addDocument, getUserProfile } from '@/lib/storage';
+import { addDocumentToDb } from '@/lib/supabaseStorage';
 import { AnalysisResponse, Document } from '@/lib/types';
 import { useAuth } from '@/components/AuthProvider';
 import { supabase } from '@/lib/supabase';
 import Paywall from '@/components/Paywall';
+import AIConsentModal, { hasAIConsent, grantAIConsent } from '@/components/AIConsentModal';
 
 /* ---- SVG Icon Components ---- */
 function IconCamera({ className = 'w-6 h-6' }: { className?: string }) {
@@ -93,6 +95,7 @@ export default function ScanPage() {
   const [batchProgress, setBatchProgress] = useState({ current: 0, total: 0 });
   const [error, setError] = useState<string | null>(null);
   const [showAuthPrompt, setShowAuthPrompt] = useState(false);
+  const [showConsentModal, setShowConsentModal] = useState(false);
   const auth = useAuth();
   const tAuth = useTranslations('auth');
   const fileRef = useRef<HTMLInputElement>(null);
@@ -218,6 +221,12 @@ export default function ScanPage() {
   async function handleAnalyze() {
     if (files.length === 0 || analyzing) return;
 
+    // GDPR-1: Check AI consent before sending documents to Claude API
+    if (!hasAIConsent()) {
+      setShowConsentModal(true);
+      return;
+    }
+
     // Check scan limit
     if (!auth.canScan) {
       setShowAuthPrompt(true);
@@ -242,6 +251,9 @@ export default function ScanPage() {
           const doc = await analyzeFile(files[i]);
           if (doc) {
             addDocument(doc);
+            if (auth.user) {
+              try { await addDocumentToDb(doc); } catch (e) { console.error('Supabase save error:', e); }
+            }
             docs.push(doc);
           }
         }
@@ -260,6 +272,9 @@ export default function ScanPage() {
         const doc = await analyzeFile(files[0]);
         if (doc) {
           addDocument(doc);
+          if (auth.user) {
+            try { await addDocumentToDb(doc); } catch (e) { console.error('Supabase save error:', e); }
+          }
           router.replace(`/app/doc/${doc.id}`);
         } else {
           setError(errT('analysis_failed'));
@@ -278,6 +293,14 @@ export default function ScanPage() {
   const hasContent = files.length > 0;
 
   return (
+    <>
+    <AIConsentModal
+      isOpen={showConsentModal}
+      onAccept={() => {
+        setShowConsentModal(false);
+        handleAnalyze();
+      }}
+    />
     <div className="min-h-screen bg-white safe-area-inset-top max-w-2xl mx-auto font-[Inter,system-ui,sans-serif]">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-white border-b border-black/[0.06] h-14 flex items-center px-4">
@@ -421,5 +444,6 @@ export default function ScanPage() {
         <input ref={fileRef} type="file" accept="image/*,application/pdf,.docx,.doc,.xlsx,.xls,.txt,.rtf,.zip,.eml,.csv" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }} />
       </div>
     </div>
+    </>
   );
 }

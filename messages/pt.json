@@ -134,7 +134,9 @@
     "delete_yes": "Sim, excluir",
     "cancel": "Cancelar",
     "sign_in_apple": "Entrar com Apple",
-    "sign_in_email": "Entrar com Email"
+    "sign_in_email": "Entrar com Email",
+    "download_my_data": "Baixar meus dados",
+    "downloading": "Baixando..."
   },
   "paywall": {
     "title": "Gostou?",
@@ -248,5 +250,18 @@
     "new_password_placeholder": "Nova senha (mín. 6 caracteres)",
     "update_password": "Atualizar",
     "password_updated": "Senha atualizada!"
+  },
+  "consent": {
+    "title": "Como o DocLear analisa seus documentos",
+    "ai_title": "Análise por IA",
+    "ai_desc": "Seu documento é enviado ao Claude AI para análise.",
+    "training_title": "Não usado para treinamento",
+    "training_desc": "Os documentos não são armazenados pela Anthropic e não são usados para treinar a IA.",
+    "encrypted_title": "Criptografado e excluído",
+    "encrypted_desc": "O conteúdo é criptografado em trânsito. Nenhuma cópia retida após a análise.",
+    "eu_title": "Proteção de dados da UE",
+    "eu_desc": "Resultados armazenados em servidores da UE. Conforme com o GDPR.",
+    "agree": "Eu concordo",
+    "learn_more": "Saiba mais sobre nossas práticas de privacidade"
   }
 }

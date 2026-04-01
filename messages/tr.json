@@ -134,7 +134,9 @@
     "delete_yes": "Evet, sil",
     "cancel": "İptal",
     "sign_in_apple": "Apple ile giriş yap",
-    "sign_in_email": "E-posta ile giriş yap"
+    "sign_in_email": "E-posta ile giriş yap",
+    "download_my_data": "Verilerimi indir",
+    "downloading": "İndiriliyor..."
   },
   "paywall": {
     "title": "Beğendiniz mi?",
@@ -248,5 +250,18 @@
     "new_password_placeholder": "Yeni şifre (min 6 karakter)",
     "update_password": "Güncelle",
     "password_updated": "Şifre güncellendi!"
+  },
+  "consent": {
+    "title": "DocLear belgelerinizi nasıl analiz eder",
+    "ai_title": "Yapay Zeka Analizi",
+    "ai_desc": "Belgeniz analiz için Claude AI'ya gönderilir.",
+    "training_title": "Eğitim için kullanılmaz",
+    "training_desc": "Belgeler Anthropic tarafından saklanmaz ve yapay zeka eğitimi için kullanılmaz.",
+    "encrypted_title": "Şifreli ve silindi",
+    "encrypted_desc": "İçerik aktarım sırasında şifrelenir. Analizden sonra kopya saklanmaz.",
+    "eu_title": "AB veri koruma",
+    "eu_desc": "Sonuçlar AB sunucularında saklanır. GDPR uyumlu.",
+    "agree": "Kabul ediyorum",
+    "learn_more": "Gizlilik uygulamalarımız hakkında daha fazla bilgi"
   }
 }
