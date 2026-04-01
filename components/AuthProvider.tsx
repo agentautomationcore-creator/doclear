@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
+import { MAX_FREE_SCANS, MAX_GUEST_SCANS } from '@/lib/types';
 
 interface AuthContextType {
   user: User | null;
@@ -22,7 +23,7 @@ const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
   isAnonymous: false,
   scanCount: 0,
-  scanLimit: 3,
+  scanLimit: MAX_GUEST_SCANS,
   canScan: true,
   incrementScan: async () => 0,
   refreshUsage: async () => {},
@@ -36,7 +37,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isAnonymous = user?.app_metadata?.provider === 'anonymous' || !user?.email;
   const isAuthenticated = !!user && !isAnonymous;
   const [plan, setPlan] = useState<string>('free');
-  const scanLimit = plan === 'pro' ? Infinity : plan === 'starter' ? 20 : 3;
+  const [scanLimitOverride, setScanLimitOverride] = useState<number | null>(null);
+
+  // Plan-based defaults; server scan_limit column takes priority if set
+  const PLAN_LIMITS: Record<string, number> = { pro: Infinity, starter: 20 };
+  const defaultLimit = isAnonymous ? MAX_GUEST_SCANS : (PLAN_LIMITS[plan] ?? MAX_FREE_SCANS);
+  const scanLimit = scanLimitOverride ?? defaultLimit;
   const canScan = scanCount < scanLimit;
 
   // Fetch usage from Supabase (single source of truth)
@@ -58,14 +64,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch (err) {
       console.error('refreshUsage failed:', err);
     }
-    // Also fetch plan from profile as fallback
+    // Also fetch plan + scan_limit from profile as fallback / override
     try {
       const { data: profile } = await supabase
         .from('profiles')
-        .select('plan')
+        .select('plan, scan_limit')
         .eq('id', user.id)
         .single();
       if (profile?.plan) setPlan(profile.plan);
+      if (profile?.scan_limit != null) setScanLimitOverride(profile.scan_limit);
     } catch {}
   }, [user]);
 

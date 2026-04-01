@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Document, Category } from '@/lib/types';
@@ -9,7 +10,7 @@ interface Props {
   document: Document;
 }
 
-export default function DocumentCard({ document: doc }: Props) {
+function DocumentCard({ document: doc }: Props) {
   const t = useTranslations('timeline');
   const categories = useTranslations('categories');
   const statusT = useTranslations('status');
@@ -87,3 +88,5 @@ export default function DocumentCard({ document: doc }: Props) {
     </Link>
   );
 }
+
+export default memo(DocumentCard);

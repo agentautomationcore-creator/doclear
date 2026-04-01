@@ -55,6 +55,7 @@ export default function SettingsPage() {
   const [email, setEmail] = useState('');
   const [emailSent, setEmailSent] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [downloadingData, setDownloadingData] = useState(false);
   const { user, isAuthenticated } = useAuth();
 
   useEffect(() => {
@@ -88,6 +89,33 @@ export default function SettingsPage() {
     if (!email.trim()) return;
     console.log('Waitlist email:', email);
     setEmailSent(true);
+  }
+
+  async function handleDownloadData() {
+    setDownloadingData(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.access_token) return;
+      const res = await fetch('/api/export-data', {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+      if (!res.ok) throw new Error('Export failed');
+      const data = await res.json();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `doclear-data-${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch {
+      alert('Failed to download data. Please try again.');
+    } finally {
+      setDownloadingData(false);
+    }
   }
 
   if (!settings) return null;
@@ -300,6 +328,16 @@ export default function SettingsPage() {
               <div className="bg-white rounded-[14px] border border-black/[0.06] py-3.5 px-4">
                 <p className="text-sm text-[#6B7280]">{user?.email}</p>
               </div>
+              <button
+                onClick={handleDownloadData}
+                disabled={downloadingData}
+                className="w-full flex items-center justify-center gap-2 bg-white text-[#1A1A2E] font-medium py-3.5 rounded-[14px] border border-black/[0.06] text-sm hover:bg-[#F5F5F7] transition-colors disabled:opacity-50"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                {downloadingData ? t('downloading') : t('download_my_data')}
+              </button>
               <button
                 onClick={async () => {
                   // Clear all local data

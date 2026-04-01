@@ -5,8 +5,6 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import {
   checkAndUpdateOverdue,
-  getDeadlinesThisWeek,
-  getSettings,
 } from '@/lib/storage';
 import { getDocumentsFromDb } from '@/lib/supabaseStorage';
 import { requestNotificationPermission, checkDeadlineNotifications } from '@/lib/notifications';
@@ -24,28 +22,34 @@ export default function TimelinePage() {
   const [filter, setFilter] = useState<Category | 'all'>('all');
   const [search, setSearch] = useState('');
   const [deadlineCount, setDeadlineCount] = useState(0);
-  const [scanCount, setScanCount] = useState(0);
-
   useEffect(() => {
     async function loadDocuments() {
       let docs: Document[];
 
-      if (user && isAuthenticated) {
-        // Authenticated users: fetch from Supabase (source of truth)
+      if (user) {
+        // Any user with session (including anonymous): fetch from Supabase
         try {
           docs = await getDocumentsFromDb();
         } catch {
-          // Fallback to localStorage if Supabase fails
+          // Fallback to localStorage only if Supabase fails
           docs = checkAndUpdateOverdue();
         }
       } else {
-        // Anonymous / no user: use localStorage
+        // No session at all: use localStorage
         docs = checkAndUpdateOverdue();
       }
 
       setDocuments(docs);
-      setDeadlineCount(getDeadlinesThisWeek().length);
-      setScanCount(getSettings().scanCount);
+
+      // Calculate deadlines from loaded docs (not localStorage)
+      const now = new Date();
+      const weekFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+      const upcomingDeadlines = docs.filter((doc) => {
+        if (!doc.deadline || doc.status === 'done') return false;
+        const d = new Date(doc.deadline);
+        return d >= now && d <= weekFromNow;
+      });
+      setDeadlineCount(upcomingDeadlines.length);
 
       requestNotificationPermission().then((granted) => {
         if (granted) {
