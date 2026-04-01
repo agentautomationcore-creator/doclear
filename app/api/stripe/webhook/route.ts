@@ -9,7 +9,11 @@ function getStripe() {
 export async function POST(request: NextRequest) {
   try {
     const stripe = getStripe();
-    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+    if (!webhookSecret) {
+      console.error('STRIPE_WEBHOOK_SECRET not configured');
+      return NextResponse.json({ error: 'Server misconfigured' }, { status: 500 });
+    }
     const body = await request.text();
     const sig = request.headers.get('stripe-signature');
 
@@ -26,6 +30,21 @@ export async function POST(request: NextRequest) {
     }
 
     const supabase = createServiceClient();
+
+    // STRIPE-6: Deduplication — prevent replay attacks and duplicate processing
+    const { error: dedupError } = await supabase
+      .from('stripe_webhook_events')
+      .insert({ event_id: event.id });
+    if (dedupError?.code === '23505') {
+      // Duplicate event — already processed
+      return NextResponse.json({ received: true, duplicate: true });
+    }
+
+    // Reject events older than 5 minutes (timestamp guard)
+    const eventAge = Date.now() / 1000 - event.created;
+    if (eventAge > 300) {
+      return NextResponse.json({ error: 'Event too old' }, { status: 400 });
+    }
 
     switch (event.type) {
       case 'checkout.session.completed': {
