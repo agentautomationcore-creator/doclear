@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { getSummarySystemPrompt, parseAnalysisResponse } from '@/lib/ai';
 import { validateToken, createServiceClient } from '@/lib/supabase';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 const anthropic = new Anthropic();
 
@@ -11,6 +12,11 @@ export async function POST(request: NextRequest) {
     const { user: authedUser, error: authError } = await validateToken(authHeader);
     if (authError || !authedUser) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const allowed = await checkRateLimit(`summary:${authedUser.id}`, 10, 60);
+    if (!allowed) {
+      return NextResponse.json({ error: 'Rate limited' }, { status: 429 });
     }
 
     const { documents, language } = await request.json();
