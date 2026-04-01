@@ -2,24 +2,9 @@ import { NextRequest } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { getChatSystemPrompt } from '@/lib/ai';
 import { createServiceClient, validateToken } from '@/lib/supabase';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 const anthropic = new Anthropic();
-
-const chatRateLimiter = new Map<string, { count: number; resetAt: number }>();
-const CHAT_RATE_LIMIT = 30;
-const CHAT_RATE_WINDOW = 60 * 1000;
-
-function checkChatRateLimit(userId: string): boolean {
-  const now = Date.now();
-  const entry = chatRateLimiter.get(userId);
-  if (!entry || now > entry.resetAt) {
-    chatRateLimiter.set(userId, { count: 1, resetAt: now + CHAT_RATE_WINDOW });
-    return true;
-  }
-  if (entry.count >= CHAT_RATE_LIMIT) return false;
-  entry.count++;
-  return true;
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,8 +18,9 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Per-user rate limiting (burst protection)
-    if (!checkChatRateLimit(authedUser.id)) {
+    // Per-user rate limiting (burst protection) — persistent via Supabase RPC
+    const allowed = await checkRateLimit(`chat:${authedUser.id}`, 30, 60);
+    if (!allowed) {
       return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), {
         status: 429,
         headers: { 'Content-Type': 'application/json' },

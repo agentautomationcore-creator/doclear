@@ -4,27 +4,12 @@ import { getAnalysisSystemPrompt, parseAnalysisResponse } from '@/lib/ai';
 import { getCountryContext } from '@/lib/countryData';
 import { CountryCode } from '@/lib/types';
 import { createServiceClient, validateToken } from '@/lib/supabase';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 export const maxDuration = 120;
 export const dynamic = 'force-dynamic';
 
 const anthropic = new Anthropic();
-
-const rateLimiter = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 10;
-const RATE_WINDOW = 60 * 1000;
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimiter.get(ip);
-  if (!entry || now > entry.resetAt) {
-    rateLimiter.set(ip, { count: 1, resetAt: now + RATE_WINDOW });
-    return true;
-  }
-  if (entry.count >= RATE_LIMIT) return false;
-  entry.count++;
-  return true;
-}
 
 // Extract text from PDF page by page using pdfjs-dist (server-side)
 async function extractPdfPageTexts(base64Data: string): Promise<{
@@ -67,8 +52,10 @@ async function extractPdfPageTexts(base64Data: string): Promise<{
 
 export async function POST(request: NextRequest) {
   try {
-    const ip = request.headers.get('x-forwarded-for') || 'unknown';
-    if (!checkRateLimit(ip)) {
+    // IP-based rate limit — persistent via Supabase RPC (10 uploads/min)
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    const ipAllowed = await checkRateLimit(`analyze:${ip}`, 10, 60);
+    if (!ipAllowed) {
       return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
     }
 

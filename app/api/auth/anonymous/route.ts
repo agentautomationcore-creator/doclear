@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServiceClient } from '@/lib/supabase';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 /**
  * Rate-limited anonymous account creation.
@@ -7,26 +8,12 @@ import { createServiceClient } from '@/lib/supabase';
  * Max 5 anonymous accounts per IP per hour.
  */
 
-const anonRateLimiter = new Map<string, { count: number; resetAt: number }>();
-const ANON_RATE_LIMIT = 5;
-const ANON_RATE_WINDOW = 60 * 60 * 1000; // 1 hour
-
-function checkAnonRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const entry = anonRateLimiter.get(ip);
-  if (!entry || now > entry.resetAt) {
-    anonRateLimiter.set(ip, { count: 1, resetAt: now + ANON_RATE_WINDOW });
-    return true;
-  }
-  if (entry.count >= ANON_RATE_LIMIT) return false;
-  entry.count++;
-  return true;
-}
-
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
 
-  if (!checkAnonRateLimit(ip)) {
+  // Persistent rate limit: 5 accounts per IP per hour (Supabase RPC)
+  const allowed = await checkRateLimit(`anon:${ip}`, 5, 3600);
+  if (!allowed) {
     return NextResponse.json(
       { error: 'Too many accounts created. Please try again later.' },
       { status: 429 }
