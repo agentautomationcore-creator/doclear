@@ -232,5 +232,9 @@ export function parseAnalysisResponse(text: string): AnalysisResponse {
   if (start !== -1 && end !== -1) {
     jsonStr = jsonStr.slice(start, end + 1);
   }
-  return JSON.parse(jsonStr);
+  try {
+    return JSON.parse(jsonStr);
+  } catch {
+    throw new Error('Failed to parse AI response as JSON');
+  }
 }

@@ -79,7 +79,8 @@ export async function getDocumentsFromDb(): Promise<Document[]> {
     .from('documents')
     .select('*')
     .eq('user_id', user.id)
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .range(0, 49);
 
   if (!data) return [];
 

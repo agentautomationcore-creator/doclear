@@ -152,7 +152,7 @@ export async function POST(request: NextRequest) {
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'done', text: fullText })}\n\n`));
           controller.close();
         } catch (err: any) {
-          const errorData = JSON.stringify({ type: 'error', error: err?.message || 'Chat failed' });
+          const errorData = JSON.stringify({ type: 'error', error: 'Chat temporarily unavailable. Please try again.' });
           controller.enqueue(encoder.encode(`data: ${errorData}\n\n`));
           controller.close();
         }
