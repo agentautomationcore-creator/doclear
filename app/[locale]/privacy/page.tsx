@@ -20,6 +20,11 @@ export default function PrivacyPage() {
 
         <div className="space-y-6 text-[#86868B] leading-relaxed">
           <section>
+            <h2 className="text-lg font-semibold text-[#1D1D1F] mb-2">Data Controller</h2>
+            <p>Growthor SAS (SIREN 944 537 034)<br />Juan-les-Pins, 06160, France<br />Contact: <a href="mailto:hello@growthor.ai" className="text-primary hover:underline">hello@growthor.ai</a></p>
+          </section>
+
+          <section>
             <h2 className="text-lg font-semibold text-[#1D1D1F] mb-2">What data we collect</h2>
             <ul className="list-disc list-inside space-y-1">
               <li>Email address (when you sign up with Google)</li>
@@ -47,6 +52,7 @@ export default function PrivacyPage() {
               <li><strong>RevenueCat</strong> — subscription management, USA (DPA signed). Processes only subscription status and anonymous user identifiers.</li>
               <li><strong>Stripe</strong> — payment processing (PCI DSS compliant). We never see or store your card details.</li>
               <li><strong>Supabase</strong> — database and file storage, EU servers (Frankfurt)</li>
+              <li><strong>Sentry</strong> — error reporting (third-party processor, DPA signed). No personal data collected — only anonymized crash reports.</li>
             </ul>
           </section>
 
@@ -70,7 +76,10 @@ export default function PrivacyPage() {
               <li><strong>Export:</strong> Export all your documents and data</li>
               <li><strong>Portability:</strong> Download your data in a standard format</li>
               <li><strong>Rectification:</strong> Edit or correct your profile data at any time</li>
+              <li><strong>Right to object (Art. 21):</strong> You may object to data processing at any time</li>
+              <li><strong>Withdraw consent:</strong> Withdraw AI analysis consent at any time in Settings</li>
             </ul>
+            <p className="mt-2">You may file a complaint with the <strong>CNIL</strong> (<a href="https://www.cnil.fr" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">www.cnil.fr</a>) if you believe your data is not processed in compliance with GDPR.</p>
           </section>
 
           <section>
@@ -91,7 +100,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-semibold text-[#1D1D1F] mb-2">Contact</h2>
             <p>For privacy inquiries: <a href="mailto:hello@growthor.ai" className="text-primary hover:underline">hello@growthor.ai</a></p>
-            <p className="mt-1">DocLear is operated by Growthor.ai, Juan-les-Pins, France.</p>
+            <p className="mt-1">DocLear is operated by Growthor SAS (SIREN 944 537 034), Juan-les-Pins, 06160, France.</p>
           </section>
         </div>
       </div>
