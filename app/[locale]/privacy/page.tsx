@@ -21,7 +21,7 @@ export default function PrivacyPage() {
         <div className="space-y-6 text-[#86868B] leading-relaxed">
           <section>
             <h2 className="text-lg font-semibold text-[#1D1D1F] mb-2">Data Controller</h2>
-            <p>Growthor SAS (SIREN 944 537 034)<br />Juan-les-Pins, 06160, France<br />Contact: <a href="mailto:hello@growthor.ai" className="text-primary hover:underline">hello@growthor.ai</a></p>
+            <p>Dmitrii Sergueev, exerçant sous le nom commercial « Growthor », Entrepreneur individuel — SIREN 944 537 034<br />Juan-les-Pins, 06160, France<br />Contact: <a href="mailto:hello@growthor.ai" className="text-primary hover:underline">hello@growthor.ai</a></p>
           </section>
 
           <section>
@@ -79,7 +79,7 @@ export default function PrivacyPage() {
               <li><strong>Right to object (Art. 21):</strong> You may object to data processing at any time</li>
               <li><strong>Withdraw consent:</strong> Withdraw AI analysis consent at any time in Settings</li>
             </ul>
-            <p className="mt-2">You may file a complaint with the <strong>CNIL</strong> (<a href="https://www.cnil.fr" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">www.cnil.fr</a>) if you believe your data is not processed in compliance with GDPR.</p>
+            <p className="mt-2">You may file a complaint with the <strong>CNIL</strong> (<a href="https://www.cnil.fr/fr/plaintes" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">www.cnil.fr/fr/plaintes</a>) if you believe your data is not processed in compliance with GDPR.</p>
           </section>
 
           <section>
@@ -100,7 +100,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-semibold text-[#1D1D1F] mb-2">Contact</h2>
             <p>For privacy inquiries: <a href="mailto:hello@growthor.ai" className="text-primary hover:underline">hello@growthor.ai</a></p>
-            <p className="mt-1">DocLear is operated by Growthor SAS (SIREN 944 537 034), Juan-les-Pins, 06160, France.</p>
+            <p className="mt-1">DocLear is operated by Dmitrii Sergueev, exerçant sous le nom commercial « Growthor », Entrepreneur individuel — SIREN 944 537 034, Juan-les-Pins, 06160, France.</p>
           </section>
         </div>
       </div>

@@ -56,10 +56,17 @@ export default function SettingsPage() {
   const [emailSent, setEmailSent] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [downloadingData, setDownloadingData] = useState(false);
+  const [aiConsent, setAiConsent] = useState(false);
+  const [analyticsConsent, setAnalyticsConsent] = useState(false);
   const { user, isAuthenticated } = useAuth();
 
   useEffect(() => {
     setSettings(getSettings());
+    // E2: Load consent state from localStorage + Supabase
+    if (typeof window !== 'undefined') {
+      setAiConsent(localStorage.getItem('doclear_ai_consent') === 'true');
+      setAnalyticsConsent(localStorage.getItem('doclear_analytics_consent') === 'true');
+    }
   }, []);
 
   function toggleNotification(key: 'sevenDays' | 'oneDay' | 'today') {
@@ -431,6 +438,63 @@ export default function SettingsPage() {
               </a>
             </div>
           )}
+        </div>
+
+        {/* E2: Privacy — Consent Withdrawal (GDPR Art. 7) */}
+        <div>
+          <p className="text-[11px] uppercase tracking-wider text-[#6B7280] font-semibold mb-2">{t('privacy')}</p>
+          <div className="bg-white rounded-[14px] border border-black/[0.06] divide-y divide-black/[0.06]">
+            <div className="flex items-center justify-between py-3.5 px-4">
+              <span className="text-[15px] text-[#1A1A2E]">{t('ai_analysis') || 'AI Analysis'}</span>
+              <button
+                onClick={async () => {
+                  const newVal = !aiConsent;
+                  setAiConsent(newVal);
+                  localStorage.setItem('doclear_ai_consent', String(newVal));
+                  if (user) {
+                    await supabase.from('profiles').update({
+                      ai_consent: newVal,
+                      ai_consent_at: newVal ? new Date().toISOString() : null,
+                    }).eq('id', user.id);
+                  }
+                }}
+                className={`w-[50px] h-[30px] rounded-full transition-colors relative ${
+                  aiConsent ? 'bg-[#1A1A2E]' : 'bg-[#D1D5DB]'
+                }`}
+              >
+                <div
+                  className={`w-[26px] h-[26px] bg-white rounded-full absolute top-[2px] transition-transform shadow-sm ${
+                    aiConsent ? 'ltr:translate-x-[22px] rtl:-translate-x-[22px]' : 'ltr:translate-x-[2px] rtl:-translate-x-[2px]'
+                  }`}
+                />
+              </button>
+            </div>
+            <div className="flex items-center justify-between py-3.5 px-4">
+              <span className="text-[15px] text-[#1A1A2E]">{t('analytics') || 'Usage Analytics'}</span>
+              <button
+                onClick={async () => {
+                  const newVal = !analyticsConsent;
+                  setAnalyticsConsent(newVal);
+                  localStorage.setItem('doclear_analytics_consent', String(newVal));
+                  if (user) {
+                    await supabase.from('profiles').update({
+                      analytics_consent: newVal,
+                      analytics_consent_at: newVal ? new Date().toISOString() : null,
+                    }).eq('id', user.id);
+                  }
+                }}
+                className={`w-[50px] h-[30px] rounded-full transition-colors relative ${
+                  analyticsConsent ? 'bg-[#1A1A2E]' : 'bg-[#D1D5DB]'
+                }`}
+              >
+                <div
+                  className={`w-[26px] h-[26px] bg-white rounded-full absolute top-[2px] transition-transform shadow-sm ${
+                    analyticsConsent ? 'ltr:translate-x-[22px] rtl:-translate-x-[22px]' : 'ltr:translate-x-[2px] rtl:-translate-x-[2px]'
+                  }`}
+                />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Footer Links */}

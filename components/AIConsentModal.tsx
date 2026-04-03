@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { supabase } from '@/lib/supabase';
 
 const CONSENT_KEY = 'doclear_ai_consent';
 
@@ -10,8 +11,20 @@ export function hasAIConsent(): boolean {
   return localStorage.getItem(CONSENT_KEY) === 'true';
 }
 
-export function grantAIConsent(): void {
+export async function grantAIConsent(): Promise<void> {
   localStorage.setItem(CONSENT_KEY, 'true');
+  // E1: Sync consent to Supabase for server-side checks
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      await supabase.from('profiles').update({
+        ai_consent: true,
+        ai_consent_at: new Date().toISOString(),
+      }).eq('id', user.id);
+    }
+  } catch {
+    // Non-blocking — localStorage is primary for UX, Supabase is for compliance
+  }
 }
 
 interface AIConsentModalProps {
@@ -24,8 +37,8 @@ export default function AIConsentModal({ isOpen, onAccept }: AIConsentModalProps
 
   if (!isOpen) return null;
 
-  const handleAccept = () => {
-    grantAIConsent();
+  const handleAccept = async () => {
+    await grantAIConsent();
     onAccept();
   };
 
