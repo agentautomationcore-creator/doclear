@@ -18,12 +18,12 @@ type LangContent = {
 const content: Record<'fr' | 'en', LangContent> = {
   fr: {
     title: 'Politique de Confidentialité — Kaly',
-    lastUpdated: 'Dernière mise à jour : 3 avril 2026',
+    lastUpdated: 'Dernière mise à jour : 4 avril 2026',
     switchLang: 'English',
     sections: [
       {
         title: 'Responsable du traitement',
-        body: `Dmitrii Sergueev, exerçant sous le nom commercial « Growthor », Entrepreneur individuel — SIREN 944 537 034\nJuan-les-Pins, 06160, France\nContact : contact@kaly.app`,
+        body: `Dmitrii Sergueev, exerçant sous le nom commercial « Growthor »\nEntrepreneur individuel — SIREN 944 537 034\nSIRET : 94453703400018\n117 Boulevard Président Wilson, 06600 Antibes, France\nContact : contact@growthor.ai`,
       },
       {
         title: 'Données collectées',
@@ -43,6 +43,21 @@ const content: Record<'fr' | 'en', LangContent> = {
         body: `Kaly traite des données de santé (poids, taille, âge, nutrition, objectifs caloriques). Ces données sont des « catégories particulières » au sens de l'Art. 9 du RGPD.\n\nNous demandons votre consentement explicite AVANT toute collecte de données de santé, lors de l'onboarding. Ce consentement est enregistré côté serveur (Supabase) avec un horodatage.\n\nVous pouvez retirer ce consentement à tout moment dans Paramètres > Confidentialité. Le retrait du consentement bloque tout traitement futur de vos données de santé.`,
       },
       {
+        title: 'Bases légales par finalité',
+        items: [
+          'Analyse nutritionnelle par IA : Consentement explicite — Art. 6(1)(a) + Art. 9(2)(a) RGPD',
+          'Suivi de santé et objectifs nutritionnels : Consentement explicite — Art. 6(1)(a) + Art. 9(2)(a) RGPD',
+          'Gestion du compte et authentification : Exécution du contrat — Art. 6(1)(b) RGPD',
+          'Gestion des abonnements (RevenueCat) : Exécution du contrat — Art. 6(1)(b) RGPD',
+          'Analyses d\'utilisation (PostHog) : Consentement — Art. 6(1)(a) RGPD',
+          'Rapports d\'erreurs (Sentry) : Consentement — Art. 6(1)(a) RGPD',
+        ],
+      },
+      {
+        title: 'Caractère obligatoire ou facultatif des données',
+        body: `La fourniture de votre adresse e-mail est nécessaire à la création de votre compte. La fourniture de photos de repas et de données de santé (poids, taille, objectifs nutritionnels) est facultative mais nécessaire au fonctionnement des fonctionnalités d'analyse IA et de suivi nutritionnel. Le refus de fournir ces données n'empêche pas l'utilisation de l'application mais limite les fonctionnalités disponibles (saisie manuelle uniquement).`,
+      },
+      {
         title: 'Ce que nous ne faisons PAS',
         items: [
           'Nous ne vendons PAS vos données à des tiers',
@@ -56,16 +71,24 @@ const content: Record<'fr' | 'en', LangContent> = {
       {
         title: 'Services tiers (sous-traitants)',
         items: [
-          'Anthropic (Claude Haiku API) — analyse nutritionnelle des photos. Anthropic n\'utilise pas les données API pour entraîner ses modèles. Les photos ne sont pas stockées après traitement.',
-          'Supabase — base de données et authentification, serveurs UE (Francfort, Allemagne). DPA signé.',
-          'RevenueCat — gestion des abonnements in-app. DPA signé. Aucune donnée de carte bancaire ne transite par nos serveurs.',
-          'PostHog — analytique d\'utilisation anonyme. Initialisé UNIQUEMENT après consentement opt-in de l\'utilisateur. Aucune donnée de santé n\'est envoyée à PostHog.',
-          'Sentry — rapports d\'erreurs. Initialisé UNIQUEMENT après consentement opt-in. Aucune donnée personnelle de santé dans les rapports d\'erreur. DPA signé.',
+          'Anthropic (Claude Haiku API) — États-Unis — analyse nutritionnelle des photos. Anthropic n\'utilise pas les données API pour entraîner ses modèles. Les photos ne sont pas stockées après traitement.',
+          'Supabase — Allemagne (UE) — base de données et authentification, serveurs UE (Francfort, Allemagne). DPA signé.',
+          'RevenueCat — États-Unis — gestion des abonnements in-app. DPA signé. Aucune donnée de carte bancaire ne transite par nos serveurs.',
+          'PostHog — Hébergement UE, société États-Unis — analytique d\'utilisation anonyme. Initialisé UNIQUEMENT après consentement opt-in de l\'utilisateur. Aucune donnée de santé n\'est envoyée à PostHog.',
+          'Sentry — États-Unis — rapports d\'erreurs. Initialisé UNIQUEMENT après consentement opt-in. Aucune donnée personnelle de santé dans les rapports d\'erreur. DPA signé.',
         ],
+      },
+      {
+        title: 'Transferts internationaux',
+        body: `Les données transmises à Anthropic (États-Unis), RevenueCat (États-Unis), PostHog (hébergement UE, société américaine) et Sentry (États-Unis) sont encadrées par des Clauses Contractuelles Types (CCT) approuvées par la Commission européenne (décision d'exécution 2021/914), garantissant un niveau de protection adéquat conformément aux articles 44 à 49 du RGPD.`,
       },
       {
         title: 'Utilisation de l\'IA',
         body: `Vos photos de repas sont envoyées à l'API Claude d'Anthropic pour analyse nutritionnelle.\n\nAvant envoi :\n• Les métadonnées EXIF (GPS, appareil photo) sont supprimées\n• L'image est compressée (max 1024px, JPEG)\n\nAnthopic n'utilise pas les données API pour entraîner ses modèles. Les photos sont traitées en temps réel et ne sont pas stockées sur les serveurs d'Anthropic après traitement.\n\nBase légale : votre consentement explicite (Art. 6(1)(a) et Art. 9(2)(a) RGPD). Vous donnez votre consentement avant la première analyse. Vous pouvez le retirer à tout moment dans les Paramètres > Confidentialité.`,
+      },
+      {
+        title: 'Décisions automatisées (Article 22 RGPD)',
+        body: `Kaly utilise l'intelligence artificielle (Claude AI, Anthropic) pour analyser automatiquement vos photos de repas et estimer le contenu nutritionnel (calories, macronutriments). Ces résultats sont des estimations automatisées fournies à titre indicatif uniquement. Aucune décision n'est prise sans votre intervention : vous pouvez modifier, corriger ou supprimer toute estimation. Vous avez le droit de demander une intervention humaine, d'exprimer votre point de vue et de contester les résultats via contact@growthor.ai.`,
       },
       {
         title: 'Stockage des données',
@@ -76,6 +99,7 @@ const content: Record<'fr' | 'en', LangContent> = {
         items: [
           'Accès (Art. 15) : consultez toutes vos données stockées dans l\'application',
           'Suppression (Art. 17) : supprimez toutes vos données via Paramètres > Supprimer le compte (suppression CASCADE)',
+          'Limitation du traitement (Art. 18) : vous pouvez demander la limitation du traitement de vos données dans les cas prévus par le RGPD, notamment lorsque vous contestez l\'exactitude de vos données ou que vous vous opposez à leur traitement',
           'Portabilité (Art. 20) : exportez toutes vos données au format CSV',
           'Rectification (Art. 16) : modifiez vos données de profil à tout moment',
           'Opposition (Art. 21) : vous avez le droit de vous opposer au traitement de vos données',
@@ -83,11 +107,15 @@ const content: Record<'fr' | 'en', LangContent> = {
         ],
       },
       {
-        title: 'Conservation des données',
+        title: 'Durées de conservation',
         items: [
-          'Données nutritionnelles et analyses : conservées tant que votre compte est actif',
-          'Après suppression du compte : toutes les données sont définitivement supprimées sous 30 jours',
-          'Données de paiement : conservées conformément à la loi fiscale (généralement 7 ans) — gérées par Apple/RevenueCat',
+          'Données nutritionnelles (repas, calories) : durée du compte actif',
+          'Données de santé (poids, taille, IMC) : durée du compte actif',
+          'Photos de repas : non conservées (supprimées immédiatement après analyse IA)',
+          'Données d\'analyse (PostHog) : 12 mois',
+          'Données d\'erreur (Sentry) : 90 jours',
+          'Données de paiement : 7 ans (obligation fiscale française)',
+          'Après suppression du compte : suppression définitive sous 30 jours',
         ],
       },
       {
@@ -96,18 +124,18 @@ const content: Record<'fr' | 'en', LangContent> = {
       },
       {
         title: 'Contact',
-        body: 'Pour toute question relative à la confidentialité : contact@kaly.app\n\nKaly est opéré par Dmitrii Sergueev, exerçant sous le nom commercial « Growthor », Entrepreneur individuel — SIREN 944 537 034, Juan-les-Pins, France.',
+        body: 'Pour toute question relative à la confidentialité : contact@growthor.ai\n\nKaly est opéré par Dmitrii Sergueev, exerçant sous le nom commercial « Growthor », Entrepreneur individuel — SIREN 944 537 034, SIRET 94453703400018, 117 Boulevard Président Wilson, 06600 Antibes, France.',
       },
     ],
   },
   en: {
     title: 'Privacy Policy — Kaly',
-    lastUpdated: 'Last updated: April 3, 2026',
+    lastUpdated: 'Last updated: April 4, 2026',
     switchLang: 'Français',
     sections: [
       {
         title: 'Data Controller',
-        body: `Dmitrii Sergueev, trading as "Growthor", Sole Proprietor (Entrepreneur individuel) — SIREN 944 537 034\nJuan-les-Pins, 06160, France\nContact: contact@kaly.app`,
+        body: `Dmitrii Sergueev, trading as "Growthor"\nSole proprietor (Entrepreneur individuel) — SIREN 944 537 034\nSIRET: 94453703400018\n117 Boulevard Président Wilson, 06600 Antibes, France\nContact: contact@growthor.ai`,
       },
       {
         title: 'What data we collect',
@@ -127,6 +155,21 @@ const content: Record<'fr' | 'en', LangContent> = {
         body: `Kaly processes health data (weight, height, age, nutrition, caloric goals). These are "special categories" under Art. 9 GDPR.\n\nWe request your explicit consent BEFORE any health data collection, during onboarding. This consent is recorded server-side (Supabase) with a timestamp.\n\nYou can withdraw consent at any time in Settings > Privacy. Withdrawing consent blocks all future processing of your health data.`,
       },
       {
+        title: 'Legal bases per purpose',
+        items: [
+          'AI nutritional analysis: Explicit consent — Art. 6(1)(a) + Art. 9(2)(a) GDPR',
+          'Health tracking and nutritional goals: Explicit consent — Art. 6(1)(a) + Art. 9(2)(a) GDPR',
+          'Account management and authentication: Performance of contract — Art. 6(1)(b) GDPR',
+          'Subscription management (RevenueCat): Performance of contract — Art. 6(1)(b) GDPR',
+          'Usage analytics (PostHog): Consent — Art. 6(1)(a) GDPR',
+          'Error reporting (Sentry): Consent — Art. 6(1)(a) GDPR',
+        ],
+      },
+      {
+        title: 'Mandatory vs. optional data',
+        body: `Providing your email address is required to create your account. Providing meal photos and health data (weight, height, nutritional goals) is optional but necessary for AI analysis and nutritional tracking features. Refusing to provide this data does not prevent use of the app but limits available features (manual entry only).`,
+      },
+      {
         title: 'What we do NOT do',
         items: [
           'We do NOT sell your data to third parties',
@@ -140,16 +183,24 @@ const content: Record<'fr' | 'en', LangContent> = {
       {
         title: 'Third-party services (sub-processors)',
         items: [
-          'Anthropic (Claude Haiku API) — nutritional analysis of meal photos. Anthropic does not use API inputs to train models. Photos are not stored after processing.',
-          'Supabase — database and authentication, EU servers (Frankfurt, Germany). DPA signed.',
-          'RevenueCat — in-app subscription management. DPA signed. No payment card data passes through our servers.',
-          'PostHog — anonymous usage analytics. Initialized ONLY after user opt-in consent. No health data is sent to PostHog.',
-          'Sentry — error reporting. Initialized ONLY after user opt-in consent. No personal health data in error reports. DPA signed.',
+          'Anthropic (Claude Haiku API) — United States — nutritional analysis of meal photos. Anthropic does not use API inputs to train models. Photos are not stored after processing.',
+          'Supabase — Germany (EU) — database and authentication, EU servers (Frankfurt, Germany). DPA signed.',
+          'RevenueCat — United States — in-app subscription management. DPA signed. No payment card data passes through our servers.',
+          'PostHog — EU-hosted, US company — anonymous usage analytics. Initialized ONLY after user opt-in consent. No health data is sent to PostHog.',
+          'Sentry — United States — error reporting. Initialized ONLY after user opt-in consent. No personal health data in error reports. DPA signed.',
         ],
+      },
+      {
+        title: 'International Transfers',
+        body: `Data sent to Anthropic (United States), RevenueCat (United States), PostHog (EU-hosted, US company), and Sentry (United States) is protected by Standard Contractual Clauses (SCCs) approved by the European Commission (Implementing Decision 2021/914), ensuring adequate protection under Articles 44-49 GDPR.`,
       },
       {
         title: 'How we use AI',
         body: `Your meal photos are sent to Anthropic's Claude API for nutritional analysis.\n\nBefore sending:\n• EXIF metadata (GPS, camera info) is stripped\n• Image is compressed (max 1024px, JPEG)\n\nAnthropic does not use API inputs to train models. Photos are processed in real-time and not stored on Anthropic's servers after processing.\n\nLegal basis: your explicit consent (Art. 6(1)(a) and Art. 9(2)(a) GDPR). You provide consent before your first analysis. You can withdraw consent at any time in Settings > Privacy.`,
+      },
+      {
+        title: 'Automated Decision-Making (Article 22 GDPR)',
+        body: `Kaly uses artificial intelligence (Claude AI, Anthropic) to automatically analyze your meal photos and estimate nutritional content (calories, macronutrients). These results are automated estimates provided for informational purposes only. No decision is made without your involvement — you can edit, correct, or delete any estimate. You have the right to request human intervention, express your point of view, and contest results via contact@growthor.ai.`,
       },
       {
         title: 'Data storage',
@@ -160,6 +211,7 @@ const content: Record<'fr' | 'en', LangContent> = {
         items: [
           'Access (Art. 15): view all your stored data in the app',
           'Deletion (Art. 17): delete all your data via Settings > Delete Account (CASCADE deletion)',
+          'Restriction of processing (Art. 18): you can request restriction of processing of your data in the cases provided by the GDPR, including when you contest the accuracy of your data or object to its processing',
           'Portability (Art. 20): export all your data as CSV',
           'Rectification (Art. 16): edit or correct your profile data at any time',
           'Right to object (Art. 21): you have the right to object to data processing',
@@ -167,11 +219,15 @@ const content: Record<'fr' | 'en', LangContent> = {
         ],
       },
       {
-        title: 'Data retention',
+        title: 'Retention periods',
         items: [
-          'Nutritional data and analyses: retained while your account is active',
-          'After account deletion: all data permanently deleted within 30 days',
-          'Payment records: retained as required by tax law (typically 7 years) — managed by Apple/RevenueCat',
+          'Nutritional data (meals, calories): duration of active account',
+          'Health data (weight, height, BMI): duration of active account',
+          'Meal photos: not retained (deleted immediately after AI analysis)',
+          'Analytics data (PostHog): 12 months',
+          'Error data (Sentry): 90 days',
+          'Payment data: 7 years (French tax obligation)',
+          'After account deletion: permanent deletion within 30 days',
         ],
       },
       {
@@ -180,7 +236,7 @@ const content: Record<'fr' | 'en', LangContent> = {
       },
       {
         title: 'Contact',
-        body: 'For privacy inquiries: contact@kaly.app\n\nKaly is operated by Dmitrii Sergueev, trading as "Growthor", Sole Proprietor (Entrepreneur individuel) — SIREN 944 537 034, Juan-les-Pins, France.',
+        body: 'For privacy inquiries: contact@growthor.ai\n\nKaly is operated by Dmitrii Sergueev, trading as "Growthor", Sole Proprietor (Entrepreneur individuel) — SIREN 944 537 034, SIRET 94453703400018, 117 Boulevard Président Wilson, 06600 Antibes, France.',
       },
     ],
   },
