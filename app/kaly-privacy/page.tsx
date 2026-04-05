@@ -43,6 +43,10 @@ const content: Record<'fr' | 'en', LangContent> = {
         body: `Kaly traite des données de santé (poids, taille, âge, nutrition, objectifs caloriques). Ces données sont des « catégories particulières » au sens de l'Art. 9 du RGPD.\n\nNous demandons votre consentement explicite AVANT toute collecte de données de santé, lors de l'onboarding. Ce consentement est enregistré côté serveur (Supabase) avec un horodatage.\n\nVous pouvez retirer ce consentement à tout moment dans Paramètres > Confidentialité. Le retrait du consentement bloque tout traitement futur de vos données de santé.`,
       },
       {
+        title: 'Données Apple Santé (HealthKit)',
+        body: `Kaly peut se connecter à Apple Santé (HealthKit) pour synchroniser certaines données de santé et d'activité : calories consommées, consommation d'eau, poids et nombre de pas.\n\nBase légale : Consentement explicite — Art. 6(1)(a) + Art. 9(2)(a) RGPD.\n\nStockage : Les données Apple Santé restent sur votre appareil. Kaly lit ces données localement mais ne les transmet pas à des serveurs externes.\n\nRévocation : Réglages iOS > Confidentialité > Santé.`,
+      },
+      {
         title: 'Bases légales par finalité',
         items: [
           'Analyse nutritionnelle par IA : Consentement explicite — Art. 6(1)(a) + Art. 9(2)(a) RGPD',
@@ -153,6 +157,10 @@ const content: Record<'fr' | 'en', LangContent> = {
       {
         title: 'Health Data — Explicit Consent (Art. 9 GDPR)',
         body: `Kaly processes health data (weight, height, age, nutrition, caloric goals). These are "special categories" under Art. 9 GDPR.\n\nWe request your explicit consent BEFORE any health data collection, during onboarding. This consent is recorded server-side (Supabase) with a timestamp.\n\nYou can withdraw consent at any time in Settings > Privacy. Withdrawing consent blocks all future processing of your health data.`,
+      },
+      {
+        title: 'Apple Health Data (HealthKit)',
+        body: `Kaly may connect to Apple Health (HealthKit) to synchronize certain health and activity data: calories consumed, water intake, weight, and step count.\n\nLegal basis: Explicit consent — Art. 6(1)(a) + Art. 9(2)(a) GDPR.\n\nStorage: Apple Health data remains on your device. Kaly reads this data locally but does not transmit it to external servers.\n\nWithdrawal: iOS Settings > Privacy > Health.`,
       },
       {
         title: 'Legal bases per purpose',
