@@ -31,7 +31,7 @@ const html = `
 
     <div class="section">
       <h2>1. About Kaly</h2>
-      <p>Kaly is an AI-powered calorie and nutrition tracking application ("the App") published by Dmitrii Sergueev, operating under the trade name "Growthor" (sole proprietorship — SIREN 944 537 034, Antibes, France). Contact: <a href="mailto:contact@kaly.app">contact@kaly.app</a>.</p>
+      <p>Kaly is an AI-powered calorie and nutrition tracking application ("the App") published by Dmitrii Sergueev, operating under the trade name "Growthor" (sole proprietorship — SIREN 944 537 034, Antibes, France). Contact: <a href="mailto:hello@growthor.ai">hello@growthor.ai</a>.</p>
     </div>
 
     <div class="section">
@@ -96,7 +96,7 @@ const html = `
 
     <div class="section">
       <h2>14. Contact</h2>
-      <p>For any questions about these Terms: <a href="mailto:contact@kaly.app">contact@kaly.app</a></p>
+      <p>For any questions about these Terms: <a href="mailto:hello@growthor.ai">hello@growthor.ai</a></p>
     </div>
   </div>
 
@@ -107,7 +107,7 @@ const html = `
 
     <div class="section">
       <h2>1. À propos de Kaly</h2>
-      <p>Kaly est une application de suivi de calories et de nutrition assistée par IA (« l'Application »), éditée par Dmitrii Sergueev, exerçant sous le nom commercial « Growthor » (entreprise individuelle — SIREN 944 537 034, Antibes, France). Contact : <a href="mailto:contact@kaly.app">contact@kaly.app</a>.</p>
+      <p>Kaly est une application de suivi de calories et de nutrition assistée par IA (« l'Application »), éditée par Dmitrii Sergueev, exerçant sous le nom commercial « Growthor » (entreprise individuelle — SIREN 944 537 034, Antibes, France). Contact : <a href="mailto:hello@growthor.ai">hello@growthor.ai</a>.</p>
     </div>
 
     <div class="section">
@@ -172,7 +172,7 @@ const html = `
 
     <div class="section">
       <h2>14. Contact</h2>
-      <p>Pour toute question relative aux présentes Conditions : <a href="mailto:contact@kaly.app">contact@kaly.app</a></p>
+      <p>Pour toute question relative aux présentes Conditions : <a href="mailto:hello@growthor.ai">hello@growthor.ai</a></p>
     </div>
   </div>
 </div>

@@ -37,7 +37,7 @@ const html = `
       <p>Dmitrii Sergueev, operating under the trade name "Growthor"<br>
       Sole proprietorship (EI) — SIREN 944 537 034<br>
       Antibes, France<br>
-      Contact: <a href="mailto:contact@kaly.app">contact@kaly.app</a></p>
+      Contact: <a href="mailto:hello@growthor.ai">hello@growthor.ai</a></p>
     </div>
 
     <div class="section">
@@ -125,7 +125,7 @@ const html = `
         <li><strong>Objection:</strong> object to processing based on legitimate interest.</li>
         <li><strong>Withdraw consent:</strong> disable AI analysis, Health data, or Analytics at any time in Settings.</li>
       </ul>
-      <p>To exercise these rights: <a href="mailto:contact@kaly.app">contact@kaly.app</a>. We will respond within 30 days. You may also file a complaint with the CNIL (<a href="https://www.cnil.fr">www.cnil.fr</a>) or your local data protection authority.</p>
+      <p>To exercise these rights: <a href="mailto:hello@growthor.ai">hello@growthor.ai</a>. We will respond within 30 days. You may also file a complaint with the CNIL (<a href="https://www.cnil.fr">www.cnil.fr</a>) or your local data protection authority.</p>
     </div>
 
     <div class="section">
@@ -145,7 +145,7 @@ const html = `
 
     <div class="section">
       <h2>13. Contact</h2>
-      <p>For any privacy-related questions: <a href="mailto:contact@kaly.app">contact@kaly.app</a></p>
+      <p>For any privacy-related questions: <a href="mailto:hello@growthor.ai">hello@growthor.ai</a></p>
     </div>
   </div>
 
@@ -159,7 +159,7 @@ const html = `
       <p>Dmitrii Sergueev, exerçant sous le nom commercial « Growthor »<br>
       Entreprise individuelle — SIREN 944 537 034<br>
       Antibes, France<br>
-      Contact : <a href="mailto:contact@kaly.app">contact@kaly.app</a></p>
+      Contact : <a href="mailto:hello@growthor.ai">hello@growthor.ai</a></p>
     </div>
 
     <div class="section">
@@ -247,7 +247,7 @@ const html = `
         <li><strong>Opposition :</strong> vous opposer au traitement basé sur l'intérêt légitime.</li>
         <li><strong>Retrait du consentement :</strong> désactiver l'analyse IA, les données de Santé ou l'Analytique à tout moment dans les Réglages.</li>
       </ul>
-      <p>Pour exercer ces droits : <a href="mailto:contact@kaly.app">contact@kaly.app</a>. Réponse sous 30 jours. Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr">www.cnil.fr</a>) ou de votre autorité de protection des données locale.</p>
+      <p>Pour exercer ces droits : <a href="mailto:hello@growthor.ai">hello@growthor.ai</a>. Réponse sous 30 jours. Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr">www.cnil.fr</a>) ou de votre autorité de protection des données locale.</p>
     </div>
 
     <div class="section">
@@ -267,7 +267,7 @@ const html = `
 
     <div class="section">
       <h2>13. Contact</h2>
-      <p>Pour toute question relative à la confidentialité : <a href="mailto:contact@kaly.app">contact@kaly.app</a></p>
+      <p>Pour toute question relative à la confidentialité : <a href="mailto:hello@growthor.ai">hello@growthor.ai</a></p>
     </div>
   </div>
 </div>
